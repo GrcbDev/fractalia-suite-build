@@ -1,0 +1,51 @@
+<ng-container>
+  <section class="ds-card pl-1 mt-3 minW-100 text-center" style="padding: 24px">
+    <div class="card w-100 ml-fix">
+      <div class="card-body pr-0 pl-0">
+        <div class="container-fluid mt-4">
+          <div class="row">
+            <div
+              class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12 mb-3 justify-content-between d-flex flex-column mobile-mb"
+            >
+              <div>
+                <div class="ds-m-bold ds-c-black ds-h2 ds-fs-24 ds-mb-12p">
+                  {{ "FAMILY_UNIT.SECTION_TITLE" | translate }}
+                </div>
+
+                <div
+                  class="ds-r-regular ds-body-primary ds-fs-16 ds-c-black ds-mb-12p"
+                >
+                {{ "FAMILY_UNIT.SECTION_DESCRIPTION" | translate }}
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12 mb-3 desktop-only justify-content-between d-flex flex-column mobile-mb pl-4 pr-4"
+            >
+              <img  src="{{staticContentUrl+'img/family-unit/unit_family.png'}}" alt="" />
+            </div>
+
+            <div
+              class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12 d-flex flex-column"
+            >
+              <h2 class="title text-center mb-4 neutral-black fs-16">
+                {{ "FAMILY_UNIT.LIST_OF_PROFILES" | translate }}
+              </h2>
+
+              <div
+                class="d-flex flex-column justify-content-center align-items-center"
+              >
+                <div class="circle-profile text-center">
+                  <span class="added">{{profilesAdded}}</span>
+                  <span class="pending-divider">/</span>
+                  <span class="pending">5</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</ng-container>

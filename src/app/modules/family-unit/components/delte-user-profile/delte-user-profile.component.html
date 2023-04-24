@@ -1,0 +1,55 @@
+<ng-template #basicModal let-modal>
+  <div class="mt-21 modal-head-container">
+    <div class="row">
+      <div class="col close-container">
+        <button type="button" class="new-close" (click)="close()">
+          <div class="icon-close"></div>
+        </button>
+      </div>
+    </div>
+    <br />
+
+    <div class="row mb-5">
+      <div class="col">
+        <div
+          class="d-flex flex-column justify-content-center align-items-center"
+        >
+          <div class="icon-trash big-trash-icon mb-4"></div>
+
+          <div class="fs-20 mb-3  bold  delete-text-container padding-delete-fix">
+            {{ "FAMILY_UNIT.DELETE_CONFIRMATION" |  translate: { userName: profile.name}  }}
+          </div>
+
+          <div class="delete-text-container">
+            {{ "FAMILY_UNIT.DELETION_DETAIL" | translate }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="form-group col-lg-12 pl-0 pr-0 identity-btns d-flex justify-content-end">
+          <section class="d-flex justify-content-end">
+            <button
+              type="submit"
+              class="btn btn-outline-secondary text-center d-block mr-2 main-secondary text-uppercase ng-star-inserted"
+              disabled=""
+            >
+              <div class="" (click)="close()"> {{ "COMP_USER.BUTTONS.CANCEL" | translate }}</div>
+            </button>
+
+            <button
+              type="submit"
+              class="btn btn-primary text-center d-block"
+              (click)="continue()"
+             
+            >
+              <div class="" >{{ "FAMILY_UNIT.DELETE_BUTTON" | translate }}</div>
+            </button>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

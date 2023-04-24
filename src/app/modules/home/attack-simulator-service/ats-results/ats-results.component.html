@@ -1,0 +1,54 @@
+<section class="content-ats" style="width: 100%;">
+  <div class="ds-flex-column ds-pb-12p ds-pr-12p card-results-ats">
+    <div class="ds-al-self-center ds-mb-12p ds-m-bold ds-body-primary">{{'COMP_ATTACKSIMULATOR.TEXT8' | translate}}
+    </div>
+    <div class="ds-flex-row ds-jc-center ds-al-center ds-jc-between  ds-mt-12p">
+      <p class="ds-r-regular ds-body-primary ds-c-accent ">{{'COMP_ATTACKSIMULATOR.TEXT7' | translate}}</p>
+      <p class="ds-m-bold ds-h3 ds-c-accent ">{{data.send}}</p>
+    </div>
+    <div class="ds-flex-row ds-jc-center ds-al-center ds-jc-between ">
+      <p class="ds-r-regular ds-body-primary ds-c-success ">{{'COMP_ATTACKSIMULATOR.TEXT12' | translate}}</p>
+      <p class="ds-m-bold ds-h3 ds-c-success ">{{data.success}}%</p>
+    </div>
+    <div class="ds-flex-row ds-jc-center ds-al-center ds-jc-between ">
+      <p class="ds-r-regular ds-body-primary ds-c-danger ">{{'COMP_ATTACKSIMULATOR.TEXT13' | translate}}</p>
+      <p class="ds-m-bold ds-h3 ds-c-danger">{{data.affected}}%</p>
+    </div>
+  </div>
+
+  <div class="ds-flex-column ds-pb-12p" style="width: 100%;">
+    <div class="ds-al-self-center ds-mb-12p ds-m-bold ds-body-primary">{{'COMP_ATTACKSIMULATOR.TEXT11' | translate}}
+    </div>
+    <div class="grid-cards-ats">
+      <div class="ds-flex-column ds-p-12p cards-ats ">
+        <p class="ds-al-self-center ds-r-regular ds-body-primary">{{'COMP_ATTACKSIMULATOR.RECEIVED' | translate}}</p>
+        <div class="ds-flex-row ds-jc-center ds-al-center ">
+          <div class="ds-h1 ds-m-bold ds-c-accent">{{data.attacksimulatorStats.received}}</div>
+          <div class="icon-send-envelope ds-fs-32 ds-c-accent ds-ml-8p"></div>
+        </div>
+      </div>
+
+      <div class="ds-flex-column  ds-p-12p cards-ats">
+        <p class="ds-al-self-center ds-r-regular ds-body-primary">{{'COMP_ATTACKSIMULATOR.OPEN' | translate}}</p>
+        <div class="ds-flex-row ds-jc-center ds-al-center ">
+          <div class="ds-h1 ds-m-bold ds-c-pink">{{data.attacksimulatorStats.opened}}</div>
+          <div class="icon-envelope-open ds-fs-32 ds-c-pink ds-ml-8p"></div>
+        </div>
+      </div>
+      <div class="ds-flex-column ds-p-12p cards-ats">
+        <p class="ds-al-self-center ds-r-regular ds-body-primary">{{'COMP_ATTACKSIMULATOR.CLICKED' | translate}}</p>
+        <div class="ds-flex-row ds-jc-center ds-al-center">
+          <div class="ds-h1 ds-m-bold ds-c-orange">{{data.attacksimulatorStats.clicked}}</div>
+          <div class="icon-click ds-fs-32 ds-c-orange ds-ml-8p"></div>
+        </div>
+      </div>
+      <div class="ds-flex-column ds-p-12p cards-ats">
+        <p class="ds-al-self-center ds-r-regular ds-body-primary">{{'COMP_ATTACKSIMULATOR.AFFECTED' | translate}}</p>
+        <div class="ds-flex-row ds-jc-center ds-al-center ">
+          <div class="ds-h1 ds-m-bold ds-c-danger">{{data.attacksimulatorStats.affected}}</div>
+          <div class="icon-sad-face ds-fs-32 ds-c-danger ds-ml-8p"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

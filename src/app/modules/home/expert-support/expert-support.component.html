@@ -1,0 +1,106 @@
+<section class="ds-card exp-support-content">
+
+  <div class="description">
+    <div class="ds-m-bold ds-c-black ds-h2 ds-fs-24 ds-mb-12p">
+      {{'COMP_EXPERT_SUPPORT.CONTACT_EXPERTS'| translate}}
+    </div>
+    <div class="ds-r-regular ds-body-primary ds-fs-16 ds-c-black  ds-mb-12p">
+      {{'COMP_CYBERSECURITY_SERVICE.ACCESS_DIGITAL_SUPPORT'| translate}}
+    </div>
+
+    <div class="buttons-mobile">
+      <div class="ds-r-bold ds-body-primary ds-fs-16 ds-c-black  ds-mb-12p">
+        {{'COMP_EXPERT_SUPPORT.COMMUNICATION_CHANNELS'| translate}}
+      </div>
+
+      <div class="d-flex">
+        <a
+          href="javascript:void(0)"
+          (click)="openCallModal()"
+          *ngIf="data.supportPhoneC2C"
+          class="ds-btn-circle-secondary ds-mr-10p"
+        >
+          <span class="icon-phone"></span>
+        </a>
+
+        <a
+          *ngIf="data.supportWhatsapp"
+          target="_blank"
+          class="btn btn-outline-secondary ds-mb-12p"
+          href="https://api.whatsapp.com/send?phone={{data.supportWhatsapp}}"
+          class="ds-btn-circle-secondary ds-mr-10p"
+        >
+          <span class="icon-whatsapp"></span>
+        </a>
+
+        <!-- <a
+          *ngIf="data.supportEmail"
+          class="btn btn-outline-secondary ds-mb-12p"
+          href="mailto:{{data.supportEmail}}"
+          class="ds-btn-circle-secondary ds-mr-10p"
+        >
+          <span class="icon-small-envelope"></span>
+        </a> -->
+
+        <button
+          class="ds-btn-circle-secondary ds-mr-10p"
+          (click)="abrirCMB()"
+          *ngIf="data.supportIncludeCallMeBack"
+        >
+          <span class="icon-call-me-back"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <img [src]="imgSource" alt="expert-support" >
+
+
+  <div class="buttons">
+
+    <div class="buttons-content">
+
+      <div class="ds-r-bold ds-body-primary ds-fs-16 ds-c-black  ds-mb-12p">
+        {{'COMP_EXPERT_SUPPORT.COMMUNICATION_CHANNELS'| translate}}
+      </div>
+
+      <a class="ds-btn-secondary ds-mb-12p"
+        (click)="openCallModal()"
+        *ngIf="data.supportPhoneC2C"
+        >
+        <span class="icon-phone ds-mr-10p"></span>
+        <span> {{'COMP_EXPERT_SUPPORT.CLICKTOCALL'| translate}}</span>
+      </a>
+      <a
+        *ngIf="data.supportWhatsapp"
+        target="_blank"
+        class="ds-btn-secondary ds-mb-12p"
+        href="https://api.whatsapp.com/send?phone={{data.supportWhatsapp}}">
+        <span class="icon-whatsapp ds-mr-10p"></span>
+        <span>{{data.supportWhatsapp}}</span>
+      </a>
+
+
+      <button
+        class="ds-btn-secondary ds-mb-12p"
+        (click)="abrirCMB()"
+        *ngIf="data.supportIncludeCallMeBack" >
+        <span class="icon-call-me-back  ds-mr-10p"></span>
+        <span> {{'COMP_EXPERT_SUPPORT.SCHEDULE_CALL'| translate}}</span>
+      </button>
+<!--
+      <a
+        class="btn btn-outline-secondary ds-mb-12p"
+        href="mailto:{{data.supportEmail}}"
+        *ngIf="data.supportEmail" >
+        <span class="icon-small-envelope ds-mr-10p"></span>
+        <span> {{'COMP_EXPERT_SUPPORT.VIA_EMAIL'| translate}}</span>
+      </a> -->
+
+
+    </div>
+
+
+  </div>
+
+</section>

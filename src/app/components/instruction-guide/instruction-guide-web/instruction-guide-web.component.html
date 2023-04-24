@@ -1,0 +1,214 @@
+<div class="cdk-overlay-container" *ngIf="!finalized">
+
+  <ng-container *ngIf="instructionConfig.startedStep && showFirstStep">
+    <div class="cdk-overlay-backdrop cdk-overlay-dark-backdrop cdk-overlay-backdrop-showing">
+    </div>
+    <div class="cdk-global-overlay-wrapper" style="justify-content: center; align-items: center;">
+      <div id="cdk-overlay-0" class="cdk-overlay-pane ds-modal-container ds-modal-sm" style="pointer-events: auto; position: static;">
+        <div class="ds-flex-row ds-jc-between ds-al-center ds-mb-24p">
+          <div class="ds-caption ds-r-regular ds-c-secondary">Paso 1 de {{instructionsGuideCards.length}}</div>
+          <div class="icon-close ds-cur-pointer ds-c-secondary ds-fs-18" (click)="closeModal()"></div>
+        </div>
+
+        <div class="ds-h3 ds-m-bold ds-c-black ds-mb-12p">
+          {{'COMP_INSTRUCTION_GUIDE.REGARD' | translate }} {{userName}}!
+        </div>
+
+        <div class="ds-body-primary ds-r-regular ds-c-black ds-mb-24p">
+          {{'COMP_INSTRUCTION_GUIDE.WELCOME_GUIDE' | translate }}  {{partnerName}}.
+          {{'COMP_INSTRUCTION_GUIDE.WELCOME_GUIDE2' | translate }}
+        </div>
+
+        <div class="ds-mb-32p">
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="checkA1" (change)="doNotShowAgain($event.target.checked)">
+            <label class="custom-control-label" for="checkA1"> {{'COMP_INSTRUCTION_GUIDE.GUIDED_TOUR_TEXT' | translate }}  </label>
+          </div>
+        </div>
+
+        <div class="ds-flex-row ds-jc-end ">
+          <ng-container *ngIf="getPositionFromList('startedStep') === instructionsGuideCards.length; else Next0">
+            <button class="ds-btn-primary ds-t-uppercase" (click)="finalize()">{{'WIZARD.BTNS.COMPLETED' | translate }}</button>
+          </ng-container>
+          <ng-template #Next0>
+            <button class="ds-btn-primary ds-t-uppercase" (click)="onNextStep('startedStep')">
+              {{'COMP_INSTRUCTION_GUIDE.START_VISIT' | translate }}
+              <span class="ds-ml-8p icon-right-big-arrow"></span>
+            </button>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+
+    <ng-container *ngIf="instructionConfig.hasHomeMenu && showHomeMenu">
+      <div class="cdk-overlay-backdrop  cdk-overlay-backdrop-showing">
+        <div class="cdk-overlay-pane instruction-card left-arrow"  [ngStyle]="configHomeMenuCard">
+
+          <div class="ds-flex-row ds-jc-between ds-al-center ds-mb-24p">
+            <div class="ds-caption ds-r-regular ds-c-secondary">
+              {{'COMP_INSTRUCTION_GUIDE.STEP_GUIDE' | translate }} {{getPositionFromList('hasHomeMenu')}} {{'COMP_INSTRUCTION_GUIDE.STEP_GUIDE2' | translate }} {{instructionsGuideCards.length}}
+            </div>
+            <div class="icon-close ds-cur-pointer ds-c-secondary ds-fs-18" (click)="closeModal()"></div>
+          </div>
+
+          <div class="ds-h3 ds-m-bold ds-c-black ds-mb-12p">
+            {{'HOME' | translate }}
+          </div>
+
+          <div class="ds-body-primary ds-r-regular ds-c-black ds-mb-24p">
+            {{'COMP_INSTRUCTION_GUIDE.DIRECT_GUIDE_ACCESS' | translate }}
+          </div>
+
+          <div class="ds-flex-row ds-jc-end">
+            <ng-container *ngIf="getPositionFromList('hasHomeMenu') === instructionsGuideCards.length; else Next">
+              <button class="ds-btn-primary ds-t-uppercase" (click)="finalize()">{{'WIZARD.BTNS.COMPLETED' | translate }}</button>
+            </ng-container>
+            <ng-template #Next>
+              <button class="ds-btn-primary ds-t-uppercase" (click)="onNextStep('hasHomeMenu')">
+                {{'COMP_INSTRUCTION_GUIDE.NEXT_TEXT' | translate }}
+                <span class="ds-ml-8p icon-right-big-arrow"></span>
+              </button>
+            </ng-template>
+          </div>
+        </div>
+        <div
+          style="
+          position: fixed;
+          box-shadow: rgba(0, 0, 0, 0.7) 0px 0px 0px 9999px; z-index: 100;"
+          [ngStyle]="configHomeMenuStep"
+          >
+        </div>
+      </div>
+    </ng-container>
+
+
+
+    <ng-container *ngIf="instructionConfig.hasFamilyMenu && showFamilyMenu">
+      <div class="cdk-overlay-backdrop  cdk-overlay-backdrop-showing">
+        <div class="cdk-overlay-pane instruction-card left-arrow"  [ngStyle]="configFamilyMenuCard">
+
+          <div class="ds-flex-row ds-jc-between ds-al-center ds-mb-24p">
+            <div class="ds-caption ds-r-regular ds-c-secondary">
+              {{'COMP_INSTRUCTION_GUIDE.STEP_GUIDE' | translate }} {{getPositionFromList('hasFamilyMenu')}} {{'COMP_INSTRUCTION_GUIDE.STEP_GUIDE2' | translate }} {{instructionsGuideCards.length}}
+            </div>
+            <div class="icon-close ds-cur-pointer ds-c-secondary ds-fs-18" (click)="closeModal()"></div>
+          </div>
+
+          <div class="ds-h3 ds-m-bold ds-c-black ds-mb-12p">
+            {{'FAMILY_UNIT.MENU_TITLE' | translate }}
+          </div>
+
+          <div class="ds-body-primary ds-r-regular ds-c-black ds-mb-24p">
+            {{'COMP_INSTRUCTION_GUIDE.CREATE_MEMBERS_PROFILE' | translate }}
+          </div>
+
+          <div class="ds-flex-row ds-jc-end">
+            <ng-container *ngIf="getPositionFromList('hasFamilyMenu') === instructionsGuideCards.length; else Next2">
+              <button class="ds-btn-primary ds-t-uppercase" (click)="finalize()">{{'WIZARD.BTNS.COMPLETED' | translate }}</button>
+            </ng-container>
+            <ng-template #Next2>
+              <button class="ds-btn-primary ds-t-uppercase" (click)="onNextStep('hasFamilyMenu')">
+                {{'COMP_INSTRUCTION_GUIDE.NEXT_TEXT' | translate }}
+                <span class="ds-ml-8p icon-right-big-arrow"></span>
+              </button>
+            </ng-template>
+
+          </div>
+        </div>
+        <div
+          style="
+          position: fixed;
+          box-shadow: rgba(0, 0, 0, 0.7) 0px 0px 0px 9999px; z-index: 100;"
+          [ngStyle]="configFamilyMenuStep"
+          >
+        </div>
+      </div>
+
+    </ng-container>
+
+
+    <ng-container *ngIf="instructionConfig.hasServices && showServices">
+      <div class="cdk-overlay-backdrop  cdk-overlay-backdrop-showing">
+        <div class="cdk-overlay-pane instruction-card left-arrow"  [ngStyle]="configServicesCard">
+
+          <div class="ds-flex-row ds-jc-between ds-al-center ds-mb-24p">
+            <div class="ds-caption ds-r-regular ds-c-secondary">
+              {{'COMP_INSTRUCTION_GUIDE.STEP_GUIDE' | translate }} {{getPositionFromList('hasServices')}} {{'COMP_INSTRUCTION_GUIDE.STEP_GUIDE2' | translate }} {{instructionsGuideCards.length}}
+            </div>
+            <div class="icon-close ds-cur-pointer ds-c-secondary ds-fs-18" (click)="closeModal()"></div>
+          </div>
+
+          <div class="ds-h3 ds-m-bold ds-c-black ds-mb-12p">
+            {{'TUTORIAL.TITLE1' | translate }}
+          </div>
+
+          <div class="ds-body-primary ds-r-regular ds-c-black ds-mb-24p">
+            {{'COMP_INSTRUCTION_GUIDE.BROWSE_ALL_SERVICES' | translate }}
+          </div>
+
+          <div class="ds-flex-row ds-jc-end">
+
+            <ng-container *ngIf="getPositionFromList('hasServices') === instructionsGuideCards.length; else Next3">
+              <button class="ds-btn-primary ds-t-uppercase" (click)="finalize()">{{'WIZARD.BTNS.COMPLETED' | translate }}</button>
+            </ng-container>
+            <ng-template #Next3>
+              <button class="ds-btn-primary ds-t-uppercase" (click)="onNextStep('hasServices')">
+                {{'COMP_INSTRUCTION_GUIDE.NEXT_TEXT' | translate }}
+                <span class="ds-ml-8p icon-right-big-arrow"></span>
+              </button>
+            </ng-template>
+
+          </div>
+        </div>
+        <div
+          style="
+          position: fixed;
+          box-shadow: rgba(0, 0, 0, 0.7) 0px 0px 0px 9999px; z-index: 100;"
+          [ngStyle]="configServicesStep"
+          >
+        </div>
+      </div>
+
+    </ng-container>
+
+
+
+    <ng-container *ngIf="instructionConfig.hasJumbotrom && showJumbotrom">
+      <div class="cdk-overlay-backdrop  cdk-overlay-backdrop-showing">
+        <div class="cdk-overlay-pane instruction-card above-arrow"  [ngStyle]="configJumbotromCard">
+
+          <div class="ds-flex-row ds-jc-between ds-al-center ds-mb-24p">
+            <div class="ds-caption ds-r-regular ds-c-secondary">Paso {{getPositionFromList('hasJumbotrom')}} de {{instructionsGuideCards.length}}</div>
+            <div class="icon-close ds-cur-pointer ds-c-secondary ds-fs-18" (click)="closeModal()"></div>
+          </div>
+
+          <div class="ds-h3 ds-m-bold ds-c-black ds-mb-12p">
+            {{'COMP_INSTRUCTION_GUIDE.STATUS_OF_THE_SERVICES' | translate }}
+          </div>
+
+          <div class="ds-body-primary ds-r-regular ds-c-black ds-mb-24p">
+            {{'COMP_INSTRUCTION_GUIDE.ACTIVE_SERVICES_BAR' | translate }}
+          </div>
+
+          <div class="ds-flex-row ds-jc-end">
+            <button class="ds-btn-primary ds-t-uppercase" (click)="finalize()">{{'WIZARD.BTNS.COMPLETED' | translate }}</button>
+          </div>
+        </div>
+        <div
+          style="
+          position: fixed;
+          box-shadow: rgba(0, 0, 0, 0.7) 0px 0px 0px 9999px; z-index: 100;"
+          [ngStyle]="configJumbotromStep"
+          >
+        </div>
+      </div>
+
+    </ng-container>
+
+
+
+
+</div>
+

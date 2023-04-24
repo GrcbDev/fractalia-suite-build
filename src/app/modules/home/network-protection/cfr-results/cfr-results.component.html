@@ -1,0 +1,114 @@
+<div class="ds-flex-row ds-jc-around ds-wrap ds-w-100">
+  <div class="ds-flex-column ds-al-center ds-border ds-w-100" style="padding-bottom: 0px; padding-left: 0px;">
+    <div class="ds-r-bold ds-body-primary">{{'CYBERSECURITY.FRACTEL.DEVICE_STATUS' | translate}}</div>
+    <div class="ds-flex-row ds-jc-between ds-al-center ds-mt-24p ds-w-100" id="licence"
+      style="background:#ECF1F8 ; border-radius: 8px; padding: 12px;">
+      <i class="icon-computer ds-cur-pointer ds-fs-20 ds-c-secondary ds-mr-12p"></i>
+      <div class="ds-c-black ds-r-regular  ds-fs-16">{{'CYBERSECURITY.FRACTEL.DEVICE_REGISTER' | translate}} </div>
+      <span class="ds-m-bold ds-ml-24p ds-fs-18">{{fractelService.totalAnalizados}}</span>
+    </div>
+    <div class="ds-flex-row ds-jc-start ds-al-start ds-flex-nowrap ds-w-100" style="height: 180px;">
+
+      <div class="ds-flex-column ds-jc-center ds-mr-16p " style="padding-bottom: 45px;">
+        <div class="numbercanvas  numbercanvaswidth" style="top: 100px;">
+          <div class="text-center  ds-fs-24 ds-m-bold">{{fractelService.elementAnalized}}</div>
+          <div class="ds-caption text-center">{{'CYBERSECURITY.FRACTEL.ELEMENTS' | translate}}</div>
+          <div class="ds-caption text-center">{{'CYBERSECURITY.FRACTEL.ANALIZED' | translate}}</div>
+        </div>
+        <canvas baseChart [data]="fractelService.doughnutChartData" [labels]="fractelService.chartLabels"
+          [colors]="fractelService.doughnutColors" [chartType]="fractelService.chartType"
+          [options]="{cutoutPercentage: 75}" width="150" height="150"></canvas>
+      </div>
+      <div class="ds-flex-column ds-al-self-center  ds-w-100">
+        <div class="ds-flex-row ds-jc-between ds-mb-12p">
+          <div class="ds-flex-column">
+            <div class="led red">
+              <i class="fas fa-circle ds-mr-8p"></i>
+            </div>
+          </div>
+          <div class="ds-flex-column ds-mr-32p ds-w-100">
+            <span class="ds-caption ds-r-regular text-left">{{'CYBERSECURITY.FRACTEL.HIGH_RISKS' | translate}}</span>
+          </div>
+          <div class="ds-flex-column ds-w-100">
+            <span class="ds-caption ds-r-bold" style="text-align:end;">{{fractelService.danger}}</span>
+          </div>
+        </div>
+
+        <div class="ds-flex-row  ds-mb-12p">
+          <div class="ds-flex-column">
+            <div class="led orange">
+              <i class="fas fa-circle ds-mr-8p"></i>
+            </div>
+          </div>
+          <div class="ds-flex-column  ds-mr-32p ds-w-100">
+            <span class="ds-caption ds-r-regular">{{'CYBERSECURITY.FRACTEL.MEDIUM_RISKS' | translate}}</span>
+          </div>
+          <div class="ds-flex-column ds-w-100">
+            <span class="ds-caption ds-r-bold" style="text-align:end;">{{fractelService.warning}}</span>
+          </div>
+        </div>
+
+        <div class="ds-flex-row ds-mb-12p">
+          <div class="ds-flex-column">
+            <div class="led green">
+              <i class="fas fa-circle ds-mr-8p"></i>
+            </div>
+          </div>
+          <div class="ds-flex-column  ds-mr-32p ">
+            <span class="ds-caption ds-r-regular" style="text-align:left;">{{'CYBERSECURITY.FRACTEL.CORRECTS' |
+              translate}}</span>
+          </div>
+          <div class="ds-flex-column ds-w-100">
+            <span class="ds-caption ds-r-bold" style="text-align:end;">{{fractelService.low}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ds-flex-column ds-border ds-w-100 ds-al-center" style=" padding-bottom: 0px;">
+    <div class="ds-r-bold ds-body-primary ">{{'CYBERSECURITY.FRACTEL.ANALIZED_DEVICE' | translate}}</div>
+    <div class="ds-mt-32p ds-flex-column ds-jc-between ds-al-center ds-w-100  ds-pb-24p" style="height: 175px;">
+      <div class="ds-body-primary text-center ds-r-regular ds-mb-24p">
+        {{'CYBERSECURITY.FRACTEL.LICENCE' | translate}}
+      </div>
+      <div class="ds-flex-row ds-jc-center ds-al-center ds-c-black ds-m-bold ds-mb-24p ds-w-100" id="licence"
+        style="background:#ECF1F8 ; border-radius: 8px; padding: 12px;">
+        <div>
+          <i class="icon-copy ds-cur-pointer ds-fs-20 ds-c-secondary ds-mr-12p" (click)="copyText()"
+            style="cursor:pointer ;"></i>
+        </div>
+        <div>
+          <input type="text" id="input" [(ngModel)]="licence" disabled="true" style="background:#ECF1F8 ; border:none;">
+
+        </div>
+      </div>
+      <a class="ds-btn-primary ds-t-uppercase" href="{{appEndpoint}}"
+        style="text-decoration: none; border:0">{{'CYBERSECURITY.FRACTEL.BTN.DOWNLOAD_APP_BUTTON' | translate}}</a>
+    </div>
+  </div>
+  <div *ngIf="showMoreInfo" class="ds-flex-column ds-al-center ds-p-24p ds-w-100"
+    style="padding-bottom: 0px; padding-right: 0px;">
+    <div class="ds-r-bold ds-body-primary ">{{'CYBERSECURITY.FRACTEL.TITLE_PART_THREE' | translate}}</div>
+    <div class="ds-mt-32p  ds-flex-column ds-jc-between ds-al-center ds-w-100"
+      style="height: 175px; padding-bottom:20px ;">
+      <div class="ds-body-primary text-center ds-r-regular ds-mb-12p">
+        {{'CYBERSECURITY.FRACTEL.TITLE_PART_THREE1' | translate}}
+      </div>
+
+      <button class="btn btn-outline-secondary ds-t-uppercase" style="width:156px"
+        (click)="loadService(data, true, 'report-list-header')">{{'CYBERSECURITY.FRACTEL.BTN.MORE_INFO' | translate
+        }}</button>
+    </div>
+  </div>
+
+  <div *ngIf="!showMoreInfo" class="ds-flex-column ds-al-center ds-p-24p ds-w-100">
+    <div class="ds-r-bold ds-body-primary ">{{'CYBERSECURITY.PROTECTION.TITLE_PART_THREE' | translate}}</div>
+    <div class="ds-mt-12p ds-flex-column ds-jc-between ds-al-center ds-w-100 ">
+      <div class="ds-mt-24p ds-body-primary text-center ds-r-regular ds-mb-12p">
+        {{'CYBERSECURITY.FRACTEL.TITLE_PART_THREE2' | translate}}
+      </div>
+    </div>
+  </div>
+
+</div>

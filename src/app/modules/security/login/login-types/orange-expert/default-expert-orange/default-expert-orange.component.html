@@ -1,0 +1,399 @@
+
+<section class="loginBox" style="height: auto !important;" >
+  <div class="container-fluid pl-0 px-0">
+    <div class="ds-flex-row ds-flex-wrap">
+      <div class="col-xl-4 col-lg-4 d-flex flex-column auth-bg-section loginText">
+        <div class="ds-flex-column ">
+          <div class="header">
+            <img class="logo" alt="logo" src="{{partnerService.partner.logotipo}}" >
+            <p class="ds-m-bold ds-c-primary ds-h1 ds-mt-32p">{{partnerService.partner.name}}</p>
+          </div>
+          <div class="body d-md-block d-none">
+            <h5 class="ds-m-bold ds-c-orange">{{'SSO_LOGIN_SIDE_TITLE_MESSAGE' | translate}}</h5>
+            <span class="ds-h4 ds-r-regular ds-c-black">{{partnerService.partner.loginSubtitle}}</span>
+          </div>
+        </div>
+
+        <div  [ngStyle]="{'background-image':loginTypeService.backgroundImage}" class="fondo">
+
+        </div>
+      </div>
+
+        <div class="col-xl-8 col-lg-8 col-md-7 d-flex flex-column justify-content-center">
+          <div class="ds-login-main-container" style="background-image: none; height: auto !important;">
+
+            <div class="ds-card-container" style="background-color:#ECF1F8 ; border: none;" >
+              <ng-container *ngIf="!showFormValidateLicence">
+                <form class="ds-login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+                  <div class="ds-h2 ds-m-bold ds-c-black ds-mb-12p">{{'ORANGE_LOGIN_SESSION' | translate}}</div>
+
+                  <div class="ds-flex-column ds-mb-12p">
+                    <label class="ds-body-secondary ds-r-regular ds-c-black ">{{partnerService.partner.userPlaceholder}}</label>
+                    <input type="text" class="ds-control"  formControlName="email" [placeholder]="partnerService.partner.userPlaceholder || '' ">
+                  </div>
+
+
+                  <div class="ds-flex-column ds-mb-12p">
+                    <div class="ds-flex-row ds-jc-between">
+                      <label class="ds-mb-4p ds-r-regular ds-body-secondary ds-c-black">{{'COMP_PARTNER.COMMCHANELS.C2C_SECRET' | translate}}*</label>
+                      <span (click)="redirectToRecoverPassword()" class="ds-r-bold ds-c-accent ds-caption ds-cur-pointer"> {{'CONTRASENA_OLVIDADA' | translate}}</span>
+                    </div>
+
+                    <div class="input-group">
+                      <input
+                        [type]="passwordInputType"
+                        placeholder="{{'COMP_PARTNER.COMMCHANELS.C2C_SECRET' | translate}}"
+                        formControlName="password"
+                        class="form-control-with-icon ds-no-take-error"
+                        maxlength="100">
+                        <div class="icon-prepend-eye" (click)="tooglePassword()" >
+                          <div class="icon-eye"></div>
+                        </div>
+                    </div>
+                  </div>
+
+
+
+                  <div class="ds-flex-row ds-jc-start ds-mt-24p">
+                    <button [disabled]="loginTypeService.isLocked" type="submit" class="ds-btn-orange ds-t-uppercase ds-r-bold ">
+                      <nz-spinner *ngIf="loginTypeService.loading">loading</nz-spinner>
+                      <div *ngIf="!loginTypeService.loading"> {{"ACCEDER" | translate}}</div>
+                    </button>
+                  </div>
+
+                  <div *ngIf="loginTypeService.loginError"  class="loginError d-flex">
+                    <div class="icon-exclamation-tri ds-mr-8p"></div>
+                    <div *ngIf="loginTypeService.isLocked">{{'LOCKED-USER' | translate}}</div>
+                    <div *ngIf="!loginTypeService.isLocked">{{'DATOS_INCORRECTOS' | translate}}</div>
+                  </div>
+
+                </form>
+              </ng-container>
+
+              <ng-container *ngIf="showFormValidateLicence" >
+                 <form class="ds-login-form" [formGroup]="validateLicenceForm" (ngSubmit)="validateLicence()">
+
+                <div class="ds-h2 ds-m-bold ds-c-black ds-mb-12p">{{'ORANGE_VALIDATE_LICENSE' | translate}}</div>
+
+                <div class="ds-flex-column ds-mb-12p">
+                  <label class="ds-body-secondary ds-r-regular ds-c-black ">{{'ORANGE_LICENSE' | translate}}*</label>
+                  <input type="text" class="ds-control"  formControlName="licence" [placeholder]="partnerService.partner.uniqueIdentifier || ''">
+                </div>
+
+                <div class="ds-flex-row ds-jc-end ds-cur-pointer" *ngIf="loginTypeService.showInstructions" (click)="showContentIntructions()">
+                  <span class="ds-body-secondary ds-r-regular ds-c-accent">{{partnerService.partner.loginInstructionsTitle}}</span>
+                </div>
+
+
+
+                <div class="ds-flex-column ds-mb-12p">
+                  <label class="ds-mb-4p ds-r-regular ds-body-secondary ds-c-black">{{ partnerService.partner.userPlaceholder }}</label>
+                  <div class="input-group">
+                    <input
+                      [type]="text"
+                      [placeholder]="partnerService.partner.userPlaceholder || ''"
+                      formControlName="email"
+                      class="ds-control"
+                      maxlength="100">
+                  </div>
+                </div>
+
+                <div class="ds-flex-column ds-mb-12p">
+                  <label class="ds-mb-4p ds-r-regular ds-body-secondary ds-c-black">{{'ORANGE_REPEAT_EMAIL' | translate}}*</label>
+                  <div class="input-group">
+                    <input
+                      [type]="text"
+                      [placeholder]="partnerService.partner.userPlaceholder || ''"
+                      formControlName="repeatEmail"
+                      class="ds-control"
+                      maxlength="100">
+                  </div>
+                  <span class="ds-c-danger ds-caption ds ds-r-regular" *ngIf="this.validateLicenceForm.hasError('Equals')  &&
+                    this.validateLicenceForm.get('email').dirty">{{'ORANGE_FIELD_NOEQUAL' | translate}}</span>
+                </div>
+
+                <div class="ds-flex-row ds-jc-start ds-mt-24p">
+                  <button [disabled]="loginTypeService.isLocked" type="submit" class="ds-btn-orange ds-r-bold ">
+                    <nz-spinner *ngIf="loginTypeService.loading">loading</nz-spinner>
+                    <div *ngIf="!loginTypeService.loading"> {{'ORANGE_VALIDATE' | translate}}</div>
+                  </button>
+                </div>
+
+                <div *ngIf="loginTypeService.loginError"  class="loginError d-flex">
+                  <div class="icon-exclamation-tri ds-mr-8p"></div>
+                  <div *ngIf="loginTypeService.isLocked">{{'LOCKED-USER' | translate}}</div>
+                  <div *ngIf="!loginTypeService.isLocked">{{'DATOS_INCORRECTOS' | translate}}</div>
+                </div>
+              </form>
+              </ng-container>
+
+
+              <div  *ngIf="showFormValidateLicence" class="ds-login-forget-password" style="margin-top:30px; border-bottom: 3px solid #BCC4D4; margin-left:0px; padding-left: 0px; padding-right: 0px; align-items: start;">
+                <div class="ds-r-regular ds-body-secondary ds-c-secondary ds-mb-24p ds-jc-start">{{'ORANGE_MESSAGE_THREE' | translate}}</div>
+
+                <button class="ds-btn-secondary-login-orange  ds-r-bold ds-text-upper ds-jc-start" (click)="goBackCredentials()" >{{'ACCEDER' | translate}}</button>
+              </div>
+
+              <div *ngIf="!showFormValidateLicence" class="ds-login-forget-password"  style="margin-top:30px; border-bottom: 3px solid #BCC4D4; margin-left:0px; padding-left: 0px; padding-right: 0px; align-items: start;">
+                <div class="ds-r-regular ds-body-secondary ds-c-secondary ds-mb-24p">{{'ORANGE_MESSAGE_ONE' | translate}}</div>
+
+                <button class="ds-btn-secondary-login-orange  ds-r-bold ds-text-upper ds-jc-start" (click)="showValidateLicenceForm()">{{'ORANGE_VALIDATE_MY_LICENSE' | translate}}</button>
+              </div>
+
+              <div *ngIf="!showFormValidateLicence">
+                <div class="ds-h2 ds-m-bold ds-c-black  ds-jc-start ds-mt-24p">{{'ORANGE_LOGIN_SESSION' | translate}}</div>
+
+              <div class="ds-login-forget-password"  style="border-bottom: 2px solid #BCC4D4; margin-top: 0px; padding-left: 0px; padding-right: 0px; align-items: start;">
+                <button class="ds-btn-orange ds-r-bold ds-text-upper"> <a href="https://areaclientes.orange.es/terceros" class="link-orange">{{'ORANGE_ACCESS_ORANGE' | translate}}</a></button>
+              </div>
+
+              </div>
+
+              <div class="ds-login-contact-us">
+                <div class="ds-r-bold  ds-caption  ds-c-secondary ds-mb-12p"> {{partnerService.partner.communicationsTitle}} </div>
+
+                <div class="ds-login-icons">
+                  <a href="tel:{{partnerService.partner.phone}}" *ngIf="partnerService.partner.includePhone && partnerService.partner.phone">
+                    <div class="icon-phone ds-mr-8p"></div>
+                    {{partnerService.partner.phone}}
+                  </a>
+
+                  <a
+                    href="https://api.whatsapp.com/send?phone={{partnerService.partner.whatsapp}}"
+                    target="_blank"
+                    *ngIf="partnerService.partner.includeWhatsapp && partnerService.partner.whatsapp">
+                    <div class="icon-whatsapp ds-mr-8p"></div>
+                    {{partnerService.partner.whatsapp}}
+                  </a>
+
+                  <a href="mailto:{{partnerService.partner.email}}" *ngIf="partnerService.partner.includeEmail && partnerService.partner.email">
+                    <div class="icon-envelope ds-mr-8p"></div>
+                    {{partnerService.partner.email}}
+                  </a>
+                </div>
+              </div>
+
+              <div class="ds-login-language" style="margin-top: 24px;">
+                <app-custom-select [placeholder]="loginTypeService.dropdownLanguage" [items]="loginTypeService.languages" (changeEvent)="onChange($event)" >
+                </app-custom-select>
+              </div>
+              <div class="ds-terms-and-conditions" align="center">
+                <span (click)="goToTerms()"> {{'TERMINOS_CONDICIONES' | translate}} </span>
+                <span (click)="goCookiesPolicy()">  {{'COOKIES.COOKIES_POLICY' | translate}} </span>
+                <span (click)="goToPrivacyPolicy()"> {{'COOKIES.PRIVACY_POLICY' | translate}} </span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+</section>
+
+<section class="loginBox" style="height: auto !important;" >
+  <div class="container-fluid pl-0 px-0">
+    <div class="ds-flex-row ds-flex-wrap">
+      <div class="col-xl-4 col-lg-4 d-flex flex-column auth-bg-section loginText">
+        <div class="ds-flex-column ">
+          <div class="header">
+            <img class="logo" alt="logo" src="{{partnerService.partner.logotipo}}" >
+            <p class="ds-m-bold ds-c-primary ds-h1 ds-mt-32p">{{partnerService.partner.name}}</p>
+          </div>
+          <div class="body d-md-block d-none">
+            <h5 class="ds-m-bold ds-c-orange">{{'SSO_LOGIN_SIDE_TITLE_MESSAGE' | translate}}</h5>
+            <span class="ds-h4 ds-r-regular ds-c-black">{{partnerService.partner.loginSubtitle}}</span>
+          </div>
+        </div>
+
+        <div  [ngStyle]="{'background-image':loginTypeService.backgroundImage}" class="fondo">
+
+        </div>
+      </div>
+
+        <div class="col-xl-8 col-lg-8 col-md-7 d-flex flex-column justify-content-center">
+          <div class="ds-login-main-container" style="background-image: none; height: auto !important;">
+
+            <div class="ds-card-container" style="background-color:#ECF1F8 ; border: none;" >
+              <ng-container *ngIf="!showFormValidateLicence">
+                <form class="ds-login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+                  <div class="ds-h2 ds-m-bold ds-c-black ds-mb-12p">{{'ORANGE_LOGIN_SESSION' | translate}}</div>
+
+                  <div class="ds-flex-column ds-mb-12p">
+                    <label class="ds-body-secondary ds-r-regular ds-c-black ">{{partnerService.partner.userPlaceholder}}</label>
+                    <input type="text" class="ds-control"  formControlName="email" [placeholder]="partnerService.partner.userPlaceholder || '' ">
+                  </div>
+
+
+                  <div class="ds-flex-column ds-mb-12p">
+                    <div class="ds-flex-row ds-jc-between">
+                      <label class="ds-mb-4p ds-r-regular ds-body-secondary ds-c-black">{{'COMP_PARTNER.COMMCHANELS.C2C_SECRET' | translate}}*</label>
+                      <span (click)="redirectToRecoverPassword()" class="ds-r-bold ds-c-accent ds-caption ds-cur-pointer"> {{'CONTRASENA_OLVIDADA' | translate}}</span>
+                    </div>
+
+                    <div class="input-group">
+                      <input
+                        [type]="passwordInputType"
+                        placeholder="{{'COMP_PARTNER.COMMCHANELS.C2C_SECRET' | translate}}"
+                        formControlName="password"
+                        class="form-control-with-icon ds-no-take-error"
+                        maxlength="100">
+                        <div class="icon-prepend-eye" (click)="tooglePassword()" >
+                          <div class="icon-eye"></div>
+                        </div>
+                    </div>
+                  </div>
+
+
+
+                  <div class="ds-flex-row ds-jc-start ds-mt-24p">
+                    <button [disabled]="loginTypeService.isLocked" type="submit" class="ds-btn-orange ds-r-bold ">
+                      <nz-spinner *ngIf="loginTypeService.loading">loading</nz-spinner>
+                      <div *ngIf="!loginTypeService.loading"> {{"ACCEDER" | translate}}</div>
+                    </button>
+                  </div>
+
+                  <div *ngIf="loginTypeService.loginError"  class="loginError d-flex">
+                    <div class="icon-exclamation-tri ds-mr-8p"></div>
+                    <div *ngIf="loginTypeService.isLocked">{{'LOCKED-USER' | translate}}</div>
+                    <div *ngIf="!loginTypeService.isLocked">{{'DATOS_INCORRECTOS' | translate}}</div>
+                  </div>
+
+                </form>
+              </ng-container>
+
+              <ng-container *ngIf="showFormValidateLicence" >
+                 <form class="ds-login-form" [formGroup]="validateLicenceForm" (ngSubmit)="validateLicence()">
+
+                <div class="ds-h2 ds-m-bold ds-c-black ds-mb-12p">{{'ORANGE_VALIDATE_LICENSE' | translate}}</div>
+
+                <div class="ds-flex-column ds-mb-12p">
+                  <label class="ds-body-secondary ds-r-regular ds-c-black ">{{'ORANGE_LICENSE' | translate}}*</label>
+                  <input type="text" class="ds-control"  formControlName="licence" [placeholder]="partnerService.partner.uniqueIdentifier || ''">
+                </div>
+
+                <div class="ds-flex-row ds-jc-end ds-cur-pointer" *ngIf="loginTypeService.showInstructions" (click)="showContentIntructions()">
+                  <span class="ds-body-secondary ds-r-regular ds-c-accent">{{partnerService.partner.loginInstructionsTitle}}</span>
+                </div>
+
+
+
+                <div class="ds-flex-column ds-mb-12p">
+                  <label class="ds-mb-4p ds-r-regular ds-body-secondary ds-c-black">{{ partnerService.partner.userPlaceholder }}</label>
+                  <div class="input-group">
+                    <input
+                      [type]="text"
+                      [placeholder]="partnerService.partner.userPlaceholder || ''"
+                      formControlName="email"
+                      class="ds-control"
+                      maxlength="100">
+                  </div>
+                </div>
+
+                <div class="ds-flex-column ds-mb-12p">
+                  <label class="ds-mb-4p ds-r-regular ds-body-secondary ds-c-black">{{'ORANGE_REPEAT_EMAIL' | translate}}*</label>
+                  <div class="input-group">
+                    <input
+                      [type]="text"
+                      [placeholder]="partnerService.partner.userPlaceholder || ''"
+                      formControlName="repeatEmail"
+                      class="ds-control"
+                      maxlength="100">
+                  </div>
+                  <span class="ds-c-danger ds-caption ds ds-r-regular" *ngIf="this.validateLicenceForm.hasError('Equals')  &&
+                    this.validateLicenceForm.get('email').dirty">{{'ORANGE_FIELD_NOEQUAL' | translate}}</span>
+                </div>
+
+                <div class="ds-flex-row ds-jc-start ds-mt-24p">
+                  <button [disabled]="loginTypeService.isLocked" type="submit" class="ds-btn-orange ds-r-bold ">
+                    <nz-spinner *ngIf="loginTypeService.loading">loading</nz-spinner>
+                    <div *ngIf="!loginTypeService.loading"> {{'ORANGE_VALIDATE' | translate}}</div>
+                  </button>
+                </div>
+
+                <div *ngIf="loginTypeService.loginError"  class="loginError d-flex">
+                  <div class="icon-exclamation-tri ds-mr-8p"></div>
+                  <div *ngIf="loginTypeService.isLocked">{{'LOCKED-USER' | translate}}</div>
+                  <div *ngIf="!loginTypeService.isLocked">{{'DATOS_INCORRECTOS' | translate}}</div>
+                </div>
+              </form>
+              </ng-container>
+
+
+              <div  *ngIf="showFormValidateLicence" class="ds-login-forget-password" style="margin-top:30px; border-bottom: 3px solid #BCC4D4; margin-left:0px; padding-left: 0px; padding-right: 0px; align-items: start;">
+                <div class="ds-r-regular ds-body-secondary ds-c-secondary ds-mb-24p ds-jc-start">{{'ORANGE_MESSAGE_THREE' | translate}}</div>
+
+                <button class="ds-btn-secondary-login-orange  ds-r-bold ds-text-upper ds-jc-start" (click)="goBackCredentials()" >{{'ACCEDER' | translate}}</button>
+              </div>
+
+              <div *ngIf="!showFormValidateLicence" class="ds-login-forget-password"  style="margin-top:30px; border-bottom: 3px solid #BCC4D4; margin-left:0px; padding-left: 0px; padding-right: 0px; align-items: start;">
+                <div class="ds-r-regular ds-body-secondary ds-c-secondary ds-mb-24p">{{'ORANGE_MESSAGE_ONE' | translate}}</div>
+
+                <button class="ds-btn-secondary-login-orange  ds-r-bold ds-text-upper ds-jc-start" (click)="showValidateLicenceForm()">{{'ORANGE_VALIDATE_MY_LICENSE' | translate}}</button>
+              </div>
+
+              <div *ngIf="!showFormValidateLicence">
+                <div class="ds-h2 ds-m-bold ds-c-black  ds-jc-start ds-mt-24p">{{'ORANGE_LOGIN_SESSION' | translate}}</div>
+
+              <div class="ds-login-forget-password"  style="border-bottom: 2px solid #BCC4D4; margin-top: 0px; padding-left: 0px; padding-right: 0px; align-items: start;">
+                <button class="ds-btn-orange ds-r-bold ds-text-upper"> <a href="https://areaclientes.orange.es/terceros" class="link-orange">{{'ORANGE_ACCESS_ORANGE' | translate}}</a></button>
+              </div>
+
+              </div>
+
+              <div class="ds-login-contact-us">
+                <div class="ds-r-bold  ds-caption  ds-c-secondary ds-mb-12p"> {{partnerService.partner.communicationsTitle}} </div>
+
+                <div class="ds-login-icons">
+                  <a href="tel:{{partnerService.partner.phone}}" *ngIf="partnerService.partner.includePhone && partnerService.partner.phone">
+                    <div class="icon-phone ds-mr-8p"></div>
+                    {{partnerService.partner.phone}}
+                  </a>
+
+                  <a
+                    href="https://api.whatsapp.com/send?phone={{partnerService.partner.whatsapp}}"
+                    target="_blank"
+                    *ngIf="partnerService.partner.includeWhatsapp && partnerService.partner.whatsapp">
+                    <div class="icon-whatsapp ds-mr-8p"></div>
+                    {{partnerService.partner.whatsapp}}
+                  </a>
+
+                  <a href="mailto:{{partnerService.partner.email}}" *ngIf="partnerService.partner.includeEmail && partnerService.partner.email">
+                    <div class="icon-envelope ds-mr-8p"></div>
+                    {{partnerService.partner.email}}
+                  </a>
+                </div>
+              </div>
+
+              <div class="ds-login-language">
+                <app-custom-select
+                  *ngIf="loginTypeService.languages.length > 1"
+                  [placeholder]="loginTypeService.dropdownLanguage"
+                  [items]="loginTypeService.languages"
+                  (changeEvent)="onChange($event)"
+                >
+                </app-custom-select>
+                <div
+                  *ngIf="loginTypeService.languages.length <= 1"
+                  class="ds-r-regular ds-body-secondary ds-c-secondary ds-caption"
+                >
+                  <span class="icon-globe mr-2"></span> <span>{{ loginTypeService.languages[0].value }}</span>
+                </div>
+              </div>
+              <div class="ds-terms-and-conditions" align="center">
+                <span (click)="goToTerms()"> {{'TERMINOS_CONDICIONES' | translate}} </span>
+                <span (click)="goCookiesPolicy()">  {{'COOKIES.COOKIES_POLICY' | translate}} </span>
+                <span (click)="goToPrivacyPolicy()"> {{'COOKIES.PRIVACY_POLICY' | translate}} </span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+</section>

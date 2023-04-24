@@ -1,0 +1,20 @@
+<div class="mb-3">
+    <span
+      class="text-center d-block gaugeLbl mx-auto bg-semantic-danger"
+      *ngIf="gaugeMessage == 1"
+    >
+      {{ gaugeLabel }}
+    </span>
+    <span
+      class="text-center d-block gaugeLbl mx-auto bg-semantic-warning"
+      *ngIf="gaugeMessage == 2"
+    >
+      {{ gaugeLabel }}
+    </span>
+    <span
+      class="text-center d-block gaugeLbl mx-auto bg-semantic-success"
+      *ngIf="gaugeMessage == 3"
+    >
+      {{ gaugeLabel }}
+    </span>
+  </div>

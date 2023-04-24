@@ -1,0 +1,32 @@
+<div class="ds-card-body">
+  <div class="w-100 d-flex flex-column align-items-center justify-content-center ">
+    <div class="max-w-778p">
+      <div class="d-flex flex-column align-items-center justify-content-center">
+        <div class="{{service.icon}} cyber-main-icon ds-c-primary ds-mb-10p"></div>
+
+
+        <div class="cac-container">
+          <div class="ds-h2 ds-m-bold ds-c-black ds-mb-8p ">
+            {{'BACKUP.PROTECTION_TEXT' | translate}}
+          </div>
+
+          <div class="ds-body-primary  ds-r-regular">
+            {{'BACKUP.PROTECTION_TEXT1' | translate}}
+          </div>
+        </div>
+
+
+        <div class="ds-button-action">
+          <button class="ds-btn-primary ds-text-upper" (click)="initProcess()" [disabled]="loading">
+            <nz-spinner *ngIf="loading"></nz-spinner>
+            <div *ngIf="!loading" class="text-uppercase">
+              {{'BACKUP.ANALYZE' | translate}}
+            </div>
+          </button>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>

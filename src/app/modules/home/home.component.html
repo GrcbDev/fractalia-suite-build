@@ -1,0 +1,222 @@
+<ng-container *ngIf="!loading; else loadingTemplate" >
+  <div class="flex-column w-50" id="user-sesion-welcome">
+    <div class="ds-caption ds-r-regular  ds-c-secondary">
+      <span>{{ 'ULTIMO_ACCESO' | translate }}:&nbsp;</span>
+      <span>{{slastPreviousAccessDate.toLocaleString() | date: 'dd/MM/yyyy'}}</span> |
+      <span>{{slastPreviousAccessDate.toLocaleString() | date: 'HH:mm'}}</span>
+    </div>
+    <div>
+      <div *ngIf="!hideGreeting" class="ds-h1 ds-m-bold ds-c-black">
+        {{ 'HOLA' | translate }} {{this.userService.currentUserValue.name}}
+       </div>
+       <div *ngIf="hideGreeting" class="ds-h1 ds-m-bold ds-c-black">
+         {{suiteName}}
+        </div>
+    </div>
+
+  </div>
+
+  <app-instruction-guide-web
+    *ngIf="instructionConfig  && jumbotromFinalizated && !instructionGuideSkip"
+    [instructionConfig]="instructionConfig"
+    [userName]="userService.currentUserValue.name"
+    [partnerName]="partnerService.partner.name"
+  >
+  </app-instruction-guide-web>
+
+  <section class="content-home">
+    <button id="activation"  *ngIf="wizardSkiped" style="margin: 0px 0px 12px " (click)="goToWizard()">
+      <img src="{{staticContentUrl+'img/fact_check.png'}}" width="16">
+      <div class="ml-2">
+          {{'COMP_USER.SUPPORT_NOTIFICATION.CONTINUE_ACTIVATION' | translate}}
+      </div>
+    </button>
+
+    <div class="ds-mb-12p mt-4" *ngIf="existCyberSecurity; else renderServices">
+      <app-cybersecurity-service ></app-cybersecurity-service>
+    </div>
+
+    <ng-template #renderServices>
+
+      <div class="ds-mb-12p" *ngIf="existJumbotron">
+        <app-servicess-status (finalized)="onJumbotromFinalized($event)"></app-servicess-status>
+      </div>
+      <div class="ds-mb-12p mt-2" *ngIf="existDigitalSupport">
+      <app-expert-support [data]="homeDashboard"></app-expert-support>
+      </div>
+      <ng-container *ngIf="homeDashboard && homeDashboard.services && homeDashboard.services.length">
+        <div *ngFor="let service of homeDashboard.services; let i = index"   [ngSwitch]="service.typeCode">
+
+
+
+           <div class="ds-mb-12p"  *ngSwitchCase="'TRE'" >
+            <app-trendmicro-service [data]="service"></app-trendmicro-service>
+          </div>
+
+          <div class="ds-mb-12p"  *ngSwitchCase="'ACU'" >
+            <app-acuetix-service [data]="service"></app-acuetix-service>
+          </div>
+
+          <div class="ds-mb-12p"  *ngSwitchCase="'ATS'" >
+            <app-attack-simulator-service [data]="service"></app-attack-simulator-service>
+          </div>
+
+          <div class="ds-mb-12p" *ngSwitchCase="'BMS'">
+            <div class="card h-100  ds-mb-12p">
+              <app-bitdefender-service [data]="service"> </app-bitdefender-service>
+            </div>
+          </div>
+          <div class="ds-mb-12p" *ngSwitchCase="'MSM'">
+            <div class="card h-100  ds-mb-12p">
+              <app-bitdefendermsm-service [data]="service"> </app-bitdefendermsm-service>
+            </div>
+          </div>
+          <div class="ds-mb-12p"  *ngSwitchCase="'CAC'" >
+            <app-user-security [data]="service"></app-user-security>
+          </div>
+
+          <div class="card h-100  ds-mb-12p" *ngSwitchCase="'CCB'">
+            <app-cybersecurity-questions [serviceCard]="true" [data]="service">  </app-cybersecurity-questions>
+          </div>
+
+          <div class="ds-mb-12p"  *ngSwitchCase="'CFR'" >
+            <app-network-protection [data]="service">     </app-network-protection>
+          </div>
+
+          <div class="ds-mb-12p" *ngSwitchCase="'CII'">
+            <app-identity-theft-protection [data]="service"></app-identity-theft-protection>
+          </div>
+
+          <div class="ds-mb-12p" *ngSwitchCase="'CIT'">
+            <app-credit-card-fraud-protection [data]="service"></app-credit-card-fraud-protection>
+          </div>
+
+          <div class="card h-100  ds-mb-12p"  *ngSwitchCase="'CYB'">
+            <app-cyberscoring [serviceCard]="true"  [data]="service" >      </app-cyberscoring>
+          </div>
+
+          <div class="ds-mb-12p" *ngSwitchCase="'ELE'">
+            <app-elearning-service [data]="service"></app-elearning-service>
+          </div>
+
+          <div class="ds-mb-12p" *ngSwitchCase="'GRA'">
+            <app-gravity-service [data]="service"></app-gravity-service>
+          </div>
+
+          <div class="ds-mb-12p" *ngSwitchCase="'GEO'">
+            <app-geolocation-service [data]="service"></app-geolocation-service>
+          </div>
+
+          <div class="ds-mb-12p" *ngSwitchCase="'NAV'">
+            <app-secure-browsing [data]="service"></app-secure-browsing>
+          </div>
+
+          <div class="ds-mb-12p" *ngSwitchCase="'TNX'">
+            <app-secure-transfer [data]="service"></app-secure-transfer>
+          </div>
+
+          <div class="ds-mb-12p" *ngSwitchCase="'CHT'">
+            <app-chat-service [data]="service" [isCardInHome]="true"></app-chat-service>
+          </div>
+
+          <div class="ds-mb-12p" *ngSwitchCase="'INF'">
+            <app-informative-service [data]="service" [isCardInHome]="true"></app-informative-service>
+          </div>
+
+          <div class="ds-mb-12p"  *ngSwitchCase="'CPR'" >
+            <app-cpr-service [data]="service"></app-cpr-service>
+          </div>
+
+
+          <div class="ds-mb-12p"  *ngSwitchCase="'FCP'" >
+            <app-professional-service [data]="service"></app-professional-service>
+          </div>
+
+          <div class="ds-mb-12p"  *ngSwitchCase="'FSK'" >
+            <app-digital-support-form [data]="service"></app-digital-support-form>
+          </div>
+
+          <div class="ds-mb-12p"  *ngSwitchCase="'KAV'" >
+            <app-antivirus-service [data]="service"></app-antivirus-service>
+          </div>
+
+          <div class="ds-mb-12p"  *ngSwitchCase="'BAK'" >
+            <app-backup-service [data]="service"></app-backup-service>
+          </div>
+
+          <div class="ds-mb-12p"  *ngSwitchCase="'FRC'" >
+            <app-digital-certificate-service [data]="service"></app-digital-certificate-service>
+          </div>
+
+          <div class="ds-mb-12p"  *ngSwitchCase="'FRV'" >
+            <app-digital-life-service [data]="service"></app-digital-life-service>
+          </div>
+
+          <div class="ds-mb-12p"  *ngSwitchCase="'FRI'" >
+            <app-internet-report-service [data]="service"></app-internet-report-service>
+          </div>
+
+          <div class="ds-mb-12p"  *ngSwitchCase="'EVD'" >
+            <app-EVD-service [data]="service"></app-EVD-service>
+          </div>
+
+          <div class="ds-mb-12p"  *ngSwitchCase="'365'" >
+            <app-office-activation-service [data]="service"></app-office-activation-service>
+          </div>
+
+          <div class="ds-mb-12p"  *ngSwitchCase="'AGN'" >
+            <app-agent-service [data]="service"></app-agent-service>
+          </div>
+
+          <div class="ds-mb-12p"  *ngSwitchCase="'BFM'" >
+            <app-bitdefender-mobile [data]="service"></app-bitdefender-mobile>
+          </div>
+
+          <div class="ds-mb-12p"  *ngSwitchCase="'BIS'" >
+            <app-bitdefender-security [data]="service"></app-bitdefender-security>
+          </div>
+
+          <div class="ds-mb-12p"  *ngSwitchCase="'BIT'" >
+            <app-bitdefender-total [data]="service"></app-bitdefender-total>
+          </div>
+
+
+          <div class="ds-mb-12p"  *ngSwitchCase="'CIB'" >
+            <app-cyber-alarm [data]="service"></app-cyber-alarm>
+          </div>
+
+
+          <div class="ds-mb-12p"  *ngSwitchCase="'ELD'" >
+            <app-digital-legacy [data]="service"></app-digital-legacy>
+          </div>
+
+          <div class="ds-mb-12p"  *ngSwitchCase="'ETD'" >
+            <app-digital-will-service [data]="service"></app-digital-will-service>
+          </div>
+
+          <div class="ds-mb-12p"  *ngSwitchCase="'FRD'" >
+            <app-cadastre-form-service [data]="service"></app-cadastre-form-service>
+          </div>
+
+        </div>
+      </ng-container>
+
+
+
+    </ng-template>
+
+  </section>
+
+
+</ng-container>
+
+
+
+<ng-template #loadingTemplate>
+  <div class="app-loading">
+    <div class="logo">
+        <img src="{{partnerService.preloaderImage}}" >
+    </div>
+  </div>
+</ng-template>
+

@@ -1,0 +1,129 @@
+.rgpd-steps-mobile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 0px;
+  margin-top: 24px;
+  margin-right: 36px;
+  margin-left: 36px;
+
+  .rgpd-progress-container-mobile {
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    max-width:100%;
+    width: 100%;
+    margin-bottom: 60px;
+
+    &::before{
+      content: '';
+      background-color:#BCC4D4;
+      position:absolute;
+      top: 50%;
+      left: 0;
+      height: 4px;
+      width: 100%;
+      transform: translateY(-50%);
+      z-index: 0;
+      transition: 0.4s ease-in;
+    }
+
+    .rgpd-text-mobile {
+      position: absolute;
+      bottom: -10px;
+      text-align: center;
+      width: 112px;
+      height: 0;
+    }
+
+
+
+  }
+}
+
+.rgpd-circle-mobile{
+  background-color: #34383F;
+  color: #fff;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #34383F;
+  z-index: 0;
+
+  .rgpd-text-mobile {
+    font-family: "RobotoBold";
+    color: #34383F;
+  }
+
+  &.ds-is-clickable {
+    &:hover{
+      border-color: #34383F !important;
+    }
+  }
+
+
+  &.done {
+    border-color: #14BB43;
+    background-color: #14BB43;
+    color: #FFFFFF;
+
+    .rgpd-text-mobile {
+      font-family: "RobotoRegular";
+      color: #34383F;
+    }
+  }
+
+  &.selected {
+    border-color: #34383F;
+    background: #34383F;
+    color: #FFFFFF;
+
+    .rgpd-text-mobile {
+      font-family: "RobotoBold";
+      color: #34383F;
+    }
+  }
+
+
+  &.disable {
+    background-color: #BCC4D4;
+    border-color: #BCC4D4;
+    color: #FFFFFF;
+
+    .rgpd-text-mobile {
+      font-family: "RobotoRegular";
+      color:#BCC4D4;
+    }
+
+  }
+}
+
+
+.rgpd-progress{
+  background-color: #14BB43;
+  position:absolute;
+  top: 50%;
+  left: 0;
+  height: 4px;
+  width: 0%;
+  transform: translateY(-50%);
+  z-index: 0;
+  transition: 0.4s ease-in;
+}
+
+
+@media only screen and (max-width: 767px) {
+  .rgpd-steps-mobile {
+    margin:0;
+    margin-top: 24px;
+    .rgpd-progress-container-mobile {
+      margin-bottom: 24px;
+      .rgpd-text-mobile {
+        display: none;
+      }
+    }
+  }
+}

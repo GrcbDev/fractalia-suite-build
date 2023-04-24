@@ -1,0 +1,32 @@
+<div class="datos d-flex flex-column">
+  <h2 class="title text-center mb-4 neutral-black fs-16">
+    {{ "CYBERSCORING.LAST_ANALYSIS" | translate }}
+  </h2>
+  <span class="text-center crit-label">
+    <font>{{ dataC.businessName }}</font>
+  </span>
+  <div class="mb-4">
+    <span class="text-center d-block crit-label">{{
+      (lastDate.toString() + "Z").toLocaleString()
+        | date : "dd/MM/yyyy HH:mm:ss"
+    }}</span>
+  </div>
+  <div class="mb-4">
+    <span class="text-center d-block crit-label">{{ sector }}</span>
+  </div>
+  <div *ngFor="let domain of dataC.domains">
+    <span class="d-block w-100 text-center crit-label">{{ domain }}</span>
+  </div>
+</div>
+<div class="datos mt-3">
+  <div class="d-block mx-auto mw-182">
+    <button
+      class="btn btn-primary d-flex justify-content-center align-items-center mx-auto mb-3 p-12"
+      (click)="getLastReport()"
+    >
+      <a class="cyb-download-last" target="_blank">
+        {{ "CYBERSCORING.DOWNLOAD_LAST_BUTTON" | translate }}</a
+      >
+    </button>
+  </div>
+</div>

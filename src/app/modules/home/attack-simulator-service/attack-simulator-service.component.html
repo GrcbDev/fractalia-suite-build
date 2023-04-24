@@ -1,0 +1,194 @@
+<section class="ds-card informative-service-content">
+  <div class="ds-card-header align-items-center">
+    <div class="d-flex align-items-center">
+
+      <span class="{{data.icon }} ds-fs-24 mr-2"></span>
+      <div class="ds-h4 ds-m-bold ds-c-black">
+        {{data.name}}
+      </div>
+    </div>
+    <span class="icon-info ds-header-icon-right cursor" (click)="open(data.name, data.longDesc, data.icon)"></span>
+  </div>
+  <div class="ds-card-body">
+    <ng-template render-component></ng-template>
+    <ng-container *ngIf="isloading">
+      <div class="default-section fa-3x">
+        <i class="fas fa-spinner fa-spin"></i>
+      </div>
+    </ng-container>
+  </div>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--FIN RESULTS  -->
+
+
+ <!-- <section class="ds-card ">
+
+  <div class="ds-card-header align-items-center">
+      <div class="d-flex align-items-center">
+        <span class="{{data.icon }} mr-2"></span>
+        <div class="ds-h4 ds-m-bold ds-c-black">
+          {{data.name}}
+        </div>
+      </div>
+      <span class="icon-info ds-header-icon-right cursor" (click)="open(data.name, data.longDesc, data.icon)"></span>
+  </div>
+
+  <div class="ds-card-body">
+    <ng-container *ngIf="!isloading; else loadingTemplate">
+
+      <div class="row h-100" *ngIf="attacksimulatorService.status==0">
+        <div class="col-xl-3 col-lg-2 col-md-1 col-sm-1 col-1 pt-4 mb-2">
+
+        </div>
+        <div class="col-xl-6 col-lg-8 col-md-10 col-sm-10 col-10 pt-4 mb-2">
+            <div class="cg-icon text-center d-block mx-auto mb-3">
+                <div class="icon-phishing" style="font-size: 3em; line-height: 1.5;"></div>
+            </div>
+            <ng-container *ngIf="userService.currentUserValue.isAdminUserId">
+                <h6 class="text-center">{{'COMP_ATTACKSIMULATOR.TEXT0' | translate}}</h6>
+                <p class="text-center">{{'COMP_ATTACKSIMULATOR.TEXT1' | translate}}</p>
+                <button type="submit" class="btn btn-primary w-auto mb-2 d-block mx-auto" [disabled]="loading" (click)="createFamily()">
+                    <nz-spinner *ngIf="loading"></nz-spinner>
+                    <div *ngIf="!loading">
+                        {{'COMP_ATTACKSIMULATOR.BUTTON_SOLICITAR' | translate}}
+                    </div>
+                </button>
+            </ng-container>
+            <ng-container *ngIf="!userService.currentUserValue.isAdminUserId">
+                <h6 class="text-center">{{'COMP_ATTACKSIMULATOR.TEXT0_NO_ADMIN' | translate}}</h6>
+            </ng-container>
+        </div>
+        <div class="col-xl-3 col-lg-2 col-md-1 col-sm-1 col-1 pt-4 mb-2">
+
+        </div>
+      </div>
+
+      <div class="h-100 row grid-divider"  *ngIf="attacksimulatorService.status==1">
+        <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12 pt-4 pb-4">
+            <div class="w-75 d-block mx-auto">
+                <div class="status-as text-center">
+                    <div class="icon-star-1 text-center" [ngClass]="{ 'green': attacksimulatorService.stats.score==5, 'orange': attacksimulatorService.stats.score==4 || attacksimulatorService.stats.score==3, 'red': attacksimulatorService.stats.score==2 || attacksimulatorService.stats.score==1 }"><font>{{attacksimulatorService.stats.score}}<small class="small">/5</small></font></div>
+                    <span class="title text-center" *ngIf="attacksimulatorService.stats.score==5">{{'COMP_ATTACKSIMULATOR.PUNTUACION5' | translate}}</span>
+                    <span class="title text-center" *ngIf="attacksimulatorService.stats.score==4">{{'COMP_ATTACKSIMULATOR.PUNTUACION4' | translate}}</span>
+                    <span class="title text-center" *ngIf="attacksimulatorService.stats.score==3">{{'COMP_ATTACKSIMULATOR.PUNTUACION3' | translate}}</span>
+                    <span class="title text-center" *ngIf="attacksimulatorService.stats.score==2">{{'COMP_ATTACKSIMULATOR.PUNTUACION2' | translate}}</span>
+                    <span class="title text-center" *ngIf="attacksimulatorService.stats.score==1">{{'COMP_ATTACKSIMULATOR.PUNTUACION1' | translate}}</span>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12 pt-4 pb-4">
+            <span class="title mb-4 text-center">{{'COMP_ATTACKSIMULATOR.TITLE_STATS' | translate}}</span>
+            <div class="row justify-content-center align-items-center">
+                <div
+                    class="col-xl-6 col-lg-6 col-md-5 col-sm-5 col-xs-6 col-8 mb-2 offset-0 offset-sm-1 offset-md-1 offset-lg-0">
+                    <div class="w100 d-block mx-auto">
+
+                        <div class="mb-2 d-flex align-items-center">
+                            <div class="w-25">
+                                <span>{{'COMP_ATTACKSIMULATOR.DELIVERED' | translate}}</span>
+                            </div>
+                            <div class="w-25 text-center">
+                                <h4 class="float-none">{{attacksimulatorService.stats.received}}</h4>
+                            </div>
+                            <div class="progress progressdash w-50">
+                                <div class="progress-bar" role="progressbar"
+                                    style="width: 100%"
+                                    aria-valuenow="100"
+                                    aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="mb-2 d-flex align-items-center">
+                            <div class="w-25">
+                                <span>{{'COMP_ATTACKSIMULATOR.OPEN' | translate}}</span>
+                            </div>
+                            <div class="w-25 text-center">
+                                <h4 class="float-none">{{attacksimulatorService.stats.opened}}</h4>
+                            </div>
+                            <div class="progress progressdash w-50">
+                                <div class="progress-bar" role="progressbar"
+                                    style="width: {{(attacksimulatorService.stats.opened * 100) / (attacksimulatorService.stats.received)}}%"
+                                    aria-valuenow="{{(attacksimulatorService.stats.opened * 100) / (attacksimulatorService.stats.received)}}"
+                                    aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="border-bottom w-100 d-inline-flex d-sm-none"></div>
+                </div>
+
+                <div
+                    class="col-xl-6 col-lg-6 col-md-5 col-sm-5 col-xs-6 col-8 mb-2 offset-0 offset-sm-1 offset-md-1 offset-lg-0">
+                    <div class="w100 d-block mx-auto">
+                        <div class="mb-2 d-flex align-items-center">
+                            <div class="w-25">
+                                <span>{{'COMP_ATTACKSIMULATOR.CLICS' | translate}}</span>
+                            </div>
+                            <div class="w-25 text-center">
+                                <h4 class="float-none">{{attacksimulatorService.stats.clicked}}</h4>
+                            </div>
+                            <div class="progress progressdash w-50">
+                                <div class="progress-bar kored" role="progressbar"
+                                    style="width: {{(attacksimulatorService.stats.clicked * 100) / (attacksimulatorService.stats.received)}}%"
+                                    aria-valuenow="{{(attacksimulatorService.stats.clicked * 100) / (attacksimulatorService.stats.received)}}"
+                                    aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                        <div class="mb-2 d-flex align-items-center">
+                            <div class="w-25">
+                                <span>{{'COMP_ATTACKSIMULATOR.AFFECTED' | translate}}</span>
+                            </div>
+                            <div class="w-25 text-center">
+                                <h4 class="float-none">{{attacksimulatorService.stats.affected}}</h4>
+                            </div>
+                            <div class="progress progressdash w-50">
+                                <div class="progress-bar kored" role="progressbar"
+                                    style="width: {{(attacksimulatorService.stats.affected * 100) / (attacksimulatorService.stats.received)}}%"
+                                    aria-valuenow="{{(attacksimulatorService.stats.affected * 100) / (attacksimulatorService.stats.received)}}"
+                                    aria-valuemin="0" aria-valuemax="100"></div>
+                                  </div>
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+
+
+                        </div>
+
+                      </div>
+
+
+    </ng-container>
+
+    <ng-template #loadingTemplate>
+      <div class="default-section fa-3x">
+        <i class="fas fa-spinner fa-spin"></i>
+      </div>
+    </ng-template>
+  </div>
+
+
+</section> -->

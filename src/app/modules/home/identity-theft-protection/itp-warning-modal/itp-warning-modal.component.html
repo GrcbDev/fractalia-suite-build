@@ -1,0 +1,51 @@
+<div class="d-flex ds-mb-32p justify-content-end ds-pt-24p ds-pr-24p">
+  <i class="icon-close" (click)="closeModal()"></i>
+</div>
+
+<section class="row mt-2 mr-4 ml-4 mb-4" *ngIf="breachedIdentity">
+    <div class="col-sm-12 pl-0 pr-0 d-flex justify-content-center">
+        <div class="new-modal-img mb-4 mt-0 fs-78 icon-warning semantic-danger"></div>
+    </div>
+    <div class="col-sm-12 pl-0 pr-0 mb-2 d-flex justify-content-center">
+        <h4 class="wizard-modal-title fs-20 lh-24 neutral-black">{{'CYBERALARM.IDENTITIES.BREACH_MODAL.TITLE' | translate}}</h4>
+    </div>
+    <div class="col-sm-12 pl-0 pr-0 d-flex justify-content-center">
+        <p class="wizard-modal-text neutral-black fs-16 lh-19"
+        [innerHTML]="'CYBERALARM.IDENTITIES.BREACH_MODAL.TEXT1' | translate: { email: breachedIdentity.identity}">
+        </p>
+    </div>
+    <div class="col-sm-12 pl-0 pr-0 d-flex flex-column justify-content-center">
+        <p class="wizard-modal-text neutral-black fs-16 lh-19 mb-0">
+        {{'CYBERALARM.IDENTITIES.BREACH_MODAL.TEXT2' | translate}}
+        </p>
+        <li *ngFor="let breach of currentBreach"
+            class="wizard-modal-text neutral-black mt-0 mb-0 fs-16 lh-19">
+            <b>{{breach.name}}</b>
+        </li>
+        <p class="wizard-modal-text neutral-black mt-3 fs-16 lh-19">
+            {{'CYBERALARM.IDENTITIES.BREACH_MODAL.TEXT3' | translate}}
+        </p>
+    </div>
+    <div class="col-sm-12 pl-0 pr-0  d-flex flex-column justify-content-center" >
+        <div *ngFor="let breach of currentBreach"
+            class="breach-info mb-3 d-flex justify-content-between" >
+            <img src="{{staticContentUrl+'img/breach.png'}}" alt="">
+            <p class="neutral-black fs-14 lh-16 mb-0"
+                [innerHTML]="breach.description">
+            </p>
+        </div>
+    </div>
+    <div class="col-sm-12 pl-0 pr-0 d-flex justify-content-center">
+        <p class="wizard-modal-text neutral-black fs-16 lh-19">
+            {{'CYBERALARM.IDENTITIES.BREACH_MODAL.TEXT4' | translate}}
+        </p>
+    </div>
+    <div class="col-sm-12 mt-3 pl-0 pr-0 justify-content-end d-flex">
+        <button
+            class="btn btn-primary wizard-modal-btn" (click)="closeModal()">
+            <div  class="text-uppercase">
+            {{'WIZARD.BTNS.CLOSE' | translate}}
+            </div>
+        </button>
+    </div>
+</section>

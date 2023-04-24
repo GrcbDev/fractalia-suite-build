@@ -1,0 +1,158 @@
+// :host{
+//   max-height: 692px;
+// }
+
+.default-section-600p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 600px;
+}
+
+
+.section-image {
+  display: flex;
+  align-items: center;
+  margin-bottom: 4px;
+  .image {
+    border-radius: 50%;
+    width: 64px;
+    height: 64px;
+    margin-right: 24px;
+  }
+
+  .content-profile-image {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+}
+
+.section-mode-view {
+  display: flex;
+  justify-content: flex-end;
+  border-bottom: 2px solid #BCC4D4;
+  .icons {
+    font-size: 24px;
+    display: flex;
+  }
+}
+
+
+.grid-content{
+  max-height: 800px;
+  padding-left: 24px;
+  padding-right: 24px;
+  margin-bottom: 40px;
+
+}
+
+
+.easy-table{
+  width: 100%;
+}
+
+.easy-table-header{
+  display: grid;
+  grid-template-columns: 30% 10% 30% 30%;
+  .cell {
+    padding-top: 16px;
+    padding-bottom: 16px;
+    font-family: 'RobotoBold';
+    font-size: 16px;
+    line-height: 19px;
+    letter-spacing: -0.015em;
+    color: #000000;
+
+    &.text-center {
+      text-align: center;
+    }
+    &.padd {
+      padding-left: 32px;
+    }
+  }
+}
+
+.easy-table-row{
+  display: grid;
+  grid-template-columns: 30% 10% 30% 30%;
+  margin-bottom: 12px;
+  border: 1px solid #BCC4D4;
+  border-radius: 8px;
+
+
+  .cell {
+    margin-top: 16px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    &.text-center {
+      justify-content: center;
+    }
+    &.right-border {
+      border-right: 1px solid #BCC4D4;;
+    }
+    &.padd {
+      padding-right: 32px;
+      padding-left: 32px;
+    }
+  }
+}
+
+
+.circle-status {
+  width: 12px;
+  height: 12px;
+  background: #BCC4D4;
+  border-radius: 50%;
+  display: inline-block;
+  &.status-ok {
+    background-color: #14BD44;
+  }
+}
+
+.device-service {
+  display: inline-flex;
+  background: #ECF1F8;
+  border-radius: 50px;
+  padding: 8px 12px;
+  max-width: 100%;
+  .ds-t-elipssis {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+}
+
+
+
+
+
+
+@media only screen and (max-width: 767px) {
+  .section-image {
+    margin-bottom: 8px;
+    .image {
+      margin-right: 18px;
+    }
+
+    .content-profile-image {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  .section-mode-view {
+    .icons {
+      display: none;
+    }
+  }
+
+  .easy-table {
+    display: none;
+  }
+
+}
+

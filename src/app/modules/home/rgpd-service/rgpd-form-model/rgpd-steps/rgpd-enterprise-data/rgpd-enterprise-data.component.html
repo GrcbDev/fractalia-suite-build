@@ -1,0 +1,208 @@
+
+
+<div class="ds-flex-row ds-al-center  ds-mb-12p">
+  <div class="ds-h2 ds-m-bold ds-c-black ds-mr-24p">
+    {{ formApiData.sections[0].section }}
+  </div>
+
+  <ng-container *ngIf="loading">
+    <span class="ds-spin-loader ds-mr-8p"></span>
+    <span class="ds-caption ds-r-regular ds-c-secondary">{{'RGPD.STEPS.SAVE_DATA' | translate}}</span>
+  </ng-container>
+
+  <ng-container *ngIf="savedSuccessfully" >
+    <span class="icon-tick-round ds-mr-4p"></span>
+    <span class="ds-caption ds-r-regular ds-c-secondary">{{'RGPD.STEPS.DATA_SAVED' | translate}}</span>
+  </ng-container>
+
+</div>
+
+
+
+
+
+<section class="ds-card ds-p-24p">
+
+  <form [formGroup]="enterpriseDataForm" class="ds-flex-column">
+
+    <div class="ds-enterprise-picture-container">
+      <div class="ds-enterprise-picture" (click)="enterpriseImage.click()">
+        <input
+          #enterpriseImage
+          name="favicon"
+          type="file"
+          (change)="onUploadImagen($event)"
+          accept="image/x-png,image/jpeg,image/gif,image/x-icon"
+          style="display: none"
+        />
+        <i class="icon-add" *ngIf="!image" ></i>
+        <img
+            *ngIf="image"
+            [src]="sanitizer.bypassSecurityTrustUrl(image)"
+            width="64"
+            height="64"
+            style="width: 64px; height: 64px; border-radius: 50%"
+          />
+      </div>
+      <div class="ds-flex-column">
+        <span class="ds-h4 ds-m-bold ds-c-black ds-mb-6p">{{'RGPD.STEPS.COMPANY_LOGO' | translate}}</span>
+        <span class="ds-body-secondary ds-c-black ds-r-regular" >{{'RGPD.STEPS.EDIT_LOGO' | translate}}</span>
+      </div>
+    </div>
+
+    <span class="ds-caption ds-r-regular ds-c-secondary ds-mb-12p">
+      * {{'CAMPOS_OBLIGATORIOS' | translate}}
+    </span>
+
+    <div class="rgpd-group">
+      <div class="ds-rgpd-item">
+        <div class="ds-flex-column ds-mb-12p">
+          <label class="ds-body-secondary ds-r-regular ds-c-black ">{{'NOMBRE_EMPRESA' | translate}} *</label>
+          <input type="text" class="ds-control" formControlName="companyName">
+          <span
+            *ngIf="enterpriseDataForm.get('companyName').touched && enterpriseDataForm.get('companyName').invalid"
+            class="ds-caption ds-r-regular ds-c-danger ds-mt-4p">
+            {{'CAMPO_REQUERIDO' | translate}}
+          </span>
+        </div>
+
+        <div class="ds-flex-column ds-mb-12p">
+          <label class="ds-body-secondary ds-r-regular ds-c-black ">{{'RGPD.STEPS.TAX_CODE' | translate}} *</label>
+          <input type="text" class="ds-control" formControlName="cif">
+          <span
+            *ngIf="enterpriseDataForm.get('cif').touched && enterpriseDataForm.get('cif').invalid"
+            class="ds-caption ds-r-regular ds-c-danger ds-mt-4p">
+            {{'CAMPO_REQUERIDO' | translate}}
+          </span>
+        </div>
+
+        <div class="ds-flex-column ds-mb-12p">
+          <label class="ds-body-secondary ds-r-regular ds-c-black ">{{'TELEFONO' | translate}} *</label>
+          <input type="text" class="ds-control" formControlName="phone">
+          <span
+            *ngIf="enterpriseDataForm.get('phone').touched && enterpriseDataForm.get('phone').invalid"
+            class="ds-caption ds-r-regular ds-c-danger ds-mt-4p">
+            {{'CAMPO_REQUERIDO' | translate}}
+          </span>
+        </div>
+
+        <div class="ds-flex-column ds-mb-12p">
+          <label class="ds-body-secondary ds-r-regular ds-c-black ">{{'RGPD.STEPS.COMPANY_EMAIL_ADDRESS' | translate}} *</label>
+          <input type="text" class="ds-control" formControlName="companyEmail">
+          <span
+            *ngIf="enterpriseDataForm.get('companyEmail').touched && enterpriseDataForm.get('companyEmail').invalid"
+            class="ds-caption ds-r-regular ds-c-danger ds-mt-4p">
+            {{'CAMPO_REQUERIDO' | translate}}
+          </span>
+        </div>
+
+        <div class="ds-flex-column">
+          <label class="ds-body-secondary ds-r-regular ds-c-black ">{{'RGPD.STEPS.EMAIL_ADDRESS_RIGHTS' | translate}} *</label>
+          <input type="text" class="ds-control" formControlName="rightsEmail">
+          <span
+            *ngIf="enterpriseDataForm.get('rightsEmail').touched && enterpriseDataForm.get('rightsEmail').invalid"
+            class="ds-caption ds-r-regular ds-c-danger ds-mt-4p">
+            {{'CAMPO_REQUERIDO' | translate}}
+          </span>
+        </div>
+
+      </div>
+
+      <div class="ds-rgpd-item">
+        <div class="ds-flex-column ds-mb-12p">
+          <label class="ds-body-secondary ds-r-regular ds-c-black ">{{'PAIS' | translate}} *</label>
+          <input type="text" class="ds-control" formControlName="country">
+          <span
+            *ngIf="enterpriseDataForm.get('country').touched && enterpriseDataForm.get('country').invalid"
+            class="ds-caption ds-r-regular ds-c-danger ds-mt-4p">
+            {{'CAMPO_REQUERIDO' | translate}}
+          </span>
+        </div>
+
+        <div class="ds-flex-column ds-mb-12p">
+          <label class="ds-body-secondary ds-r-regular ds-c-black ">{{'CIUDAD' | translate}} *</label>
+          <input type="text" class="ds-control" formControlName="city">
+          <span
+            *ngIf="enterpriseDataForm.get('city').touched && enterpriseDataForm.get('city').invalid"
+            class="ds-caption ds-r-regular ds-c-danger ds-mt-4p">
+            {{'CAMPO_REQUERIDO' | translate}}
+          </span>
+        </div>
+
+        <div class="ds-flex-column ds-mb-12p">
+          <label class="ds-body-secondary ds-r-regular ds-c-black ">{{'DIRECCION' | translate}} *</label>
+          <input type="text" class="ds-control" formControlName="address">
+          <span
+            *ngIf="enterpriseDataForm.get('address').touched && enterpriseDataForm.get('address').invalid"
+            class="ds-caption ds-r-regular ds-c-danger ds-mt-4p">
+            {{'CAMPO_REQUERIDO' | translate}}
+          </span>
+        </div>
+
+
+        <div class="ds-flex-column  ds-mb-12p">
+          <label class="ds-body-secondary ds-r-regular ds-c-black ">{{'CODIGO_POSTAL' | translate}} *</label>
+          <input type="text" class="ds-control" formControlName="postalCode">
+          <span
+            *ngIf="enterpriseDataForm.get('postalCode').touched && enterpriseDataForm.get('postalCode').invalid"
+            class="ds-caption ds-r-regular ds-c-danger ds-mt-4p">
+            {{'CAMPO_REQUERIDO' | translate}}
+          </span>
+        </div>
+
+
+        <div class="ds-flex-column">
+          <label class="ds-body-secondary ds-r-regular ds-c-black ">{{'RGPD.STEPS.TEXT_DESCRIPTION' | translate}} *</label>
+          <input type="text" class="ds-control" formControlName="businessActivity">
+          <span
+            *ngIf="enterpriseDataForm.get('businessActivity').touched && enterpriseDataForm.get('businessActivity').invalid"
+            class="ds-caption ds-r-regular ds-c-danger ds-mt-4p">
+            {{'CAMPO_REQUERIDO' | translate}}
+          </span>
+        </div>
+
+      </div>
+
+
+    </div>
+
+    <div class="rgpd-group" >
+      <div class="ds-rgpd-item">&nbsp;</div>
+      <div class="ds-rgpd-item">
+        <span class="ds-button-next">
+          <button
+            [ngClass]="editMode ? 'ds-btn-secondary' : 'ds-btn-primary'"
+            class=" ds-t-uppercase"
+            [attr.disabled]="loading ? true : null"
+            (click)="nextStep()">
+            {{'RGPD.STEPS.FOLLOWING' | translate}}
+            <span class="icon-right-big-arrow"></span>
+          </button>
+        </span>
+      </div>
+    </div>
+
+
+    <ng-container *ngIf="editMode;">
+      <div class="ds-border-separate  ds-mt-8p"></div>
+
+      <div class="ds-flex-row ds-jc-end ds-mt-8p">
+        <button
+          class="ds-btn-primary ds-t-uppercase"
+          [attr.disabled]="enterpriseDataForm.dirty ? null : true"
+          (click)="updateStep()">
+          {{'RGPD.STEPS.UPDATE_MODEL' | translate}}
+          <span class="icon-right-big-arrow"></span>
+        </button>
+      </div>
+
+    </ng-container>
+
+
+
+
+  </form>
+</section>
+
+
+

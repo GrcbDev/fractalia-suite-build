@@ -1,0 +1,76 @@
+<section class="ds-card ">
+
+  <div class="ds-card-header align-items-center">
+      <div class="d-flex align-items-center">
+        <span class="{{data.icon }} mr-2"></span>
+        <div class="ds-h4 ds-m-bold ds-c-black">
+          {{data.name}}
+        </div>
+      </div>
+      <span class="icon-info ds-header-icon-right cursor" (click)="open(data.name, data.longDesc, data.icon)"></span>
+  </div>
+
+  <div class="ds-card-body">
+    <ng-container *ngIf="!isloading; else loadingTemplate">
+
+      <div class="row h-100" *ngIf="this.tranxferstate == 0">
+        <div class="col-xl-3 col-lg-2 col-md-1 col-sm-1 col-1 pt-4 mb-2">
+
+        </div>
+        <div class="col-xl-6 col-lg-8 col-md-10 col-sm-10 col-10 pt-4 mb-2">
+            <div class="cg-icon text-center d-block mx-auto mb-3">
+                <div class="icon-double-arrow"></div>
+            </div>
+            <h6 class="text-center">{{'TRANXFER.TEXT1' | translate}}</h6>
+            <p class="text-center">{{'TRANXFER.TEXT2' | translate}}</p>
+            <button type="submit" class="btn btn-primary w-auto mb-2 d-block mx-auto" [disabled]="loadingTranxfer" (click)="activateTranxferUser()">
+                <nz-spinner *ngIf="loadingTranxfer"></nz-spinner>
+                <div *ngIf="!loadingTranxfer">
+                    {{'TRANXFER.ADD_BUTTON' | translate}}
+                </div>
+            </button>
+        </div>
+        <div class="col-xl-3 col-lg-2 col-md-1 col-sm-1 col-1 pt-4 mb-2">
+
+        </div>
+      </div>
+
+      <!-- Estado 2 -->
+      <div class="row h-100 grid-divider" *ngIf="this.tranxferstate == 1">
+        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mt-2 pt-0 mb-2">
+            <img class="d-block mx-auto" src="{{staticContentUrl+'img/art/tranxfer-paso-1.png'}}" width="250" height="150" alt="Paso 2" style="max-width: 200px; height: auto;" />
+            <h6 class="text-center">{{'TRANXFER.PASO1' | translate}}</h6>
+            <p class="text-center d-block mx-auto w-75">{{'TRANXFER.PASO1_DESCRIPTION' | translate}}
+            </p>
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mt-2 pt-0 mb-2">
+            <img class="d-block mx-auto" src="{{staticContentUrl+'img/art/tranxfer-paso-2.png'}}" width="250" height="150" alt="Paso 2" style="max-width: 200px; height: auto;" />
+            <h6 class="text-center">{{'TRANXFER.PASO2' | translate}}</h6>
+            <p class="text-center d-block mx-auto w-75">{{'TRANXFER.PASO2_DESCRIPTION' | translate}}
+            </p>
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 mt-2 pt-0 mb-2">
+            <img class="d-block mx-auto" src="{{staticContentUrl+'img/art/tranxfer-paso-3.png'}}" width="250" height="150" alt="Paso 2" style="max-width: 200px; height: auto;" />
+            <h6 class="text-center">{{'TRANXFER.PASO3' | translate}}</h6>
+            <p class="text-center d-block mx-auto w-75">{{'TRANXFER.PASO3_DESCRIPTION' | translate}}
+            </p>
+        </div>
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 pt-4 mb-2">
+            <button class="btn btn-primary w-auto mb-2 d-block mx-auto" (click)="goToTranxfer()">
+                {{'TRANXFER.INICIAR' | translate}}
+            </button>
+        </div>
+      </div>
+
+
+    </ng-container>
+
+    <ng-template #loadingTemplate>
+      <div class="default-section fa-3x">
+        <i class="fas fa-spinner fa-spin"></i>
+      </div>
+    </ng-template>
+  </div>
+
+
+</section>

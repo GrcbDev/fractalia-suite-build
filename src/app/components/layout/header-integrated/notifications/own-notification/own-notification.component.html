@@ -1,0 +1,49 @@
+
+<div class="notif-container" >
+  <ng-container *ngIf="sortNotifications.length > 0; else dontHaveNotifications">
+    <div class="mb-4" *ngFor="let dateNotifications of sortNotifications" [ngSwitch]="dateNotifications.notificationDate">
+    <!-- <div class="mb-4" *ngFor="let dateNotifications of notifications"> -->
+      <div class="d-flex justify-content-center align-items-end r-regular">
+        <!-- <span *ngIf="(currentDate && currentDate === (dateNotifications.notificationDate))"> {{'NOTIFICATIONS.TODAY' | translate}}</span> -->
+        <!-- <span *ngIf="(yesterdayDate && yesterdayDate === (dateNotifications.notificationDate))"> {{'NOTIFICATIONS.YESTERDAY' | translate}}</span> -->
+        <!-- <span *ngIf="(currentDate !== (dateNotifications.notificationDate) || yesterdayDate !== (dateNotifications.notificationDate))"> {{ dateNotifications.notificationDate}}</span> -->
+
+        <span *ngSwitchCase="(currentDate)"> {{'NOTIFICATIONS.TODAY' | translate}}</span>
+        <span *ngSwitchCase="(yesterdayDate)"> {{'NOTIFICATIONS.YESTERDAY' | translate}}</span>
+        <span *ngSwitchDefault> {{ dateNotifications.notificationDate }}</span>
+      </div>
+      <hr class="hr-color">
+      <div class="d-flex align-items-center mb-4" *ngFor="let notification of dateNotifications.notifications">
+        <div class="section--icon flex-column alerta">
+          <div class="alerta-icon">
+            <div class="{{notification.serviceIcon}} ds-service-icon"></div> <span class="ds-r-regular ds-c-secondary fs-12 px-2" style="white-space: break-spaces">{{notification.serviceName}}</span>
+          </div>
+        </div>
+        <div class="section--text w-100">
+          <div id="hora" class="ml-2 ds-r-regular ds-c-secondary"> {{(notification.notificationDate.toString()+'Z').toLocaleString() | date: 'HH:mm'}}</div>
+          <div class="background-alert" [ngClass]="notification.readed  ? 'ds-bg-background' : 'ds-bg-secondary-disabled'">
+            <!-- <p class="body-font d-flex text-align-justify">
+              <i class="{{notification.serviceIcon}}"></i>
+              <span [innerHtml]="notification.serviceName"></span>
+            </p> -->
+            <p class="ds-c-black mb-0" [innerHTML]="notification.description" style="word-wrap: break-word"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </ng-container>
+
+
+    <ng-template #dontHaveNotifications>
+      <div class="no-alerta">
+        <div class="none-notification icon-bell mb-2 ds-c-secondary-disabled">
+          <p class="ds-r-regular ds-c-secondary fs-16 pt-2">{{'COMP_USER.SUPPORT_NOTIFICATION.NO_NOTIFICATIONS_YET' | translate}}</p>
+        </div>
+      </div>
+    </ng-template>
+
+</div>
+
+
+

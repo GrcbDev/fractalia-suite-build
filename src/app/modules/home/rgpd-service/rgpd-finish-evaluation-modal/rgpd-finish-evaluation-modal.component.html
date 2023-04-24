@@ -1,0 +1,79 @@
+<div class="modal-header w-100">
+  <div class="d-flex ds-jc-end w-100">
+    <button type="button" class="close" aria-label="Close" (click)="openStop()">
+      <div class="icon-close"></div>
+    </button>
+  </div>
+</div>
+<div class="modal-body">
+  <div class="d-flex ds-jc-center ds-al-center mt-2 mb-2">
+    <div class="icon-green-check semantic-success fs-65"></div>
+  </div>
+  <div class="d-flex ds-jc-center ds-al-center mt-2 mb-2 px-1">
+    <span class="ds-h3 ds-m-bold fs-20">Evaluacion Finalizada</span>
+  </div>
+  <div class="d-flex ds-jc-center ds-al-center mt-2 mb-2 px-2">
+    <span class="ds-r-regular fs-16">Por los resultados obtenidos de la evaluación inicial, se considera que la compañía se encuentra en:</span>
+  </div>
+
+  <!-- <div class="d-flex ds-flex-column ds-jc-center ds-al-center mt-2 mb-2 p-3 success-background">
+    <div class="ds-flex-row ds-jc-center ds-al-center mt-2 mb-2 px-2">
+      <div class="icon-green-check semantic-success fs-24"></div>
+      <span class="ds-h1 ml-2 semantic-success align-self-center lh-19 semantic-type"><b>{{'SURVEY.SCORE_LOW'| translate}}</b></span>
+    </div>
+    
+    <div class="ds-jc-center ds-al-center mt-2 mb-2 px-2 white-background p-3">
+      <span class="ds-r-regular ds-c-neutral fs-16">Para una correcta adaptación de los cumplimientos RGPD, tu empresa deberá ponerse en contacto con un gestor especializado que revise con detenimiento las necesidades de la compañía.</span>
+    </div>
+  </div> -->
+
+  <div class="d-flex ds-flex-column ds-jc-center ds-al-center mt-2 mb-2 p-3 success-background" *ngIf="rgpdservice.rgpd.evalResult == 1">
+    <div class="ds-flex-row ds-jc-center ds-al-center mt-2 mb-2 px-2">
+      <div class="icon-green-check semantic-success fs-48"></div>
+      <span class="ds-h1 ml-2 semantic-success align-self-center lh-19 semantic-type"><b>{{'SURVEY.SCORE_LOW'| translate}}</b></span>
+    </div>
+    
+    <div class="ds-jc-center ds-al-center mt-2 mb-2 px-2 white-background p-3">
+      <span class="ds-r-regular ds-c-neutral fs-16">
+        Por favor, haz click en “CONTINUAR” en caso de que haya pasado un año desde que la empresa realizó su adaptación a la RGPD ya que probablemente el modelo deba ser actualizado.
+      </span>
+    </div>
+  </div>
+
+  <div class="d-flex ds-flex-column ds-jc-center ds-al-center mt-2 mb-2 p-3 warning-background" *ngIf="rgpdservice.rgpd.evalResult == 2">
+    <div class="ds-flex-row ds-jc-center ds-al-center mt-2 mb-2 px-2">
+      <div class="icon-exclamation semantic-warning fs-48"></div>
+      <span class="ds-h1 ml-2 semantic-warning align-self-center lh-19 semantic-type"><b>{{'SURVEY.SCORE_MID'| translate}}</b></span>
+    </div>
+    
+    <div class="ds-jc-center ds-al-center mt-2 mb-2 p-2 white-background p-3">
+      <span class="ds-r-regular ds-c-neutral fs-16">
+        <p>Es probable que tu empresa no esté cumpliendo con la normativa RGPD requerida.</p>
+
+        <p>Por favor, haz click en “CONTINUAR” para proseguir con el formulario y que podamos elaborar un modelo a la medida de tu empresa.</p>
+      </span>
+    </div>
+  </div>
+
+  <div class="d-flex ds-flex-column ds-jc-center ds-al-center mt-2 mb-2 p-3 danger-background" *ngIf="rgpdservice.rgpd.evalResult == 3">
+    <div class="ds-flex-row ds-jc-center ds-al-center mt-2 mb-2 px-2">
+      <div class="icon-warning semantic-danger fs-48"></div>
+      <span class="ds-h1 ml-2 semantic-danger align-self-center lh-19 semantic-type"><b>{{'SURVEY.SCORE_HIGH'| translate}}</b></span>
+    </div>
+    
+    <div class="ds-jc-center ds-al-center mt-2 mb-2 px-2 white-background p-3">
+      <span class="ds-r-regular ds-c-neutral fs-16">
+        Para una correcta adaptación de los cumplimientos RGPD, tu empresa deberá ponerse en contacto con un gestor especializado que revise con detenimiento las necesidades de la compañía.
+      </span>
+    </div>
+  </div>
+
+  <div class="ds-flex-row ds-jc-end mt-3">
+    <button [ngClass]="rgpdservice.rgpd.evalResult == 3 ? 'btn btn-primary' : 'btn btn-outline-secondary'" class="mr-1" (click)="openStop()">
+      <span [ngClass]="rgpdservice.rgpd.evalResult == 3 ? 'ds-c-white' : 'ds-c-neutral'" >Finalizar</span>
+    </button>
+    <button class="btn btn-primary mr-1" *ngIf="rgpdservice.rgpd.evalResult != 3">
+      <span class="ds-c-white">Continuar</span>
+    </button>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+$color: #666A73;
+
+.ds-dual-ring {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+}
+.ds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 16px;
+  height: 16px;
+  margin: 0px;
+  border-radius: 50%;
+  border: 1px solid $color;
+  border-color: $color transparent $color transparent;
+  animation: ds-dual-ring 1.2s linear infinite;
+}
+@keyframes ds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+.ds-spin-loader {
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid $color;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  display: inline-block;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+}

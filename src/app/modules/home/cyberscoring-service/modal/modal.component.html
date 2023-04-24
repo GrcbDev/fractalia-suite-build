@@ -1,0 +1,456 @@
+<div class="modal-content mh-400 mw-482">
+  <div class="new-modal-header row ml-4 mt-21">
+    <h4
+      *ngIf="!success && !editModal && !cantEdit && !freeModal"
+      class="new-modal-title col-sm-11 pl-0 pr-0 neutral-black"
+    >
+      {{ "CYBERSCORING.FORMULARIO_CYBERSCORING_TITLE" | translate }}
+    </h4>
+    <h4
+      *ngIf="!success && editModal"
+      class="new-modal-title col-sm-11 pl-0 pr-0 neutral-black mb-4"
+    >
+      {{ "CYBERSCORING.FORMULARIO_CYBERSCORING_TITLE_EDIT" | translate }}
+    </h4>
+    <h4
+      *ngIf="success || cantEdit || freeModal"
+      class="new-modal-title col-sm-11 pl-0 pr-0"
+    ></h4>
+    <button
+      type="button"
+      class="new-close col-sm-1 pr-0"
+      aria-label="Close"
+      data-dismiss="modal"
+      (click)="toggleValidate()"
+    >
+      <div
+        class="icon-close"
+        data-dismiss="modal"
+        (click)="toggleValidate()"
+      ></div>
+    </button>
+    <p *ngIf="!success && editModal">
+      {{
+        "CYBERSCORING.FORMULARIO_CYBERSCORING_DESC_EDIT"
+          | translate
+            : {
+                nextAnalysisDate:
+                  ((dataC.nextAnalysisDate.toString() + "Z").toLocaleString()
+                  | date : "dd/MM/yyyy")
+              }
+      }}
+    </p>
+    <p *ngIf="!success && editModal">
+      {{ "CYBERSCORING.FORMULARIO_CYBERSCORING_DESC_EDIT_2" | translate }}
+    </p>
+    <div
+      class="form-group col-lg-12 col-md-12 col-sm-12 mt-2 pl-0 pr-0 mb-0"
+      *ngIf="!success && !cantEdit && !freeModal"
+    >
+      <label class="w-100 fs-12">
+        {{ "CYBERSCORING.FORMULARIO_CYBERSCORING_REQUIRED" | translate }}
+      </label>
+    </div>
+  </div>
+
+  <!--Cuerpo Modal Solicitud-->
+  <section class="row mt-2 mr-4 ml-4">
+    <div
+      class="col-sm-12 pl-0 pr-0 d-flex justify-content-center"
+      *ngIf="success"
+    >
+      <img
+        class="new-modal-img mw-66"
+        src="{{ staticContentUrl + 'img/check-circle-outline.png' }}"
+      />
+    </div>
+    <div
+      class="col-sm-12 pl-0 pr-0 d-flex justify-content-center"
+      *ngIf="cantEdit"
+    >
+      <div class="new-modal-img mt-0">
+        <div class="icon-cyberscoring mb-2 fs-78"></div>
+      </div>
+    </div>
+
+    <div
+      class="col-sm-12 pl-0 pr-0 d-flex justify-content-center"
+      *ngIf="freeModal"
+    >
+      <div class="new-modal-img mt-0">
+        <div class="icon-illustration-info mb-2 fs-88"></div>
+      </div>
+    </div>
+    <!-- Modal info Solicitud Exito premiun-->
+    <div
+      class="col-sm-12 pl-0 pr-0 d-flex justify-content-center flex-column mt-3"
+      *ngIf="success && !editModal"
+    >
+      <h3 class="text-center mb-2 fs-20 lh-24">
+        {{ "CYBERSCORING.PROCESSED" | translate }}
+      </h3>
+      <p class="pl-3 pr-3 text-center right-card-text">
+        {{ "CYBERSCORING.PROCESSED_DESC1" | translate }}
+      </p>
+      <p class="pl-3 pr-3 text-center right-card-text">
+        {{ "CYBERSCORING.PROCESSED_DESC2" | translate }}
+      </p>
+    </div>
+
+    <!-- Modal info Solicitud freemiun-->
+    <div
+      class="col-sm-12 pl-0 pr-0 d-flex justify-content-center flex-column"
+      *ngIf="freeModal"
+    >
+      <h3 class="text-center mb-2 fs-20 lh-24">
+        {{ "CYBERSCORING.FREE_MODAL_TITLE" | translate }}
+      </h3>
+      <p class="pl-3 pr-3 text-center right-card-text">
+        {{ "CYBERSCORING.FREE_MODAL_DESC1" | translate }}
+      </p>
+      <p class="mb-5 pl-3 pr-3 text-center right-card-text">
+        {{ "CYBERSCORING.FREE_MODAL_DESC2" | translate }}
+      </p>
+    </div>
+
+    <!-- Modal info Los datos estan siendo analizados (noeditable)-->
+    <div
+      class="col-sm-12 pl-0 pr-0 d-flex justify-content-center flex-column mt-3"
+      *ngIf="cantEdit"
+    >
+      <h3 class="text-center mb-2 fs-20 lh-24">
+        {{ "CYBERSCORING.NO_EDIT_DESC" | translate }}
+      </h3>
+    </div>
+
+    <!-- Modal info solicitud actualizada-->
+    <div
+      class="col-sm-12 pl-0 pr-0 d-flex justify-content-center flex-column mt-3"
+      *ngIf="success && editModal"
+    >
+      <h3 class="text-center mb-2 fs-20 lh-24">
+        {{ "CYBERSCORING.UPDATE_SUCCESS" | translate }}
+      </h3>
+      <p class="pl-3 pr-3 text-center right-card-text">
+        {{ "CYBERSCORING.UPDATE_SUCCESS_TEXT1" | translate }}
+        {{
+          (dataC.nextAnalysisDate.toString() + "Z").toLocaleString()
+            | date : "dd/MM/yyyy"
+        }}
+        {{ "CYBERSCORING.UPDATE_SUCCESS_TEXT2" | translate }}
+      </p>
+      <p class="pl-3 pr-3 text-center right-card-text">
+        {{ "CYBERSCORING.PROCESSED_DESC2" | translate }}
+      </p>
+    </div>
+
+    <form
+      class="col-sm-12 pl-0 pr-0"
+      (ngSubmit)="createCompany()"
+      (keydown.enter)="$event.preventDefault()"
+    >
+      <div
+        class="form-group col-md-12 col-sm-12 pl-0 pr-0 no-padding-responsive"
+        *ngIf="!cantEdit && !freeModal"
+      >
+        <label class="modal-form-label neutral-black"
+          >{{ "CYBERSCORING.BUSINESS_NAME" | translate }} *</label
+        >
+        <div class="input-group" *ngIf="!editModal && !success">
+          <input
+            type="text"
+            required
+            class="form-control new-input"
+            name="businessName"
+            [(ngModel)]="dataC.businessName"
+            (focusout)="onFocusOutBusiness($event)"
+            [ngClass]="{
+              'is-invalid':
+                businessName.invalid &&
+                (businessName.dirty || businessName.touched)
+            }"
+            [attr.disabled]="readonlyFields ? 'disabled' : null"
+            #businessName="ngModel"
+            maxlength="200"
+            [readonly]="readonlyFields"
+          />
+        </div>
+        <div class="input-group" *ngIf="editModal || success">
+          <input
+            type="text"
+            required
+            class="form-control new-input"
+            name="nextBusinessName"
+            [(ngModel)]="dataC.nextBusinessName"
+            (focusout)="onFocusOutBusiness($event)"
+            [ngClass]="{
+              'is-invalid':
+                nextBusinessName.invalid &&
+                (nextBusinessName.dirty || nextBusinessName.touched)
+            }"
+            [attr.disabled]="readonlyFields ? 'disabled' : null"
+            #nextBusinessName="ngModel"
+            maxlength="200"
+            [readonly]="readonlyFields"
+          />
+        </div>
+        <div *ngIf="errorBusinessName" class="text-danger text-left">
+          {{ "CAMPO_REQUERIDO" | translate }}
+        </div>
+      </div>
+
+      <div
+        class="form-group col-md-12 col-sm-12 pl-0 pr-0 no-padding-responsive"
+        *ngIf="!cantEdit && !freeModal"
+      >
+        <label class="modal-form-label neutral-black"
+          >{{ "CYBERSCORING.SECTOR" | translate }} *</label
+        >
+        <div class="input-group" *ngIf="!editModal && !success">
+          <select
+            class="form-control new-input"
+            name="cnae"
+            required
+            bindLabel="cnae"
+            (blur)="onFocusOutCnae($event)"
+            [(ngModel)]="dataC.cnae"
+            [attr.disabled]="readonlyFields ? 'disabled' : null"
+            [ngClass]="{ 'is-invalid': errorCnae }"
+          >
+            <option [value]="-1" [disabled]="true" [hidden]="dataC.cnae">
+              {{ "CYBERSCORING.SECTOR" | translate }}
+            </option>
+            <option *ngFor="let sector of sectors" [value]="sector.id">
+              {{ sector.name }}
+            </option>
+          </select>
+        </div>
+        <div class="input-group" *ngIf="editModal || success">
+          <select
+            class="form-control new-input"
+            name="nextCnae"
+            required
+            bindLabel="nextCnae"
+            (blur)="onFocusOutCnae($event)"
+            [(ngModel)]="dataC.nextCnae"
+            [attr.disabled]="readonlyFields ? 'disabled' : null"
+            [ngClass]="{ 'is-invalid': errorCnae }"
+          >
+            <option [value]="-1" [disabled]="true" [hidden]="dataC.nextCnae">
+              {{ "CYBERSCORING.SECTOR" | translate }}
+            </option>
+            <option *ngFor="let sector of sectors" [value]="sector.id">
+              {{ sector.name }}
+            </option>
+          </select>
+        </div>
+        <div *ngIf="errorCnae" class="text-danger text-left">
+          {{ "CAMPO_REQUERIDO" | translate }}
+        </div>
+      </div>
+
+      <div
+        class="form-row cyberscoring-form mr-0 ml-0 p-0"
+        *ngIf="!cantEdit && !freeModal"
+      >
+        <div
+          class="form-group col-md-12 col-sm-12 pl-0 pr-0 no-padding-responsive"
+          *ngIf="!readonlyFields"
+        >
+          <label class="modal-form-label neutral-black"
+            >{{ "CYBERSCORING.ADD_DOMAINS" | translate }} *</label
+          >
+          <div class="input-group" *ngIf="!editModal">
+            <input
+              type="text"
+              [attr.disabled]="
+                dataC.domains.length >= dataC.maxDomains ? 'disabled' : null
+              "
+              class="form-control new-input mr-3"
+              maxlength="255"
+              [readonly]="readonlyFields"
+              #domain
+              (keyup.enter)="AddDomain(domain.value)"
+              (focusout)="onFocusOutDomain(false)"
+              [ngClass]="{ 'is-invalid': errorNoDomain }"
+            />
+            <div class="input-group-append">
+              <button
+                type="button"
+                class="btn btn-outline-secondary text-center d-block ml-0"
+                [attr.disabled]="
+                  dataC.domains.length >= dataC.maxDomains ? 'disabled' : null
+                "
+                (click)="AddDomain(domain.value)"
+              >
+                {{ "CYBERSCORING.BUTTON_ADD" | translate }}
+              </button>
+            </div>
+          </div>
+          <div class="input-group" *ngIf="editModal">
+            <input
+              type="text"
+              [attr.disabled]="
+                dataC.nextDomains.length >= dataC.maxDomains ? 'disabled' : null
+              "
+              class="form-control new-input mr-3"
+              maxlength="255"
+              [readonly]="readonlyFields"
+              #domain
+              (keyup.enter)="AddDomain(domain.value)"
+              (focusout)="onFocusOutDomain(true)"
+              [ngClass]="{ 'is-invalid': errorNoDomain }"
+            />
+            <div class="input-group-append">
+              <button
+                type="button"
+                class="btn btn-outline-secondary text-center d-block ml-0"
+                [attr.disabled]="
+                  dataC.nextDomains.length >= dataC.maxDomains
+                    ? 'disabled'
+                    : null
+                "
+                (click)="AddDomain(domain.value)"
+              >
+                {{ "CYBERSCORING.BUTTON_ADD" | translate }}
+              </button>
+            </div>
+          </div>
+          <p class="col-12 pl-0 mb-0 field-desc">
+            {{ "CYBERSCORING.CAN_ADD" | translate }} {{ dataC.maxDomains }}
+            {{ "CYBERSCORING.DOMAIN_PLACEHOLDER" | translate }}/s
+          </p>
+          <div *ngIf="errorDomain" class="text-danger text-left fs-12">
+            {{ message }}
+          </div>
+          <div *ngIf="errorNoDomain" class="text-danger text-left">
+            {{ "CAMPO_REQUERIDO" | translate }}
+          </div>
+        </div>
+
+        <div
+          class="form-group col-md-8 col-sm-8 pl-0 pr-0 no-padding-responsive"
+          *ngIf="dataC.domains.length > 0 && !editModal && !success"
+        >
+          <label class="modal-form-label neutral-black fs-16 lh-19">
+            {{ "CYBERSCORING.DOMAINS" | translate }}:
+          </label>
+          <div *ngFor="let domain of dataC.domains">
+            <div
+              class="col-md-12 float-left domain pl-0 pr-0 pt-2 pb-2 mb-1 ml-4"
+            >
+              <div class="input-group-append p-0 justify-content-between">
+                <span class="col-md-10 pr-0">{{ domain }}</span>
+                <a
+                  href="javascript:void(0)"
+                  class="col-md-1 p-0"
+                  *ngIf="!readonlyFields"
+                  (click)="DeleteDomain(domain)"
+                >
+                  <div class="myicons-delete"></div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="form-group col-md-8 col-sm-8 pl-0 pr-0 no-padding-responsive"
+          *ngIf="dataC.nextDomains.length > 0 && (editModal || success)"
+        >
+          <label class="modal-form-label neutral-black fs-16 lh-19"
+            >{{ "CYBERSCORING.DOMAINS" | translate }}:</label
+          >
+          <div *ngFor="let domain of dataC.nextDomains">
+            <div
+              class="col-md-12 float-left domain pl-0 pr-0 pt-2 pb-2 mb-1 ml-4"
+            >
+              <div class="input-group-append p-0 justify-content-between">
+                <span class="col-md-10 pr-0">{{ domain }}</span>
+                <a
+                  href="javascript:void(0)"
+                  class="col-md-1 p-0"
+                  *ngIf="!readonlyFields"
+                  (click)="DeleteDomain(domain)"
+                  ><div class="myicons-delete"></div
+                ></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="form-group col-md-12 col-sm-12 pl-0 pr-0 no-padding-responsive"
+        *ngIf="!readonlyFields && !cantEdit && !freeModal"
+      >
+        <div class="custom-control custom-checkbox">
+          <input
+            type="checkbox"
+            class="custom-control-input"
+            id="confirm"
+            name="confirm"
+            [(ngModel)]="confirm"
+            (change)="checkTerms($event)"
+          />
+          <label class="custom-control-label" for="confirm">{{
+            "CYBERSCORING.DOMAIN_TERMS" | translate
+          }}</label>
+        </div>
+        <div *ngIf="!terms" class="text-danger text-left consent">
+          {{ "CONSENTIMIENTO" | translate }}
+        </div>
+      </div>
+
+      <div class="mt-2 errormen">
+        <div
+          *ngIf="showMessage"
+          class="loginError d-inline-flex align-items-center"
+        >
+          {{ message }}
+        </div>
+      </div>
+      <div class="form-group col-lg-12 pl-0 pr-0 d-flex justify-content-end">
+        <button
+          type="submit"
+          class="btn btn-primary text-center d-block"
+          *ngIf="!readonlyFields && !editModal && !cantEdit && !freeModal"
+          [disabled]="
+            !dataC.businessName ||
+            dataC.cnae == -1 ||
+            dataC.domains.length == 0 ||
+            loading ||
+            !terms
+          "
+        >
+          <nz-spinner *ngIf="loading"></nz-spinner>
+          <div *ngIf="!loading">{{ "ENVIAR" | translate }}</div>
+        </button>
+        <button
+          type="submit"
+          class="btn btn-primary text-center d-block"
+          *ngIf="!readonlyFields && editModal"
+          [disabled]="
+            !dataC.nextBusinessName ||
+            dataC.nextCnae == -1 ||
+            dataC.nextDomains.length == 0 ||
+            loading ||
+            !terms
+          "
+        >
+          <nz-spinner *ngIf="loading"></nz-spinner>
+          <div *ngIf="!loading">{{ "ACTUALIZAR" | translate }}</div>
+        </button>
+        <button
+          data-dismiss="modal"
+          class="btn btn-primary text-center d-block"
+          *ngIf="readonlyFields || cantEdit || freeModal"
+          [disabled]="loading"
+          (click)="toggleValidate()"
+        >
+          <nz-spinner *ngIf="loading"></nz-spinner>
+          <div *ngIf="!loading">{{ "CERRAR" | translate }}</div>
+        </button>
+      </div>
+    </form>
+  </section>
+</div>

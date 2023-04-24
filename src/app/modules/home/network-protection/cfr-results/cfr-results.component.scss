@@ -1,0 +1,9 @@
+.ds-wrap{
+  flex-wrap: nowrap;
+}
+
+@media screen and (width <= 600px){
+  .ds-wrap{
+      flex-wrap: wrap;
+  }
+}

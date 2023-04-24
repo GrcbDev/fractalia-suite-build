@@ -1,0 +1,36 @@
+<div>
+  <div class="modal-content wizard-modal-content">
+    <div class="new-modal-header row ml-4">
+      <div class="col-sm-12 d-flex justify-content-end">
+        <button type="button" class="new-close col-sm-1 pr-0" aria-label="Close" (click)="close()">
+          <div class="icon-close" (click)="close()"></div>
+        </button>
+      </div>
+    </div>
+    <section class="row mt-2 mr-4 ml-4 mb-4">
+      <div class="col-sm-12 pl-0 pr-0 d-flex justify-content-center">
+        <img class="new-modal-img unplug" src="{{staticContentUrl+'img/unplug.png'}}">
+      </div>
+      <div class="col-sm-12 pl-0 pr-0 mb-2 d-flex justify-content-center">
+        <h4 class="wizard-modal-title neutral-black">{{'WIZARD.MODAL_TITLE' | translate}}</h4>
+      </div>
+      <div class="col-sm-12 pl-0 pr-0 d-flex justify-content-center">
+        <p class="wizard-modal-text neutral-black">
+          {{'WIZARD.MODAL_TEXT' | translate}}
+        </p>
+      </div>
+      <div class="col-sm-12 pl-0 pr-0 wizard-modal-btns d-flex">
+        <button class="btn mr-3 btn-primary wizard-modal-btn" (click)="closeModal()">
+          <div class="text-uppercase">
+            {{'WIZARD.BTNS.STOP' | translate}}
+          </div>
+        </button>
+        <button class="btn btn-outline-secondary wizard-modal-btn" (click)="stayModal()">
+          <div class="text-uppercase">
+            {{'WIZARD.BTNS.CONTINUE' | translate}}
+          </div>
+        </button>
+      </div>
+    </section>
+  </div>
+</div>

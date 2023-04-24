@@ -1,0 +1,29 @@
+.breach-body{
+    min-height: 400px;
+}
+
+@media only screen and (max-width: 850px) {
+    .identity-card {
+        margin-right: 0px !important;
+        max-width: none !important;
+    }
+} 
+
+.small-image {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .card-user-info {
+    display: flex;
+    align-items: center;
+    width: auto;
+    margin-bottom: 10px;
+  }
+  
+  .user-name {
+    font-weight: bold;
+  }
+  

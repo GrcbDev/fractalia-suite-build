@@ -1,0 +1,26 @@
+#bms-steps-mobile {
+  display: none;
+}
+
+.bms-title-web {
+  display: flex !important;
+}
+
+
+.ds-card-body p {
+  color: #8B8F98 !important;
+  font-size: 12px;
+  text-align: left;
+  font-family: 'RobotoRegular';
+}
+
+@media only screen and (max-width: 992px) {
+  #bms-steps-mobile {
+    display: flex;
+  }
+
+  .bms-title-web {
+    display: none !important;
+  }
+
+}

@@ -1,0 +1,150 @@
+.content-result-questionary {
+  display: flex;
+
+  .result-step {
+    display: flex;
+    flex-direction: column;
+    width: 66.6%;
+    margin-right: 24px;
+    border-right: 2px solid #ECF1F8;
+
+    & .global-result {
+      display: flex;
+      margin-bottom: 24px;
+      align-items: center;
+
+      & .first-content{
+        width: 60%;
+        margin-right: 24px;
+      }
+
+      & .second-content{
+        display: flex;
+        width: 40%;
+      }
+    }
+  }
+
+  .continue-step {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    width: 33.3%;
+    padding: 0px 24px;
+  }
+}
+
+
+
+
+.global-score-progress{
+  min-width: 100%;
+  max-height: 9px !important;
+  background: #ffffff !important;
+  border-radius: 8px !important;
+
+  &.danger {
+    border: 1px solid #EB1919;
+  }
+
+  &.warning {
+    border: 1px solid #FFC507;
+  }
+
+  &.success {
+    border: 1px solid #14BD44;
+  }
+}
+
+
+.progress-bar-item {
+  position: relative;
+  border-radius: 8px;
+  border: 2px solid #FFE4C4;
+  & .item-content {
+    position: relative;
+    padding: 8px 16px;
+  }
+}
+
+.progress-bar-item::before {
+  content: " ";
+  position: absolute;
+  width: 30%;
+  height: 100%;
+  background-color: #FFE4C4;
+  border-radius: 8px;
+}
+
+@media screen and (max-width: 1200px) {
+
+  .content-result-questionary {
+    display: flex;
+    flex-wrap: wrap;
+    .result-step {
+      width: 100%;
+      margin-bottom: 24px;
+      border-right: none;
+      border-bottom: 2px solid #ECF1F8;
+
+      & .global-result {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        & .first-content{
+          margin-bottom: 8px;
+          width: 100%;
+        }
+
+        & .second-content{
+          width: 100%;
+        }
+      }
+    }
+
+    .continue-step {
+      width: 100%;
+      margin-bottom: 24px;
+    }
+  }
+
+
+}
+
+
+@media screen and (max-width: 768px) {
+
+  .content-result-questionary {
+    display: flex;
+    flex-wrap: wrap;
+    .result-step {
+      width: 100%;
+
+      margin-bottom: 24px;
+      border-right: none;
+      border-bottom: 2px solid #ECF1F8;
+
+      & .global-result {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        & .first-content{
+          margin-bottom: 8px;
+          width: 100%;
+        }
+
+        & .second-content{
+          width: 100%;
+        }
+      }
+    }
+
+    .continue-step {
+      width: 100%;
+      margin-bottom: 24px;
+    }
+  }
+
+
+}

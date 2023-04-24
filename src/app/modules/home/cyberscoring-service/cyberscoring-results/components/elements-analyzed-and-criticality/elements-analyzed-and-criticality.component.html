@@ -1,0 +1,122 @@
+<div>
+  <div class="col-12 ml-0 mr-0 pl-0 pr-0 datos">
+    <h2 class="title text-center mb-4 neutral-black fs-16">
+      {{ "CYBERSCORING.ASSETS" | translate }}
+    </h2>
+    <div class="datos row justify-content-between text-left w-100 mr-0 ml-0">
+      <div class="asset-card pr-2 pl-2 mb-2 w-48">
+        <div class="col-12 pl-0 pr-0 d-flex justify-content-between">
+          <h3 class="mt-1 w-70 neutral-black fs-24">
+            {{ dataC.summaryAssetTypes.domains }}
+          </h3>
+          <div class="icon-cyberscoring-domain fs-20"></div>
+        </div>
+        <div class="col-12 pl-0 pr-0 pb-2">
+          <span class="neutral-black fs-16 lh-19">{{
+            "CYBERSCORING.DOMAINS_LABEL" | translate
+          }}</span>
+        </div>
+      </div>
+
+      <div class="asset-card pr-2 pl-2 mb-2 w-48">
+        <div class="col-12 pl-0 pr-0 d-flex justify-content-between">
+          <h3 class="mt-1 w-70 neutral-black fs-24">
+            {{ dataC.summaryAssetTypes.ipv4 }}
+          </h3>
+          <div class="icon-cyberscoring-ip4 fs-20"></div>
+        </div>
+        <div class="col-12 pl-0 pr-0 pb-2">
+          <span class="neutral-black fs-16 lh-19">IP4</span>
+        </div>
+      </div>
+
+      <div class="asset-card pr-2 pl-2 mb-2 w-48">
+        <div class="col-12 pl-0 pr-0 d-flex justify-content-between">
+          <h3 class="mt-1 w-70 neutral-black fs-24">
+            {{ dataC.summaryAssetTypes.ipv6 }}
+          </h3>
+          <div class="icon-cyberscoring-ip6 fs-20"></div>
+        </div>
+        <div class="col-12 pl-0 pr-0 pb-2">
+          <span class="neutral-black fs-16 lh-19">IP6</span>
+        </div>
+      </div>
+
+      <div class="asset-card pr-2 pl-2 mb-2 w-48">
+        <div class="col-12 pl-0 pr-0 d-flex justify-content-between">
+          <h3 class="mt-1 w-75 neutral-black fs-24">
+            {{ dataC.summaryAssetTypes.ports }}
+          </h3>
+          <div class="icon-cyberscoring-port fs-20"></div>
+        </div>
+        <div class="col-12 pl-0 pr-0 pb-2">
+          <span class="neutral-black fs-16 lh-19">{{
+            "CYBERSCORING.PORTS" | translate
+          }}</span>
+        </div>
+      </div>
+
+      <!-- <div class="asset-card pr-2 pl-2 mb-2 w-48">
+                <div class="col-12 pl-0 pr-0 d-flex justify-content-between">
+                  <h3 class="mt-1 w-75 neutral-black fs-24">
+                    {{dataC.summaryAssetTypes.userProvided}}</h3>
+                  <div class="icon-cyberscoring-user fs-20"></div>
+                </div>
+                <div class="col-12 pl-0 pr-0 pb-2">
+                  <span class="neutral-black fs-16 lh-19">{{'CYBERSCORING.USER' | translate}}</span>
+                </div>
+              </div> -->
+    </div>
+  </div>
+</div>
+
+<div>
+  <div class="col-12 ml-0 mr-0 pl-0 pr-0 datos">
+    <h2 class="title text-center mb-4 neutral-black fs-16">
+      {{ "CYBERSCORING.CRITICITIES.TITLE" | translate }}
+    </h2>
+    <div class="datos w-100 d-block text-left">
+      <div class="dg d-flex justify-content-between">
+        <span class="crit-label">{{
+          "CYBERSCORING.CRITICITIES.CRITICAL" | translate
+        }}</span>
+        <h4 class="crit-elem bg-semantic-danger-light">
+          {{ dataC.summaryAffectedAssets.critical }}
+        </h4>
+      </div>
+
+      <div class="dg d-flex justify-content-between">
+        <span class="crit-label">{{
+          "CYBERSCORING.CRITICITIES.HIGH" | translate
+        }}</span>
+        <h4 class="crit-elem bg-semantic-orange-light">
+          {{ dataC.summaryAffectedAssets.high }}
+        </h4>
+      </div>
+      <div class="dg d-flex justify-content-between">
+        <span class="crit-label">{{
+          "CYBERSCORING.CRITICITIES.MEDIUM" | translate
+        }}</span>
+        <h4 class="crit-elem bg-semantic-warning-light">
+          {{ dataC.summaryAffectedAssets.medium }}
+        </h4>
+      </div>
+      <div class="dg d-flex justify-content-between">
+        <span class="crit-label">{{
+          "CYBERSCORING.CRITICITIES.LOW" | translate
+        }}</span>
+        <h4 class="crit-elem bg-semantic-success-light">
+          {{ dataC.summaryAffectedAssets.low }}
+        </h4>
+      </div>
+      <div class="dg d-flex justify-content-between">
+        <span class="crit-label">{{
+          "CYBERSCORING.CRITICITIES.INFO" | translate
+        }}</span>
+        <h4 class="crit-elem bg-semantic-information-light mb-0">
+          {{ dataC.summaryAffectedAssets.info }}
+        </h4>
+      </div>
+    </div>
+  </div>
+</div>

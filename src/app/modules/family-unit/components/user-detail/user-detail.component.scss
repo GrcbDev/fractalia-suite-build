@@ -1,0 +1,326 @@
+.modal-head-container {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.close-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.img-profile-container {
+  margin-right: 10px;
+}
+.unit-card-img {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+}
+
+.title-modal-detail {
+  font-size: 24px;
+  font-weight: bold;
+  color: black;
+}
+
+.head-user-info-container {
+  width: 750px;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 1rem;
+}
+
+.mobile-grid {
+  display: none;
+}
+
+.options-for-view-container {
+  display: flex;
+  justify-content: flex-end;
+  border-bottom: solid 2px #bcc4d4;
+  margin-bottom: 2rem;
+}
+
+@media only screen and (max-width: 767px) {
+  .head-user-info-container {
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+    justify-content: unset;
+  }
+
+  .title-modal-detail {
+    font-size: 20px;
+  }
+
+  .options-for-view-container,
+  .list-view,
+  .grid-view,
+  .date {
+    display: none;
+  }
+
+  .mobile-grid {
+    display: block;
+  }
+}
+
+.user-detail-card-header {
+  display: flex;
+  justify-content: space-between;
+  width: auto;
+}
+
+@media only screen and (max-width: 767px) {
+  .user-detail-card-header {
+    width: 250px;
+  }
+
+  .user-creation-info {
+    margin-left: 70px;
+    margin-bottom: 1rem
+  }
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.user-name {
+  font-weight: bold;
+}
+
+.scuare-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: baseline;
+}
+
+.one-row {
+  margin-top: -12px;
+}
+
+.scuare-icon {
+  width: 8px;
+  height: 8px;
+}
+
+.list-info {
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.scuare-info {
+  margin-top: -5px;
+  cursor: pointer;
+}
+
+.titles-container {
+  display: flex;
+  justify-content: space-around;
+  font-weight: bold;
+  padding: 1rem;
+  border: solid 2px white;
+}
+
+.title-fix {
+  margin-left: 126px;
+}
+
+.service-container {
+  border: solid 2px #bcc4d4;
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 1rem;
+  padding-right: 3rem;
+
+}
+
+.service-unit-name,
+.usage,
+.devices {
+  padding-right: 1rem;
+  border-right: solid 2px #bcc4d4;
+}
+
+.service-unit-name {
+  padding-right: 2rem;
+  width: 220px;
+}
+
+.usage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 34px;
+
+  .ok-mark {
+    width: 12px;
+    height: 12px;
+    background: #14bd44;
+    border-radius: 50%;
+    margin-left: -44px;
+  }
+
+  .no-ok-mark {
+    width: 12px;
+    height: 12px;
+    background: #bcc4d4;
+    border-radius: 50%;
+    margin-left: -44px;
+  }
+}
+
+.devices {
+  width: 150px;
+}
+
+.status {
+  width: 60px;
+  font-size: 13px;
+}
+
+.section-grid-title {
+  font-weight: bold;
+  padding-bottom: 1rem;
+  margin-left: -10px;
+}
+
+.info-card {
+  padding: 1rem;
+  border: solid 2px #14bd44;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  margin-right: 1rem;
+}
+
+.not-secure {
+  border: solid 2px #eb1919;
+}
+
+.user-small-image {
+  margin-right: 10px;
+}
+
+.small-image {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
+.card-user-info {
+  display: flex;
+  align-items: center;
+  width: auto;
+  margin-bottom: 10px;
+}
+
+.card-user-device,
+.card-notification {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.card-device-icon,
+.card-notification-icon,
+.card-notification-title {
+  margin-right: 10px;
+}
+
+.device-info,
+.card-notification-title {
+  font-weight: bold;
+}
+
+.card-detail-footer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.iphone-icon {
+  width: 30px;
+  height: auto;
+  margin-left: -4px;
+}
+
+.bell-icon {
+  margin-left: 4px;
+}
+
+.greeen-shield {
+  background-image: url(../../../../../assets/img/green_shield.png);
+  background-repeat: no-repeat;
+  width: 25px;
+  height: 27px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.red-shield {
+  background-image: url(../../../../../assets/img/red-shield.png);
+  background-repeat: no-repeat;
+  width: 25px;
+  height: 27px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.card-device-status {
+  display: flex;
+  align-items: center;
+  color: #14bd44;
+}
+
+.card-status-text {
+  font-weight: bold;
+}
+
+.danger-text {
+  color: #eb1919;
+}
+
+.card-number {
+  margin-left: 10px;
+}
+
+.card-footer-icons {
+  display: flex;
+  align-items: center;
+  .card-info-icon {
+    margin-right: 10px;
+  }
+}
+
+.credit-card-detail{
+  margin-right: 10px;
+}
+
+.devices, .status{
+  display: flex;
+  /* align-items: center; */
+  flex-direction: column;
+  align-items: baseline;
+}
+.text-center-fix {
+  margin-left: 39px;
+}
+
+.text-center-fix-last {
+  margin-left: 20px;
+}
+@media only screen and (max-width: 767px) {
+}
+
+.icon-menu  {
+  display: block;
+ }

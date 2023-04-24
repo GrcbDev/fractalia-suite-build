@@ -1,0 +1,139 @@
+<section class="ds-card informative-service-content">
+
+  <div class="ds-card-header align-items-center">
+      <div class="d-flex align-items-center">
+        <span class="{{data.icon }} ds-fs-24 mr-2"></span>
+        <div class="ds-h4 ds-m-bold ds-c-black">
+          {{data.name}}
+        </div>
+      </div>
+      <span class="icon-info ds-header-icon-right cursor" (click)="open(data.name, data.longDesc, data.icon)"></span>
+  </div>
+
+  <div class="ds-card-body">
+
+    <ng-container *ngIf="!isloading; else loadingTemplate">
+      <div class="h-100 row align-items-center"
+      *ngIf="pentestingService.hasPentestingInfo && pentestingService.AcunetixIMG.status==3">
+      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12 pt-1 pb-4">
+          <div class="w-75 d-block mx-auto">
+              <span class="subtitle2 text-center mb-4">{{'CYBERSECURITY.PENTESTING.TEXT11' | translate}}</span>
+              <span class="subtitle text-center mb-2">{{'CYBERSECURITY.PENTESTING.TEXT2' | translate}}:</span>
+              <span class="subtitle2 text-center mb-2" style="color: #14BB43;">
+                {{'CYBERSECURITY.PENTESTING.MESSAGE.TEXT23' | translate:{days:pentestingService.diasProximoAnalisis} }}
+              </span>
+              <span class="subtitle2 text-center mb-4">{{pentestingService.urlProximoAnalisis}}</span>
+          </div>
+      </div>
+      <div class="col-xl-5 col-lg-8 col-md-12 col-sm-12 col-xs-12 pt-1 pb-4">
+          <div class="row align-items-center justify-content-md-center">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12 pb-4">
+              <span class="title text-center mb-1 ml-2">{{'CYBERSECURITY.PENTESTING.CARD.LAST_ANALYSIS3'| translate}}
+              </span>
+            </div>
+              <div class="col-xl-7 col-lg-8 col-md-12 col-sm-12 col-xs-12 col-12 mb-2">
+                  <div class="row align-items-center">
+                      <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6 col-6 mb-2">
+                          <div class="canvasservices">
+                              <div class="numbercanvas">
+                                  <h3 class="text-center">{{pentestingService.totalAlerts}}</h3>
+                                  <span class="subtitle text-center">{{'CYBERSECURITY.PENTESTING.CARD.ALERTS' | translate}}</span>
+                              </div>
+                              <canvas baseChart [data]="pentestingService.doughnutChartData" [labels]="pentestingService.chartLabels" [colors]="pentestingService.doughnutColors" [chartType]="pentestingService.chartType" [options]="{cutoutPercentage: 75}"></canvas>
+                          </div>
+                      </div>
+                      <div class="col-xl-6 col-lg-6 col-md-4 col-sm-5 col-xs-5 col-5 mb-2">
+                          <div class="w75 d-block mx-auto">
+                              <div class="mb-2">
+                                  <div class="led red"><i class="fas fa-circle"></i></div>
+                                  <span>{{'CYBERSECURITY.PENTESTING.CARD.HIGH' | translate}}</span>
+                                  <h4 class="">{{pentestingService.AcunetixIMG.reportAlertsHigh}}</h4>
+                              </div>
+                              <div class="mb-2">
+                                  <div class="led orange"><i class="fas fa-circle"></i></div>
+                                  <span>{{'CYBERSECURITY.PENTESTING.CARD.MEDIUM' | translate}}</span>
+                                  <h4 class="">{{pentestingService.AcunetixIMG.reportAlertsMedium}}</h4>
+                              </div>
+                              <div class="mb-2">
+                                  <div class="led green"><i class="fas fa-circle"></i></div>
+                                  <span>{{'CYBERSECURITY.PENTESTING.CARD.LOW' | translate}}</span>
+                                  <h4 class="">{{pentestingService.AcunetixIMG.reportAlertsLow}}</h4>
+                              </div>
+                              <div class="mb-2">
+                                  <div class="led purple"><i class="fas fa-circle"></i></div>
+                                  <span>{{'CYBERSECURITY.PENTESTING.CARD.INFO' | translate}}</span>
+                                  <h4 class="">{{pentestingService.AcunetixIMG.reportAlertsInfo}}</h4>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12 col-12 mb-2">
+                  <div class="w-75 d-block mx-auto" style="white-space:nowrap">
+                      <span class="subtitle text-left mb-1 ml-2" style="color: #8B8F98;">{{pentestingService.AcunetixIMG.url}}
+                      </span>
+                      <span class="subtitle2 text-left mb-1 ml-2">{{(pentestingService.AcunetixIMG.reportGenerated.toString()+'Z').toLocaleString() | date: 'dd/MM/yyyy HH:mm:ss'}}
+                      </span>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="col-xl-3 col-lg-12 col-md-12 col-sm-12 col-xs-12 pt-1 pb-4">
+          <div class="">
+              <button class="btn btn-outline-secondary ng-star-inserted mw-80 d-block mx-auto" (click)="loadService(data, false)">
+                  {{'GESTIONAR' | translate}} <div class="icon-right-big-arrow"></div>
+              </button>
+          </div>
+      </div>
+    </div>
+    <div class="h-100" *ngIf="pentestingService.hasPentestingInfo &&
+    (pentestingService.AcunetixIMG.status==1 || pentestingService.AcunetixIMG.status==2)">
+        <div class="row h-100 justify-content-center align-items-center">
+            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12 pt-4 pb-4">
+                <div class="w-75 d-block mx-auto">
+                    <p class="subtitle2 text-lg-left text-center ml-2" [innerHTML]="truncateService.removeHTML(data.desc, 250)"></p>
+                </div>
+            </div>
+            <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-xs-12 pt-4 pb-0 pb-lg-4">
+              <ng-container *ngIf="pentestingService.NumMaxUrl==1; else moreURL" >
+                <p *ngIf="pentestingService.AcunetixIMG.status==1"
+                    class="text-center orangetext">{{'CYBERSECURITY.PENTESTING.MESSAGE.TEXT14' | translate}}</p>
+                <p *ngIf="pentestingService.AcunetixIMG.status==2"
+                  class="text-center orangetext">{{'CYBERSECURITY.PENTESTING.MESSAGE.TEXT24' | translate}}</p>
+              </ng-container>
+              <ng-template #moreURL>
+                <p class="text-center orangetext">{{'CYBERSECURITY.PENTESTING.MESSAGE.TEXT25' | translate}}</p>
+              </ng-template>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-xs-12 pt-4 pb-4">
+              <button class="btn btn-outline-secondary ng-star-inserted mw-80 d-block mx-auto" (click)="loadService(data, false)">
+                {{'GESTIONAR' | translate}} <div class="icon-right-big-arrow"></div>
+              </button>
+            </div>
+        </div>
+    </div>
+    <div class="h-100" *ngIf="!pentestingService.hasPentestingInfo">
+        <div class="row h-100">
+            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12 pt-4 pb-4">
+                <div class="w-75 d-block mx-auto">
+                    <p class="subtitle2 text-lg-left text-center ml-2" [innerHTML]="truncateService.removeHTML(data.desc, 250)"></p>
+                </div>
+            </div>
+            <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-xs-12 pt-4 pb-0 pb-lg-4">
+                <button class="btn btn-primary d-block mx-auto mw-90 ng-star-inserted" (click)="loadService(data, true)">{{'CYBERSECURITY.PENTESTING.BUTTON'
+                    | translate}}</button>
+            </div>
+        </div>
+    </div>
+
+
+    </ng-container>
+
+
+    <ng-template #loadingTemplate>
+      <div class="default-section fa-3x">
+        <i class="fas fa-spinner fa-spin"></i>
+      </div>
+    </ng-template>
+  </div>
+</section>

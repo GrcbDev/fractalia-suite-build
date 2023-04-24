@@ -1,0 +1,29 @@
+
+  <div class="ds-modal-header ds-mb-32p justify-content-end">
+    <i class="icon-close" (click)="closeModal()"></i>
+  </div>
+  <div class="content-center-left">
+    <div class="icon-trash fa-6x ds-c-black ds-mb-32p mx-auto"></div>
+
+    <div>
+      <p class="ds-c-black ds-m-bold ds-fs-18 ds-mb-12p"> ¿Seguro que quieres eliminar el dispositivo
+        {{modalRef.config.data.value.computerName}}?</p>
+
+    </div>
+
+    <div>
+      <p class="ds-c-black ds-r-regular ds-fs-16 ds-mb-12p">Si eliminas este dispositivo ya no aparecerá en tu vista de
+        dispositivos ni se tendrá en cuenta para el resumen global del servicio. Sin embargo, la aplicación seguirá
+        instalada en tu ordenador hasta que decidas desinstalarla.</p>
+    </div>
+
+  </div>
+
+  <div class="d-flex justify-content-end">
+    <button class="btn btn-outline-secondary ds-mr-12p ds-t-uppercase" (click)="closeModal()"> {{'CANCEL' | translate}}
+    </button>
+    <button class="btn btn-primary" (click)="deletedDevice()">
+      <nz-spinner *ngIf="loading"></nz-spinner>
+      <span *ngIf="!loading"> {{'COMP_GRAVITY.REMOVE_FORM.DELETE_BUTTON' | translate}}</span>
+    </button>
+  </div>

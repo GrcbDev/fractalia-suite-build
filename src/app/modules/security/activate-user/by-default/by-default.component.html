@@ -1,0 +1,26 @@
+<section class="row mr-0 ml-0 activation-section section-scroll-heigth" >
+  <app-activate-sidebar class="activation-section section-scroll-heigth" [logo]="logo" [textStep]="stepText">
+  </app-activate-sidebar>
+
+  <div class="container-fluid pt-5">
+    <div class="ds-mb-32p" *ngIf="step === firstStep">
+      <app-access-password
+        (onSubmitAccessForm)="onSubmitAccessForm($event)"
+        [itIsOneStepActivation]="false"
+        [(loadingPassword)]="loadingAccessForm"
+        >
+      </app-access-password>
+    </div>
+    <div class="ds-mb-32p" *ngIf="step === secondStep">
+    
+      <app-profile-data
+        [userData]="data"
+        (onSubmitProfileDataForm)="onSubmitProfileDataForm($event)"
+        [(loadingProfileData)]="loadingProfileDataForm"
+        >
+      </app-profile-data>
+    </div>
+
+
+  </div>
+</section>

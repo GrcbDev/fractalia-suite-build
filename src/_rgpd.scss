@@ -1,0 +1,109 @@
+.ds-border-separate{
+  border: 2px solid #ECF1F8;
+  margin-bottom: 16px;
+}
+
+.rgpd-group {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap:24px;
+  margin-bottom: 12px;
+
+  .ds-rgpd-item {
+    width: 50%;
+  }
+}
+
+.ds-rgpd-main{
+  color:#34383F;
+}
+
+.ds-rgpd-main.disable{
+  color:#BCC4D4;
+}
+
+
+
+
+.ds-card-third-company {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 12px;
+  .ds-card-third-company-item {
+    background: #BCC4D4;
+    border-radius: 3px;
+    padding: 8px;
+    width: calc(50% - 12px);
+    display: flex;
+    justify-content: space-between;
+  }
+
+}
+
+
+.ds-rgpd-field-other{
+  margin-left: 25px;
+}
+
+
+.ds-enterprise-picture-container {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  margin-bottom: 32px;
+
+  .ds-enterprise-picture {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center ;
+    border: 2px solid #BCC4D4;
+    color: #BCC4D4;
+    border-radius: 50%;
+    margin-right: 18px;
+    cursor: pointer;
+  }
+}
+
+
+.ds-button-next {
+  display: flex;
+  margin-top: 32px;
+}
+
+
+
+@media only screen and (max-width: 767px) {
+  .rgpd-group {
+    display: flex;
+    flex-direction: column;
+    gap:12px;
+    .ds-rgpd-item {
+      width: 100%;
+    }
+  }
+
+
+  .ds-card-third-company {
+    .ds-card-third-company-item {
+      width: 100%;
+    }
+
+  }
+
+  .ds-button-next {
+    justify-content: flex-end;
+  }
+
+
+}
+
+
+.ds-complement {
+  background: #FFF;
+  background-color: #FFF;
+}

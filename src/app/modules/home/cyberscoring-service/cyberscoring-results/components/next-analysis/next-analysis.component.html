@@ -1,0 +1,16 @@
+<div class="col-12 mt-4" *ngIf="!freemiun && !isMinDate">
+  <div class="datos w-100 d-block text-center">
+    <span class="w-100 text-center crit-label">
+      {{ "CYBERSCORING.NEXT_ANALYSIS" | translate
+      }}{{ (nextDate.toString() + "Z").toLocaleString() | date : "dd/MM/yyyy" }}
+    </span>
+  </div>
+</div>
+<div class="col-12 mt-4" *ngIf="!freemiun && isMinDate">
+  <div class="datos w-100 d-block text-center">
+    <span class="w-100 text-center crit-label">
+      {{ "CYBERSCORING.NEXT_ANALYSIS" | translate
+      }}{{ "CYBERSCORING.NO_NEXT_ANALYSIS_DATE" | translate }}
+    </span>
+  </div>
+</div>

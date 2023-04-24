@@ -1,0 +1,177 @@
+<section class="loginBox">
+  <div class="container-fluid pl-0 px-0">
+    <div class="row vh-100 no-gutters">
+      <div class="col-md-4 d-flex flex-column auth-bg-section loginText" [ngStyle]="{ 'background-image': loginTypeService.backgroundImage }" >
+        <div class="header">
+          <img class="logo" alt="logo" src="{{ partnerService.partner.logotipo }}"/>
+          <h3>{{ partnerService.partner.name }}</h3>
+        </div>
+        <div class="body d-md-block d-none">
+          <h5>{{ partnerService.partner.loginTitle }}</h5>
+          <p>{{ partnerService.partner.loginSubtitle }}</p>
+        </div>
+      </div>
+      <div class="col-md-8 ds-flex-row ds-al-center ds-jc-center">
+        <div class="login-container-form">
+          <form class="ds-login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()" >
+            <div class="ds-h1 ds-m-bold ds-c-black ds-mb-12p">{{ "COMP_LANDING.INIT_SESSION" | translate }}</div>
+            <div class="ds-flex-column ds-mb-12p">
+              <label class="ds-body-secondary ds-r-regular ds-c-black" >{{ partnerService.partner.userPlaceholder }}</label >
+              <input
+                type="text"
+                class="ds-control"
+                formControlName="email"
+                [placeholder]="partnerService.partner.userPlaceholder || ''"
+              />
+            </div>
+
+            <div class="invalid-feedback" [ngClass]="{ 'd-block': loginForm.touched && f && f['email'] && f['email'].errors }">
+              <div *ngIf="f && f['email'] && f['email'].errors && f['email'].errors!['required']">
+                <div class="icon-exclamation-tri">{{'CAMPO_REQUERIDO' | translate}}</div>
+              </div>
+              <div *ngIf="f && f['email'] && f['email'].errors && f['email'].errors!['pattern']">
+                <div class="icon-exclamation-tri">{{'DATOS_INCORRECTOS' | translate}}</div>
+              </div>
+            </div>
+
+            <div class="ds-flex-column ds-mb-12p">
+              <div class="ds-flex-row ds-jc-between">
+                <label class=" ds-r-regular ds-body-secondary ds-c-black">{{'COMP_PARTNER.COMMCHANELS.C2C_SECRET' | translate}}*</label>
+                <span (click)="redirectToRecoverPassword()" class="ds-r-bold ds-c-accent ds-caption ds-cur-pointer"> {{'CONTRASENA_OLVIDADA' | translate}}</span>
+              </div>
+              <div class="input-group">
+                <input
+                  [type]="passwordInputType"
+                  placeholder="{{'COMP_PARTNER.COMMCHANELS.C2C_SECRET' | translate}}"
+                  formControlName="password"
+                  class="form-control-with-icon ds-no-take-error"
+                  maxlength="100"
+                />
+                <div class="icon-prepend-eye" (click)="tooglePassword()">
+                  <div class="icon-eye"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="invalid-feedback" [ngClass]="{ 'd-block': loginForm.touched && f && f['password'] && f['password'].errors }">
+              <div *ngIf="f && f['password'] && f['password'].errors && f['password'].errors!['required']">
+                <div class="icon-exclamation-tri">{{'CAMPO_REQUERIDO' | translate}}</div>
+              </div>
+            </div>
+
+            <div class="ds-flex-row ds-mb-24p">
+              <div class="ds-container-switch">
+                <div class="item-switch">
+                  <input
+                    class="ds-switch"
+                    type="checkbox"
+                    formControlName="checkKeepSession"
+                    name="checkbox11"
+                    id="loginKeepSession"
+                  />
+                  <label
+                    style="margin-left: 9px"
+                    class="ds-r-regular ds-caption ds-c-secondary"
+                    for="loginKeepSession"
+                    >{{ "COMP_LANDING.KEEP_SESSION" | translate }}</label
+                  >
+                </div>
+              </div>
+            </div>
+            <div class="ds-flex-row ds-al-end">
+              <button type="submit" class="ds-btn-primary ds-t-uppercase">
+                <nz-spinner *ngIf="loginTypeService.loading">loading</nz-spinner>
+                <div *ngIf="!loginTypeService.loading">
+                  {{
+                    "ACCEDER" | translate
+                  }}
+                </div>
+              </button>
+            </div>
+            <div *ngIf="loginTypeService.loginError" class="loginError d-flex">
+              <div class="icon-exclamation-tri ds-mr-8p"></div>
+              {{ "DATOS_INCORRECTOS" | translate }}
+            </div>
+          </form>
+
+
+          <div class="ds-login-forget-password ds-login-code">
+
+            <div class="ds-r-regular ds-body-secondary ds-c-secondary ds-mb-24p ds-t-center">
+              {{ 'REGISTER_FORM.ACCESS_QUESTION' | translate }}
+
+              {{ 'REGISTER_FORM.ACCESS_QUESTION2' | translate: { identifier: partnerService.partner.uniqueIdentifier} }}
+            </div>
+
+            <button class="ds-btn-secondary ds-r-bold ds-text-upper" (click)="redirectToRegisterForm()">{{ 'REGISTER_FORM.ACCESS_BUTTON' | translate}}</button>
+          </div>
+
+
+
+          <div class="ds-login-contact-us" style="border-top:2px solid #BCC4D4; ">
+            <div class="ds-r-bold ds-caption ds-c-secondary ds-mb-12p">
+              {{ partnerService.partner.communicationsTitle }}
+            </div>
+            <div class="ds-login-icons" style="margin-bottom: 24px;">
+              <a
+                href="tel:{{ partnerService.partner.phone }}"
+                *ngIf="
+                  partnerService.partner.includePhone &&
+                  partnerService.partner.phone
+                "
+              >
+                <div class="icon-phone ds-mr-8p"></div>
+                {{ partnerService.partner.phone }}
+              </a>
+              <a
+                href="https://api.whatsapp.com/send?phone={{
+                  partnerService.partner.whatsapp
+                }}"
+                target="_blank"
+                *ngIf="
+                  partnerService.partner.includeWhatsapp &&
+                  partnerService.partner.whatsapp
+                "
+              >
+                <div class="icon-whatsapp ds-mr-8p"></div>
+                {{ partnerService.partner.whatsapp }}
+              </a>
+              <a
+                href="mailto:{{ partnerService.partner.email }}"
+                *ngIf="
+                  partnerService.partner.includeEmail &&
+                  partnerService.partner.email
+                "
+              >
+                <div class="icon-envelope ds-mr-8p"></div>
+                {{ partnerService.partner.email }}
+              </a>
+            </div>
+          </div>
+          <div class="ds-login-language">
+            <app-custom-select
+              *ngIf="loginTypeService.languages.length > 1"
+              [placeholder]="loginTypeService.dropdownLanguage"
+              [items]="loginTypeService.languages"
+              (changeEvent)="onChange($event)"
+            >
+            </app-custom-select>
+            <div
+              *ngIf="loginTypeService.languages.length <= 1"
+              class="ds-r-regular ds-body-secondary ds-c-secondary ds-caption"
+            >
+              <span class="icon-globe mr-2"></span> <span>{{ loginTypeService.languages[0].value }}</span>
+            </div>
+          </div>
+
+          <div class="ds-terms-and-conditions">
+            <span (click)="goToTerms()"> {{'TERMINOS_CONDICIONES' | translate}} </span>
+            <span (click)="goCookiesPolicy()">  {{'COOKIES.COOKIES_POLICY' | translate}} </span>
+            <span (click)="goToPrivacyPolicy()"> {{'COOKIES.PRIVACY_POLICY' | translate}} </span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

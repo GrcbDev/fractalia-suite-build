@@ -1,0 +1,138 @@
+<div class="sidebar" [ngClass]="{ 'sidebar--show' : notificationService.sidebarToogle }" id="sidebar-toogle">
+
+  <div class="sidebar-container"  >
+
+    <div class="header-sidebar" >
+      <div class="icon-menu cursor mr-4" ></div>
+      <img src="{{logo}}" alt="homepage" class="light-logo" />
+    </div>
+
+    <nav class="ds-nav">
+      <ul class="ds-ul-main-list" #sidebarContent>
+
+        <li
+          routerLinkActive="active"
+          class="ds-main-li-profile">
+          <a
+            href="javascript:void(0)"
+            routerLink="profile"
+            class="nav-link"
+            tooltip="{{'MY_PROFILE' | translate}}"
+          >
+            <img class="profile-imagen" alt="{{this.userService.currentUserValue.name}}" [src]="userService.menuPhoto">
+            <span class="span-link">  {{'MY_PROFILE' | translate}} </span>
+          </a>
+          <span class="icon-logout" (click)="handleLogout()"  tooltip="{{'CERRAR_SESION' | translate}}"></span>
+        </li>
+
+
+
+
+        <li
+          routerLink="home"
+          *ngIf="validationProfile"
+          id="home-menu"
+          routerLinkActive="active"
+          class="ds-main-li-item">
+          <a  href="javascript:void(0)" class="nav-link" tooltip="{{'HOME' | translate}}">
+            <div class="icon-home"></div>
+            <span class="span-link"> {{'HOME' | translate}} </span>
+          </a>
+        </li>
+
+        <li
+        routerLink="family-unit"
+        *ngIf="showUnitFamily"
+        id="family-unit-menu"
+        routerLinkActive="active"
+        class="ds-main-li-item">
+        <a  href="javascript:void(0)" class="nav-link" tooltip="{{'FAMILY_UNIT.MENU_TITLE' | translate}}">
+          <!--<div class="icon-home"></div>-->
+          <span>
+            <img src="{{staticContentUrl+'img/family-unit/unit_family_menu.png'}}" alt="">
+          </span>
+          <span class="span-link"> {{ "FAMILY_UNIT.MENU_TITLE" | translate }} </span>
+        </a>
+      </li>
+
+        <li
+          routerLink="user-managment"
+          *ngIf="this.currentUser && this.currentUser.isAdminUserId && this.currentUser.companyUser.maxLicense > 1 && validationProfile && !this.showUnitFamily"
+          routerLinkActive="active"
+          class="ds-main-li-item">
+          <a  href="javascript:void(0)" class="nav-link" tooltip="{{'CONFIGURATION' | translate}}">
+            <div class="icon-users"></div>
+            <span class="span-link"> {{'CONFIGURATION' | translate}} </span>
+          </a>
+        </li>
+
+        <ng-container  *ngIf="validationProfile">
+          <div id="menu-services">
+            <ng-container *ngFor="let item of menuList" >
+
+              <ng-container *ngIf="item && item.children; else noChildren">
+                <li class="ds-main-li-item with-children" routerLinkActive #rla="routerLinkActive"    [ngClass]="{'active': rla.isActive && !item.showChildren } " >
+                  <a href="javascript:void(0)" class="nav-children"  (click)="clickItemMenu(item)" tooltip="{{item.name}}">
+                    <div class="underline">
+                      <div class="d-flex align-items-center">
+                        <div class="{{item.icon}}"></div>
+                        <span class="span-link"> {{item.name}}</span>
+                      </div>
+                      <div class="icon-bottom-arrow" [ngClass]="{ 'arrow-down': item.showChildren}"></div>
+                    </div>
+
+                  </a>
+                  <ul class="children-ul-list"   [ngStyle]="{ 'height' : item.showChildren ? 40*item.children.length + 'px' : '0px', 'transition': 'height .2s'}">
+
+                    <ng-container  *ngFor="let child of item.children">
+
+                      <ng-container *ngIf="child.code === 'RGP' " >
+                        <li class="children-li-inside" [routerLink]="[child.route]" (click)="goToRGPChange()"  routerLinkActive="active" >
+                          <span  *ngIf="child.name.length >= 40" tooltip="{{child.name}}"> {{child.name}} </span>
+                          <span  *ngIf="child.name.length < 40" > {{child.name}} </span>
+                        </li>
+                      </ng-container>
+
+                      <ng-container *ngIf="child.code !== 'RGP' " >
+                        <li class="children-li-inside" [routerLink]="[child.route]"  routerLinkActive="active" >
+                          <span  *ngIf="child.name.length >= 40" tooltip="{{child.name}}"> {{child.name}} </span>
+                          <span  *ngIf="child.name.length < 40" > {{child.name}} </span>
+                        </li>
+                      </ng-container>
+
+                    </ng-container>
+                  </ul>
+                </li>
+              </ng-container>
+
+              <ng-template #noChildren>
+                <li class="ds-main-li-item"  [routerLink]="[item.route]" routerLinkActive="active" >
+                  <a href="javascript:void(0)" class="nav-link" tooltip="{{item.name}}">
+                    <ng-container *ngIf="item.route == 'profile'; else noProfileMenu">
+                      <div class="separate">
+                        <div class="d-flex align-items-center">
+                          <img  [src]="userService.menuPhoto" class="profile-imagen" alt="{{this.userService.currentUserValue.name}}" />
+                          <span class="span-link"> {{item.name}}</span>
+                        </div>
+                        <span class="icon-logout" (click)="handleLogout()" tooltip="{{'CERRAR_SESION' | translate}}"></span>
+                      </div>
+                    </ng-container>
+                    <ng-template #noProfileMenu>
+                      <div class="{{item.icon}}"></div>
+                      <span class="span-link"> {{item.name}} </span>
+                    </ng-template>
+
+                  </a>
+                </li>
+              </ng-template>
+
+            </ng-container>
+          </div>
+
+        </ng-container>
+
+
+      </ul>
+    </nav>
+  </div>
+</div>

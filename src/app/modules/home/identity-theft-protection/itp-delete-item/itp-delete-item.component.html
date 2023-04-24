@@ -1,0 +1,29 @@
+<div class="ds-modal-header ds-mb-32p justify-content-end">
+  <i class="icon-close" (click)="closeModal()"></i>
+</div>
+
+<div class="ds-t-center d-flex flex-column ds-mb-32p">
+  <div class="icon-trash fa-6x ds-c-black ds-mb-32p" ></div>
+
+  <div class="ds-h3 ds-m-bold ds-c-black ds-mb-12p">
+    {{'CYBERALARM.IDENTITIES.REMOVE_FORM.SURE1' | translate}}
+  </div>
+
+  <div class="ds-body-primary ds-r-regular ds-c-black ds-mb-12p">
+    {{'CYBERALARM.IDENTITIES.REMOVE_FORM.SURE2' | translate}}
+  </div>
+
+  <div class="ds-body-primary ds-r-bold ds-c-black ds-mb-12p" >
+    {{emailSelected.identity}}
+  </div>
+
+</div>
+
+
+<div class="d-flex justify-content-end" >
+  <button class="btn btn-outline-secondary ds-mr-12p ds-t-uppercase"  (click)="closeModal()">   {{'CANCEL' | translate}} </button>
+  <button class="btn btn-primary"  (click)="saveDeleteEmail()">
+    <nz-spinner *ngIf="loading"></nz-spinner>
+    <span  *ngIf="!loading"> {{'COMP_GRAVITY.REMOVE_FORM.DELETE_BUTTON' | translate}}</span>
+  </button>
+</div>

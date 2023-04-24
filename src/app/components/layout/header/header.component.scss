@@ -1,0 +1,146 @@
+
+.frac-navbar {
+  background-color: #FFF;
+  padding: 20px 10px 20px 24px;
+}
+
+.btn-download{
+  width: 36px;
+  height: 36px;
+  border-radius: 8px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.noti-bell-header {
+  position: relative;
+  min-width: 12px;
+  height: 12px;
+  background: #EB1919;
+  margin-left: -12px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8px;
+  line-height: 9px;
+  font-weight: 400;
+  padding: 2px 3px;
+}
+
+
+.noti-icon-mobile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 36px;
+  width: 36px !important;
+  border: 1px solid  #ECF1F8;
+  background-color: #ECF1F8;
+  border-radius: 50%;
+  visibility: hidden;
+  cursor: pointer;
+}
+
+.pwa-icon{
+  font-size: 20px;
+  padding: 2px;
+  color: #fff;
+  background: #00b1ea;
+  border-radius: 10px;
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.light-logo {
+  width: 160px;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+.icon-menu  {
+  display: none;
+}
+@media only screen and (max-width: 992px) {
+  // .light-logo {
+  //   width: 120px;
+  // }
+}
+@media only screen and (max-width: 767px) {
+  .frac-navbar {
+    width: 100%;
+  }
+
+  .noti-icon-mobile {
+    visibility: visible;
+  }
+
+  .icon-menu  {
+   display: block;
+  }
+
+  .light-logo {
+    width: 120px;
+  }
+
+  .header-right ul li {
+    max-width: 100% !important;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  #notificacion {
+    width: 391px;
+    margin-top:12px;
+  }
+}
+
+
+
+
+.toolbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  color: #2a2a2a;
+  font-weight: 600;
+  border-bottom:1px solid #dfe3eb;
+}
+
+.toolbar img {
+  margin: 0 16px;
+}
+
+:host {
+  box-shadow: 0 2px 12px 0 #dfe3eb;
+  background: #ffffff;
+  color: #2a2a2a;
+}
+
+
+.fixed {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 940;
+}
+
+.toolbar {
+  visibility: hidden;
+}
+
+@media only screen and (max-width: 767px) {
+  .toolbar {
+    visibility: visible;
+  }
+}
+

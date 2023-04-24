@@ -1,0 +1,367 @@
+
+.cac-main-content {
+  background: #ECF1F8;
+  border-radius: 8px;
+  padding: 40px 24px;
+  min-height: 444px;
+
+  .cac-help-container {
+
+    display: flex;
+    flex-wrap: wrap ;
+    gap: 24px;
+
+
+
+    .cac-help-text-steps {
+      width: 35%;
+    }
+
+    .cac-help-first-step {
+      width: 60%;
+      display: flex;
+
+      height: 300px;
+      .cac-sidebar {
+        width: 30%;
+        display: flex;
+        flex-direction: column;
+        background-color: #00183A;
+
+        .cac-img-logo {
+          margin: 7px 7px 35px 7px;
+          width: 115px;
+          height: 15px;
+        }
+
+        .cac-item-menu {
+          background: #004CAB;
+          color: #fff;
+          padding: 8px 15px;
+        }
+
+      }
+
+      .cac-content{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #B8BABE;
+        width: 70%;
+
+        .cac-card {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 5px;
+          flex-direction: column;
+          background-color: #fff;
+          padding: 12px 24px 12px 12px;
+
+          .cac-card-item {
+            display: flex;
+            align-items: center;
+            background: #FFFFFF;
+            border: 1px solid rgba(190, 190, 190, 0.99);
+            padding: 4px 8px;
+            min-width: 187px;;
+
+            &.active {
+              background: #D4E4FF;
+              border: 1px solid #D4E4FF;
+            }
+
+          }
+
+
+        }
+      }
+    }
+
+    .cac-help-second-step {
+      width: 60%;
+      display: flex;
+      flex-direction: column;
+
+      .cac-content{
+        background: #B8BABE;
+        width: 100%;
+        padding-bottom: 26px ;
+        margin-bottom: 30px;
+      }
+
+      .cac-acronis-card {
+        display: flex;
+        align-items: center;
+        background: #FFFFFF;
+        border: 1px solid rgba(190, 190, 190, 0.99);
+        padding: 4px 8px;
+        width: 187px;
+        margin-top: 20px;
+        margin-left: 9px;
+      }
+
+      .acronis-phone {
+        width: 250px;
+        height: 115.45px;
+      }
+
+    }
+
+
+    .cac-help-third-step {
+      width: 60%;
+      display: flex;
+      height: 300px;
+      .cac-sidebar {
+        width: 30%;
+        display: flex;
+        flex-direction: column;
+        background-color: #00183A;
+
+        .cac-img-logo {
+          margin: 10px 9px;
+          width: 79px;
+          height: 17px;
+        }
+      }
+
+      .cac-content{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background: #fff;
+        width: 70%;
+
+        .green-btn {
+          width: auto !important;
+        }
+      }
+    }
+
+    .cac-help-fourth-step {
+      width: 60%;
+      display: flex;
+      height: 300px;
+      .cac-sidebar {
+        width: 30%;
+        display: flex;
+        flex-direction: column;
+        background-color: #00183A;
+
+        .cac-img-logo {
+          margin: 7px 7px 35px 7px;
+          width: 115px;
+          height: 15px;
+        }
+      }
+
+      .cac-content{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background: #B8BABE;
+        width: 70%;
+
+        .cac-card{
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          background-color: #fff;
+          height: 164px;
+          width: 217px;
+          padding: 12px;
+        }
+
+
+      }
+    }
+
+    .cac-help-fifth-step {
+      width: 60%;
+      display: flex;
+      flex-direction: column;
+      height: 300px;
+      .cac-sidebar {
+        width: 33%;
+        display: flex;
+        flex-direction: column;
+        background-color: #00183A;
+
+        .cac-item-menu {
+          background: #004CAB;
+          color: #fff;
+          padding: 8px 6px;
+        }
+
+        .cac-img-logo {
+          margin: 7px 7px 35px 7px;
+          width: 115px;
+          height: 15px;
+        }
+      }
+
+      .cac-content{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background: #B8BABE;
+        width: 67%;
+
+        .cac-card{
+          display: flex;
+          background-color: #fff;
+          padding: 12px;
+
+          &.first {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin:28px;
+            width: 228px;
+            height: 87px;
+          }
+
+          &.second {
+            display: flex;
+            flex-direction: column;
+            width: 255px;
+            height: 153px;
+          }
+        }
+      }
+    }
+
+
+    .cac-help-sixth-step {
+      width: 60%;
+      display: flex;
+      height: 320px;
+      .cac-sidebar {
+        width: 33%;
+        display: flex;
+        flex-direction: column;
+        background-color: #00183A;
+
+        .cac-img-logo {
+          margin: 7px 7px 35px 7px;
+          width: 115px;
+          height: 15px;
+        }
+
+        .cac-item-menu {
+          background: #004CAB;
+          color: #fff;
+          padding: 8px 6px;
+        }
+      }
+
+      .cac-content{
+        display: flex;
+        align-items: flex-end;
+        flex-direction: column;
+        background: #B8BABE;
+        width: 67%;
+
+        .cac-card{
+          display: flex;
+          flex-direction: column;
+          background-color: #fff;
+          height: 100%;
+          width: 255px;
+          padding: 12px;
+        }
+
+        .fake-select {
+          margin-left: 0px;
+          margin-bottom: 8px;
+          display: flex;
+          justify-content: flex-end;
+          padding-right: 8px;
+        }
+
+        .fake-list{
+          margin-left: 0px;
+        }
+
+
+      }
+    }
+
+    .cac-help-seventh-step {
+      width: 60%;
+      display: flex;
+      height: 300px;
+
+      .cac-content{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        background:  #49494A;
+        width: 100%;
+
+        .cac-card{
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          background-color: #fff;
+          border-radius: 8px;
+          width: 222px;
+          height: 217px;
+          padding: 24px;
+        }
+
+
+      }
+    }
+  }
+
+}
+
+
+
+
+@media only screen and (max-width: 900px) {
+  .cac-main-content {
+    .cac-help-container {
+
+      .cac-help-text-steps {
+        width: 100%;
+      }
+
+      .cac-help-first-step{
+        width: 100%;
+      }
+
+      .cac-help-second-step {
+        width: 100%;
+      }
+
+      .cac-help-third-step {
+        width: 100%;
+      }
+
+      .cac-help-fourth-step {
+        width: 100%;
+      }
+
+      .cac-help-fifth-step {
+        width: 100%;
+      }
+
+      .cac-help-sixth-step {
+        width: 100%;
+      }
+
+      .cac-help-seventh-step {
+        width: 100%;
+      }
+    }
+  }
+
+}

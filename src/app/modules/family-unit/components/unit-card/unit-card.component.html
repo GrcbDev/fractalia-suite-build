@@ -1,0 +1,70 @@
+<div class="container card-unit"  *ngIf="profile && fullProfiledata; else loadingTemplate">
+  <div class="row">
+    <div class="col-lg">
+      <div class="head-unit-container">
+        <img *ngIf="!profile.photo"
+          class="unit-card-img"
+          alt=""
+          src="{{staticContentUrl+'img/family-unit/fi-cnsuxl-user-circle.png'}}"
+        />
+        <img *ngIf="profile.photo"
+        class="unit-card-img"
+        [src]="profile.photo"
+        alt=""
+      />
+        <div class="head-icons-container">
+          <div
+          *ngIf="index > 0"
+            class="icon-trash fs-20 main-secondary cursor"
+            (click)="deleteProfile()"
+          ></div>
+          <span
+            class="icon-edit fs-20 main-secondary cursor"
+            (click)="editProfile()"
+          >
+          </span>
+        </div>
+      </div>
+
+      <div class="card-unit-info">
+        <span class="user-name">{{profile.name}} {{profile.surname}}</span> <br />
+        <span>{{profile.email}}</span> <br />
+
+        <button
+        *ngIf="fullProfiledata"
+          class="btn btn-primary wizard-resume-btn d-flex align-items-center justify-content-center"
+        >
+          <div class="text-uppercase" (click)="openDetail()">
+            {{ "FAMILY_UNIT.BTN_SHOW_INFO" | translate }}
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-edit-user-profile
+  (action)="getEditModalAction($event)"
+  *ngIf="isOpenEditProfile"
+[profile]="profile"
+></app-edit-user-profile>
+<app-delte-user-profile
+  (action)="getDeleteModalAction($event)"
+  *ngIf="isOpenDelete"
+[profile]="profile"
+></app-delte-user-profile>
+<app-user-detail
+  (action)="getDetailModalAction($event)"
+  *ngIf="isOpenDetail"
+  [profile]="profile"
+  [detail]="fullProfiledata"
+></app-user-detail>
+
+<ng-template #loadingTemplate>
+  <div class="app-unit-loading">
+    <div class="logo">
+      <img class="unit-logo" src="{{ partnerService.preloaderImage }}" />
+    </div>
+  </div>
+</ng-template>
+

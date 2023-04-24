@@ -1,0 +1,224 @@
+
+<div class="d-flex w-100 justify-content-end">
+  <button type="button" class="btn ds-fs-14" >
+    <div class="icon-close"></div>
+  </button>
+</div>
+
+<div class="p-3 w-100 justify-content-center btn">
+  <h1>hola</h1>
+</div>
+
+
+  <div class="mt-21 modal-head-container">
+    <div class="row">
+      <div class="col close-container">
+        <button type="button" class="new-close" (click)="close()">
+          <div class="icon-close"></div>
+        </button>
+      </div>
+    </div>
+    <br />
+
+  <div class="row">
+      <div class="col">
+        <h4 class="right-card-text mb-4 fs-24 bold">
+          {{ "FAMILY_UNIT.TITLE_ADD" | translate }}
+        </h4>
+      </div>
+    </div>
+
+    <div class="row mb-3">
+      <div class="picture-container">
+        <div class="">
+          <div class="d-flex align-items-center modal-width-fix">
+            <div class="photo">
+              <input
+                #profileImage
+                name="favicon"
+                type="file"
+                (change)="onUploadImagen($event)"
+                accept="image/x-png,image/jpeg,image/gif,image/x-icon"
+                style="display: none"
+              />
+              <button
+                type="button"
+                class="btn bback"
+                (click)="profileImage.click()"
+              >
+                <img
+                  [src]="sanitizer.bypassSecurityTrustUrl(image)"
+                  width="64"
+                  height="64"
+                  style="width: 64px; height: 64px; border-radius: 50%"
+                />
+              </button>
+            </div>
+            <div class="text">
+              <p class="title">
+                {{ "FAMILY_UNIT.PROFILE_PICTURE" | translate }}
+              </p>
+              <p class="subtitle">
+                {{ "FAMILY_UNIT.ACTION_DESCRIPTION" | translate }}
+              </p>
+            </div>
+          </div>
+          <div
+            class="modal fade"
+            id="modal"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="modalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="modalLabel">
+                    {{ "CUT_PROFILE_IMAGE_USER" | translate }}
+                  </h5>
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="img-container">
+                    <img id="image" src="" />
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-default"
+                    data-dismiss="modal"
+                  >
+                    {{ "CANCEL" | translate }}
+                  </button>
+                  <button type="button" class="btn btn-primary" id="crop">
+                    {{ "OK" | translate }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group col-lg-12 col-md-12 col-sm-12 mt-2 pl-0 pr-0 mb-0">
+      <label class="w-100 fs-12">
+        * {{ "FAMILY_UNIT.REQUIRED_FIELDS" | translate }}</label
+      >
+    </div>
+  </div>
+  <section class="row mt-2 mr-4 ml-4">
+    <div
+      novalidate=""
+      class="col-sm-12 pl-0 pr-0 ng-untouched ng-pristine ng-invalid"
+    >
+      <div
+        class="form-group col-md-12 col-sm-12 pl-0 pr-0 no-padding-responsive"
+      >
+        <label class="modal-form-label neutral-black">
+          {{ "FAMILY_UNIT.NAME" | translate }} * </label
+        ><input
+          type="text"
+          [(ngModel)]="profile.name"
+          name="name"
+          maxlength="40"
+          class="form-control new-input ng-untouched"
+        />
+      </div>
+
+      <div
+        class="form-group col-md-12 col-sm-12 pl-0 pr-0 no-padding-responsive"
+      >
+        <label class="modal-form-label neutral-black">
+          {{ "FAMILY_UNIT.ALIAS" | translate }} </label
+        ><input
+          type="text"
+          [(ngModel)]="profile.surname"
+          name="surname"
+          maxlength="40"
+          class="form-control new-input ng-untouched"
+        />
+      </div>
+      <div
+        class="form-group col-md-12 col-sm-12 pl-0 pr-0 no-padding-responsive"
+      >
+        <label class="modal-form-label neutral-black">
+          {{ "FAMILY_UNIT.EMAIL" | translate }} * </label
+        ><input
+          type="text"
+          [(ngModel)]="profile.email"
+          name="email"
+          maxlength="40"
+          class="form-control new-input ng-untouched"
+        />
+      </div>
+
+      <div
+        class="form-group col-md-12 col-sm-12 pl-0 pr-0 no-padding-responsive"
+      >
+        <label class="modal-form-label neutral-black">
+          {{ "FAMILY_UNIT.GENDER" | translate }} *
+        </label>
+
+        <select
+          class="form-control new-input ng-untouched"
+          id=""
+          #selectProfile
+          [(ngModel)]="profile.gender"
+          name="gender"
+          (change)="onChangGender($event)"
+        >
+          <option value="Male">
+            {{ "FAMILY_UNIT.MALE" | translate }}
+          </option>
+          <option value="Female">
+            {{ "FAMILY_UNIT.FEMALE" | translate }}
+          </option>
+        </select>
+      </div>
+
+      <div
+        class="form-group col-md-12 col-sm-12 pl-0 pr-0 no-padding-responsive"
+      >
+        <label class="modal-form-label neutral-black">
+          {{ "FAMILY_UNIT.TIME_ZONE" | translate }} * </label
+        >
+
+        <select
+        class="form-control new-input"
+        id=""
+        #selectProfile
+        [(ngModel)]="profile.timezone"
+        name="timezone"
+        (change)="onChangTimezone($event)"
+      >
+      <option [value]="item" *ngFor="let item of timeZoneList">
+        {{item}}
+      </option>
+      </select>
+      </div>
+
+      <div
+        class="form-group col-lg-12 pl-0 pr-0 identity-btns d-flex justify-content-end"
+      >
+        <section class="d-flex justify-content-end">
+          <button
+            type="submit"
+            class="btn btn-primary text-center d-block"
+            (click)="continue()"
+          >
+            <div class="">{{ "FAMILY_UNIT.BTN_CREATE" | translate }}</div>
+          </button>
+        </section>
+      </div>
+    </div>
+  </section>

@@ -1,0 +1,219 @@
+<div class="ds-flex-row ds-al-center  ds-mb-12p">
+  <div class="ds-h2 ds-m-bold ds-c-black ds-mr-24p">
+    {{formApiData.section}}
+  </div>
+
+  <ng-container *ngIf="loading">
+    <span class="ds-spin-loader ds-mr-8p"></span>
+    <span class="ds-caption ds-r-regular ds-c-secondary">{{'RGPD.STEPS.SAVE_DATA' | translate}}</span>
+  </ng-container>
+
+  <ng-container *ngIf="savedSuccessfully" >
+    <span class="icon-tick-round ds-mr-4p"></span>
+    <span class="ds-caption ds-r-regular ds-c-secondary">{{'RGPD.STEPS.DATA_SAVED' | translate}}</span>
+  </ng-container>
+
+</div>
+
+<section class="ds-card ds-p-24p">
+
+  <form [formGroup]="stepForm" class="ds-flex-column ds-rgpd-main" [ngClass]="{'disable' : !stepForm.get('sectionQuestion').value }">
+
+    <div class="ds-flex-column  ds-mb-12p  ">
+      <span class="ds-h4 ds-m-bold ds-c-black ds-mb-8p" controlName="sectionQuestionTitle"></span>
+      <span class="ds-body-secondary ds-r-regular  ds-c-black  ds-mb-8p" controlName="sectionQuestionDescription"></span>
+    </div>
+
+
+    <div class="ds-mb-12p">
+      <div class="ds-container-radio column">
+        <div class="item-radio">
+          <input class="ds-radio" type="radio" id="radio1" (change)="onChangeMainQuestion()" formControlName="sectionQuestion" [value]="true" />
+          <label for="radio1" class="ds-body-secondary ds-r-regular ">{{'COMP_USERS.YES' | translate}}</label>
+        </div>
+
+        <div class="item-radio">
+          <input class="ds-radio" type="radio" id="radio2" (change)="onChangeMainQuestion()" formControlName="sectionQuestion" [value]="false"/>
+           <label for="radio2" class="ds-body-secondary ds-r-regular ">{{'COMP_USERS.NO' | translate}}</label>
+        </div>
+      </div>
+    </div>
+
+
+    <div formArrayName="questions"  *ngIf="questionsForm.controls.length">
+      <div class="ds-border-separate"></div>
+
+      <div formGroupName="{{ ix }}"  class="ds-flex-column ds-mb-12p "  *ngFor="let X of questionsForm.controls; let ix = index">
+        <span class="ds-h4 ds-m-bold  ds-mb-16p" controlName="questionName"></span>
+
+        <div formArrayName="answers"  *ngIf="X['controls'].answers['controls'].length">
+          <div formGroupName="{{ iy }}" *ngFor="let Y of X['controls'].answers['controls']; let iy = index" >
+            <div class="ds-container-checkbox column">
+              <div class="item-checkbox">
+                <input class="ds-checkbox" formControlName="isChecked" (change)="verifyOtherField(ix, iy)"  type="checkbox" name="checkbox" [id]="['checkbox'+ix+'_'+iy]"/>
+                <label [for]="['checkbox'+ix+'_'+iy]" class="ds-body-secondary ds-r-regular " controlName="answerName"> </label>
+              </div>
+            </div>
+            <div class="ds-flex-column" *ngIf="Y.value.hasFieldOther && Y.value.isChecked">
+              <div class="ds-flex-row">
+                <input type="text" class="ds-control ds-rgpd-field-other" placeholder="Indique cuál/cuáles*" formControlName="otherField">
+              </div>
+              <span
+                *ngIf="Y.get('otherField').touched && Y.get('otherField').invalid"
+                class="ds-caption ds-r-regular ds-c-danger ds-mt-4p ds-rgpd-field-other">
+                {{'CAMPO_REQUERIDO' | translate}}
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </form>
+
+
+  <div class="ds-flex-column">
+
+
+    <form [formGroup]="thirdCompanyForm" class="ds-mb-24p ds-flex-column" *ngIf="formApiData.hasCompanies && stepForm.get('sectionQuestion').value">
+      <span class="ds-h4 ds-m-bold  ds-mb-16p" controlName="thirdCompanyTitle"></span>
+
+      <span class="ds-caption ds-r-regular ds-c-secondary ds-mb-16p">* {{'CAMPOS_OBLIGATORIOS' | translate}}</span>
+
+      <div class="rgpd-group">
+        <div class="ds-rgpd-item">
+          <div class="ds-flex-column">
+              <div class="ds-flex-column ds-mb-12p ">
+
+                <div class="ds-flex-column ds-mb-12p">
+                  <span class="ds-body-secondary ds-r-regular  ds-mb-4p">{{'RGPD.STEPS.COMPANY_TYPE' | translate}} *</span>
+                  <select name="" id="" class="ds-control" formControlName="type">
+                    <ng-container  *ngFor="let item of thirdTypeCompaniesSelect">
+                      <option [value]="item.rgpdModelThirdTypeCompaniesId">{{item.thirdTypeCompany}}</option>
+                    </ng-container>
+                  </select>
+                </div>
+
+                <div class="ds-flex-column ds-mb-12p">
+                  <span class="ds-body-secondary ds-r-regular  ds-mb-4p">{{'RGPD.STEPS.NAME_AGENCY' | translate}} *</span>
+                  <input type="text" class="ds-control" formControlName="name">
+                </div>
+
+                <div class="ds-flex-column ds-mb-12p">
+                  <span class="ds-body-secondary ds-r-regular  ds-mb-4p">{{'RGPD.STEPS.TAX_CODE' | translate}} *</span>
+                  <input type="text" class="ds-control" formControlName="cif" >
+                </div>
+
+                <div class="ds-flex-column ds-mb-12p">
+                  <span class="ds-body-secondary ds-r-regular  ds-mb-4p">{{'RGPD.STEPS.FULL_ADDRESS' | translate}} *</span>
+                  <input type="text" class="ds-control" formControlName="address" >
+                </div>
+
+                <div class="ds-flex-column ds-mb-12p">
+                  <span class="ds-body-secondary ds-r-regular  ds-mb-4p">{{'RGPD.STEPS.SERVICE_PROVIDED' | translate}} *</span>
+                  <input type="text" class="ds-control" formControlName="serviceProvided">
+                </div>
+              </div>
+
+              <div class="ds-flex-row ds-jc-end">
+                <button class="ds-btn-secondary ds-t-uppercase" (click)="addAgent()">{{'GUARDAR_NEW' | translate}}</button>
+              </div>
+
+            </div>
+        </div>
+        <div class="ds-rgpd-item">
+          <div class="ds-flex-column">
+            <span class="ds-body-primary ds-r-regular  ds-mb-12p" controlName="thirdCompanySubtitle"></span>
+
+            <div class="ds-card-third-company">
+
+              <div class="ds-card-third-company-item" *ngFor="let agentItem of agentList; let i = index">
+
+                <div class="ds-flex-column">
+
+                  <div class="ds-flex-column ds-mb-4p">
+                    <span class="ds-caption ds-r-bold ds-c-black"> {{'RGPD.STEPS.COMPANY_TYPE' | translate}}:</span>
+                    <span class="ds-caption ds-r-regular ds-c-black">{{agentItem.enterpriseType}}</span>
+                  </div>
+
+                  <div class="ds-flex-column ds-mb-4p">
+                    <span class="ds-caption ds-r-bold ds-c-black"> {{'RGPD.STEPS.NAME_AGENCY' | translate}}:</span>
+                    <span class="ds-caption ds-r-regular ds-c-black">{{agentItem.name}}</span>
+                  </div>
+
+                  <div class="ds-flex-column ds-mb-4p">
+                    <span class="ds-caption ds-r-bold ds-c-black">{{'RGPD.STEPS.TAX_IDENTIFICATION_NUMBER' | translate}}:</span>
+                    <span class="ds-caption ds-r-regular ds-c-black">{{agentItem.cif}}</span>
+                  </div>
+
+                  <div class="ds-flex-column ds-mb-4p">
+                    <span class="ds-caption ds-r-bold ds-c-black"> {{'DIRECCION' | translate}}:</span>
+                    <span class="ds-caption ds-r-regular ds-c-black">{{agentItem.address}}</span>
+                  </div>
+
+                  <div class="ds-flex-column ds-mb-4p">
+                    <span class="ds-caption ds-r-bold ds-c-black"> {{'RGPD.STEPS.SERVICE_PROVIDED2' | translate}}:</span>
+                    <span class="ds-caption ds-r-regular ds-c-black">{{agentItem.serviceProvided}}</span>
+                  </div>
+
+                </div>
+
+                <span class="icon-trash ds-cur-pointer fs-14 ds-c-black" (click)="onDeleteAgent(i)"></span>
+              </div>
+
+
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+
+
+    </form>
+
+
+
+
+
+
+    <div class="ds-border-separate" *ngIf="!editMode;"></div>
+
+    <span class="ds-flex-row ds-jc-center">
+      <button
+        class="ds-btn-secondary ds-t-uppercase ds-mr-24p"
+        (click)="previusStep()">
+        <span class="icon-left-big-arrow"></span>
+        {{'RGPD.STEPS.PREVIOUS' | translate}}
+      </button>
+      <button
+        [ngClass]="editMode ? 'ds-btn-secondary' : 'ds-btn-primary'"
+        class="ds-t-uppercase" (click)="nextStep()">
+        {{'RGPD.STEPS.FOLLOWING' | translate}}
+        <span class="icon-right-big-arrow"></span>
+      </button>
+    </span>
+
+    <ng-container *ngIf="editMode;">
+      <div class="ds-border-separate  ds-mt-24p"></div>
+
+      <div class="ds-flex-row ds-jc-end ds-mt-8p">
+        <button
+          class="ds-btn-primary ds-t-uppercase"
+          [attr.disabled]="stepForm.dirty ? null : true"
+          (click)="updateStep()">
+          {{'RGPD.STEPS.UPDATE_MODEL' | translate}}
+          <span class="icon-right-big-arrow"></span>
+        </button>
+      </div>
+
+    </ng-container>
+
+  </div>
+</section>
+
+
+

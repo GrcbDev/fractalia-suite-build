@@ -1,0 +1,31 @@
+<div [id] ="id"  class="dropdown-select"  #toggleButton>
+  <div class="custom-dropdown"  (click)="toogleSelect()">
+    <div>
+      <ng-container *ngIf="itemSelected">
+        <img *ngIf="itemSelected.imagenPath" [src]="itemSelected.imagenPath" class="li-image">
+        <span class="ds-body-secondary ds-r-regular ds-c-black">{{ itemSelected.value }} </span>
+      </ng-container>
+
+      <ng-container *ngIf="!itemSelected">
+        <span class="ds-body-secondary ds-r-regular ds-c-black">{{ placeholder }} </span>
+      </ng-container>
+
+    </div>
+    <span class="icon-bottom-arrow ds-fs-18"></span>
+  </div>
+  <div [hidden]="!isOpen">
+    <ul  class = "ul-dropdown" id="list" #menu>
+      <li *ngFor="let item of items"
+        [id]="item && item.key ? item.key : 0"
+        [ngClass]="{'selected': item.key  === itemSelected.key}"
+        (click)="onSelectedItem(item)"
+        >
+       <img [src]="item.imagenPath" *ngIf="item.imagenPath"  class="li-image">
+       <i *ngIf="item.iconName" class="{{item.iconName}} fs-14 ds-mr-8p ds-c-black"></i>
+       <span class="ds-body-secondary ds-r-regular ds-c-black">{{item.value}} </span>
+      </li>
+    </ul>
+  </div>
+
+
+</div>

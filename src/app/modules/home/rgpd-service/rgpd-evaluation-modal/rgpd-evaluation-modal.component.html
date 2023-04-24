@@ -1,0 +1,108 @@
+<div class="modal-header">
+  <div class="d-flex w-100 px-1">
+    <div class="ds-h3 ds-m-bold ds-c-black w-50" [innerHTML]="'RGPD.ADAPTATION' | translate"></div>
+    <div class="ds-jc-end w-50">
+      <button type="button" class="close" aria-label="Close" (click)="openStop()">
+        <div class="icon-close"></div>
+      </button>
+    </div>
+  </div>
+</div>
+
+<ng-container *ngIf="isloading">
+  <div class="default-section fa-3x">
+    <i class="fas fa-spinner fa-spin"></i>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="!isloading">
+  <div class="modal-body">
+    <div class="px-2">
+      <label class="progress-label w-100">
+        {{actualProgress}} {{'WIZARD.PROGRESS' | translate}}
+      </label>
+
+      <div class="mb-4 w-100 ">
+        <div class="progress custom-progress large">
+          <div role="progressbar" class="progress-bar" aria-valuemin="5" aria-valuemax="100"
+            [style.width]="actualProgress">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="div px-2">
+      <span *ngIf="!loading"></span>
+      <div class="ds-b-accent">
+        <span class="ds-body-secondary ds-r-bold ds-c-white ds-t-uppercase">{{ 'RGPD.EVAL_FORM' | translate }}</span>
+      </div>
+
+      <div class="mt-2" *ngIf="data && data.length > 0">
+        <form [formGroup]="myForm" (ngSubmit)="next(false)">
+          <div *ngFor="let d of data; let i = index">
+            <div class="animated fadeInLeft" *ngIf="this.data && this.data[number] && this.data[number].questionId && d.questionId === this.data[number].questionId">
+              <div class="ds-flex-row mb-2">
+                <div class="ds-h4 ds-m-bold ds-c-black mt-2">{{ d.question }}</div>
+              </div>
+              <div class="row px-3" *ngIf="d.questionExtraHtml">
+                <div class="modal-body des m-0 col-md-6 col-sm-12">
+                  <div [innerHTML]="d.questionExtraHtml"></div>
+                </div>
+                <div class="col-md-6 col-sm-12 mt-2">
+                  <div class="item-radio mt-2" *ngFor="let p of d.possibleAnswers">
+                    <input class="ds-radio" type="radio" [id]="p.answerId" [formControlName]="'question'+d.questionId" [value]="p.answerId" [checked]="(d.answerSelectedId == p.answerId) ? true : ((answer == p.answerId) ? true : false)" (change)="change($event, p.answerId)" />
+                    <label [for]="p.answerId" class="ds-body-secondary ds-r-regular ">{{ p.answer }}</label>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-2" *ngIf="!d.questionExtraHtml">
+                <div class="col-md-6 col-sm-12">
+                  <div class="item-radio mt-2" *ngFor="let p of d.possibleAnswers">
+                    <input class="ds-radio" type="radio" [id]="p.answerId" [formControlName]="'question'+d.questionId" [value]="p.answerId" [checked]="(d.answerSelectedId == p.answerId) ? true : ((answer == p.answerId) ? true : false)" (change)="change($event, p.answerId)" />
+                    <label [for]="p.answerId" class="ds-body-secondary ds-r-regular ">{{ p.answer }}</label>
+                  </div>
+                </div>
+                <div class="col-md-6 col-sm-12 d-md-block d-none d-md-block d-lg-block d-xl-block">
+                  <div class="ds-flex-row ds-jc-end">
+                    <img class="ds-image" [src]="d.questionExtraImage ? staticContentUrl + d.questionExtraImage : null" alt="image" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="ds-flex-row ds-jc-end mt-5">
+                <button class="ds-btn-secondary mr-1" *ngIf="number !== 0" (click)="back()" [disabled]="submit && loadingButton">
+                  <nz-spinner *ngIf="loadingButton">loading</nz-spinner>
+                  <span *ngIf="!loadingButton">
+                    <div class="ds-flex ds-flex-row">
+                      <div class="icon-left-big-arrow"></div>
+                      {{ capitalize('WIZARD.BMS_MODAL.BTN_PREVIOUS' | translate) }}
+                    </div>
+                  </span>
+                </button>
+                <!-- <button class="ds-btn-primary" (click)="next(false)" *ngIf="number !== (data.length - 1)" [disabled]="submit && loadingButton"> -->
+                <button class="ds-btn-primary" type="submit" *ngIf="number !== (data.length - 1)" [disabled]="SaveDisabled">
+                  <nz-spinner *ngIf="loadingButton">loading</nz-spinner>
+                  <span *ngIf="!loadingButton">
+                    <div class="ds-flex ds-flex-row">
+                      {{ capitalize('COMP_INSTRUCTION_GUIDE.NEXT_TEXT' | translate) }}
+                      <div class="icon-right-big-arrow"></div>
+                    </div>
+                  </span>
+                </button>
+                <!-- <button class="ds-btn-primary" (click)="next(true)" *ngIf="number === (data.length - 1)" [disabled]="submit && loadingButton"> -->
+                <button class="ds-btn-primary" type="submit" *ngIf="number === (data.length - 1)" [disabled]="SaveDisabled">
+                  <nz-spinner *ngIf="loadingButton">loading</nz-spinner>
+                  <span *ngIf="!loadingButton">
+                    <div class="ds-flex ds-flex-row">
+                      {{ capitalize('COMP_INSTRUCTION_GUIDE.ENDTEXT_GUIDED_TOUR' | translate) }}
+                      <div class="icon-right-big-arrow"></div>
+                    </div>
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</ng-container>

@@ -1,0 +1,39 @@
+.ml-fix{
+    margin-left: 11px;
+}
+
+.circle-profile{
+    border: solid 3px #36b3ed;
+    color: #36b3ed;
+    width: 96px;
+    height: 96px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 96px;
+    background-color: #ECF1F8;
+}
+
+.added{
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.pending{
+    font-size: 1rem;
+    font-weight: bold;
+    margin-top: 4px;
+}
+
+.pending-divider{
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-top: 4px;
+}
+
+@media only screen and (max-width: 767px) {
+    .desktop-only {
+      display: none !important;
+    }
+  }
+

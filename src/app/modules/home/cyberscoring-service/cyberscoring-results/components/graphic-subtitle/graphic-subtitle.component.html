@@ -1,0 +1,21 @@
+
+  <div class="mb-4" *ngIf="gaugeMessage > 0">
+    <span
+      class="text-center d-block gaugeMsg"
+      *ngIf="gaugeMessage == 1"
+    >
+      {{ "CYBERSCORING.GAUGE_LOW" | translate }}
+    </span>
+    <span
+      class="text-center d-block gaugeMsg"
+      *ngIf="gaugeMessage == 2"
+    >
+      {{ "CYBERSCORING.GAUGE_MID" | translate }}
+    </span>
+    <span
+      class="text-center d-block gaugeMsg"
+      *ngIf="gaugeMessage == 3"
+    >
+      {{ "CYBERSCORING.GAUGE_HIGH" | translate }}
+    </span>
+  </div>

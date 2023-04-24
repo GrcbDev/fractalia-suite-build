@@ -1,0 +1,40 @@
+<div class="ds-login-main-container" >
+  <div class="ds-card-container">
+
+    <div class="ds-login-logo">
+      <img class="ds-login-back-icon" (click)="goToLogin()" src="https://devstatic.app.onlineassist.me/suite/img/new-login/arrow.svg" alt="">
+      <img [src]="loginTypeService.logotipo">
+    </div>
+
+    <ng-template render-component></ng-template>
+
+
+    <div class="ds-login-contact-us">
+      <div class="ds-r-bold  ds-caption  ds-c-secondary ds-mb-12p"> {{partnerService.partner.communicationsTitle}} </div>
+
+      <div class="ds-login-icons">
+        <a href="tel:{{partnerService.partner.phone}}" *ngIf="partnerService.partner.includePhone && partnerService.partner.phone">
+          <div class="icon-phone ds-mr-8p"></div>
+          {{partnerService.partner.phone}}
+        </a>
+
+        <a
+          href="https://api.whatsapp.com/send?phone={{partnerService.partner.whatsapp}}"
+          target="_blank"
+          *ngIf="partnerService.partner.includeWhatsapp && partnerService.partner.whatsapp">
+          <div class="icon-whatsapp ds-mr-8p"></div>
+          {{partnerService.partner.whatsapp}}
+        </a>
+
+        <a href="mailto:{{partnerService.partner.email}}" *ngIf="partnerService.partner.includeEmail && partnerService.partner.email">
+          <div class="icon-envelope ds-mr-8p"></div>
+          {{partnerService.partner.email}}
+        </a>
+      </div>
+
+
+
+    </div>
+
+  </div>
+</div>

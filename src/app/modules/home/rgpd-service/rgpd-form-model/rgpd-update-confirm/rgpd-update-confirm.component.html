@@ -1,0 +1,24 @@
+<div class="d-flex flex-column">
+  <div class="ds-flex-row ds-jc-end">
+    <i class="icon-close ds-cur-pointer ds-fs-32 ds-c-secondary" (click)="closeModal()"></i>
+  </div>
+
+  <div class="ds-t-center">
+    <span class="icon-download2" style="font-size: 80px;"></span>
+  </div>
+
+
+  <div class="rgpd-update-container">
+    <span class="ds-h3 ds-m-bold ds-c-black ds-mb-12p">{{'RGPD.STEPS.EDIT_CHANGES' | translate}}</span>
+    <span class="ds-body-primary ds-r-regular ds-c-black ds-mb-24p"> {{'RGPD.STEPS.GDPR_MODEL' | translate}} </span>
+    <span class="ds-body-primary ds-r-regular ds-c-black ds-mb-24p">{{'RGPD.STEPS.GDPR_MODEL2' | translate}}</span>
+  </div>
+
+
+  <div class="ds-flex-row ds-jc-end">
+    <button class="ds-btn-secondary ds-t-uppercase ds-mr-24p"   (click)="closeModal()"> {{'RGPD.STEPS.NO_EDIT' | translate}}</button>
+    <button class="ds-btn-primary ds-t-uppercase" (click)="confirm()" > {{'RGPD.STEPS.YES_UPDATE' | translate}} </button>
+  </div>
+
+
+</div>

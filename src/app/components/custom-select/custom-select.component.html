@@ -1,0 +1,14 @@
+<div class="ds-custom-select-container">
+  <button #toggleButton class="ds-custom-select" (click)="toogleSelect()">
+    <span class="icon-globe"></span>
+    {{ placeholder }}
+    <span class="icon-bottom-arrow ds-fs-18"></span>
+  </button>
+
+  <ul #menu class="ds-custom-select-list" [hidden]="!isOpen">
+    <ng-container *ngFor="let item of items">
+      <li (click)="onSelectedItem(item)">{{ item.value }}</li>
+    </ng-container>
+  </ul>
+</div>
+

@@ -1,0 +1,62 @@
+<ng-template #basicModal let-modal>
+  <div class="mt-21 modal-head-container">
+    <div class="row">
+      <div class="col close-container">
+        <button type="button" class="new-close" (click)="close()">
+          <div class="icon-close"></div>
+        </button>
+      </div>
+    </div>
+    <br />
+
+    <div class="row mb-5">
+      <div class="col">
+        <div
+          class="d-flex flex-column justify-content-center align-items-center"
+        >
+          <img
+            src="{{staticContentUrl+'img/family-unit/ok_result.png'}}"
+            class="mb-4"
+            alt=""
+          />
+
+          <div class="fs-20 mb-3 bold delete-text-container padding-delete-fix">
+            <span *ngIf="isForAdd">  {{ "FAMILY_UNIT.RESULT_TITLE_CREATE" | translate }}</span>
+            <span *ngIf="!isForAdd"> {{ "FAMILY_UNIT.RESULT_TITLE_EDIT" | translate }}</span>
+          </div>
+
+          <div class="delete-text-container">
+            <span *ngIf="isForAdd">
+               {{ "FAMILY_UNIT.RESULT_INFO_CREATE" | translate: { userName: profile.name} }}
+            </span>
+
+            <span *ngIf="!isForAdd">
+              {{ "FAMILY_UNIT.RESULT_INFO_EDIT1" | translate: { userName: profile.name}  }}
+              <br />
+              <br />
+              {{ "FAMILY_UNIT.RESULT_INFO_EDIT2" | translate }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div
+          class="form-group col-lg-12 pl-0 pr-0 identity-btns d-flex justify-content-end"
+        >
+          <section class="d-flex justify-content-end">
+            <button
+              type="submit"
+              class="btn btn-primary text-center d-block"
+              disabled=""
+            >
+              <div class="" (click)="close()"> {{ "FAMILY_UNIT.BTN_CLOSE" | translate }}</div>
+            </button>
+          </section>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

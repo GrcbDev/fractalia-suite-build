@@ -1,0 +1,135 @@
+<section class="ds-card ">
+
+  <div class="cac-progress-container">
+    <div class="col-md-4 cac-line-step active ds-flex-row ds-jc-center">
+      <div class="cac-circle active">
+        <span class="icon-tick-round ds-fs-40"></span>
+      </div>
+    </div>
+    <div class="col-md-4 cac-line-step ds-flex-row ds-jc-center"  [ngClass]="{ 'active' : currentStep > 1 }">
+      <div class="cac-circle" [ngClass]="{'active': currentStep > 1 }">
+        <span class=" ds-fs-40 {{ currentStep > 1 ? 'icon-tick-round' : 'icon-circle-password' }}"></span>
+      </div>
+    </div>
+    <div class="col-md-4  ds-flex-row ds-jc-center" [ngClass]="{ 'active' : currentStep > 2 }">
+      <div class="cac-circle " [ngClass]="{ 'disable' : currentStep < 2   ,'active': currentStep > 2 }">
+        <span class=" ds-fs-32 {{ currentStep > 2 ? 'icon-tick-round' : 'icon-download2' }}"></span>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="cac-steps-mobile">
+
+    <div class="cac-progress-container-mobile">
+      <div class="cac-progress" [ngStyle]="{'width': widthPercent }"></div>
+
+      <div class="cac-circle-mobile active">
+        <span class="icon-tick-round ds-fs-20"></span>
+        <span class="ds-caption ds-r-bold ds-c-black cac-text-mobile">{{'CYBERSECURITY.BACKUP.ACTIVATION' | translate}}</span>
+      </div>
+
+      <div class="cac-circle-mobile" [ngClass]="{'active': currentStep > 1 }">
+        <span *ngIf="currentStep > 1" class="icon-tick-round ds-fs-20"></span>
+        <span class="ds-body-primary ds-r-regular " *ngIf="currentStep <= 1">2</span>
+        <span class="ds-caption ds-r-bold ds-c-black cac-text-mobile">{{'CONTRASENA' | translate}}</span>
+      </div>
+
+      <div class="cac-circle-mobile" [ngClass]="{ 'disable' : currentStep < 2   ,'active': currentStep > 2 }">
+        <span *ngIf="currentStep > 2" class="icon-tick-round ds-fs-20"></span>
+        <span class="ds-body-primary ds-r-regular " *ngIf="currentStep <= 2">3</span>
+        <span class="ds-caption ds-r-bold cac-text-mobile"  [ngClass]="currentStep < 2 ? 'ds-c-secondary-disabled' : 'ds-c-black' ">{{'CYBERSECURITY.FRACTEL.PASO2R' | translate}}</span>
+      </div>
+    </div>
+
+    <div class="ds-flex-row ds-jc-center w-100">
+      <div class="cac-circle">
+        <span class=" ds-fs-40 {{iconMobile}}"></span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="d-flex justify-content-center">
+    <div class="cac-two">
+
+      <div class="ds-flex-column ds-al-center ds-t-center ds-px-24p" [ngClass]="{'cac-mobile-d-none': (currentStep+1) != 1}">
+        <div class="ds-r-bold ds-body-primary ds-mb-12p">
+          {{'CYBERSECURITY.FRACTEL.PASO1' | translate}}
+        </div>
+        <div class="ds-body-primary ds-r-regular fs-14 ds-mb-12p">
+          {{'WIZARD.ACRO_STEP1.1' | translate}}
+        </div>
+        <div class="ds-body-primary ds-r-regular fs-14">
+          {{'WIZARD.ACRO_STEP1.2' | translate}}
+        </div>
+      </div>
+
+
+
+      <div class="ds-flex-column ds-al-center ds-t-center ds-px-24p" [ngClass]="{'cac-mobile-d-none': (currentStep+1) != 2}">
+        <div class="ds-r-bold ds-body-primary ds-mb-12p">
+          {{'WIZARD.BMS_STEP2_TITLE' | translate}}
+        </div>
+        <div class="ds-body-primary ds-r-regular fs-14 ds-mb-12p">
+          {{'WIZARD.ACRO_STEP2.2' | translate}} <span class="ds-r-bold ds-t-uppercase">{{'WIZARD.ACRO_STEP2.3' | translate}}</span>. {{'WIZARD.ACRO_STEP2.4' | translate}}
+        </div>
+
+
+        <ng-container  *ngIf="currentStep < 2 ">
+
+          <button class="ds-btn-secondary  ds-t-uppercase ds-mt-24p ds-mb-24p" (click)="checkLicence(1)">
+            <nz-spinner *ngIf="loadingCheckProccess"></nz-spinner>
+            <div *ngIf="!loadingCheckProccess"> {{'WIZARD.BTNS.TEST' | translate}}    </div>
+          </button>
+
+          <div class="d-flex ds-mb-32p text-left">
+            <span class="icon-info fs-20 ds-mr-8p ds-c-secondary"></span>
+            <div class="ds-caption ds-r-regular ds-c-black ">{{'BACKUP.MESSAGE_NOT_RECEIVED' | translate}}
+              <a href="javascript:void(0)" (click)="resendMail()">{{'BACKUP.SEND_NEW_EMAIL' | translate}}</a>
+            </div>
+          </div>
+        </ng-container>
+
+      </div>
+
+
+      <div class="ds-flex-column ds-al-center ds-t-center ds-px-24p" [ngClass]="{'ds-c-secondary-disabled': currentStep < 2, 'cac-mobile-d-none': (currentStep+1)  != 3}"  >
+        <div class="ds-r-bold ds-body-primary  ds-mb-12p">
+          {{'WIZARD.ACRO_STEP3_TITLE' | translate}}
+        </div>
+        <div class="ds-body-primary ds-r-regular fs-14  ds-mb-16p">
+          {{'WIZARD.CLICK_ON' | translate}} <span class="ds-r-bold ds-t-uppercase">{{'WIZARD.ACCESS_ACRONIS' | translate}}</span>
+          {{'WIZARD.ACCESS_ACRONIS2' | translate}}
+           <span class="ds-r-bold ds-t-uppercase">{{'WIZARD.ACCESS_ACRONIS3' | translate}}</span>
+           {{'WIZARD.ACCESS_ACRONIS4' | translate}}
+        </div>
+
+        <div class="ds-flex-row ds-mb-16p ds-jc-center ds-al-center" [ngClass]="{'ds-cur-pointer': currentStep >= 2}" (click)="openHelpModal()">
+          <span class=" icon-more-info ds-fs-24  ds-mr-8p" [ngClass]="{'ds-c-secondary-disabled': currentStep < 2}"></span>
+          <div class="ds-r-bold ds-t-uppercase">{{'WIZARD.ACCESS_ACRONIS3' | translate}}</div>
+        </div>
+
+        <div class="ds-body-primary ds-r-regular fs-14 ds-mb-24p">
+          {{'WIZARD.ACRO_STEP3_TEXT3' | translate}} <span class="ds-r-bold ds-t-uppercase">{{'WIZARD.ACRO_STEP3_TEXT4' | translate}}</span>
+        </div>
+
+        <div class="ds-flex-column" *ngIf="currentStep >= 2 ">
+          <button class="ds-btn-primary ds-t-uppercase ds-mb-12p" (click)="goToAcronis()"> {{'WIZARD.BTNS.DOWNLOAD_CAC' | translate}}</button>
+          <button class="ds-btn-secondary ds-t-uppercase" (click)="checkLicence(2)">
+            <nz-spinner *ngIf="loadingCheckProccess"></nz-spinner>
+            <div *ngIf="!loadingCheckProccess"> {{'WIZARD.BTNS.CONTINUE' | translate}}    </div>
+          </button>
+        </div>
+
+      </div>
+
+
+
+    </div>
+  </div>
+
+
+
+
+</section>

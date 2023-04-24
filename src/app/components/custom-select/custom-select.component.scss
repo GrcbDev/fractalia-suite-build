@@ -1,0 +1,59 @@
+
+.ds-custom-select-container{
+  position: relative;
+
+  .ds-custom-select {
+    border: none;
+    padding: 12px 12px 12px 0px;
+    cursor: pointer;
+    background:none;
+    height: calc(1.5em + 1.25rem + 2px);
+    box-shadow: 0 3px 2px rgb(233 236 239 / 5%);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    outline: none;
+    font-family: 'RobotoRegular';
+    font-size: 12px;
+    line-height: 14px;
+    min-width: 100px;
+    color: #666A73;
+  }
+
+  .ds-custom-select-list {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    background: #FFFFFF;
+    box-shadow: 0px 5px 15px rgb(0 0 0 / 15%);
+    border-radius: 10px;
+    //top: 0px;
+    bottom: 100%;
+    left: 0px;
+    //transform: translate3d(0px, -270px, 0px);
+  }
+
+  .ds-custom-select-list > li {
+    min-width: 130px;
+    border-bottom: 1px solid #e9ecef;
+    font-size: 0.875rem;
+    line-height: 100%;
+    padding: 12px;
+    cursor: pointer;
+  }
+
+  .ds-custom-select-list > li:last-child {
+    border-bottom: none;
+  }
+
+  .ds-custom-select-list > li:hover {
+    background: #f8f9fa;
+  }
+
+  .rotate180 {
+    transform: rotate(180deg);
+  }
+
+}
+

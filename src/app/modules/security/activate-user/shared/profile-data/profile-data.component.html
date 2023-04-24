@@ -1,0 +1,143 @@
+
+<div class="w-100">
+  <p class="right-card-tittle">{{'ACTIVACION_CONFIGURAR_PERFIL' | translate }}</p>
+
+  <div class="ds-card ds-p-32p">
+
+    <form (ngSubmit)="onSubmitForm()"  [formGroup]="profileDataForm">
+
+      <div class="row  ds-mb-12p">
+        <div class="col-md-6 d-flex flex-column ds-mb-12p">
+          <div class="picture-container">
+            <div class="upload-wrapper mt-0 mb-0">
+              <div class="">
+                <div class="photo top">
+                  <input #profileImage name="favicon" type="file" (change)="onUploadImagen($event)"
+                    accept="image/x-png,image/jpeg,image/gif,image/x-icon">
+                  <button type="button" class="btn bback" (click)="profileImage.click()">
+                    <img [src]=sanitizer.bypassSecurityTrustUrl(image) />
+                  </button>
+                </div>
+                <div class="text">
+                  <p class="right-card-tittle foto-perfil">{{'IMAGEN_PERFIL' | translate}}</p>
+                  <p class="right-card-text" >{{'CAMBIAR_IMAGEN_PERFIL_CIRCULO' | translate}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 d-flex flex-column" id="activation-profile-form-noti-web">
+          <p class="right-card-tittle fs-16">{{'GESTION_EMAILS_NOTIFICACIONES' | translate }}</p>
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input"  id="activeNewsletter" formControlName="activeNewsletter">
+            <label class="custom-control-label" for="activeNewsletter">{{'GESTION_EMAILS_OPT5' | translate}}</label>
+          </div>
+        </div>
+      </div>
+
+      <label class="restpass-label ds-mb-12p">*&nbsp;{{'CAMPOS_OBLIGATORIOS' | translate}}</label>
+
+      <div class="row ds-mb-12p">
+
+        <div class="col-md-6">
+
+          <div class="d-flex flex-column ds-mb-12p">
+            <label class="right-card-label" for="">{{ 'NOMBRE' | translate }}&nbsp;*</label>
+            <input type="text" class="form-control  new-input" formControlName="name" maxlength="100">
+            <div
+              *ngIf="profileDataForm.get('name').touched && profileDataForm.get('name').hasError('required')"
+              class="text-danger text-left">
+              {{'CAMPO_REQUERIDO' | translate}}
+            </div>
+          </div>
+
+          <div class="d-flex flex-column ds-mb-12p">
+            <label class="right-card-label" for="">{{ 'APELLIDOS' | translate }}&nbsp;*</label>
+            <input type="text" class="form-control  new-input" formControlName="surname" maxlength="100">
+            <div
+              *ngIf="profileDataForm.get('surname').touched && profileDataForm.get('surname').hasError('required')"
+              class="text-danger text-left">
+              {{'CAMPO_REQUERIDO' | translate}}
+            </div>
+          </div>
+          <div class="d-flex flex-column ds-mb-12p">
+            <label class="right-card-label" for="">{{ 'PAIS' | translate }}</label>
+            <select class="form-control new-input"  formControlName="countryCode">
+              <option *ngFor="let country of partnerService.countries" [value]="country.code">
+                {{country.name}}
+              </option>
+            </select>
+          </div>
+
+          <div class="d-flex flex-column ds-mb-12p" *ngIf="partnerService.partner.hasFullProfile">
+            <label class="right-card-label" for="">{{ 'CIUDAD' | translate }}</label>
+            <input type="text" class="form-control  new-input" formControlName="city" maxlength="50">
+          </div>
+
+          <div class="d-flex flex-column ds-mb-12p" *ngIf="partnerService.partner.hasFullProfile">
+            <label class="right-card-label" for="">{{ 'TELEFONO' | translate }}</label>
+            <input type="text" class="form-control  new-input" formControlName="phone" maxlength="20">
+          </div>
+        </div>
+
+        <div class="col-md-6">
+
+          <div class="d-flex flex-column  ds-mb-12p">
+            <label class="right-card-label" for="">{{ 'EMAIL' | translate }}&nbsp;*</label>
+            <input type="text" class="form-control  new-input" maxlength="100" formControlName="email" [readonly]="isReadOnlyEmail">
+          </div>
+          <div class="d-flex flex-column  ds-mb-12p">
+            <label class="right-card-label" for="">{{ 'COMP_PARTNERS.LANGUAGES' | translate }}&nbsp;*</label>
+            <select class="form-control new-input"  formControlName="languageCode">
+              <option *ngFor="let lan of partnerService.partner.languages" [ngValue]="lan.code" >
+                {{lan.name}}
+              </option>
+            </select>
+          </div>
+          <div class="d-flex flex-column  ds-mb-12p" *ngIf="partnerService.partner.hasFullProfile">
+            <label class="right-card-label" for="">{{ 'DIRECCION' | translate }}</label>
+            <input type="text" class="form-control  new-input" formControlName="adress"  maxlength="100">
+          </div>
+          <div class="d-flex flex-column  ds-mb-12p" *ngIf="partnerService.partner.hasFullProfile">
+            <label class="right-card-label" for="">{{ 'CODIGO_POSTAL' | translate }}</label>
+            <input type="text" class="form-control  new-input" formControlName="postalcode" maxlength="10">
+          </div>
+          <div class="d-flex flex-column ds-mb-12p mt-3"  id="activation-profile-form-noti-mobile">
+            <p class="right-card-tittle fs-16">{{'GESTION_EMAILS_NOTIFICACIONES' | translate }}</p>
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input"  id="activeNewsletterMobile" formControlName="activeNewsletter">
+              <label class="custom-control-label" for="activeNewsletterMobile">{{'GESTION_EMAILS_OPT5' | translate}}</label>
+            </div>
+          </div>
+          <div class="d-flex flex-column  ds-mb-12p">
+            <label class="right-card-label" for="">&nbsp;</label>
+            <div class="custom-control custom-checkbox text-left ds-mb-4p">
+              <input type="checkbox" class="custom-control-input" id="termsProfileData" formControlName="checkTerms">
+              <label class="custom-control-label custom-control-label-activation text-left terms-label" for="termsProfileData">{{'LEIDO_ACEPTO' | translate}} <a
+                  routerLink="/terms" >{{'LEIDO_ACEPTO_2' |
+                  translate}}</a>{{'LEIDO_ACEPTO_3' | translate}}.</label>
+            </div>
+            <div
+              *ngIf="profileDataForm.get('checkTerms').hasError('required')"
+              class="text-danger text-left">{{'CONSENTIMIENTO' | translate}} </div>
+          </div>
+
+        </div>
+
+
+      </div>
+
+
+      <div class="row mt-3">
+        <div class="col-md-12 d-flex justify-content-end">
+          <button type="submit" class="btn btn-primary" [disabled]="profileDataForm.invalid">
+            <nz-spinner *ngIf="loadingProfileData"></nz-spinner>
+            <div *ngIf="!loadingProfileData" class="text-uppercase">{{'GUARDAR_CAMBIOS' | translate}}</div>
+          </button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
+

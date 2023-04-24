@@ -1,0 +1,81 @@
+
+<section
+  class="ds-card pl-1 mt-3 minW-100 text-center"
+  style="padding: 24px"
+>
+  <div class="card w-100 ml-fix">
+    <div class="card-body pr-0 pl-0">
+      <div class="container-fluid mt-4">
+        <div class="row" >
+          <div
+            *ngFor="let profile of items; let i = index"
+            class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12 mb-3 justify-content-between d-flex flex-column mobile-mb"
+          >
+          <div class="container card-unit" >
+            <div class="row">
+              <div class="col-lg">
+                <div class="head-unit-container">
+                  <img *ngIf="!profile.photo"
+                    class="unit-card-img"
+                    alt=""
+                    src="{{staticContentUrl+'img/family-unit/fi-cnsuxl-user-circle.png'}}"
+                  />
+                  <img *ngIf="profile.photo"
+                  class="unit-card-img"
+                  [src]="profile.photo"
+                  alt=""
+                />
+                  <div class="head-icons-container">
+                    <div
+                      *ngIf="index > 0"
+                      class="icon-trash fs-20 main-secondary cursor"
+                      (click)="deleteProfile()"
+                    ></div>
+                    <span
+                      class="icon-edit fs-20 main-secondary cursor"
+                      (click)="editProfile()"
+                    >
+                    </span>
+                  </div>
+                </div>
+
+                <div class="card-unit-info">
+                  <span class="user-name">{{profile.name}} {{profile.surname}}</span> <br />
+                  <span>{{profile.email}}</span> <br />
+
+                  <button
+                  *ngIf="fullProfiledata"
+                    class="btn btn-primary wizard-resume-btn d-flex align-items-center justify-content-center"
+                  >
+                    <div class="text-uppercase" (click)="openDetail()">
+                      {{ "FAMILY_UNIT.BTN_SHOW_INFO" | translate }}
+                    </div>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          </div>
+
+          <div
+            *ngIf="items.length < 5"
+            class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12 mb-3 justify-content-between d-flex flex-column mobile-mb"
+          >
+            <div class="container add-card" (click)="addProfile()">
+              <div class="row">
+                <div class="col-lg">
+                  <div class="add-card-info">
+                    <div class="add">+</div>
+                    <div class="info text-center">
+                      {{ "FAMILY_UNIT.ADD_PROFILE" | translate }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

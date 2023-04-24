@@ -1,0 +1,57 @@
+
+<div class="ds-h2 ds-m-bold ds-c-black ds-mb-12p">
+  {{'RGPD.STEPS.FORM_COMPLETED' | translate}}
+</div>
+
+<section class="ds-card ds-p-24p ">
+
+  <div class="ds-flex-column">
+    <span class="ds-h4 ds-m-bold ds-c-black ds-mb-12p">{{'RGPD.STEPS.CUSTOM_TEMPLATE' | translate}}:</span>
+
+
+    <div class="ds-body-primary ds-r-regular ds-c-black ds-mb-24p">
+
+      <ul class="ds-rgpd-list">
+        <li class="ds-first-list">{{'RGPD.STEPS.TEXT_CLAUSES1' | translate}}</li>
+        <li class="ds-first-list">{{'RGPD.STEPS.TEXT_CLAUSES2' | translate}}</li>
+        <li class="ds-first-list">{{'RGPD.STEPS.TEXT_CLAUSES3' | translate}}</li>
+        <li class="ds-first-list"> {{'RGPD.STEPS.TEXT_CLAUSES4' | translate}}
+          <ul>
+            <li>{{'RGPD.STEPS.TEXT_CLAUSES5' | translate}}</li>
+            <li>{{'RGPD.STEPS.TEXT_CLAUSES6' | translate}}</li>
+            <li>{{'RGPD.STEPS.TEXT_CLAUSES7' | translate}}</li>
+          </ul>
+        </li>
+      </ul>
+      {{'RGPD.STEPS.TEXT_CLAUSES8' | translate}}
+    </div>
+  </div>
+
+  <div class="ds-card-gray">
+    <span class="ds-h4 ds-m-bold ds-c-black ds-mb-24p">{{'RGPD.STEPS.REVIEW_MODEL' | translate}}</span>
+
+    <div class="ds-mb-24p">
+      <button class="ds-btn-primary ds-t-uppercase" (click)="generateDocument()">
+        <nz-spinner  *ngIf="isLoading"></nz-spinner>
+        <span  *ngIf="!isLoading">{{'RGPD.STEPS.DOWNLOAD_RGPD' | translate}}</span>
+      </button>
+    </div>
+
+    <div class="ds-captionm ds-r-regular ds-c-secondary ds-mb-24p" style="max-width: 550px;">
+      {{'RGPD.STEPS.DOWNLOAD_RGPD2' | translate}}
+    </div>
+
+    <span class="ds-body-primary  ds-r-regular ds-c-black" >
+      {{'RGPD.STEPS.FINAL_TEXT' | translate}}
+    </span>
+  </div>
+
+
+  <div class="ds-flex-row ds-jc-end" >
+    <button class="ds-btn-secondary ds-t-uppercase" (click)="finalize()">{{'COMP_INSTRUCTION_GUIDE.ENDTEXT_GUIDED_TOUR' | translate}}</button>
+  </div>
+
+</section>
+
+
+

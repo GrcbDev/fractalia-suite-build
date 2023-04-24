@@ -1,0 +1,63 @@
+
+.cdk-overlay-dark-backdrop{
+  background: rgba(0,0,0,.70);
+}
+
+.cdk-overlay-pane{
+  background-color: white;
+}
+
+
+.instruction-card {
+  position: fixed;
+  border-radius: 10px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  animation-duration: 0.5s;
+  animation-delay: 0s;
+  animation-fill-mode: both;
+
+  &.above-arrow {
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      top: -15px;
+      left: 25px;
+      width: 0px;
+      height: 0px;
+      border-left: 15px solid transparent;
+      border-right: 15px solid transparent;
+      border-bottom: 15px solid #ffff;
+      font-size: 0px;
+      line-height: 0px;
+    }
+  }
+
+  &.left-arrow {
+    &::before {
+      content: '';
+      position: absolute;
+      top:25px;
+      left:-15px;
+      width:0px;
+      height:0px;
+      border-bottom:15px solid transparent;  /* izquierda flecha */
+      border-top:15px solid transparent; /* derecha flecha */
+      border-right:15px solid #fff; /* base flecha y color*/
+      font-size: 0px;
+      line-height: 0px;
+    }
+  }
+
+}
+
+
+.custom-control-label::before {
+  top:0px
+}
+
+.custom-control-label::after {
+  top:0px
+}

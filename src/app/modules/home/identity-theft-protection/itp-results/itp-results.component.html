@@ -1,0 +1,139 @@
+<div class="ds-card-body" *ngIf="!isloading">
+  <div class="d-flex justify-content-between row mr-0 ml-0">
+    <div class="col-lg-6 col-md-12 col-sm-12 sumary-l ">
+        <div class="identities-sumary d-flex justify-content-between">
+            <span class="fs-16 lh-19 mb-0 neutral-black">
+                {{'CYBERALARM.IDENTITIES.TEXT5' | translate}}
+            </span>
+            <h3 class="fs-24 lh-19 mb-0 neutral-black">
+              {{ cards.items.length }}/{{ maxCardsByUser }}
+            </h3>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-12 col-sm-12 sumary-r">
+        <div class="identities-sumary d-flex justify-content-between">
+            <div class="clipper">
+                <div class="led mr-2 semantic-danger">
+                    <i class="fas fa-circle"></i>
+                </div>
+                <span class="fs-16 lh-19 mb-0 neutral-black">
+                    {{'CYBERALARM.IDENTITIES.TEXT6' | translate}}
+                </span>
+            </div>
+            <h3 class="fs-24 lh-19 mb-0 neutral-black">
+              {{ cards.totalMaliciousEmails }}
+            </h3>
+        </div>
+    </div>
+</div>
+
+<div class="mt-2 identity-card-container row mr-0 ml-0 d-flex col-sm-12" [ngClass]="(cards.items.length == 1)? 'justify-content-start' : ''">
+  <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-1 pt-1 pb-1 pr-0 pl-0 align-self-stretch identity-card card-email-fix"
+    [ngClass]="{'single-card' : cards.items.length == 1, 'compact' : compactCards == true}"
+    *ngFor="let monitoredIdentity of cards.items;">
+
+    <div class="card p-2 h-100 status" [ngClass]="monitoredIdentity.breaches === 0 ? 'ok' : 'ko'">
+
+      <div class="card-body p-0" >
+        <div class="card-user-info" *ngIf="suiteService.isUnitFamily">
+          <div class="user-small-image" >
+            <img
+              *ngIf="!monitoredIdentity.photo"
+              class="small-image"
+              src="{{staticContentUrl+'img/family-unit/fi-cnsuxl-user-circle.png'}}"
+              alt=""
+            />
+            <img
+              *ngIf="monitoredIdentity.photo"
+              class="small-image"
+              [src]="monitoredIdentity.photo"
+              alt=""
+            />
+          </div>
+          <div class="ds-body-primary ds-r-regular ds-c-black ">
+            {{ monitoredIdentity.name + " " + monitoredIdentity.surname }}
+          </div>
+        </div>
+
+
+
+
+        <p class="neutral-black fs-16 mb-0 identity-email"
+          [ngClass]="(compactCards) ? 'lh-19' : 'lh-29'">
+          <b>{{'CYBERALARM.IDENTITIES.EMAIL' | translate}}:</b>
+          <span class="neutral-black fs-16 "
+          [ngClass]="(compactCards) ? 'lh-19' : 'lh-29'">
+              {{monitoredIdentity.identity}}
+          </span>
+        </p>
+        <p class="neutral-black fs-16 mb-0"
+          [ngClass]="(compactCards) ? 'lh-19' : 'lh-29'">
+          <b>{{'CYBERALARM.IDENTITIES.LASTANALISYS' | translate}}</b>
+          <span class="neutral-black fs-16"
+          [ngClass]="(compactCards) ? 'lh-19' : 'lh-29'">
+              {{monitoredIdentity.lastAnalysisDate}}
+          </span>
+        </p>
+      </div>
+
+      <div class="card-footer p-0">
+        <div class="d-flex align-items-center"
+          [ngClass]="(compactCards) ? 'justify-content-end' : 'justify-content-between'">
+          <div class="creditcard-icon" *ngIf="!compactCards">
+            <div class="creditcard-status">
+              <div *ngIf="monitoredIdentity.breaches === 0" class="d-flex">
+                <div class="icon-shield-check semantic-success fs-24 fade-infinite"></div>
+                  <span class="ml-2 semantic-success align-self-center fs-16 lh-19"><b>{{'CYBERALARM.IDENTITIES.PROTECTING' | translate}}</b></span>
+                </div>
+                <div *ngIf="monitoredIdentity.breaches > 0" class="d-flex">
+                  <div class="icon-shield-cross semantic-danger fs-24"></div>
+                  <span class="ml-2 semantic-danger align-self-center fs-16 lh-19"><b>{{'CYBERALARM.IDENTITIES.DANGER' | translate}}</b></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="d-flex justify-content-end" [ngClass]="(compactCards) ? 'd-ajust-btn-itp' : ''">
+              <div class="d-flex align-items-center mr-2 cursor-pointer"
+                  *ngIf="monitoredIdentity.breaches > 0"
+                  (click)="openWarningModal(monitoredIdentity)">
+                <div class="icon-warning fs-18 semantic-danger"></div>
+              </div>
+              <div class="d-flex align-items-center cursor-pointer" (click)="deleteEmail(monitoredIdentity)">
+                <div class="icon-trash fs-20 main-secondary"></div>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-container *ngIf="cards.items.length !== 0 && showAddCard else noShowAddCard">
+    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-1 pt-1 pb-1 pr-0 pl-0 align-self-stretch identity-card"
+    [ngClass]="(compactCards && (cards.items.length % 2) == 0) ? 'compact identity-card-add' : (compactCards ? 'compact' : '')" (click)="addEmail()">
+      <div [ngClass]="(!compactCards && cards.items.length == 1 ) ? 'spaceBetweenCards' : ''" class="card scard h-100">
+        <button class="add-plus h-100">
+            <div class="mx-auto icon-plus main-disabled fs-20"></div>
+            <span class="fs-14 lh-16 mx-auto plus-text main-disabled"
+            [ngClass]="compactCards ? '' : 'mt-2'">
+                {{'CYBERALARM.IDENTITIES.TEXT7' | translate}}
+            </span>
+        </button>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #noShowAddCard>
+    <div *ngIf="!showAddCard" style="width: 32%; height:0px;">&nbsp;</div>
+  </ng-template>
+
+
+</div>
+
+
+
+</div>
+
+<ng-container *ngIf="isloading">
+  <div class="default-section fa-3x">
+    <i class="fas fa-spinner fa-spin"></i>
+  </div>
+</ng-container>

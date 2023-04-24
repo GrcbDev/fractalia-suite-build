@@ -1,0 +1,27 @@
+
+<div class="d-flex w-100 justify-content-end">
+  <div class="icon-close ds-fs-14 ds-cur-pointer" (click)="closeModal()"></div>
+</div>
+
+
+<div class="ds-t-center d-flex flex-column ds-mb-32p">
+  <div class="icon-trash fa-6x ds-c-black ds-mb-32p" ></div>
+
+  <div class="ds-h3 ds-m-bold ds-c-black ds-mb-12p">
+    {{ "FAMILY_UNIT.DELETE_CONFIRMATION" |  translate: { userName: profile.name}  }} ?
+  </div>
+
+  <div class="ds-body-primary ds-r-regular ds-c-black ds-mb-12p">
+    {{ "FAMILY_UNIT.DELETION_DETAIL" | translate }}
+  </div>
+
+</div>
+
+
+<div class="d-flex justify-content-end " >
+  <button class="ds-btn-secondary ds-mr-12p ds-t-uppercase"  (click)="closeModal()">   {{'CANCEL' | translate}} </button>
+  <button class="ds-btn-primary ds-t-uppercase"  (click)="saveDelete()">
+    <nz-spinner *ngIf="loading"></nz-spinner>
+    <span  *ngIf="!loading"> {{'COMP_GRAVITY.REMOVE_FORM.DELETE_BUTTON' | translate}}</span>
+  </button>
+</div>

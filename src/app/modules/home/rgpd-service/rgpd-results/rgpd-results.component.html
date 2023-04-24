@@ -1,0 +1,328 @@
+<section class="ds-card informative-service-content">
+
+  <div class="ds-card-header align-items-center">
+      <div class="d-flex align-items-center">
+        <span class="{{service.icon }} ds-fs-24 mr-2"></span>
+        <div class="ds-h4 ds-m-bold ds-c-black">
+          {{service.name}}
+        </div>
+      </div>
+      <span class="icon-info ds-header-icon-right cursor" (click)="open(service.name, service.longDesc, service.icon)"></span>
+  </div>
+
+  <ng-container *ngIf="currentRisk === HighRisk">
+
+    <div class="ds-card-body">
+      <div class="rgpd-result">
+        <div class="col-md-8 rgpd-result-item" >
+
+
+          <div class="ds-flex-column ds-px-24p">
+            <span class="ds-h4 ds-m-bold ds-c-black ds-mb-16p">{{ 'RGPD.EVAL_RESULT_TITLE' | translate}}</span>
+            <div class="row ds-al-center">
+              <div class="col-md-6 ds-flex-column ds-al-center">
+                <div class="ds-flex-column" style="max-width: 292px;">
+                  <div class="ds-flex-row ds-al-center ds-jc-center ds-h1 ds-m-bold ds-c-danger ds-mb-12p">
+                    <span class="icon-warning"></span>
+                    {{'SURVEY.SCORE_HIGH'| translate}}
+                  </div>
+                  <span class="ds-body-primary ds-r-regular ds-c-black">
+                    {{ 'RGPD.PROTECTION_LEVEL' | translate }}
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-md-6" >
+                <div class="ds-rgpd-card-form-eval">
+                  <div class="ds-flex-row ds-jc-between ds-mb-24p">
+                    <div class="ds-flex-column">
+                      <span class="ds-caption ds-r-bold ds-c-black"> {{ 'RGPD.EVAL_FORM' | translate}} </span>
+                      <span class="ds-caption ds-r-regular ds-c-black"> {{ 'RGPD.COMPLETE' | translate: { val: (rgpdInformation.evalFinishDate | date: 'dd/MM/yyyy') } }} </span>
+                    </div>
+
+                    <div>
+                      <div class="ds-form-eval-sumary">
+                        <span class="ds-caption ds-r-bold ds-c-success">{{ 'RGPD.DONE' | translate}}</span>
+                      </div>
+                    </div>
+
+                  </div>
+
+                  <div class="ds-r-regular ds-body-secondary ds-c-black ds-mb-12p">
+                    {{ 'RGPD.POLITY_CHANGES_QUEST' | translate }}
+                  </div>
+
+                  <div>
+                    <button class="ds-btn-primary ds-t-uppercase" (click)="toggleEvaluation()">
+                      <span class="icon-redo"></span>
+                      {{ 'RGPD.REBUILD_EVAL' | translate}}
+                    </button>
+                  </div>
+
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="col-md-4 rgpd-result-item" *ngIf="rgpdInformation.status === 1 && rgpdInformation.evalResult === 3">
+          <div class="ds-flex-column ds-al-center ds-px-24p">
+
+            <span class="ds-h4 ds-m-bold ds-c-black ds-mb-16p">{{ 'RGPD.RGPD_MODEL' | translate }}</span>
+
+            <div class="ds-body-primary ds-r-regular ds-c-black ds-mb-24p ">
+              {{ 'RGPD.ADAPTATION_RGPD' | translate }}
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 rgpd-result-item" *ngIf="rgpdInformation.status === 1 && rgpdInformation.evalResult !== 3">
+          <div class="ds-flex-column ds-al-center ds-px-24p">
+
+            <span class="ds-h4 ds-m-bold ds-c-black ds-mb-16p">{{ 'RGPD.RGPD_MODEL' | translate }}</span>
+
+            <div class="ds-body-primary ds-r-regular ds-c-black ds-mb-24p ">
+              <span class="ds-r-bold">{{ 'RGPD.TEMPLATE_YET' | translate }}</span>
+            </div>
+
+            <div class="ds-body-primary ds-jc-center ds-al-center">
+              <div class="icon-data-not-found ds-big-icon"></div>
+            </div>
+
+            <div class="ds-body-primary ds-r-regular ds-c-black ds-mb-24p">
+              {{ 'RGPD.FINISH_FORMS' | translate }}
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 rgpd-result-item" *ngIf="rgpdInformation.status === 2">
+          <div class="ds-flex-column ds-al-center ds-px-24p">
+            <span class="ds-h4 ds-m-bold ds-c-black ds-mb-16p">{{ 'RGPD.RGPD_MODEL' | translate }}</span>
+
+            <div class="ds-flex-column ds-body-primary ds-r-bold ds-c-black ds-mb-32p">
+              <span>{{ 'RGPD.LAST_MODEL' | translate }}</span>
+              <span>{{ rgpdInformation.modelFinishDate | date: 'dd/MM/yyyy' }}</span>
+            </div>
+
+            <div class="ds-flex-column ds-body-primary ds-r-regular ds-c-black ds-mb-32p">
+              {{ 'RGPD.DOWNLOAD_MODEL_DESC' | translate }}
+            </div>
+
+            <div class="ds-flex-row ds-jc-center ">
+              <button class="ds-btn-primary ds-t-uppercase" (click)="downloadModelForm()">
+                <nz-spinner *ngIf="downloadLoading"></nz-spinner>
+                <ng-container *ngIf="!downloadLoading">
+                  <span class="icon-download2"></span>
+                  <span>{{ 'RGPD.DOWNLOAD_MODEL' | translate }}</span>
+                </ng-container>
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+
+
+  </ng-container>
+
+
+
+  <ng-container *ngIf="currentRisk === MediumRisk || currentRisk === LowRisk">
+    <div class="ds-card-body">
+      <div class="rgpd-result">
+        <div class="col-md-4 rgpd-result-item" >
+
+          <div class="ds-flex-column ds-al-center ds-px-24p">
+
+            <span class="ds-h4 ds-m-bold ds-c-black ds-mb-16p">{{ 'RGPD.EVAL_RESULT_TITLE' | translate}}</span>
+
+            <div class="ds-flex-column">
+              <div class="ds-flex-row ds-al-center ds-jc-center ds-h1 ds-m-bold ds-c-warning ds-mb-12p" *ngIf="rgpdInformation.evalResult == 2">
+                <span class="icon-exclamation"></span>
+                {{'SURVEY.SCORE_MID'| translate}}
+              </div>
+
+              <div class="ds-flex-row ds-al-center ds-jc-center ds-h1 ds-m-bold ds-c-success ds-mb-12p" *ngIf="rgpdInformation.evalResult == 1">
+                <span class="icon-green-check"></span>
+                {{'SURVEY.SCORE_LOW'| translate}}
+              </div>
+
+              <span class="ds-body-primary ds-r-regular ds-c-black ds-mb-12p">
+                {{ 'RGPD.PROTECTION_LEVEL' | translate }}
+              </span>
+
+              <div class="ds-rgpd-card-form-eval">
+                <div class="ds-flex-row ds-jc-between ds-mb-12p">
+                  <div class="ds-flex-column">
+                    <span class="ds-caption ds-r-bold ds-c-black"> {{ 'RGPD.EVAL_FORM' | translate }} </span>
+                    <span class="ds-caption ds-r-regular ds-c-black"> {{ 'RGPD.COMPLETE' | translate: { val: (rgpdInformation.evalFinishDate | date: 'dd/MM/yyyy') } }} </span>
+                  </div>
+
+                  <div>
+                    <div class="ds-form-eval-sumary">
+                      <span class="ds-caption ds-r-bold ds-c-success">{{ 'RGPD.DONE' | translate}}</span>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="ds-flex-row ds-jc-center ">
+                  <button class="ds-btn-outlined-secondary ds-t-uppercase" (click)="toggleEvaluation()">
+                    <span class="icon-redo"></span>
+                    {{ 'RGPD.REBUILD_EVAL' | translate}}
+                  </button>
+                </div>
+              </div>
+
+
+            </div>
+
+
+
+
+          </div>
+
+        </div>
+
+        <div  class="col-md-4 rgpd-result-item">
+          <div class="ds-flex-column ds-px-24p" style="height: 100%;">
+            <span class="ds-h4 ds-m-bold ds-c-black ds-mb-16p ">{{ 'RGPD.MODEL_CREATION' | translate}}</span>
+
+            <div class="ds-flex-column" style="height: 100%;">
+              <div class="ds-rgpd-card-form-eval" style="height: 100%;">
+                <div class="ds-flex-row ds-jc-between ds-mb-12p">
+                  <div class="ds-flex-column">
+                    <span class="ds-caption ds-r-bold ds-c-black"> {{ 'RGPD.MODEL_FORM' | translate }} </span>
+                    <span class="ds-caption ds-r-regular ds-c-black" *ngIf="rgpdInformation.modelFinishDate"> {{ 'RGPD.LAST_ACCESS' | translate: { val: (rgpdInformation.modelFinishDate | date: 'dd/MM/yyyy') } }} </span>
+                  </div>
+
+                  <div>
+                    <div class="ds-form-eval-sumary">
+                      <span class="ds-caption ds-r-bold ds-c-success" *ngIf="rgpdInformation.status === 2">{{ 'RGPD.DONE' | translate}}</span>
+                      <span class="ds-caption ds-r-bold semantic-blue" *ngIf="rgpdInformation.status === 1">{{ 'RGPD.PENDING' | translate}}</span>
+                    </div>
+                  </div>
+
+                </div>
+
+                <span class="ds-body-primary ds-r-regular ds-c-black ds-mb-32p" *ngIf="rgpdInformation.status === 1">
+                  {{ 'RGPD.REPLY_QUESTIONS_DESC' | translate }}
+                </span>
+                <span class="ds-body-primary ds-r-regular ds-c-black ds-mb-32p" *ngIf="rgpdInformation.status === 2">
+                  {{ 'RGPD.POLITY_CHANGES_QUEST' | translate }}
+                </span>
+
+                <div class="ds-flex-row ds-jc-center">
+                  <button class="ds-btn-primary ds-t-uppercase" (click)="goToModelForm()" *ngIf="rgpdInformation.status === 1">
+                    <span class="icon-description"></span>
+                    {{ 'RGPD.FINISH_MODEL' | translate}}
+                  </button>
+                  <button class="ds-btn-outlined-secondary ds-t-uppercase" (click)="goToModelForm()" *ngIf="rgpdInformation.status === 2">
+                    <span class="icon-edit-pen"></span>
+                    {{ 'RGPD.EDIT_MODEL' | translate}}
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="col-md-4 rgpd-result-item" *ngIf="rgpdInformation.status === 1 && rgpdInformation.evalResult === 3">
+          <div class="ds-flex-column ds-al-center ds-px-24p">
+
+            <span class="ds-h4 ds-m-bold ds-c-black ds-mb-16p">{{ 'RGPD.RGPD_MODEL' | translate }}</span>
+
+            <div class="ds-body-primary ds-r-regular ds-c-black ds-mb-24p ">
+              {{ 'RGPD.ADAPTATION_RGPD' | translate }}
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 rgpd-result-item" *ngIf="rgpdInformation.status === 1 && rgpdInformation.evalResult !== 3">
+          <div class="ds-flex-column ds-al-center ds-px-24p">
+
+            <span class="ds-h4 ds-m-bold ds-c-black ds-mb-16p">{{ 'RGPD.RGPD_MODEL' | translate }}</span>
+
+            <div class="ds-body-primary ds-r-regular ds-c-black ds-mb-24p ">
+              <span class="ds-r-bold">{{ 'RGPD.TEMPLATE_YET' | translate }}</span>
+            </div>
+
+            <div class="ds-body-primary ds-jc-center ds-al-center">
+              <div class="icon-data-not-found ds-big-icon"></div>
+            </div>
+
+            <div class="ds-body-primary ds-r-regular ds-c-black ds-mb-24p">
+              {{ 'RGPD.FINISH_FORMS' | translate }}
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 rgpd-result-item" *ngIf="rgpdInformation.status === 2">
+          <div class="ds-flex-column ds-al-center ds-px-24p">
+            <span class="ds-h4 ds-m-bold ds-c-black ds-mb-16p">{{ 'RGPD.RGPD_MODEL' | translate }}</span>
+
+            <div class="ds-flex-column ds-body-primary ds-r-bold ds-c-black ds-mb-32p">
+              <span>{{ 'RGPD.LAST_MODEL' | translate }}</span>
+              <span>{{ rgpdInformation.modelFinishDate | date: 'dd/MM/yyyy' }}</span>
+            </div>
+
+            <div class="ds-flex-column ds-body-primary ds-r-regular ds-c-black ds-mb-32p">
+              {{ 'RGPD.DOWNLOAD_MODEL_DESC' | translate }}
+            </div>
+
+            <div class="ds-flex-row ds-jc-center ">
+              <button class="ds-btn-primary ds-t-uppercase" (click)="downloadModelForm()">
+                <nz-spinner *ngIf="downloadLoading"></nz-spinner>
+                <ng-container *ngIf="!downloadLoading">
+                  <span class="icon-download2"></span>
+                  <span>{{ 'RGPD.DOWNLOAD_MODEL' | translate }}</span>
+                </ng-container>
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+        <!-- <div class="col-md-4 rgpd-result-item" >
+          <div class="ds-flex-column ds-al-center ds-px-24p">
+            <span class="ds-h4 ds-m-bold ds-c-black ds-mb-16p">{{ 'RGPD.RGPD_MODEL' | translate }}</span>
+
+            <div class="ds-flex-column ds-body-primary ds-r-bold ds-c-black ds-mb-32p">
+              <span>{{ 'RGPD.LAST_MODEL' | translate }}</span>
+              <span>26/08/22 - 6:52 pm</span>
+            </div>
+
+            <div class="ds-flex-column ds-body-primary ds-r-regular ds-c-black ds-mb-32p">
+              {{ 'RGPD.DOWNLOAD_MODEL_DESC' | translate }}
+            </div>
+
+            <div class="ds-flex-row ds-jc-center ">
+              <button class="ds-btn-primary ds-t-uppercase" (click)="downloadModelForm()">
+                <nz-spinner *ngIf="downloadLoading"></nz-spinner>
+                <ng-container *ngIf="!downloadLoading">
+                  <span class="icon-download2"></span>
+                  <span>{{ 'RGPD.DOWNLOAD_MODEL' | translate }}</span>
+                </ng-container>
+              </button>
+            </div>
+
+          </div>
+
+        </div> -->
+      </div>
+    </div>
+  </ng-container>
+
+
+
+</section>
+
+
+
+
+
+

@@ -1,0 +1,162 @@
+<section class="ds-card ">
+
+  <div class="ds-card-header align-items-center">
+      <div class="d-flex align-items-center">
+        <span class="icon-formulario-ciberseguridad mr-2"></span>
+        <div class="ds-h4 ds-m-bold ds-c-black">
+          Cuestionario de ciberseguridad
+        </div>
+      </div>
+      <span class="icon-info ds-header-icon-right" ></span>
+  </div>
+
+  <div class="ds-card-body">
+
+    <ng-container *ngIf="true; else NoAswerQuestionYet">
+      <div class="content-result-questionary">
+        <div class="result-step">
+
+          <div class="ds-h4 ds-m-bold ds-c-black ds-mb-16p">
+            El riesgo global de tu empresa es:
+            <!-- {{'SURVEY.GLOBAL_RISK'| translate}} -->
+          </div>
+
+          <div class="global-result">
+
+            <div class="first-content">
+
+              <div class="d-flex flex-column">
+                <div>
+                  <span class="ds-m-bold ds-fs-48 ds-c-danger">75</span>
+                  <span class="ds-m-bold ds-h4 ds-c-black">/10</span>
+                </div>
+
+                <div class="progress global-score-progress warning ds-mb-24p">
+                  <div role="progressbar" aria-valuemin="5" aria-valuemax="100" class="progress-bar" style="width: 68%;"></div>
+                </div>
+              </div>
+
+            </div>
+            <div class="second-content">
+              <div class="d-flex flex-column">
+                <span class="ds-r-regular ds-caption ds-c-black ds-mb-4p">Esta puntuación es considerada como:</span>
+                <span class="ds-h2 ds-m-bold ds-c-danger">Riesgo alto</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="ds-h4 ds-m-bold ds-c-black ds-mb-16p">
+            La riesgo por área es:
+          </div>
+
+          <div class="global-result">
+
+            <div class="first-content">
+
+              <div class="progress-bar-item"  >
+                <div class="item-content d-flex justify-content-between ">
+                  <div class="d-flex" >
+                    <span class="icon-cuest-cib-personas ds-mr-8p"></span>
+                    <span class="ds-r-bold ds-fs-14 ds-c-black ds-ml-8p">PERSONAS</span>
+                  </div>
+                  <div class="d-flex align-items-center">
+                    <span class="ds-body-primary ds-r-bold ds-c-black">30</span>
+                    <span class="ds-body-secondary ds-r-regular ds-c-black" style="margin-top: 2px;">/100</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="second-content">
+              <div class="ds-body-secondary ds-r-bold ds-c-black">
+                Riesgo bajo
+              </div>
+            </div>
+          </div>
+
+          <div class="global-result">
+
+            <div class="first-content">
+
+              <div class="progress-bar-item"  >
+                <div class="item-content d-flex justify-content-between ">
+                  <div class="d-flex" >
+                    <span class="icon-cuest-cib-personas ds-mr-8p"></span>
+                    <span class="ds-r-bold ds-fs-14 ds-c-black ds-ml-8p">PERSONAS</span>
+                  </div>
+                  <div class="d-flex align-items-center">
+                    <span class="ds-body-primary ds-r-bold ds-c-black">30</span>
+                    <span class="ds-body-secondary ds-r-regular ds-c-black" style="margin-top: 2px;">/100</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="second-content">
+              <div class="ds-body-secondary ds-r-bold ds-c-black">
+                Riesgo bajo
+              </div>
+            </div>
+          </div>
+
+
+
+        </div>
+
+        <div class="continue-step">
+          <div class="ds-h4 ds-m-bold ds-c-black ds-mb-12p">
+            <!-- {{'SURVEY.LAST_SURVEY'| translate}} -->
+            Último cuestionario
+          </div>
+
+          <div class="ds-body-primary ds-r-regular ds-c-black ds-mb-24p">
+            12/16/2020 - 6:52:13 pm
+          </div>
+
+          <div class="ds-body-primary ds-r-regular ds-c-black ds-mb-24p">
+            Puedes hacer el cuestionario todas las veces que quieras para conocer el impacto de las nuevas políticas de seguridad que implementes en tu compañía.
+          </div>
+
+          <button class="btn btn-primary ds-mb-12p"> Hacer cuestionario </button>
+          <button class="btn btn-outline-secondary ds-r-bold ds-t-uppercase"> más información </button>
+
+        </div>
+      </div>
+
+
+
+
+
+    </ng-container>
+
+    <ng-template #NoAswerQuestionYet>
+
+      <div class="w-100 d-flex flex-column align-items-center justify-content-center">
+        <div class="max-w-778p">
+          <div class="d-flex flex-column align-items-center justify-content-center">
+            <div class="icon-formulario-ciberseguridad cyber-main-icon ds-c-primary ds-mb-10p"></div>
+            <div class="ds-h2 ds-m-bold ds-c-black ds-mb-8p">
+              Realiza el cuestionario
+            </div>
+            <div class="ds-t-center ds-body-primary  ds-r-regular ds-mb-12p">
+              Evalúa la situación de seguridad de tu empresa y averigua cómo puedes mejorarla.
+              Al realizar este cuestionario podrás conocer con más claridad cómo impactan las políticas de seguridad de tu compañía y si es necesario revisarlas.
+            </div>
+
+            <button class="btn btn-primary "> Hacer cuestionario </button>
+          </div>
+        </div>
+
+      </div>
+
+
+    </ng-template>
+
+
+
+
+
+  </div>
+</section>

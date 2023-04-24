@@ -1,0 +1,153 @@
+
+<ng-container *ngIf="!citSuccess; else addCreditCardSuccess">
+
+  <form class="d-flex flex-column" [formGroup]="citAddEmailForm">
+    <div class="ds-modal-header ds-mb-32p">
+      <span class="ds-modal-title ds-h3 ds-m-bold ">{{service.name}}</span>
+      <i class="icon-close" (click)="closeModal()"></i>
+    </div>
+
+
+    <div class="ds-body-primary ds-r-regular ds-c-black ds-mb-32p"  *ngIf=" this.suiteService.suites[0].suiteType === 0">
+      {{'CYBERALARM.CARDS.TEXT1' | translate}}
+    </div>
+
+    <div class="ds-body-primary ds-r-regular ds-c-black ds-mb-32p"  *ngIf=" this.suiteService.isUnitFamily">
+      {{'FAMILY_UNIT.CARD_FORM_TITLE' | translate}}
+    </div>
+
+    <div class="ds-caption ds-r-regular ds-c-secondary ds-mb-12p">
+       {{'CYBERSCORING.FORMULARIO_CYBERSCORING_REQUIRED'| translate}}
+    </div>
+
+    <div class="ds-flex-column ds-mb-24p" *ngIf="this.suiteService.isUnitFamily">
+      <label class="ds-label-control">{{'FAMILY_UNIT.PROFILE_TO_SELECT' | translate}}*</label>
+      <app-dropdown
+        placeholder="{{'FAMILY_UNIT.DEFAULT_PROFILE_VALUE' | translate}}"
+        formControlName="selectProfile"
+        [initValue]="dropdownInitial"
+        (onchange)="onChangeProfile($event)"
+        [items]="selectItems">
+      </app-dropdown>
+    </div>
+
+    <div class="ds-mb-24p ds-flex-column">
+      <label class="ds-label-control" > {{'CYBERALARM.CARDS.ALIAS' | translate}} *</label>
+      <input type="text" formControlName="alias" class="ds-control" maxlength="40">
+      <div *ngIf="((inputAlias.invalid && inputAlias.touched) || inputAlias.dirty) && creditCardAddedd.length < 1">
+        <div *ngIf="inputAlias.errors?.pattern"
+            class="loginError semantic-danger fs-12 lh-14 d-inline-flex align-items-center">
+            {{'CYBERALARM.CARDS.ADD_FORM.VALIDATION_ALIAS2' | translate }}
+        </div>
+        <div *ngIf="inputAlias.errors?.required || aliasRequired"
+            class="loginError semantic-danger fs-12 lh-14 d-inline-flex align-items-center">
+            {{'CAMPO_REQUERIDO' | translate }}
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex ds-mb-24p">
+
+      <div class="ds-w-70 ds-mr-12p">
+        <div class="d-flex flex-column">
+          <label class="ds-label-control">{{'CYBERALARM.CARDS.NUM_CARDS' | translate}} *</label>
+          <input type="text" class="ds-control" formControlName="numberCard"  placeholder="Ingrese aquí" >
+          <span  class="ds-control-example-message">  {{'CYBERALARM.CARDS.ADD_FORM.MAX' | translate: { maxCards: maxCardsByUser} }}</span>
+          <div *ngIf="(inputCard.invalid && inputCard.touched) || inputCard.dirty">
+            <div *ngIf="inputCard.errors?.pattern"
+                class="loginError semantic-danger fs-12 lh-14 d-inline-flex align-items-center">
+                <div class="icon-exclamation-tri"></div>
+                {{'CYBERALARM.CARDS.ADD_FORM.VALIDATION_CARD2' | translate }}
+            </div>
+          </div>
+          <span *ngIf="emailMessage" class="ds-control-error-message">{{emailMessage}}</span>
+        </div>
+      </div>
+
+      <div class="ds-w-30">
+        <div class="d-flex flex-column">
+          <label class="ds-label-control">&nbsp;</label>
+          <a href="javascript:void(0)" class="btn btn-outline-secondary ds-t-uppercase" (click)="addCard()"> {{'GUARDAR_NEW'| translate}}</a>
+        </div>
+
+      </div>
+    </div>
+
+    <ng-container  *ngIf="creditCardAddedd && creditCardAddedd.length > 0">
+      <div class="ds-body-primary ds-r-regular ds-c-black ds-mb-12p">
+        {{'CYBERALARM.CARDS.ADD_FORM.CARDS_TO_PROTECT' | translate}}
+      </div>
+      <div class="ds-w-80 ml-4 ds-mb-32p">
+        <div class="file-item" *ngFor="let item of creditCardAddedd; let i = index">
+          <div *ngIf="item && item.numberCard" class="d-flex flex-column fs-12" style="text-align:left; color:#34383F">
+            <span class="break-word">{{ item.alias }} - {{maskCreditCard(item.numberCard)}}</span>
+          </div>
+          <a *ngIf="item && item.numberCard" class="ml-2" href="javascript:void(0)" (click)="deleteCard(item)"><i class="icon-trash"></i></a>
+        </div>
+      </div>
+    </ng-container>
+
+    <div class="d-flex justify-content-end" >
+      <button class="btn btn-outline-secondary ds-mr-12p ds-t-uppercase" (click)="closeModal()"> {{'CANCEL'| translate}}</button>
+      <button class="btn btn-primary" [disabled]="false" (click)="saveAddForm()">
+        <span *ngIf="!loading">{{'CYBERALARM.IDENTITIES.ADD_FORM.BTN'| translate}} </span>
+        <nz-spinner *ngIf="loading"></nz-spinner>
+      </button>
+    </div>
+  </form>
+
+
+</ng-container>
+
+<ng-template #addCreditCardSuccess>
+  <div class="d-flex flex-column">
+    <div class="ds-modal-header ds-mb-32p justify-content-end">
+      <i class="icon-close" (click)="closeModal()"></i>
+    </div>
+
+    <div class="ds-t-center d-flex flex-column ds-mb-32p">
+      <div class="icon-green-check fa-6x ds-c-success ds-mb-32p" ></div>
+
+      <div class="ds-h3 ds-m-bold ds-c-black ds-mb-12p">
+        {{'CYBERALARM.CARDS.ADD_FORM.RESULT_OK' | translate}}
+      </div>
+
+      <div class="ds-body-primary ds-r-regular ds-c-black ">
+        {{'CYBERALARM.CARDS.ADD_FORM.RESULT_OK_TEXT' | translate}}
+      </div>
+
+
+
+    </div>
+
+    <div class="d-flex flex-column ds-mb-32p">
+      <div class="ds-body-primary ds-r-regular ds-c-black ds-mb-12p">
+        {{'CYBERALARM.CARDS.ADD_FORM.CARDS_PROTECTED' | translate}}
+      </div>
+
+      <ng-container  *ngIf="creditCardAddedd && creditCardAddedd.length > 0">
+        <div class="ds-w-80 ml-4">
+          <div class="file-item" *ngFor="let item of creditCardAddedd; let i = index">
+            <div class="d-flex flex-column fs-12" style="text-align:left; color:#34383F">
+              <span class="break-word">{{item.alias}} - {{maskCreditCard(item.numberCard)}}</span>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+
+
+    </div>
+
+    <div class="d-flex justify-content-end" >
+      <button class="btn btn-primary"  (click)="closeModal()">{{'COMP_USER.SUPPORT_NOTIFICATION.CLOSE'| translate}} </button>
+    </div>
+
+
+  </div>
+
+
+</ng-template>
+
+
+

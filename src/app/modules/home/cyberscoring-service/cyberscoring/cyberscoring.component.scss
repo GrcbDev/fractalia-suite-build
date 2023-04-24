@@ -1,0 +1,40 @@
+.cyb-mobile {
+  display: none;
+}
+
+
+.cyb-web {
+  display: flex;
+}
+
+.datos  {
+  & .dg {
+    h4 {
+      font-size: .7rem;
+      float: right;
+      margin-top: 4px;
+    }
+  }
+}
+
+.fs-card-body {
+  padding-bottom: 24px;
+}
+
+
+@media only screen and (max-width: 992px)  {
+  .fs-card-body {
+    padding-bottom: 0;
+  }
+
+  .cyb-mobile {
+    display: block;
+  }
+
+  .cyb-web {
+    display: none;
+  }
+
+
+}
+

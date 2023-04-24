@@ -1,0 +1,78 @@
+.cybersecurity-content {
+  display: flex;
+  justify-content: space-between;
+
+  & .description {
+    width: 50%;
+    padding: 32px 24px 0px 24px;
+    max-width: 468px;
+  }
+
+  // & .cy-img-content {
+  //   width: 50%;
+  //   display: flex;
+  //   justify-content: flex-end;
+
+  // }
+
+
+  & .img-cybersecurity {
+    width: 50%;
+    background-position: center;
+    background-size: cover;
+    width: 492px;
+    min-height: 236px;
+    background-image: url(https://devstatic.app.onlineassist.me/suite/img/cybersecurity/cybersecurity-img-web.png);
+    background-repeat: no-repeat;
+    position: relative;
+    z-index: 1;
+    opacity: 0.5;
+  }
+
+  & .img-cybersecurity.withBG::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right , white, white, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0),rgba(255, 255, 255, 0));
+    z-index: -1;
+  }
+
+
+}
+
+
+
+
+@media only screen and (max-width: 1000px) {
+  .cybersecurity-content {
+    flex-wrap: wrap;
+    & .description {
+      width: 100%;
+      margin-bottom: 36px;
+      max-width: 100%;
+    }
+    & .img-cybersecurity {
+      display: flex;
+      width: 100%;
+      opacity: 1;
+      border-radius: 0px 0px 8px 8px;
+    }
+
+    & .img-cybersecurity.withBG::after {
+      background: none;
+
+    }
+  }
+}
+
+
+@media only screen and (max-width: 600px) {
+  .exp-support-content {
+
+  }
+}
+
+

@@ -1,0 +1,10 @@
+.user-list-com {
+  padding-top: 4em;
+}
+
+@media only screen and (max-width: 767px) {
+  .user-list-com {
+    padding-top: 0 !important;
+  }
+
+}

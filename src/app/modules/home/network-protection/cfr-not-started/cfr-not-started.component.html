@@ -1,0 +1,23 @@
+<div class="content-center-left">
+  <div class="{{data.icon}} ds-mt-24p ds-mb-24p mx-auto main-primary cyber-main-icon">
+  </div>
+<div>
+<h2 class="neutral-black cyb-body-title ds-mb-12p">
+  {{'CYBERSCORING.PRIMER_ANALISIS' | translate}}
+</h2>
+</div>
+
+<div *ngIf="userService.currentUserValue.isAdminUserId" class="ds-flex-column justify-content-center align-items-center">
+    <p class="ds-content-p">   {{'CYBERSECURITY.FRACTEL.START_TEXT' | translate}}
+
+     </p>
+     <p> {{'CYBERSECURITY.FRACTEL.START_TEXT1' | translate}}</p>
+         <button type="submit" class="ds-btn-primary text-uppercase ds-mt-24p" (click)="loadService()" [disabled]="!loading">
+          <nz-spinner *ngIf="!loading"></nz-spinner>
+            <div *ngIf="loading">
+              {{'CYBERSECURITY.FRACTEL.BTN.START' | translate}}
+            </div>
+          </button>
+        </div>
+  </div>
+

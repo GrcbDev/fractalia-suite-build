@@ -1,0 +1,23 @@
+
+
+
+
+<section class="ds-card informative-service-content" *ngIf="!hideHtml">
+  <div class="ds-card-body ds-flex-column ds-jc-center ds-al-center">
+    <div class="{{data.icon}} mb-2 mt-4 mx-auto main-primary cyber-main-icon">
+    </div>    
+        <h2 class="text-center neutral-black cyb-body-title">
+          {{data.name}}
+        </h2>  
+        <p class="text-center cyb-body-text">
+            {{'COMP_BITDEFENDERMSP.TEXT8' | translate}}
+        </p>   
+        <button class="btn btn-primary text-uppercase"
+          (click)="setUserLicenceMSM()">
+            <nz-spinner *ngIf="loading"></nz-spinner>
+            <div *ngIf="!loading" class="text-uppercase">
+              {{'COMP_BITDEFENDERMSP.BUTTON_SOLICITAR'| translate}}
+            </div>
+        </button>    
+  </div>
+</section>

@@ -1,0 +1,150 @@
+
+<div>
+  <div class="d-flex w-100 justify-content-end ds-mb-24p" >
+    <button type="button" class="btn ds-fs-14 ds-p-0" (click)="closeModal()">
+      <div class="icon-close"></div>
+    </button>
+  </div>
+
+  <app-slider [showArrows]="false">
+   <ng-container *ngIf="instructionConfig.startedStep">
+      <ng-template Slide >
+        <div class="ds-flex-column">
+          <div class="ds-mb-32p">
+            <img src="{{staticContentUrl+'img/instruction-guide/step1.png'}}"  alt="">
+          </div>
+
+          <div class="ds-h4 ds-m-bold ds-c-black ds-mb-12p">
+            {{'COMP_INSTRUCTION_GUIDE.REGARD' | translate }} {{userName}}!
+          </div>
+
+          <div class="ds-body-primary ds-r-regular ds-c-black ds-mb-32p">
+            {{'COMP_INSTRUCTION_GUIDE.WELCOME_GUIDE' | translate }} {{partnerName}}.
+            {{'COMP_INSTRUCTION_GUIDE.WELCOME_GUIDE2' | translate }}
+          </div>
+
+          <div class="ds-mb-32p">
+            <button class="ds-btn-primary ds-t-uppercase" (click)="onNextStep('startedStep')">{{'COMP_INSTRUCTION_GUIDE.START_VISIT' | translate }}</button>
+          </div>
+
+          <div class="ds-mb-32p">
+            <div class="custom-control custom-checkbox">
+              <input type="checkbox" class="custom-control-input" id="checkA1" (change)="doNotShowAgain($event.target.checked)">
+              <label class="custom-control-label" for="checkA1" >{{'COMP_INSTRUCTION_GUIDE.GUIDED_TOUR_TEXT' | translate }}</label>
+            </div>
+          </div>
+
+        </div>
+      </ng-template>
+    </ng-container>
+
+    <ng-container *ngIf="instructionConfig.hasHomeMenu">
+      <ng-template Slide>
+        <div class="ds-flex-column">
+          <div class="ds-mb-32p">
+            <img src="{{staticContentUrl+'img/instruction-guide/step2.png'}}" class="step-images" alt="">
+          </div>
+
+          <div class="ds-h4 ds-m-bold ds-c-black ds-mb-12p">
+            {{'HOME' | translate }}
+          </div>
+
+          <div class="ds-body-primary ds-r-regular ds-c-black ds-mb-32p">
+            {{'COMP_INSTRUCTION_GUIDE.DIRECT_GUIDE_ACCESS' | translate }}
+          </div>
+
+          <div class="ds-mb-32p ds-flex-row ds-jc-end">
+            <button class="ds-btn-primary ds-t-uppercase" (click)="onNextStep('startedStep')">
+              {{'COMP_INSTRUCTION_GUIDE.NEXT_TEXT' | translate }}
+              <span class="ds-ml-8p icon-right-big-arrow"></span>
+            </button>
+          </div>
+        </div>
+      </ng-template>
+
+    </ng-container>
+
+    <ng-container *ngIf="instructionConfig.hasFamilyMenu">
+      <ng-template Slide>
+        <div class="ds-flex-column">
+          <div class="ds-mb-24p">
+            <img src="{{staticContentUrl+'img/instruction-guide/step3.png'}}" class="step-images" alt="">
+          </div>
+
+          <div class="ds-h4 ds-m-bold ds-c-black ds-mb-12p">
+            {{'FAMILY_UNIT.MENU_TITLE' | translate }}
+          </div>
+
+          <div class="ds-body-primary ds-r-regular ds-c-black ds-mb-32p">
+            {{'COMP_INSTRUCTION_GUIDE.CREATE_MEMBERS_PROFILE' | translate }}
+          </div>
+
+          <div class="ds-mb-16p ds-flex-row ds-jc-end">
+            <button class="ds-btn-primary ds-t-uppercase"  (click)="onNextStep('startedStep')">
+              {{'COMP_INSTRUCTION_GUIDE.NEXT_TEXT' | translate }}
+              <span class="ds-ml-8p icon-right-big-arrow"></span>
+            </button>
+          </div>
+        </div>
+      </ng-template>
+    </ng-container>
+
+    <ng-container *ngIf="instructionConfig.hasServices">
+      <ng-template Slide>
+        <div class="ds-flex-column">
+          <div class="ds-mb-24p">
+            <img src="{{staticContentUrl+'img/instruction-guide/step4.png'}}" class="step-images" alt="">
+          </div>
+
+          <div class="ds-h4 ds-m-bold ds-c-black ds-mb-12p">
+            {{'TUTORIAL.TITLE1' | translate }}
+          </div>
+
+          <div class="ds-body-primary ds-r-regular ds-c-black ds-mb-32p">
+            {{'COMP_INSTRUCTION_GUIDE.BROWSE_ALL_SERVICES' | translate }}
+          </div>
+
+          <div class="ds-mb-16p ds-flex-row ds-jc-end">
+            <button class="ds-btn-primary ds-t-uppercase"  (click)="onNextStep('startedStep')">
+              {{'COMP_INSTRUCTION_GUIDE.NEXT_TEXT' | translate }}
+              <span class="ds-ml-8p icon-right-big-arrow"></span>
+            </button>
+          </div>
+        </div>
+      </ng-template>
+    </ng-container>
+
+
+
+    <ng-container *ngIf="instructionConfig.hasJumbotrom">
+      <ng-template Slide >
+        <div class="ds-flex-column">
+          <div class="ds-mb-16p">
+            <img src="{{staticContentUrl+'img/instruction-guide/step5.png'}}" class="step-images" alt="">
+          </div>
+
+          <div class="ds-h4 ds-m-bold ds-c-black ds-mb-12p">
+            {{'COMP_INSTRUCTION_GUIDE.STATUS_OF_THE_SERVICES' | translate }}
+          </div>
+
+          <div class="ds-body-primary ds-r-regular ds-c-black ds-mb-16p">
+            {{'COMP_INSTRUCTION_GUIDE.ACTIVE_SERVICES_BAR' | translate }}
+          </div>
+
+          <div class="ds-mb-16p ds-flex-row ds-jc-center">
+            <button class="ds-btn-primary ds-t-uppercase"  (click)="finalize()">
+              {{'WIZARD.BTNS.COMPLETED' | translate }}
+              <span class="ds-ml-8p icon-right-big-arrow"></span>
+            </button>
+          </div>
+        </div>
+      </ng-template>
+
+    </ng-container>
+
+
+
+  </app-slider>
+
+</div>
+

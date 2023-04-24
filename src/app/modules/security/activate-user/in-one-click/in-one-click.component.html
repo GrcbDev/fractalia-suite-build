@@ -1,0 +1,19 @@
+
+<section class="row mr-0 ml-0 activation-section section-scroll-heigth" >
+  <app-activate-sidebar class="activation-section section-scroll-heigth" [logo]="logo" [textStep]="step">
+  </app-activate-sidebar>
+
+  <div class="container-fluid pt-5">
+    <div class="ds-mb-32p">
+      <app-access-password
+        (onSubmitAccessForm)="onSubmitAccessForm($event)"
+        [itIsOneStepActivation]="data.activeUsers1Click"
+        [(loadingPassword)]="loadingAccessForm"
+      >
+      </app-access-password>
+    </div>
+
+  </div>
+</section>
+
+

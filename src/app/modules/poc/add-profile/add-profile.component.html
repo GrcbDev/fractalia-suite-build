@@ -1,0 +1,126 @@
+
+<ng-container *ngIf="!addProfileSuccessForm; else addProfileSuccess">
+  <div class="d-flex w-100 justify-content-end">
+    <div class="icon-close ds-fs-14 ds-cur-pointer" (click)="closeModal()"></div>
+  </div>
+
+  <form class="d-flex flex-column" [formGroup]="addUserProfileForm">
+
+    <div class="ds-h3 ds-m-bold ds-c-black ds-mb-24p"> {{ "FAMILY_UNIT.TITLE_ADD" | translate }}</div>
+
+    <div class="d-flex align-items-center modal-width-fix">
+      <div class="photo">
+        <input
+          #profileImage
+          name="favicon"
+          type="file"
+          (change)="onUploadImagen($event)"
+          accept="image/x-png,image/jpeg,image/gif,image/x-icon"
+          style="display: none"
+        />
+        <button
+          type="button"
+          class="btn bback"
+          (click)="profileImage.click()"
+        >
+          <img
+            [src]="sanitizer.bypassSecurityTrustUrl(image)"
+            width="64"
+            height="64"
+            style="width: 64px; height: 64px; border-radius: 50%"
+          />
+        </button>
+      </div>
+      <div class="text">
+        <p class="title">
+          {{ "FAMILY_UNIT.PROFILE_PICTURE" | translate }}
+        </p>
+        <p class="subtitle">
+          {{ "FAMILY_UNIT.ACTION_DESCRIPTION" | translate }}
+        </p>
+      </div>
+    </div>
+
+    <span class="ds-caption ds-r-regular ds-c-secondary  ds-mb-12p">* {{ "FAMILY_UNIT.REQUIRED_FIELDS" | translate }}</span>
+
+    <div class="d-flex flex-column ds-mb-12p">
+      <label class="ds-label-control">{{ "FAMILY_UNIT.NAME" | translate }} *</label>
+      <input type="text" class="ds-control" formControlName="name">
+      <div *ngIf="isInputNameValid" class="loginError semantic-danger fs-12 lh-14 d-inline-flex align-items-center">
+        {{'CAMPO_REQUERIDO' | translate }}
+      </div>
+    </div>
+
+    <div class="d-flex flex-column ds-mb-12p">
+      <label class="ds-label-control">{{'COMP_USER.SURNAME' | translate}} *</label>
+      <input type="text" class="ds-control" formControlName="surname" >
+      <div *ngIf="isInputSurNameValid" class="loginError semantic-danger fs-12 lh-14 d-inline-flex align-items-center">
+        {{'CAMPO_REQUERIDO' | translate }}
+      </div>
+    </div>
+
+    <div class="d-flex flex-column ds-mb-12p">
+      <label class="ds-label-control">{{ "FAMILY_UNIT.EMAIL" | translate }} *</label>
+      <input type="text" class="ds-control" formControlName="email" >
+      <div *ngIf="isInputEmailValid" class="loginError semantic-danger fs-12 lh-14 d-inline-flex align-items-center">
+        {{'CAMPO_REQUERIDO' | translate }}
+      </div>
+    </div>
+
+    <div class="d-flex flex-column ds-mb-12p">
+      <label class="ds-label-control">{{ "FAMILY_UNIT.GENDER" | translate }} </label>
+      <select class="ds-control"  formControlName="gender" >
+        <option value="Male"> {{ "FAMILY_UNIT.MALE" | translate }} </option>
+        <option value="Female">{{ "FAMILY_UNIT.FEMALE" | translate }} </option>
+        <option value="NoAnswer">{{ "FAMILY_UNIT.NO_ANSWER" | translate }} </option>
+      </select>
+    </div>
+
+
+    <!-- <div class="d-flex flex-column ds-mb-32p">
+      <label class="ds-label-control">{{ "FAMILY_UNIT.TIME_ZONE" | translate }} </label>
+      <select class="ds-control"  formControlName="timezone" >
+        <option [value]="item" *ngFor="let item of timeZoneList"> {{item}} </option>
+      </select>
+    </div> -->
+
+
+    <div class="d-flex justify-content-end" >
+      <button class="btn btn-primary"  (click)="saveAddProfileForm()">
+        <span *ngIf="!loading">{{ "FAMILY_UNIT.BTN_CREATE" | translate }}</span>
+        <nz-spinner *ngIf="loading"></nz-spinner>
+      </button>
+    </div>
+  </form>
+
+</ng-container>
+
+
+<ng-template #addProfileSuccess>
+  <div class="d-flex flex-column">
+    <div class="ds-modal-header ds-mb-32p justify-content-end">
+      <i class="icon-close" (click)="closeModal()"></i>
+    </div>
+
+    <div class="ds-t-center d-flex flex-column ds-mb-32p">
+      <div class="icon-green-check fa-6x ds-c-success ds-mb-32p" ></div>
+
+      <div class="ds-h3 ds-m-bold ds-c-black ds-mb-12p">
+        {{ "FAMILY_UNIT.RESULT_TITLE_CREATE" | translate }}
+      </div>
+
+      <div class="ds-body-primary ds-r-regular ds-c-black "
+        [innerHTML]="'FAMILY_UNIT.RESULT_INFO_CREATE' | translate: { userName: profile.name}">
+      </div>
+
+    </div>
+
+    <div class="d-flex justify-content-end " >
+      <button class="btn btn-primary"  (click)="closeModal()">{{'COMP_USER.SUPPORT_NOTIFICATION.CLOSE'| translate}} </button>
+    </div>
+
+
+  </div>
+
+
+</ng-template>

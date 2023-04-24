@@ -1,0 +1,55 @@
+<div class="w-100">
+  <h2 class="title text-left mb-2 neutral-black fs-24 lh-29">
+    {{ "CYBERSCORING.SCORING_HISTORY" | translate }}
+  </h2>
+</div>
+<div class="card w-100 mb-5">
+  <div class="container-fluid" *ngIf="dataC.historicalRating.length >= 2">
+    <h2 class="title text-left pt-4 mb-4 ml-4 crit-label">
+      {{ "CYBERSCORING.SCORE" | translate }}
+    </h2>
+    <div class="d-flex flex-row w-100">
+      <canvas
+        class="h-90 mb-4 mwp-90"
+        baseChart
+        [datasets]="chartDataset"
+        [chartType]="chartType"
+        [labels]="chartLabels"
+        [options]="chartOptions"
+      >
+      </canvas>
+      <div class="d-flex flex-column pl-2 w-10">
+        <span class="w-100 mb-2 mt-2 text-left custom-legend">{{
+          "CYBERSCORING.GOOD" | translate
+        }}</span>
+        <span class="w-100 mb-5 mt-3 text-left custom-legend">{{
+          "CYBERSCORING.FAIR" | translate
+        }}</span>
+        <span class="w-100 mb-5 text-left custom-legend">{{
+          "CYBERSCORING.POOR" | translate
+        }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid" *ngIf="dataC.historicalRating.length < 2">
+    <section class="row">
+      <div class="col-sm-12 pl-0 pr-0 d-flex justify-content-center">
+        <img
+          class="new-modal-img mw-148 mt-96"
+          src="{{ staticContentUrl + 'img/no-data.png' }}"
+        />
+      </div>
+      <div class="col-sm-12 mb-3">
+        <h3 class="text-center fs-20 bold lh-24 neutral-black">
+          {{ "CYBERSCORING.NO_DATA_TITLE" | translate }}
+        </h3>
+      </div>
+      <div class="col-sm-12 pr-0 pl-0 align-items-center mb-90">
+        <p class="text-center cyb-body-text mb-0">
+          {{ "CYBERSCORING.NO_DATA_DESC" | translate }}
+        </p>
+      </div>
+    </section>
+  </div>
+</div>

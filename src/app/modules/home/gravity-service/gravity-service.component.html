@@ -1,0 +1,27 @@
+<section class="ds-card ">
+
+  <div class="ds-card-header align-items-center">
+      <div class="d-flex align-items-center">
+        <span class="{{data.icon }} mr-2"></span>
+        <div class="ds-h4 ds-m-bold ds-c-black">
+          {{data.name}}
+        </div>
+      </div>
+      <span class="icon-info ds-header-icon-right cursor" (click)="open(data.name, data.longDesc, data.icon)"></span>
+  </div>
+
+  <div class="ds-card-body">
+    <app-gravity-integrated [service]="data"></app-gravity-integrated>
+    <!-- <ng-container *ngIf="!isloading; else loadingTemplate">
+    </ng-container>
+
+    <ng-template #loadingTemplate>
+      <div class="default-section fa-3x">
+        <i class="fas fa-spinner fa-spin"></i>
+      </div>
+    </ng-template> -->
+  </div>
+
+
+</section>
+

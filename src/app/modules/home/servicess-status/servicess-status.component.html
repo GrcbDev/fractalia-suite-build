@@ -1,0 +1,74 @@
+ <div class="d-flex flex-column" *ngIf="showJumbotrom"  id="jumbotrom">
+
+
+  <div class="d-flex" *ngIf="jumbotronData">
+    <div class="ds-r-bold ds-c-secondary ds-fs-14 ds-t-uppercase ds-mb-8p">{{'COMP_SERVICE_STATUS.SERVICES_STATUS'| translate}}</div>
+    <span class="{{ jumbotronData.levelProtectionConfig.levelClassCss }} cursor ml-2" id="service-status-icon-mobile" (click)="openStatusServiceModal()" >
+      <span class="{{jumbotronData.levelProtectionConfig.iconConfig}}"></span>
+    </span>
+  </div>
+
+  <div class="ds-card ds-jumbotron">
+
+
+    <ng-container *ngIf="!isloading;">
+      <div class="jumbotron-summary">
+        <span class="ds-caption ds-r-regular ds-c-black ds-mb-12p">{{'COMP_SERVICE_STATUS.PROTECTION_LEVEL'| translate}}</span>
+
+        <span class="ds-h2 ds-m-bold {{ jumbotronData.levelProtectionConfig.levelClassCss }} cursor" (click)="openStatusServiceModal()" >
+          {{ jumbotronData.levelProtectionConfig.translatedText }}
+          <span class="{{jumbotronData.levelProtectionConfig.iconConfig}}"></span>
+        </span>
+      </div>
+      <div class="jumbotron-cards" #carrouselContainer>
+
+        <a
+          #prevMove
+          href="javascript:void(0)"
+          class="jumbotron-arrows"
+          (mousedown)="onLeftMove()"
+          (mouseup)="onFinishMove()"
+          >
+          <i class="icon-left-arrow"></i>
+        </a>
+        <div class="jumbotron-items">
+          <div class="carrousel" #carrousel>
+            <div class="carrousel-inner" #innerCarrousel>
+              <ng-container *ngFor="let item of jumbotronData.services; let i = index">
+                <div class="jumbotron-item {{item.borderClass}}" (click)="goToService(item)"  [tooltip]="item.serviceName" >
+                  <div class="d-flex ds-fs-24">
+                    <span class="{{item.serviceIcon}}"></span>
+                    <span class="ds-fs-16 {{item.iconClass}} {{item.colorClass}} "></span>
+                  </div>
+                </div>
+
+              </ng-container>
+
+            </div>
+          </div>
+        </div>
+
+        <a
+          #nextMove
+          href="javascript:void(0)"
+          class="jumbotron-arrows"
+          (mousedown)="onRightMove()"
+          (mouseup)="onFinishMove()">
+          <i class="icon-right-arrow"></i>
+      </a>
+      </div>
+    </ng-container>
+
+    <ng-template #loadingTemplate>
+      <div class="w-100 text-center fa-2x">
+        <i class="fas fa-spinner fa-spin"></i>
+      </div>
+    </ng-template>
+
+
+  </div>
+
+
+
+</div>
+

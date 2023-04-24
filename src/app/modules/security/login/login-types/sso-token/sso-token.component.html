@@ -1,0 +1,89 @@
+<section class="loginBox">
+  <div class="container-fluid pl-0 px-0">
+    <div class="row vh-100 no-gutters">
+      <div class="col-md-4 d-flex flex-column auth-bg-section loginText" [ngStyle]="{ 'background-image': loginTypeService.backgroundImage }" >
+        <div class="header">
+          <img class="logo" alt="logo" src="{{ partnerService.partner.logotipo }}"/>
+          <h3>{{ partnerService.partner.name }}</h3>
+        </div>
+        <div class="body d-md-block d-none">
+          <h5>{{ partnerService.partner.loginTitle }}</h5>
+          <p>{{ partnerService.partner.loginSubtitle }}</p>
+        </div>
+      </div>
+      <div class="col-md-8 ds-flex-row ds-al-center ds-jc-center">
+        <div class="login-container-form">
+
+          <span class="ds-h2 ds-m-bold ds-c-black">
+            {{'COMP_PARTNER.LOGIN.LOGIN_SSO_TEXT' | translate}}
+          </span>
+
+
+
+          <div class="ds-login-contact-us">
+            <div class="ds-r-bold ds-caption ds-c-secondary ds-mb-12p">
+              {{ partnerService.partner.communicationsTitle }}
+            </div>
+            <div class="ds-login-icons" style="margin-bottom: 24px;">
+              <a
+                href="tel:{{ partnerService.partner.phone }}"
+                *ngIf="
+                  partnerService.partner.includePhone &&
+                  partnerService.partner.phone
+                "
+              >
+                <div class="icon-phone ds-mr-8p"></div>
+                {{ partnerService.partner.phone }}
+              </a>
+              <a
+                href="https://api.whatsapp.com/send?phone={{
+                  partnerService.partner.whatsapp
+                }}"
+                target="_blank"
+                *ngIf="
+                  partnerService.partner.includeWhatsapp &&
+                  partnerService.partner.whatsapp
+                "
+              >
+                <div class="icon-whatsapp ds-mr-8p"></div>
+                {{ partnerService.partner.whatsapp }}
+              </a>
+              <a
+                href="mailto:{{ partnerService.partner.email }}"
+                *ngIf="
+                  partnerService.partner.includeEmail &&
+                  partnerService.partner.email
+                "
+              >
+                <div class="icon-envelope ds-mr-8p"></div>
+                {{ partnerService.partner.email }}
+              </a>
+            </div>
+          </div>
+          <div class="ds-login-language">
+            <app-custom-select
+              *ngIf="loginTypeService.languages.length > 1"
+              [placeholder]="loginTypeService.dropdownLanguage"
+              [items]="loginTypeService.languages"
+              (changeEvent)="onChange($event)"
+            >
+            </app-custom-select>
+            <div
+              *ngIf="loginTypeService.languages.length <= 1"
+              class="ds-r-regular ds-body-secondary ds-c-secondary ds-caption"
+            >
+              <span class="icon-globe mr-2"></span> <span>{{ loginTypeService.languages[0].value }}</span>
+            </div>
+          </div>
+
+          <div class="ds-terms-and-conditions">
+            <span (click)="goToTerms()"> {{'TERMINOS_CONDICIONES' | translate}} </span>
+            <span (click)="goCookiesPolicy()">  {{'COOKIES.COOKIES_POLICY' | translate}} </span>
+            <span (click)="goToPrivacyPolicy()"> {{'COOKIES.PRIVACY_POLICY' | translate}} </span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,219 @@
+
+
+  <div class="ds-modal-header ds-p-24p">
+    <span class="ds-modal-title ds-h2 ds-m-bold ds-c-black-zero"> {{ "FAMILY_UNIT.PROFILE_INFO" | translate }}</span>
+    <i class="icon-close ds-cur-pointer ds-fs-18" (click)="closeModal()"></i>
+  </div>
+
+  <ng-container *ngIf="!loading">
+    <div class="section-image ds-px-24p">
+      <div *ngIf="!profile.photo" class="icon-user ds-fs-40 text-center image" style="background-color: #ecf1f8; border-radius: 50px;" ></div>
+                      <img *ngIf="profile.photo"
+                      class="image"
+                      [src]="profile.photo"
+                      alt=""
+                    />
+
+      <div class="content-profile-image">
+        <div class="ds-flex-column">
+          <span class="ds-r-bold ds-body-primary ds-c-black ds-mb-8p">{{ profile.name + " " + profile.surname }}</span>
+          <span class="ds-r-regular ds-body-primary ds-c-black ds-mb-8p">{{ profile.email }}</span>
+        </div>
+
+
+        <div class="ds-r-regular ds-body-primary ds-c-black" *ngIf="!profile.isOwnerAccount">
+          {{ "FAMILY_UNIT.PROFILE_CREATION_DATE" | translate }}&nbsp;{{ profile.creationDate | date : "dd/MM/yyyy" }}
+        </div>
+      </div>
+
+    </div>
+
+    <span class="section-mode-view ds-mx-24p ds-mb-32p">
+      <div class="icons">
+        <span
+          class="icon-view-list ds-cur-pointer"
+          [ngClass]="{ 'ds-c-primary' :  showServiceInTable}"
+          (click)="onShowServiceInTable()">
+        </span>
+        <span
+          class="icon-view-module ds-cur-pointer"
+          [ngClass]="{ 'ds-c-primary' :  !showServiceInTable}"
+          (click)="onHideServiceInTable()">
+        </span>
+      </div>
+    </span>
+
+
+    <div class="grid-content">
+      <div  [hidden]="!showServiceInTable" >
+        <div class="easy-table" style="height: 400px; overflow-y: auto; overflow-x: hidden; padding: 8px;">
+
+          <div class="easy-table-header">
+            <div class="cell padd ">{{ "FAMILY_UNIT.USER_DETAIL_TABLE_TITLE_1" | translate }}</div>
+            <div class="cell text-center">{{ "FAMILY_UNIT.USER_DETAIL_TABLE_TITLE_2" | translate }}</div>
+            <div class="cell padd">{{ "FAMILY_UNIT.USER_DETAIL_TABLE_TITLE_3" | translate }}</div>
+            <div class="cell padd">{{ "FAMILY_UNIT.USER_DETAIL_TABLE_TITLE_4" | translate }}</div>
+          </div>
+
+          <div class="easy-table-row" *ngFor="let item of serviceList">
+            <div class="cell padd right-border">
+              <span class="">{{item.name}}</span>
+            </div>
+            <div class="cell text-center right-border">
+              <span class="circle-status" [ngClass]="{ 'status-ok':  item.isUsed }"></span>
+            </div>
+            <div class="cell padd right-border" [ngClass]="{ 'text-center':  item.devices.length === 0 }">
+              <ng-container *ngIf="item.devices.length; else noItem">
+                <div class="ds-flex-column">
+                  <span class="device-service" *ngFor="let device of item.devices; let c = index" [ngClass]="{ 'ds-mt-12p': c > 0 }">
+                    <div class="{{device.itemIcon}} ds-mr-8p"></div>
+                    <span class="ds-t-elipssis">{{device.itemName}}</span>
+                  </span>
+                </div>
+              </ng-container>
+
+              <ng-template #noItem>
+                <span class="ds-caption ds-r-regular ds-c-black"> -</span>
+              </ng-template>
+            </div>
+            <div class="cell padd" [ngClass]="{ 'text-center':  item.devices.length === 0 }">
+              <ng-container *ngIf="item.devices.length; else noItem2">
+                <div class="ds-flex-column">
+                  <div
+                    style="height: 30px;"
+                    *ngFor="let device of item.devices; let c = index" [ngClass]="{ 'ds-mt-12p': c > 0 }"
+                    class=" ds-flex-row ds-al-center"
+                  >
+                    <ng-container *ngIf="device.itemStatus === 0">
+                      <div class="icon-shield-check ds-c-success ds-mr-8p ds-fs-18 fade-infinite "></div>
+                      <span class="ds-caption ds-r-bold ds-c-success">{{'CYBERALARM.IDENTITIES.PROTECTING' | translate}}</span>
+                    </ng-container>
+
+                    <ng-container *ngIf="device.itemStatus > 0">
+                      <div class="icon-shield-cross ds-c-danger ds-mr-8p ds-fs-18 "></div>
+                      <span class="ds-caption ds-r-bold ds-c-danger">{{'CYBERALARM.IDENTITIES.DANGER' | translate}}</span>
+                    </ng-container>
+
+                  </div>
+                </div>
+              </ng-container>
+
+              <ng-template #noItem2>
+                <span class="ds-caption ds-r-regular ds-c-black"> -</span>
+              </ng-template>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+
+      <div [hidden]="showServiceInTable">
+
+        <div class="ds-flex-column" style="height: 400px; overflow-y: auto; overflow-x: hidden; padding: 8px;">
+          <ng-container *ngFor="let item of serviceList">
+            <ng-container *ngIf="item.devices.length">
+              <span class="ds-body-primary ds-r-bold ds-c-black-zero ds-mb-12p ">{{item.name}}</span>
+
+              <div class="row ds-mb-24p" >
+                <div class="col-xl-4 ds-mb-12p"  *ngFor="let device of item.devices; let c = index">
+                  <div class="card p-2 h-100 status" [ngClass]="device.itemStatus === 0 ? 'ok' : 'ko'" style="height: 182px !important;">
+
+                    <div class="card-body p-0" >
+                      <div class="card-user-info">
+                        <div class="user-small-image" >
+                          <img [src]="imageRounded" alt="" class="small-image">
+                        </div>
+                        <div class="ds-body-primary ds-r-regular ds-c-black ">
+                          {{ profile.name + " " + profile.surname }}
+                        </div>
+                      </div>
+
+
+
+                      <p class="neutral-black fs-16 mb-0 identity-email">
+                        <b *ngIf="item.serviceType=='CII'">{{'CYBERALARM.IDENTITIES.EMAIL' | translate}}:</b>
+                        <b *ngIf="item.serviceType=='CIT'">{{'CYBERALARM.CARDS.ALIAS' | translate}}:</b>
+                        <b *ngIf="['BMS','MSM'].includes(item.serviceType)">{{'CYBERSECURITY.PROTECTION.DEVICE' | translate}}:</b>
+                        <span class="neutral-black fs-16 ">
+                            {{device.itemName}}
+                        </span>
+                      </p>
+                      <p class="neutral-black fs-16 mb-0 identity-email" *ngIf="['CIT'].includes(item.serviceType)">
+                        <b *ngIf="item.serviceType=='CIT'">{{'CYBERALARM.CARDS.NUM' | translate}}:</b>
+                        <span class="neutral-black fs-16 ">
+                            {{device.itemValue}}
+                        </span>
+                      </p>
+                      <p class="neutral-black fs-16 mb-0">
+                        <b>{{'CYBERALARM.IDENTITIES.LASTANALISYS' | translate}}</b>
+                        <span class="neutral-black fs-16">
+                            {{device.itemDate | date : "dd/MM/yyyy" }}
+                        </span>
+                      </p>
+                    </div>
+
+                    <div class="card-footer p-0">
+                      <div class="d-flex align-items-center justify-content-between">
+                        <div class="creditcard-icon" >
+                          <div class="creditcard-status">
+                            <div *ngIf="device.itemStatus === 0" class="d-flex">
+                              <div class="icon-shield-check semantic-success fs-24 fade-infinite"></div>
+                                <span class="ml-2 semantic-success align-self-center fs-16 lh-19"><b>{{'CYBERALARM.IDENTITIES.PROTECTING' | translate}}</b></span>
+                              </div>
+                              <div *ngIf="device.itemStatus > 0" class="d-flex">
+                                <div class="icon-shield-cross semantic-danger fs-24"></div>
+                                <span class="ml-2 semantic-danger align-self-center fs-16 lh-19"><b>{{'CYBERALARM.IDENTITIES.DANGER' | translate}}</b></span>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="d-flex justify-content-end">
+
+                            <div class="d-flex align-items-center mr-2 cursor-pointer"
+                                *ngIf="device.itemStatus > 0 && (item.serviceType=='CII' || item.serviceType=='CIT')"
+                                (click)="openWarningModal(item, device)">
+                              <div class="icon-warning fs-18 semantic-danger"></div>
+                            </div>
+                            <div class="d-flex align-items-center cursor-pointer" *ngIf="item.serviceType=='CII' || item.serviceType=='CIT'" (click)="deleteItem(item, device)">
+                              <div class="icon-trash fs-20 main-secondary"></div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </ng-container>
+
+
+
+
+          </ng-container>
+
+        </div>
+
+
+
+      </div>
+
+
+    </div>
+
+  </ng-container>
+
+
+  <ng-container *ngIf="loading">
+    <div class="fa-3x default-section-600p ">
+      <i class="fas fa-spinner fa-spin"></i>
+    </div>
+  </ng-container>
+
+
+
+
+
+
+
+

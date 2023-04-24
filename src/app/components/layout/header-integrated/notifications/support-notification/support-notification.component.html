@@ -1,0 +1,55 @@
+<div class="notif-container" >
+  <ng-container *ngIf="notifications.length > 0; else dontHaveNotifications"> </ng-container>
+
+  <div class="mb-4" *ngFor="let dateNotifications of notifications" [ngSwitch]="dateNotifications.notificationDate">
+    <div class="d-flex justify-content-center align-items-end r-regular">
+      <span *ngSwitchCase="(currentDate)"> {{'NOTIFICATIONS.TODAY' | translate}}</span>
+      <span *ngSwitchCase="(yesterdayDate)"> {{'NOTIFICATIONS.YESTERDAY' | translate}}</span>
+      <span *ngSwitchDefault> {{ dateNotifications.notificationDate }}</span>
+    </div>
+    <hr class="hr-color">
+    <div class="d-flex align-items-center mb-4"  *ngFor="let notification of dateNotifications.notifications">
+      <div class="section--icon flex-column alerta">
+        <div class="alerta-icon ">
+          <div class="{{notification.serviceIcon}} ds-service-icon" style="font-size: 3em; color: #242B59;"></div> <span>{{notification.serviceName}}</span>
+        </div>
+      </div>
+      <div class="section--text">
+        <div class="ml-2 ds-r-regular ds-c-secondary"> {{(notification.notificationDate.toString()+'Z').toLocaleString() | date: 'HH:mm'}}</div>
+        <div class="background-alert" [ngClass]="notification.readed  ? 'ds-bg-background' : 'ds-bg-secondary-disabled'">
+          <p class="body-font d-flex text-align-justify ds-c-black mb-0" style="word-break: break-word;" [innerText]="notification.description">
+          </p>
+
+          <div class="link-content r-regular">
+            <div class="d-flex align-items-center mr-2 mb-2" *ngFor="let item of notification.parseLinks">
+              <a href="{{item.linkUrl}}" target="_blank" style="color: #0349FE;">
+                <i class="fas fa-link"></i>
+                <span class="ml-1">{{item.linkName}}</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="link-content r-regular">
+            <div class="d-flex align-items-center mr-2 mb-2" *ngFor="let item of notification.parseFiles;let i = index ">
+              <a href="javascript:void(0)" (click)="downloadFile(notification,i)" style="color: #0349FE;">
+                <i class="fa fa-download"></i>
+                <span class="ml-1">{{item}}</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <ng-template #dontHaveNotifications>
+    <div class="no-alerta">
+      <div class="none-notification icon-bell mb-2">
+        <p class="regular">{{'COMP_USER.SUPPORT_NOTIFICATION.NO_NOTIFICATIONS_YET' | translate}}</p>
+      </div>
+    </div>
+  </ng-template>
+
+</div>

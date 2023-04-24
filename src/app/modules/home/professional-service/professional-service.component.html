@@ -1,0 +1,28 @@
+<section class="ds-card informative-service-content">
+  <ng-container  *ngIf="!isloading; else loadingTemplate">
+    <div class="ds-card-header align-items-center">
+      <div class="d-flex align-items-center">
+        <span class="{{data.icon }} ds-fs-24 mr-2"></span>
+        <div class="ds-h4 ds-m-bold ds-c-black">
+          {{data.name}}
+        </div>
+      </div>
+      <span class="icon-info ds-header-icon-right cursor" (click)="open(data.name, data.longDesc, data.icon)" ></span>
+    </div>
+
+    <div class="ds-card-body">
+      <ng-container >
+        <div class="ds-r-regular ds-fs-16 ds-body-primary ds-c-black ds-t-justify ds-mb-24p" [innerHTML]="data.longDesc">
+        </div>
+        <button class="btn btn-primary" (click)="openService()">{{ 'ACCESS_THE_SERVICE'  | translate  }}</button>
+      </ng-container>
+    </div>
+  </ng-container>
+
+  <ng-template #loadingTemplate>
+    <div class="default-section fa-3x">
+      <i class="fas fa-spinner fa-spin"></i>
+    </div>
+  </ng-template>
+
+</section>

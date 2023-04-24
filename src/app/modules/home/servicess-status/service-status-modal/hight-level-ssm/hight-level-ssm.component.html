@@ -1,0 +1,23 @@
+<div class="d-flex justify-content-center text-center align-items-center flex-column">
+
+  <div class="icon-green-check fa-7x ds-c-success"></div>
+
+  <div class="ds-h3 ds-m-bold ds-c-black ds-mb-12p">{{'COMP_SERVICE_STATUS.CONGRATULATIONS'| translate}}</div>
+
+  <div class="ds-body-primary ds-c-black ds-r-regular ds-mb-24p">
+    {{'COMP_SERVICE_STATUS.SERVICES_ACTIVATED'| translate}}
+  </div>
+
+  <div class="ds-body-primary ds-c-black ds-r-regular ds-mb-24p" *ngIf="!allServicesActivated">
+    {{'COMP_SERVICE_STATUS.LEVEL_PROTECTION_HIGH'| translate}}
+  </div>
+
+
+  <div class="jumbotron-item orange" *ngIf="!allServicesActivated">
+    <div class="d-flex ds-fs-24 justify-content-end">
+      <span class="icon-exclam ds-fs-16 ds-c-orange"></span>
+    </div>
+  </div>
+
+
+</div>

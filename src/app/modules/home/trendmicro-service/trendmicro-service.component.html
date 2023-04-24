@@ -1,0 +1,201 @@
+<section class="ds-card informative-service-content">
+  <ng-container *ngIf="!isloading; else loadingTemplate">
+    <div class="ds-card-header align-items-center">
+      <div class="d-flex align-items-center">
+        <span class="{{data.icon }} ds-fs-24 mr-2"></span>
+        <div class="ds-h4 ds-m-bold ds-c-black">
+          {{data.name}}
+        </div>
+      </div>
+      <span class="icon-info ds-header-icon-right cursor" (click)="open(data.name, data.longDesc, data.icon)"></span>
+    </div>
+    <div class="ds-card-body">
+      <ng-container>
+        <!--Usuario sin licencia-->
+        <div *ngIf="!trendmicroservice.trendmicro.created"
+          class="ds-card-body ds-flex-column ds-jc-center ds-al-center">
+          <div class="{{data.icon}} mb-2 mt-4 mx-auto main-primary cyber-main-icon">
+          </div>
+          <h2 class="text-center neutral-black cyb-body-title">
+            {{data.name}}
+          </h2>
+          <p class="text-center cyb-body-text">
+            <strong>{{'TRENDMICRO.NO_LICENSE_MSG_a' | translate}}</strong>
+          </p>
+          <p class="text-center cyb-body-text">{{'TRENDMICRO.NO_LICENSE_MSG_b' | translate}}</p>
+        </div>
+
+        <!--Licencia activa - sin dispositivos registrados-->
+        <div *ngIf="trendmicroservice.trendmicro.created">
+
+            <section class="ds-card" *ngIf="trendmicroservice.trendmicro.devices.length == 0">
+
+              <div class="cac-progress-container" >
+                <div class="col-md-4 cac-line-step active ds-flex-row ds-jc-center">
+                  <div class="cac-circle active">
+                    <span class="icon-tick-round ds-fs-40"></span>
+                  </div>
+                </div>
+
+                <div class="col-md-4   ds-flex-row ds-jc-center" >
+                  <div class="cac-circle " >
+                    <span class=" ds-fs-32 icon-download2"></span>
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="cac-steps-mobile">
+
+                <div class="cac-progress-container-mobile">
+                  <div class="cac-progress" [ngStyle]="{'width': widthPercent }"></div>
+
+                  <div class="cac-circle-mobile active">
+                    <span class="icon-tick-round ds-fs-20"></span>
+
+                  </div>
+
+                  <div class="cac-circle-mobile" >
+                    <span class="ds-body-primary ds-r-regular ">2</span>
+
+                  </div>
+                </div>
+                <div class="col-md-4   ds-flex-row ds-jc-center" >
+                  <div class="cac-circle " >
+                    <span class=" ds-fs-32 icon-download2"></span>
+                  </div>
+                </div>
+                <h4 class="multistep-name neutral-black fs-16 mt-3 text-center">
+                  {{'TRENDMICRO.LICENSE_STEP_2' | translate}}
+                </h4>
+                <p class="ds-body-primary  mt-2 text-center">
+                  {{'TRENDMICRO.LICENSE_STEP_2_MSG_a' | translate}}<strong class="ds-t-uppercase">{{'WIZARD.BTNS.DOWNLOAD' | translate}}</strong>{{'TRENDMICRO.LICENSE_STEP_2_MSG_b' | translate}}
+                </p>
+                <p class="ds-body-primary  mt-2 text-center">
+                  {{'TRENDMICRO.LICENSE_STEP_2_MSG_c' | translate}}<strong class="ds-t-uppercase">{{'WIZARD.BTNS.CONTINUE' | translate}}</strong>".
+                </p>
+                <div class="multistep-btns mt-2">
+                  <button style="width: 200px" class="btn btn-primary activation-service-btn" (click)="downloadTRE()">
+                    <nz-spinner *ngIf="loading"></nz-spinner>
+                    <div *ngIf="!loading" class="text-uppercase">
+                      {{'WIZARD.BTNS.DOWNLOAD' | translate}}
+                    </div>
+                  </button>
+                </div>
+                <div class="multistep-btns mt-2">
+                  <button style="width: 200px" class="ds-btn-secondary ds-t-uppercase "
+                  (click)="openInfoModal()">
+                    <div class="text-uppercase">
+                      {{'WIZARD.BTNS.CONTINUE' | translate}}
+                    </div>
+                  </button>
+                </div>
+
+
+              </div>
+
+              <div class="d-flex justify-content-center " >
+                <div class="cac-two cac-mobile-d-none"  >
+
+                  <div class="ds-flex-column ds-al-center ds-t-center ds-px-24p" style="width:500px">
+                    <h4 class="multistep-name neutral-black fs-16 mt-3 text-center">
+                      {{'TRENDMICRO.LICENSE_STEP_1' | translate}}
+                    </h4>
+                    <p class="ds-body-primary mt-2 text-center">
+                      {{'TRENDMICRO.LICENSE_STEP_1_MSG_a' | translate}}
+                    </p>
+                  </div>
+
+                  <div class="ds-flex-column ds-al-center ds-t-center ds-px-24p"  style="width:500px">
+                    <h4 class="multistep-name neutral-black fs-16 mt-3 text-center">
+                      {{'TRENDMICRO.LICENSE_STEP_2' | translate}}
+                    </h4>
+                    <p class="ds-body-primary  mt-2 text-center">
+                      {{'TRENDMICRO.LICENSE_STEP_2_MSG_a' | translate}}<strong class="ds-t-uppercase">{{'WIZARD.BTNS.DOWNLOAD' | translate}}</strong>{{'TRENDMICRO.LICENSE_STEP_2_MSG_b' | translate}}
+                    </p>
+                    <p class="ds-body-primary  mt-2 text-center">
+                      {{'TRENDMICRO.LICENSE_STEP_2_MSG_c' | translate}}<strong class="ds-t-uppercase">{{'WIZARD.BTNS.CONTINUE' | translate}}</strong>".
+                    </p>
+                    <div class="multistep-btns mt-2">
+                      <button style="width: 200px" class="btn btn-primary activation-service-btn" (click)="downloadTRE()">
+                        <nz-spinner *ngIf="loading"></nz-spinner>
+                        <div *ngIf="!loading" class="text-uppercase">
+                          {{'WIZARD.BTNS.DOWNLOAD' | translate}}
+                        </div>
+                      </button>
+                    </div>
+                    <div class="multistep-btns mt-2">
+                      <button style="width: 200px" class="ds-btn-secondary ds-t-uppercase "
+                      (click)="openInfoModal()">
+                        <div class="text-uppercase">
+                          {{'WIZARD.BTNS.CONTINUE' | translate}}
+                        </div>
+                      </button>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </section>
+
+
+        </div>
+  <!--Licencia activa - con dispositivos registrados-->
+        <div *ngIf="trendmicroservice.trendmicro.created">
+          <div *ngIf="trendmicroservice.trendmicro.devices.length > 0"  class="h-100 row justify-content-center align-items-center">
+            <div
+              class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12 pt-4 justify-content-between d-flex flex-column mobile-mb ds-border">
+              <div class="text-center">
+                <div class="col-lg-12 col-md-12 col-sm-12 d-flex justify-content-start flex-column"
+                  *ngIf="!mobile && !tablet">
+                  <img class="multistep-step animated bounceIn" src="{{staticContentUrl+'img/completed-circle.png'}}">
+                  <br />
+                  <h3 class="text-center neutral-black cyb-body-title">
+                    {{'COMP_GRAVITY.DEVICES' | translate}}
+                  </h3>
+                  <p class="text-center crit-label">
+                    {{'TRENDMICRO.LICENSE_STEP_2_MSG_d' | translate}}
+                  </p>
+                  <!--<br />
+                  <p style="font-size: xx-small;" class="multistep-desc mt-2 text-center">
+                    {{'TRENDMICRO.LICENSE_STEP_2_MSG_e' | translate}}&nbsp;N/A
+                  </p>-->
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12 pt-4 justify-content-between d-flex flex-column">
+              <div class="text-center">
+                <h2 class="title text-center mb-4 neutral-black fs-16">
+                  {{'CYBERSECURITY.PROTECTION.BTN_SSO_MANAGE' | translate}}</h2>
+                <span class="text-center crit-label">
+                  {{'TRENDMICRO.LICENSE_STEP_2_MSG_f' | translate}}
+                </span>
+              </div>
+              <div class="text-center multistep-btns mt-4">
+                <button class="ds-btn-primary " (click)="downloadTRE()">
+                  <nz-spinner *ngIf="loading"></nz-spinner>
+                  <div *ngIf="!loading" class="text-uppercase">
+                    {{'CYBERSECURITY.PROTECTION.BTN_SSO_MANAGE' | translate}}
+                  </div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+      </ng-container>
+    </div>
+  </ng-container>
+
+  <ng-template #loadingTemplate>
+    <div class="default-section fa-3x">
+      <i class="fas fa-spinner fa-spin"></i>
+    </div>
+  </ng-template>
+</section>
+
+

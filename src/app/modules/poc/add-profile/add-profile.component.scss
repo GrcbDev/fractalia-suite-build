@@ -1,0 +1,36 @@
+.add-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 64px;
+  border: solid 2px #bcc4d4;
+  width: 64px;
+  color: #bcc4d4;
+  border-radius: 64px;
+  cursor: pointer;
+}
+
+.modal-head-container {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.close-container {
+  display: flex;
+  justify-content: end;
+}
+
+.modal-width-fix {
+  width: 482px;
+}
+
+@media only screen and (max-width: 767px) {
+  .modal-width-fix {
+    width: 360px;
+  }
+}
+
+p.title {
+  color: #34383f;
+  font-weight: bold;
+}

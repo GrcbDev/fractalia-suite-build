@@ -1,0 +1,57 @@
+<div class="w-100">
+    <h2 class="title text-left mb-2 neutral-black fs-24 lh-29">
+      {{ "CYBERSCORING.INFO_HISTORY" | translate }}
+    </h2>
+  </div>
+
+  <div class="table-responsive card w-100 mb-5">
+    <table class="table table-bordered no-border mb-0">
+      <thead>
+        <tr>
+          <th class="custom-th text-center" scope="col">
+            {{ "COMP_PARTNERS.DOMAIN" | translate }}
+          </th>
+          <th class="custom-th text-center" scope="col">
+            {{ "CYBERSCORING.TABLE_SCORE" | translate }}
+          </th>
+          <th class="custom-th text-center" scope="col">
+            {{ "CYBERSCORING.TABLE_DATE" | translate }}
+          </th>
+          <th class="custom-th text-center" scope="col">
+            {{ "CYBERSCORING.TABLE_REPORT" | translate }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of dataC.reports">
+          <td class="custom-td text-center">{{ item.businessName }}</td>
+          <td
+            class="custom-td text-center"
+            [ngClass]="{
+              'score-good': item.score >= 900,
+              'score-mid': item.score < 900 && item.score >= 700,
+              'score-low': item.score < 700
+            }"
+          >
+            {{ item.score }}
+          </td>
+          <td class="custom-td text-center">
+            {{
+              (item.date.toString() + "Z").toLocaleString()
+                | date : "dd/MM/yyyy"
+            }}
+          </td>
+          <td class="custom-td text-center minw-250" width="250">
+            <button
+              type="button"
+              class="btn btn-outline-secondary text-center d-block mx-auto"
+              (click)="getLastReport(item.cyberscoringId)"
+            >
+              <div class="icon-download"></div>
+              {{ "CYBERSCORING.DOWNLOAD_LAST_BUTTON" | translate }}
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

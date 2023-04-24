@@ -1,0 +1,27 @@
+
+<form class="ds-login-form" [formGroup]="recoverPasswordForm" (ngSubmit)="onSubmitRecoverPassword()">
+
+  <div class="ds-h2 ds-m-bold ds-c-black ds-mb-12p">{{'RESET_PASSWORD.TITLE' | translate}}</div>
+
+  <div class="ds-body-primary ds-r-regular ds-c-black ds-mb-24p">
+    {{'COMP_PARTNER.LOGIN.WRITE_EMAIL' | translate}}
+  </div>
+
+  <div class="ds-flex-column ds-mb-24p">
+    <label class="ds-body-secondary ds-r-regular ds-c-black ">{{partnerService.partner.userPlaceholder}}</label>
+    <input type="text" class="ds-control"  formControlName="email" [placeholder]="partnerService.partner.userPlaceholder || '' ">
+  </div>
+
+  <div class="ds-flex-row ds-jc-start ds-mb-24p">
+    <button class="ds-btn-primary ds-r-bold ds-text-upper">
+      <nz-spinner *ngIf="loading">loading</nz-spinner>
+      <div *ngIf="!loading">  {{'RESET_PASSWORD.RECOVER_PASSWORD' | translate}}</div>
+    </button>
+  </div>
+</form>
+
+<div class="ds-login-forget-password">
+  <div class="ds-r-regular ds-body-secondary ds-c-secondary ds-mb-24p">{{'RESET_PASSWORD.REMEMBER_PASSWORD' | translate}}</div>
+
+  <button  class="ds-btn-secondary ds-r-bold ds-t-uppercase" (click)="goToLogin()">{{"ACCEDER" | translate}}</button>
+</div>

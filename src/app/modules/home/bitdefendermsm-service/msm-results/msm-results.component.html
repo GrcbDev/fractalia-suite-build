@@ -1,0 +1,367 @@
+
+<section class="ds-card informative-service-content" *ngIf="!isFullPage">
+  <div class="ds-card-body">
+    <div class="h-100 row justify-content-center align-items-center" >
+      <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12 pt-4 pb-4">
+          <div class="w-75 d-block mx-auto">
+              <span class="title text-left mb-2 ml-2" [innerHTML]="data.name"></span>
+              <span class="subtitle2 text-left ml-2">{{'CYBERSECURITY.PROTECTION.PROTECT_ALL_DEVICES'
+                  | translate}}</span>
+              <button class="btn btn-secondary mt-3 ml-2 mw-80 d-none d-xl-block" (click)="loadBitdefenderPopup()">
+                  <div class="icon-shield"></div> {{'INSTALAR'
+                  | translate}}
+              </button>
+              <p>
+                  {{'COMP_BITDEFENDERMSP.TEXT_CLICK' | translate}}
+                  <a [href]="bitdefendermsmService.access_central_url" target="_blank">{{'COMP_BITDEFENDERMSP.HERE' | translate}}</a>
+              </p>
+          </div>
+      </div>
+      <div class="col-xl-5 col-lg-8 col-md-12 col-sm-12 col-xs-12 pt-4 pb-4">
+          <div class="row justify-content-center align-items-center">
+              <div class="col-xl-6 col-lg-6 col-md-5 col-sm-5 col-xs-6 col-8 mb-2 offset-0 offset-sm-1 offset-md-1 offset-lg-0">
+                  <div class="w100 d-block mx-auto">
+                      <div class="mb-2 d-flex align-items-center">
+                          <div class="w-25">
+                              <span>{{'CYBERSECURITY.PROTECTION.TOTAL' |
+                                  translate}}</span>
+                          </div>
+                          <div class="w-25 text-center">
+                              <h4 class="float-none">
+                                  {{bitdefendermsmService.nDeviceInstall}}</h4>
+                          </div>
+                          <div class="progress progressdash w-50">
+                              <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                              </div>
+                          </div>
+                      </div>
+                      <div class="mb-2 d-flex align-items-center">
+                          <div class="w-25">
+                              <span>{{'CYBERSECURITY.PROTECTION.LOW_RISK' |
+                                  translate}}</span>
+                          </div>
+                          <div class="w-25 text-center">
+                              <h4 class="float-none">
+                                  {{bitdefendermsmService.nDeviceInstall - bitdefendermsmService.devicesRisk.length}}
+                              </h4>
+                          </div>
+                          <div class="progress progressdash w-50">
+                              <div
+                                class="progress-bar okgreen" role="progressbar"
+                                style="width: {{((bitdefendermsmService.nDeviceInstall -
+                                      bitdefendermsmService.devicesRisk.length) * 100) / (bitdefendermsmService.nDeviceInstall)}}%"
+                                      aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                      </div>
+                      <div class="mb-2 d-flex align-items-center">
+                          <div class="w-25">
+                              <span>{{'CYBERSECURITY.PROTECTION.HIGHT_RISK' |
+                                  translate}}</span>
+                          </div>
+                          <div class="w-25 text-center">
+                              <h4 class="float-none">
+                                  {{bitdefendermsmService.devicesRisk.length}}
+                              </h4>
+                          </div>
+                          <div class="progress progressdash w-50">
+                              <div class="progress-bar kored" role="progressbar"
+                              style="width: {{(bitdefendermsmService.devicesRisk.length * 100) / (bitdefendermsmService.nDeviceInstall)}}%"
+                                  aria-valuemin="0" aria-valuemax="100"></div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="border-bottom w-100 d-inline-flex d-sm-none"></div>
+              </div>
+
+              <div class="col-xl-6 col-lg-6 col-md-5 col-sm-4 col-xs-6 col-8 mb-2">
+                  <div class="w-75 d-block mx-auto">
+                      <div class="align-left">
+                          <div class="mb-2">
+                              <span>{{'CYBERSECURITY.PROTECTION.HIGH_RISK' |
+                                  translate}}</span>
+                              <h4>{{bitdefendermsmService.devicesRisk.length}}</h4>
+                          </div>
+                          <div class="mb-2">
+                              <span>{{'CYBERSECURITY.PROTECTION.FILES_AT_RISK' |
+                                  translate}}</span>
+                              <h4 class="red d-flex" style="position: relative; left: 18px;">
+                                  {{bitdefendermsmService.sumFilesUnresolved}}
+                                  <div class="icon-exclamation-tri"></div>
+                              </h4>
+                          </div>
+                          <div class="mb-2">
+                              <span>{{'CYBERSECURITY.PROTECTION.VULNERABILITIES' |
+                                  translate}}</span>
+                              <h4>{{bitdefendermsmService.sumRisk}}</h4>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="col-xl-3 col-lg-12 col-md-12 col-sm-12 col-xs-12 pt-4 pb-4">
+          <div class="d-inline-flex d-sm-inline-block d-xl-none w-100 text-center">
+              <button class="btn btn-secondary mr-2 mw-80" (click)="loadBitdefenderPopup()">
+                  <div class="icon-shield"></div> {{'INSTALAR'
+                  | translate}}
+              </button>
+              <button class="btn btn-outline-secondary ng-star-inserted mw-80" (click)="loadService()">
+                  {{'GESTIONAR' | translate}} <div class="icon-right-big-arrow"></div>
+              </button>
+          </div>
+          <div class="d-none d-xl-block">
+              <button class="btn btn-outline-secondary ng-star-inserted mw-80 d-block mx-auto" (click)="loadService()">
+                  {{'GESTIONAR' | translate}} <div class="icon-right-big-arrow"></div>
+              </button>
+          </div>
+      </div>
+    </div>
+</div>
+</section>
+
+<section class="dashboard-page"  *ngIf="isFullPage">
+    <div class="row" >
+      <div class="col" style="text-align: start;">
+          <h2 class="font-title-family">
+              {{'COMP_BITDEFENDERMSP.FAMILY_UNIT.OVERVIEW' | translate}}
+            </h2>
+        </div>
+    </div>
+
+    <div class="card">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
+            <div class="row">
+              <div class="col-lg-3 col-md-12 col-sm-12" style="font-size:3em;">
+                <div class="{{service.icon}}"></div>
+              </div>
+              <div class="col-lg-9 col-md-12 col-sm-12">
+                <div class="mt-4">{{'COMP_BITDEFENDERMSP.PROTECTION_DEVICES' | translate}}</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12 text-center">
+            <button class="btn btn-secondary mt-4" style="color: #fff;background: #1e117b;border-color: #1e117b;
+            border: 2px solid #1e117b;white-space: normal;line-height: 1.2;padding: 12px;"
+            (click)="loadBitdefenderPopup()">
+                <div class="icon-shield"></div> {{'INSTALAR'
+                | translate}}
+            </button>
+            <p class="text-center">
+              {{'COMP_BITDEFENDERMSP.TEXT_CLICK' | translate}}
+              <a [href]="bitdefendermsmService.access_central_url" target="_blank">{{'COMP_BITDEFENDERMSP.HERE' | translate}}</a>
+            </p>
+          </div>
+        </div>
+          <div class="row grid-divider">
+              <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                  <div class=" mb-4">
+                      <div class="card-header">
+                          <h1 class="title mb-4 text-center">
+                            {{'CYBERSECURITY.PROTECTION.PROTECTED_DEVICES' | translate}}
+                            {{this.deviceInstall}}&nbsp;
+                            {{'CYBERSECURITY.PROTECTION.OF' | translate}}&nbsp;
+                            {{this.deviceTotal}}
+                          </h1>
+                      </div>
+                      <div class="card-body">
+                          <div class="row">
+                              <div class="col-12 col-xl-7 col-lg-7 col-md-8 col-sm-6 col-xs-12 mb-4 d-flex flex-column justify-content-center">
+                                  <div class="canvasservices">
+                                      <div class="numbercanvas text-center">
+                                          <h5 class="text-center mb-0">{{this.deviceInstall}}/{{this.deviceTotal}}</h5>
+                                          <span class="subtitle text-center">Inst.</span>
+                                      </div>
+                                      <div class="doughnut">
+                                          <canvas baseChart
+                                          [data]="doughnutChartData"
+                                          [labels]="chartLabels"
+                                          [colors]="doughnutColors"
+                                          [chartType]="chartType"
+                                          [options]="{cutoutPercentage: 75}"></canvas>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="col-12 col-xl-5 col-lg-5 col-md-4 col-sm-6 col-xs-12 mb-4 d-flex flex-column justify-content-center">
+                                  <div class="datos w-75 d-block mx-auto">
+                                      <h1 class="title mb-4 text-left">Dispositivos</h1>
+                                      <div class="dg mb-2">
+                                          <div class="led red">
+                                              <i class="fas fa-circle"></i>
+                                          </div>
+                                          <!-- <span>{{'CYBERSECURITY.PROTECTION.TALL_RISK' | translate}}</span> -->
+                                          <!-- <h4 class="">{{protectionService.data.unresolved}}</h4> -->
+                                          <span>{{'CYBERSECURITY.PROTECTION.PENDING' | translate}}</span>
+                                          <h4 class="">{{this.deviceTotal-this.deviceInstall}}</h4>
+                                      </div>
+                                      <div class="dg mb-2">
+                                          <div class="led green">
+                                              <i class="fas fa-circle"></i>
+                                          </div>
+                                          <!-- <span>{{'CYBERSECURITY.PROTECTION.LOW_RISK' | translate}}</span> -->
+                                          <!-- <h4 class="">{{protectionService.data.resolved}}</h4> -->
+                                          <span>{{'CYBERSECURITY.PROTECTION.INSTALL' | translate}}</span>
+                                          <h4 class="">{{this.deviceInstall}}</h4>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 col-xl-7 col-lg-7 col-md-8 col-sm-6 col-xs-12 mb-4 d-flex flex-column justify-content-center">
+                                <div class="canvasservices">
+                                    <div class="numbercanvas text-center">
+                                        <h2 class="text-center mb-0">{{this.deviceInstall}}</h2>
+                                        <span class="subtitle text-center">{{'CYBERSECURITY.PROTECTION.TOTAL_PROTECTED_DEVICES' | translate}}</span>
+                                    </div>
+                                    <div class="doughnut">
+                                      <canvas baseChart [data]="bitdefendermsmService.doughnutChartData"
+                                      [labels]="bitdefendermsmService.chartLabels" [colors]="bitdefendermsmService.doughnutColors"
+                                      [chartType]="bitdefendermsmService.chartType"
+                                      [options]="{cutoutPercentage: 75}"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-xl-5 col-lg-5 col-md-4 col-sm-6 col-xs-12 mb-4 d-flex flex-column justify-content-center">
+                                <div class="datos w-75 d-block mx-auto">
+                                    <h1 class="title mb-4 text-left">{{'CYBERSECURITY.PROTECTION.RISK' | translate}}</h1>
+                                    <div class="dg mb-2">
+                                        <div class="led red">
+                                            <i class="fas fa-circle"></i>
+                                        </div>
+                                        <span>{{'CYBERSECURITY.PROTECTION.TALL_RISK' | translate}}</span>
+                                        <h4 class="">{{bitdefendermsmService.devicesRisk.length}}</h4>
+                                    </div>
+                                    <div class="dg mb-2">
+                                        <div class="led green">
+                                            <i class="fas fa-circle"></i>
+                                        </div>
+                                        <span>{{'CYBERSECURITY.PROTECTION.LOW_RISK' | translate}}</span>
+                                        <h4 class="">{{bitdefendermsmService.nDeviceInstall-bitdefendermsmService.devicesRisk.length}}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                  </div>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                  <div class=" mb-4">
+                      <div class="card-header">
+                          <h1 class="title mb-4 text-center">{{'CYBERSECURITY.PROTECTION.DAYS_WITHOUT_ANALYZING' | translate}}</h1>
+                      </div>
+                      <canvas baseChart [datasets]="barChartData"
+                          [labels]="barChartLabels"
+                          [options]="barChartOptions"
+                          [legend]="barChartLegend"
+                          [chartType]="barChartType">
+                      </canvas>
+
+                  </div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 mb-4">
+                  <hr class="mt-0">
+              </div>
+              <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-xs-12 mb-4">
+
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-xs-12 mb-4">
+                  <div class="">
+                      <h1 class="title mb-4 text-center">{{'CYBERSECURITY.PROTECTION.VULNERABILITY_SCAN' | translate}}</h1>
+                      <div class="datos d-block w-75 mx-auto">
+                          <div class="dg mb-2">
+                              <div class="led red">
+                                  <i class="fas fa-circle"></i>
+                              </div>
+                              <span>{{'CYBERSECURITY.PROTECTION.DEVICES_ANALYZED' | translate}}</span>
+                              <h4 class="">{{bitdefendermsmService.nDeviceAnalitics}}</h4>
+                          </div>
+                          <div class="dg mb-2">
+                              <div class="led orange">
+                                  <i class="fas fa-circle"></i>
+                              </div>
+                              <span>{{'CYBERSECURITY.PROTECTION.FILES_AT_RISK' | translate}}</span>
+                              <h4 class="">{{bitdefendermsmService.sumFilesUnresolved}}</h4>
+                          </div>
+                          <div class="dg mb-2">
+                              <div class="led green">
+                                  <i class="fas fa-circle"></i>
+                              </div>
+                              <span>{{'CYBERSECURITY.PROTECTION.VULNERABILITIES' | translate}}</span>
+                              <h4 class="">{{bitdefendermsmService.sumRisk}}</h4>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-xs-12 mb-4">
+
+              </div>
+          </div>
+      </div>
+    </div>
+
+    <div class="devices-list">
+      <br />
+      <hr>
+
+      <div class="row">
+        <div class="col-xl-12 ds-mb-12p">
+          <span class="ds-h2 ds-m-bold ds-c-black"> {{'COMP_BITDEFENDERMSP.FAMILY_UNIT.DEVICE_STATUS' | translate}}</span>
+        </div>
+
+
+        <div class="col-xl-4" *ngFor="let device of bitdefendermsmService.bitdefenderResponse.devices; let j = index">
+          <div class="ds-card-bms-result">
+
+            <div class="ds-flex-row ds-al-center ds-mb-16p">
+              <span class="{{device.icon}} ds-fs-32 ds-mr-12p"></span>
+              <div class="ds-flex-column">
+                <span class="ds-h4 ds-m-bold ds-c-black">{{device.displayName}}</span>
+                <span class="ds-body-secondary ds-r-regular ds-c-secondary">{{device.os}}</span>
+              </div>
+            </div>
+
+            <div class="ds-flex-row ds-al-center ds-mb-12p" *ngIf="suiteService.isUnitFamily">
+              <app-dropdown
+                [items]="selectItems"
+                [initValue]="device.userProfileId"
+                (onchange)="onChangeProfile($event, device)"
+                >
+              </app-dropdown>
+            </div>
+
+            <span class="ds-body-secondary ds-r-regular ds-c-secondary ds-mb-12p">{{'FAMILY_UNIT.LAST_ANALYSIS' | translate}} <span>{{ device.lastScanFormatted }}</span></span>
+
+            <span class="ds-r-bold ds-body-primary ds-c-black ds-mb-12p ds-fs-16">{{'COMP_BITDEFENDERMSP.FAMILY_UNIT.RESULTS' | translate}}</span>
+
+            <div class="ds-flex-row ds-jc-between ds-mb-12p">
+              <span class="ds-r-regular ds-body-primary ds-c-black ds-mb-12p ds-fs-16">{{'COMP_BITDEFENDERMSP.FAMILY_UNIT.ANALYZED_FILES' | translate}}</span>
+              <span class="ds-h3 ds-m-bold ds-c-black">{{device.scanned}}</span>
+            </div>
+
+            <div class="ds-flex-row ds-jc-between ds-mb-12p">
+              <span class="ds-r-regular ds-body-primary ds-c-success ds-mb-12p ds-fs-16">{{'COMP_BITDEFENDERMSP.FAMILY_UNIT.FIXED_ISSUES' | translate}}</span>
+              <span class="ds-h3 ds-m-bold ds-c-success">{{device.resolved}}</span>
+            </div>
+
+
+            <div class="ds-flex-row ds-jc-between ds-mb-12p">
+              <span class="ds-r-regular ds-body-primary ds-c-danger ds-mb-12p ds-fs-16">{{'COMP_BITDEFENDERMSP.FAMILY_UNIT.OUTSTANDING_ISSUES' | translate}}</span>
+              <span class="ds-h3 ds-m-bold ds-c-danger">{{device.unresolved}}</span>
+            </div>
+
+
+
+          </div>
+        </div>
+
+    </div>
+    </div>
+
+</section>
+

@@ -1,0 +1,17 @@
+
+<div class="d-flex ds-mb-24p align-items-center">
+  <div class="ds-h1 ds-m-bold ds-c-black  ds-mr-24p">
+    {{data.name}}
+  </div>
+  <span class="icon-info ds-fs-18 cursor" (click)="openServiceInfo()"></span>
+</div>
+
+<ng-template render-component></ng-template>
+
+<ng-container *ngIf="isloading">
+  <div class="ds-card ">
+    <div class="default-section fa-3x ">
+      <i class="fas fa-spinner fa-spin"></i>
+    </div>
+  </div>
+</ng-container>

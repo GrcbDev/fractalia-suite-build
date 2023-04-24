@@ -1,0 +1,15 @@
+.cac-waiting-container {
+  display: flex;
+  margin-top: 40px;
+  flex-direction: column;
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+
+@media only screen and (max-width: 767px) {
+  .cac-waiting-container{
+    text-align: left;
+  }
+
+}

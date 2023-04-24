@@ -1,0 +1,40 @@
+<div class="modal-content breachModal">
+  <div class="new-modal-header row ml-4">
+    <div class="col-sm-12 d-flex justify-content-end">
+      <button
+        type="button"
+        id="closeModal"
+        class="new-close col-1 pr-0"
+        aria-label="Close"
+        (click)="closeModal()"
+      >
+        <div class="icon-close" (click)="closeModal()"></div>
+      </button>
+    </div>
+  </div>
+  <section class="row mt-2 mr-4 ml-4 mb-4 breach-body">
+    <div class="col-sm-12 pl-0 pr-0 d-flex justify-content-center">
+      <div
+        class="new-modal-img mb-4 mt-0 fs-78 icon-warning semantic-danger"
+      ></div>
+    </div>
+    <div class="col-sm-12 pl-0 pr-0 mb-2 d-flex justify-content-center">
+      <h4 class="wizard-modal-title fs-20 lh-24 neutral-black">
+        {{ "CYBERALARM.CARDS.FRAUD_MODAL.TITLE" | translate }}
+      </h4>
+    </div>
+    <div class="col-sm-12 pl-0 pr-0 d-flex justify-content-center">
+      <p class="wizard-modal-text neutral-black fs-16 lh-19">
+        {{ "CYBERALARM.CARDS.FRAUD_MODAL.TEXT" | translate }}
+      </p>
+    </div>
+    <div class="col-sm-12 mt-3 pl-0 pr-0 justify-content-end d-flex">
+      <button class="btn btn-primary wizard-modal-btn" (click)="closeModal()">
+        <nz-spinner *ngIf="loading"></nz-spinner>
+        <div *ngIf="!loading" class="text-uppercase">
+          {{ "WIZARD.BTNS.CLOSE" | translate }}
+        </div>
+      </button>
+    </div>
+  </section>
+</div>

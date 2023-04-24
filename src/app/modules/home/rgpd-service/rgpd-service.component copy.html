@@ -1,0 +1,302 @@
+<div class="d-flex ds-mb-24p align-items-center" *ngIf="rgpdservice.rgpd && rgpdservice.rgpd.status && rgpdservice.rgpd.status === 0">
+  <div class="ds-h1 ds-m-bold ds-c-black ds-mr-24p">
+    {{data.name}}
+  </div>
+  <span class="icon-info ds-fs-18 cursor" (click)="open(data.name, data.longDesc, data.icon)"></span>
+</div>
+<section class="ds-card informative-service-content">
+  <div class="ds-card-header align-items-center" *ngIf="rgpdservice.rgpd && rgpdservice.rgpd.status && rgpdservice.rgpd.status !== 0">
+    <div class="d-flex align-items-center">
+      <span class="{{data.icon }} ds-fs-24 mr-2"></span>
+      <div class="ds-h4 ds-m-bold ds-c-black">
+        {{data.name}}
+      </div>
+    </div>
+    <span class="icon-info ds-header-icon-right cursor" (click)="open(data.name, data.longDesc, data.icon)"></span>
+  </div>
+  <ng-container *ngIf="!isloading; else loadingTemplate">
+    <ng-container>
+      <!--Usuario sin licencia-->
+
+      <div class="ds-flex-column ds-jc-center ds-al-center pt-0 pb-4" *ngIf="rgpdservice.rgpd.status === 0">
+        <div class="{{data.icon}} mb-2 mt-4 mx-auto main-primary cyber-main-icon">
+        </div>
+        <h2 class="text-center neutral-black cyb-body-title">
+          {{ 'RGPD.COMPLETE_FORM_TITLE' | translate}}
+        </h2>
+        <p class="text-center cyb-body-text">
+          {{ 'RGPD.COMPLETE_FORM_DESC' | translate}}
+        </p>
+        <button
+          class="btn btn-primary text-uppercase mt-2"
+          [disabled]="!this.rgpdservice.formEval"
+          (click)="toggleEvaluation()"
+        >
+          <nz-spinner *ngIf="!this.rgpdservice.formEval">loading</nz-spinner>
+          <span *ngIf="this.rgpdservice.formEval">{{ 'RGPD.COMPLETE_FORM' | translate}}</span>
+        </button>
+      </div>
+
+      <!--Licencia activa - sin dispositivos registrados-->
+      <div *ngIf="rgpdservice.rgpd.status != 0">
+        <div class="card w-100 mb-5">
+          <div class="card-body pr-0 pl-0">
+            <div class="container-fluid mt-4">
+              <div class="row h-100 grid-divider justify-content-center">
+                <div [ngClass]="rgpdservice.rgpd.evalResult === 3 ? 'col-xl-8 col-lg-8' : 'col-xl-4 col-lg-4'" class=" col-md-12 col-sm-12 col-xs-12 mb-3 mobile-mb">
+                  <span class="d-flex multistep-name neutral-black fs-16 mt-1 mb-1 text-center ds-jc-center ds-al-center">
+                    {{ 'RGPD.EVAL_RESULT_TITLE' | translate}}
+                  </span>
+                  <div class="" [ngClass]="rgpdservice.rgpd.evalResult === 3 ? 'd-flex mx-2 flex-row' : 'flex-column'">
+                    <div [ngClass]="rgpdservice.rgpd.evalResult === 3 ? 'd-flex ds-js-center ds-al-center p-4 w-100' : ''">
+                      <div>
+                        <div class="d-flex ds-jc-center ds-al-center mt-2 mb-2" *ngIf="rgpdservice.rgpd.evalResult == 1">
+                          <div class="icon-green-check semantic-success fs-24"></div>
+                          <span class="ml-2 semantic-success align-self-center lh-19 semantic-type"><b>{{'SURVEY.SCORE_LOW'| translate}}</b></span>
+                        </div>
+                        <div class="d-flex ds-jc-center ds-al-center mt-2 mb-2" *ngIf="rgpdservice.rgpd.evalResult == 2">
+                          <div class="icon-exclamation semantic-warning fs-24"></div>
+                          <span class="ml-2 semantic-warning align-self-center fs-16 lh-19"><b>{{'SURVEY.SCORE_MID'| translate}}</b></span>
+                        </div>
+                        <div class="d-flex ds-jc-center ds-al-center mt-2 mb-2" *ngIf="rgpdservice.rgpd.evalResult == 3">
+                          <div class="icon-warning semantic-danger fs-24"></div>
+                          <span class="ml-2 semantic-danger align-self-center fs-16 lh-19"><b>{{'SURVEY.SCORE_HIGH'| translate}}</b></span>
+                        </div>
+                        <div class="row">
+                          <span class="fs-12 roboto ds-al-center ds-jc-center text-center">Este es el nivel de protección de datos que maneja tu compañía.</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div [ngClass]="rgpdservice.rgpd.evalResult === 3 ? 'd-flex ds-js-center ds-al-center p-4 w-100' : ''">
+                      <div class="neutral-background mt-2">
+                        <div class="d-flex ds-jc-between">
+                          <div class="d-flex pl-3 pr-3 pt-1">
+                            <div class="ds-jc-center">
+                              <p class="roboto-b fs-12 m-0">
+                                {{ 'RGPD.EVAL_FORM' | translate}}
+                              </p>
+                              <p class="fs-12 m-0">
+                                {{ 'RGPD.COMPLETE' | translate: { val: (rgpdservice.rgpd.evalFinishDate | date: 'dd/MM/yyyy') } }}
+
+                                <!-- Completado: {{ rgpdservice.rgpd.evalFinishDate | date: 'dd/MM/yyyy' }} -->
+                              </p>
+                            </div>
+                          </div>
+                          <div class="d-flex mt-1">
+                            <div class="d-flex ds-jc-center ds-al-center neutral-white">
+                              <div class="roboto-b semantic-success ds-fs-12 p-2">{{ 'RGPD.DONE' | translate}}</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row pl-4 pr-4 pb-1">
+                          <button
+                            class="btn btn-outline-secondary text-uppercase mt-2"
+                            [disabled]="!this.rgpdservice.formEval"
+                            (click)="rebuildEvaluation()"
+                          >
+                            <nz-spinner *ngIf="!this.rgpdservice.formEval">loading</nz-spinner>
+                            <div *ngIf="this.rgpdservice.formEval">
+                              <div class="icon-redo"></div>
+                              <span class="roboto-b fs-14px">{{ 'RGPD.REBUILD_EVAL' | translate}}
+                              </span>
+                            </div>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!--Informacion de elementos analizados y criticidad-->
+                <div  *ngIf="rgpdservice.rgpd.evalResult !== 3"   class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12 mb-3 tri-div justify-content-between d-flex flex-column mobile-mb pl-4 pr-4">
+                  <div>
+                    <span class="d-flex multistep-name neutral-black fs-16 mb-3 text-center ds-jc-center ds-al-center">
+                      {{ 'RGPD.MODEL_CREATION' | translate}}
+                    </span>
+                  </div>
+                  <div class="neutral-background">
+                    <div class="d-flex ds-jc-between mb-2">
+                      <div class="d-flex pl-3 pr-3 pt-1">
+                        <div class="ds-jc-center" *ngIf="rgpdservice.rgpd.status === 1">
+                          <p class="roboto-b fs-12 m-0">
+                            {{ 'RGPD.EVAL_FORM' | translate}}
+                          </p>
+                          <p class="fs-12 m-0">
+                            {{ 'RGPD.COMPLETE' | translate: { val: (rgpdservice.rgpd.evalFinishDate | date: 'dd/MM/yyyy') } }}
+                          </p>
+                        </div>
+                        <div class="ds-jc-center" *ngIf="rgpdservice.rgpd.status === 2">
+                          <p class="roboto-b fs-12 m-0">
+                            {{ 'RGPD.MODEL_FORM' | translate }}
+                          </p>
+                          <p class="fs-12 m-0">
+                            {{ 'RGPD.LAST_ACCESS' | translate: { vale: (rgpdservice.rgpd.modelFinishDate | date: 'dd/MM/yyyy') } }}
+                            <!-- Último acceso: {{ rgpdservice.rgpd.modelFinishDate | date: 'dd/MM/yyyy' }} -->
+                          </p>
+                        </div>
+                      </div>
+                      <div class="d-flex mt-1">
+                        <div class="d-flex ds-jc-center ds-al-center neutral-white">
+                          <div class="roboto-b semantic-success ds-fs-12 p-2" *ngIf="rgpdservice.rgpd.status === 2">{{ 'RGPD.DONE' | translate }}</div>
+                          <div class="roboto-b semantic-blue ds-fs-12 p-2" *ngIf="rgpdservice.rgpd.status === 1">{{ 'RGPD.PENDING' | translate }}</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="d-flex ds-jc-center ds-al-center mt-3 mb-2">
+                      <span class="fs-16 text-center" *ngIf="rgpdservice.rgpd.status === 1">{{ 'RGPD.REPLY_QUESTIONS_DESC' | translate }}</span>
+                      <span class="fs-14 text-center" *ngIf="rgpdservice.rgpd.status === 2">{{ 'RGPD.POLITY_CHANGES_QUEST' | translate }}</span>
+                    </div>
+                    <div class="row pl-4 pr-4 pb-1">
+                      <button
+                        class="btn btn-primary text-uppercase mt-2"
+                        (click)="openRGPDFormModel()"
+                        *ngIf="rgpdservice.rgpd.status === 1"
+                      >
+                        <div class="icon-description"></div>
+                        <span class="roboto-b fs-14px">{{ 'RGPD.FINISH_MODEL' | translate }}</span>
+                      </button>
+                      <!-- <button
+                        class="btn btn-primary text-uppercase mt-2"
+                        data-toggle="modal"
+                        data-target="#analisisForm"
+                        (click)="toggleEvaluation()"
+                      >
+                        <div class="icon-redo"></div>
+                        <span class="roboto-b fs-14px">Rehacer Evaluación</span>
+                      </button>-->
+                      <button
+                        class="btn btn-outline-secondary text-uppercase mt-2"
+                        (click)="openRGPDFormModel()"
+                        *ngIf="rgpdservice.rgpd.status === 2"
+                      >
+                        <div class="icon-edit-pen"></div>
+                        <span class="roboto-b fs-14px">{{ 'RGPD.EDIT_MODEL' | translate }}</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!--Informacion de ultimo analisis-->
+                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12 justify-content-between d-flex flex-column">
+                  <div *ngIf="rgpdservice.rgpd.status === 1 && rgpdservice.rgpd.evalResult !== 3">
+                    <span class="d-flex multistep-name neutral-black fs-16 mb-3 text-center ds-jc-center ds-al-center">
+                      {{ 'RGPD.RGPD_MODEL' | translate }}
+                    </span>
+                    <span class="d-flex multistep-name neutral-black fs-16 text-center ds-jc-center ds-al-center">
+                      {{ 'RGPD.TEMPLATE_YET' | translate }}
+                    </span>
+                    <div class="d-flex ds-jc-center ds-al-center">
+                      <div class="icon-data-not-found big-icon"></div>
+                    </div>
+                    <div class="d-flex ds-jc-center ds-al-center mb-2">
+                      <span class="fs-16 text-center">
+                        {{ 'RGPD.FINISH_FORMS' | translate }}
+                      </span>
+                    </div>
+                  </div>
+                  <div *ngIf="rgpdservice.rgpd.status === 1 && rgpdservice.rgpd.evalResult === 3">
+                    <span class="d-flex multistep-name neutral-black fs-16 mb-3 text-center ds-jc-center ds-al-center">
+                      {{ 'RGPD.RGPD_MODEL' | translate }}
+                    </span>
+                    <div class="d-flex ds-jc-center ds-al-center mt-3 mb-2">
+                      <span class="fs-16 text-center">
+                        {{ 'RGPD.ADAPTATION_RGPD' | translate }}
+                      </span>
+                    </div>
+                  </div>
+                  <div *ngIf="rgpdservice.rgpd.status === 2">
+                    <span class="d-flex multistep-name neutral-black fs-16 mb-3 text-center ds-jc-center ds-al-center">
+                      {{ 'RGPD.RGPD_MODEL' | translate }}
+                    </span>
+                    <span class="d-flex multistep-name neutral-black fs-16 mb-3 text-center ds-jc-center ds-al-center">
+                      {{ 'RGPD.LAST_MODEL' | translate: { date: '26/08/22 - 6:52 pm'} }}
+                      <!-- Último modelo realizado 26/08/22 - 6:52 pm -->
+                    </span>
+                    <div class="d-flex ds-jc-center ds-al-center mt-3 mb-2">
+                      <span class="fs-16 text-center">
+                        {{ 'RGPD.DOWNLOAD_MODEL_DESC' | translate }}
+                      </span>
+                    </div>
+                    <button
+                      class="btn btn-primary text-uppercase mt-2"
+                      (click)="downloadRGPDFormModel()"
+                    >
+                      <nz-spinner *ngIf="downloadLoading"></nz-spinner>
+                      <ng-container *ngIf="!downloadLoading">
+                        <div class="icon-download2"></div>
+                        <span class="roboto-b fs-14px">{{ 'RGPD.DOWNLOAD_MODEL' | translate }}</span>
+                      </ng-container>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Histórico de scorings-->
+        <ng-container *ngIf="!freemiun">
+          <!-- Grafica de Histórico de scorings-->
+          <!-- <app-historical-scoring-graph
+            [dataC]="dataC"
+            [chartDataset]="chartDataset"
+            [chartType]="chartType"
+            [chartLabels]="chartLabels"
+            [chartOptions]="chartOptions"
+          ></app-historical-scoring-graph> -->
+
+          <!-- Tabla de Historico de informes-->
+          <!-- <app-report-history-table [dataC]="dataC"></app-report-history-table> -->
+        </ng-container>
+      </div>
+
+    </ng-container>
+  </ng-container>
+
+  <ng-template #loadingTemplate>
+    <div class="default-section fa-3x">
+      <i class="fas fa-spinner fa-spin"></i>
+    </div>
+  </ng-template>
+</section>
+
+<!-- <div class="modal fade add-service pr-1 pl-1" tabindex="-1" role="dialog" aria-hidden="true" id="trendmicroRegister">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content" style="min-height: 512px; max-width: 482px;">
+      <div class="new-modal-header row ml-4">
+        <div class="col-sm-12 col-12 d-flex justify-content-end">
+          <button type="button" id="closeRegisterModal" class="new-close col-sm-1 col-1 pr-0" aria-label="Close"
+            data-dismiss="modal">
+            <div class="icon-close" data-dismiss="modal"></div>
+          </button>
+        </div>
+      </div>
+
+      <section class="row mt-2 mr-4 ml-4 mb-4">
+        <div class="col-sm-12 col-12 pl-0 pr-0 d-flex justify-content-center">
+          <img class="new-modal-img unplug" src="{{staticContentUrl+'img/icon_info.png'}}">
+        </div>
+        <div class="col-sm-12 col-12 pl-0 pr-0 mb-2 d-flex justify-content-center">
+          <h4 class="wizard-modal-title fs-20 lh-24 neutral-black">TrendMicro</h4>
+        </div>
+        <div class="col-sm-12 col-12 pl-0 pr-0 d-flex justify-content-center">
+          <p class="wizard-modal-text neutral-black fs-16 lh-19 roboto-b">
+            {{'TRENDMICRO.MODAL_MSG_a' | translate}}
+          </p>
+        </div>
+        <div class="col-sm-12 col-12 pl-0 pr-0 d-flex justify-content-center">
+          <p class="wizard-modal-text neutral-black fs-16 lh-19">
+            {{'TRENDMICRO.MODAL_MSG_b' | translate}}
+          </p>
+        </div>
+        <div class="col-sm-12 col-12 pl-0 pr-0 wizard-modal-btns d-flex">
+          <button class="btn btn-primary wizard-modal-btn" data-dismiss="modal">
+            <div class="text-uppercase">
+              {{'WIZARD.BTNS.CLOSE' | translate}}
+            </div>
+          </button>
+        </div>
+      </section>
+    </div>
+  </div>
+</div> -->

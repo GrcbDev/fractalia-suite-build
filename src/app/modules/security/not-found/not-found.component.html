@@ -1,0 +1,34 @@
+<section class="not-found-page">
+  <div class="nf-text-content">
+
+
+    <div class="nf-max-content">
+      <div class="ds-h1 ds-m-bold ds-fs-36 ds-c-black ds-mb-24p">
+        {{'NOT_FOUND_PAGE.TITLE'| translate}}
+      </div>
+      <ng-container   *ngIf="partnerService.partner && partnerService.partner.customDomain">
+        <span class="ds-h2 ds-m-bold ds-fs-24 ds-c-black ds-mb-24p">
+          {{'NOT_FOUND_PAGE.DESCRIPTION'| translate}}
+        </span>
+
+        <a
+          class="ds-h2 ds-m-bold ds-fs-24 ds-mb-24p"
+          [href]="'https://'+partnerService.partner.customDomain"
+          >
+          {{ partnerService.partner.customDomain }}
+        </a>
+
+      </ng-container>
+
+
+
+      <div class="nf-imagen-mobile">
+        <img src="https://devstatic.app.onlineassist.me/suite/img/not-found/not-found-mobile.png" alt="">
+      </div>
+
+    </div>
+  </div>
+  <div class="not-found-image">
+    <img src="https://devstatic.app.onlineassist.me/suite/img/not-found/not-found-web.png" alt="">
+  </div>
+</section>

@@ -1,0 +1,112 @@
+<div class="ds-login-main-container" >
+  <div class="ds-card-container">
+
+    <div class="ds-login-logo">
+      <img [src]="loginTypeService.logotipo">
+    </div>
+
+
+    <form class="ds-login-form" [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+
+      <div class="ds-h1 ds-m-bold ds-c-black ds-mb-12p">{{"COMP_SIGNUP.REGISTER"|translate}}</div>
+
+      <div class="ds-body-primary ds-r-regular ds-c-black ds-mb-24p">
+        {{"COMP_SIGNUP.REGISTER_CODE"| translate: { identifier: partnerService.partner.uniqueIdentifier } }}
+      </div>
+
+      <div class="ds-flex-column ds-mb-12p">
+        <label class="ds-body-secondary ds-r-regular ds-c-black ">{{partnerService.partner.userPlaceholder}}</label>
+        <input type="text" class="ds-control" formControlName="registerCode" [placeholder]="partnerService.partner.userPlaceholder || '' ">
+      </div>
+
+      <div class="invalid-feedback" [ngClass]="{ 'd-block': signUpForm.touched && f && f['registerCode'] && f['registerCode'].errors }">
+        <div *ngIf="f && f['registerCode'] && f['registerCode'].errors && f['registerCode'].errors!['required']">
+          <div class="icon-exclamation-tri">{{'CAMPO_REQUERIDO' | translate}}</div>
+        </div>
+        <div *ngIf="f && f['registerCode'] && f['registerCode'].errors && f['registerCode'].errors!['pattern']">
+          <div class="icon-exclamation-tri">{{'DATOS_INCORRECTOS' | translate}}</div>
+        </div>
+      </div>
+
+      <div class="ds-flex-column ds-mb-24p">
+        <label class="ds-body-secondary ds-r-regular ds-c-black ">{{ 'EMAIL' | translate }}*</label>
+        <input type="text" class="ds-control" formControlName="email" placeholder="{{ 'EMAIL' | translate }}">
+      </div>
+
+      <div class="invalid-feedback" [ngClass]="{ 'd-block': signUpForm.touched && f && f['email'] && f['email'].errors }">
+        <div *ngIf="f && f['email'] && f['email'].errors && f['email'].errors!['required']">
+          <div class="icon-exclamation-tri">{{'CAMPO_REQUERIDO' | translate}}</div>
+        </div>
+        <div *ngIf="f && f['email'] && f['email'].errors && f['email'].errors!['pattern']">
+          <div class="icon-exclamation-tri">{{'DATOS_INCORRECTOS' | translate}}</div>
+        </div>
+      </div>
+
+      <div class="ds-flex-column ds-mb-24p">
+        <label class="ds-body-secondary ds-r-regular ds-c-black ">{{'COMP_SIGNUP.REPEAT_EMAIL' | translate }}*</label>
+        <input type="text" class="ds-control"  formControlName="repeatemail" placeholder="{{ 'EMAIL' | translate }}">
+        <div *ngIf="inputRepeatEmail.hasError('notMatch')"
+          class="text-danger text-left">{{'COMP_SIGNUP.VALID_REPEAT_EMAIL' | translate }}</div>
+      </div>
+
+      <div class="ds-flex-row ds-mb-24p">
+        <button class="ds-btn-primary ds-r-bold ds-text-upper">
+          <nz-spinner *ngIf="loginTypeService.loading">loading</nz-spinner>
+          <div *ngIf="!loginTypeService.loading">  {{"COMP_SIGNUP.REGISTER"|translate}}</div>
+        </button>
+      </div>
+    </form>
+
+    <div class="ds-login-forget-password">
+      <div class="ds-r-regular ds-body-secondary ds-c-secondary ds-mb-24p">{{"COMP_SIGNUP.OK_REGISTER"|translate}}</div>
+
+      <button  class="ds-btn-secondary ds-r-bold ds-t-uppercase" (click)="goToLogin()">{{"ACCEDER" | translate}}</button>
+    </div>
+
+
+    <div class="ds-login-contact-us">
+      <div class="ds-r-bold  ds-caption  ds-c-secondary ds-mb-12p"> {{partnerService.partner.communicationsTitle}} </div>
+
+      <div class="ds-login-icons">
+        <a href="tel:{{partnerService.partner.phone}}" *ngIf="partnerService.partner.includePhone && partnerService.partner.phone">
+          <div class="icon-phone ds-mr-8p"></div>
+          {{partnerService.partner.phone}}
+        </a>
+
+        <a
+          href="https://api.whatsapp.com/send?phone={{partnerService.partner.whatsapp}}"
+          target="_blank"
+          *ngIf="partnerService.partner.includeWhatsapp && partnerService.partner.whatsapp">
+          <div class="icon-whatsapp ds-mr-8p"></div>
+          {{partnerService.partner.whatsapp}}
+        </a>
+
+        <a href="mailto:{{partnerService.partner.email}}" *ngIf="partnerService.partner.includeEmail && partnerService.partner.email">
+          <div class="icon-envelope ds-mr-8p"></div>
+          {{partnerService.partner.email}}
+        </a>
+      </div>
+
+
+
+    </div>
+
+    <div class="ds-login-language">
+      <app-custom-select
+        *ngIf="loginTypeService.languages.length > 1"
+        [placeholder]="loginTypeService.dropdownLanguage"
+        [items]="loginTypeService.languages"
+        (changeEvent)="onChange($event)"
+      >
+      </app-custom-select>
+      <div
+        *ngIf="loginTypeService.languages.length <= 1"
+        class="ds-r-regular ds-body-secondary ds-c-secondary ds-caption"
+      >
+        <span class="icon-globe mr-2"></span> <span>{{ loginTypeService.languages[0].value }}</span>
+      </div>
+    </div>
+
+
+  </div>
+</div>

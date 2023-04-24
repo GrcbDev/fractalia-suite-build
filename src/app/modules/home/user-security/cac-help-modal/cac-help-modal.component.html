@@ -1,0 +1,407 @@
+
+<div class="d-flex flex-column">
+  <div class="ds-flex-row ds-jc-end">
+    <span class="icon-close ds-cur-pointer ds-fs-32 ds-c-secondary" (click)="closeModal()"></span>
+  </div>
+
+
+  <div class="ds-mb-32p ds-flex-row ds-jc-center">
+    <img src="{{staticContentUrl+'img/bms_modal/interrogation.png'}}">
+  </div>
+
+  <div class="ds-mb-24p ds-r-regular ds-body-primary ds-c-black">
+    {{'WIZARD.ACRONIS_MODAL.TEXT_1' | translate}}
+  </div>
+
+  <div class="cac-main-content">
+
+    <div class="cac-help-container" >
+
+      <ng-container *ngIf="step == 1">
+        <div class="cac-help-text-steps">
+
+          <div class="ds-flex-column  ds-c-black">
+
+            <span class="ds-r-bold ds-mb-12p">{{'WIZARD.BMS_MODAL.STEP' | translate}}{{step}}</span>
+
+            <div class="ds-r-regular ds-body-primary ds-mb-24p">{{'WIZARD.ACRONIS_MODAL.STEP1_TEXT1' | translate}}</div>
+
+            <div class="ds-r-regular ds-body-primary">{{'WIZARD.ACRONIS_MODAL.STEP1_TEXT2' | translate}}</div>
+
+          </div>
+
+        </div>
+
+        <div class="cac-help-first-step">
+          <div class="cac-sidebar">
+            <img class="cac-img-logo" src="{{staticContentUrl+'img/acronis_modal/acronis_cyber_logo.png'}}" >
+
+            <div class="cac-item-menu">{{'COMP_USER.STATISTICS.DEVICES' | translate}}</div>
+          </div>
+          <div class="cac-content">
+            <div class="cac-card">
+              <span class="ds-caption ds-r-regular ds-c-black-zero ds-mb-12p">{{'WIZARD.ACRONIS_MODAL.DEVICE_ADD' | translate}}</span>
+
+              <div class="cac-card-item active">
+                <span class="icon-computer ds-fs-24 ds-mr-8p"></span>
+                <div class="ds-caption ds-r-bold ds-c-black-zero">{{'WIZARD.ACRONIS_MODAL.WIN_MAC' | translate}}</div>
+              </div>
+
+              <div class="cac-card-item ">
+                <span class="icon-mobile ds-fs-24 ds-mr-8p"></span>
+                <div class="ds-caption ds-r-bold ds-c-black-zero">{{'WIZARD.ACRONIS_MODAL.IOS_AND' | translate}}</div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="step == 2">
+        <div class="cac-help-text-steps">
+
+          <div class="ds-flex-column  ds-c-black">
+
+            <span class="ds-r-bold ds-mb-12p">{{'WIZARD.BMS_MODAL.STEP' | translate}}{{step}}</span>
+
+
+            <div class="ds-r-bold ds-body-primary">{{'WIZARD.ACRONIS_MODAL.STEP2_DESKTOP' | translate}}</div>
+            <div class="ds-r-regular ds-body-primary ds-mb-24p">{{'WIZARD.ACRONIS_MODAL.STEP2_TEXT1' | translate}}</div>
+            <div class="ds-r-regular ds-body-primary  ds-mb-24p">  {{'WIZARD.ACRONIS_MODAL.STEP2_TEXT2' | translate}}</div>
+
+
+            <div class="ds-r-bold ds-body-primary">{{'WIZARD.ACRONIS_MODAL.STEP2_MOBILE' | translate}}</div>
+            <div class="ds-r-regular ds-body-primary ds-mb-24p">{{'WIZARD.ACRONIS_MODAL.STEP2_TEXT3' | translate}}</div>
+            <div class="ds-r-regular ds-body-primary  ds-mb-24p">  {{'WIZARD.ACRONIS_MODAL.STEP2_TEXT4' | translate}}</div>
+
+            <div class="ds-r-bold ds-body-primary">{{'WIZARD.ACRONIS_MODAL.STEP2_TEXT5' | translate}}</div>
+
+          </div>
+
+        </div>
+
+
+        <div class="cac-help-second-step">
+
+          <div class="cac-content">
+
+            <div class="acronis-agent-container d-flex w-100">
+              <div  class="agent-btn text-center">
+                <span class="text-uppercase roboto-b fs-14 lh-16">{{'WIZARD.ACRONIS_MODAL.WIN_AGENT' | translate}}</span>
+              </div>
+              <div  class="agent-btn text-center">
+                <span class="text-uppercase roboto-b fs-14 lh-16">{{'WIZARD.ACRONIS_MODAL.MAC_AGENT' | translate}}</span>
+              </div>
+            </div>
+
+            <div class="cac-acronis-card">
+              <img class="ds-mr-12p" src="{{staticContentUrl+'img/acronis_modal/logo_app.png'}}">
+              <span class="ds-caption ds-r-regular ds-c-black-zero">Acronis</span>
+            </div>
+
+          </div>
+
+          <img class="acronis-phone" src="{{staticContentUrl+'img/acronis_modal/acronis_phone.png'}}">
+
+
+
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="step == 3">
+        <div class="cac-help-text-steps">
+
+          <div class="ds-flex-column  ds-c-black">
+
+            <span class="ds-r-bold ds-mb-12p">{{'WIZARD.BMS_MODAL.STEP' | translate}}{{step}}</span>
+
+            <div class="ds-r-regular ds-body-primary ds-mb-24p">{{'WIZARD.ACRONIS_MODAL.STEP3_TEXT1' | translate}}</div>
+
+            <div class="ds-r-regular ds-body-primary ds-mb-24p">{{'WIZARD.ACRONIS_MODAL.STEP3_TEXT2' | translate}}</div>
+
+            <div class="ds-r-regular ds-body-primary">{{'WIZARD.ACRONIS_MODAL.STEP3_TEXT3' | translate}}</div>
+
+          </div>
+
+        </div>
+
+        <div class="cac-help-third-step">
+          <div class="cac-sidebar">
+            <img class="cac-img-logo" src="{{staticContentUrl+'img/acronis_modal/acronis_logo.png'}}" >
+          </div>
+          <div class="cac-content">
+
+            <img class="ds-mb-24p" src="{{staticContentUrl+'img/acronis_modal/desktop.png'}}">
+
+            <div class="d-flex align-self-center green-btn">
+              <span class="ds-r-bold ds-c-white fs-20  ">{{'WIZARD.ACRONIS_MODAL.STEP3_REGISTER' | translate}}</span>
+            </div>
+
+
+          </div>
+        </div>
+
+      </ng-container>
+
+      <ng-container *ngIf="step == 4">
+        <div class="cac-help-text-steps">
+
+          <div class="ds-flex-column  ds-c-black">
+
+            <span class="ds-r-bold ds-mb-12p">{{'WIZARD.BMS_MODAL.STEP' | translate}}{{step}}</span>
+
+            <div class="ds-r-regular ds-body-primary ds-mb-24p">{{'WIZARD.ACRONIS_MODAL.STEP4_TEXT1' | translate}}</div>
+
+            <div class="ds-r-regular ds-body-primary ds-mb-24p">{{'WIZARD.ACRONIS_MODAL.STEP4_TEXT2' | translate}}</div>
+
+          </div>
+
+        </div>
+
+        <div class="cac-help-fourth-step">
+          <div class="cac-sidebar">
+            <img class="cac-img-logo" src="{{staticContentUrl+'img/acronis_modal/acronis_cyber_logo.png'}}" >
+          </div>
+          <div class="cac-content">
+
+            <div class="cac-card">
+              <span class="ds-caption ds-r-regular ds-c-black-zero ds-mb-12p">{{'WIZARD.ACRONIS_MODAL.STEP4_REGISTER' | translate}}</span>
+
+              <div class="d-flex align-self-start justify-content-center blue-btn">
+                <span class="fs-12 lh-14 text-left mb-0 roboto-b">{{'WIZARD.ACRONIS_MODAL.STEP4_CONFIRM' | translate}}</span>
+              </div>
+
+            </div>
+
+
+          </div>
+        </div>
+
+      </ng-container>
+
+      <ng-container *ngIf="step == 5">
+        <div class="cac-help-text-steps">
+
+          <div class="ds-flex-column  ds-c-black">
+
+            <span class="ds-r-bold ds-mb-12p">{{'WIZARD.BMS_MODAL.STEP' | translate}}{{step}}</span>
+
+            <div class="ds-r-regular ds-body-primary ds-mb-24p">{{'WIZARD.ACRONIS_MODAL.STEP5_TEXT1' | translate}}</div>
+
+            <div class="ds-r-regular ds-body-primary ds-mb-24p">{{'WIZARD.ACRONIS_MODAL.STEP5_TEXT2' | translate}}</div>
+
+          </div>
+
+        </div>
+
+        <div class="cac-help-fifth-step">
+          <div class="ds-flex-row w-100 ds-mb-12p">
+            <div class="cac-sidebar">
+              <img class="cac-img-logo" src="{{staticContentUrl+'img/acronis_modal/acronis_cyber_logo.png'}}" >
+              <div class="cac-item-menu">{{'WIZARD.ACRONIS_MODAL.STEP5_ALL_DEVICES' | translate}}</div>
+            </div>
+
+            <div class="cac-content">
+
+              <div class="cac-card first">
+
+                <img class="ds-mr-20p" src="{{staticContentUrl+'img/acronis_modal/desktop_mac.png'}}" style="width: 48px;">
+
+                <div>
+                  <span class="ds-caption ds-r-regular ds-c-black-zero ds-mb-12p">{{'WIZARD.ACRONIS_MODAL.STEP5_YOUR_DEVICE' | translate}}</span>
+
+                  <div class="d-flex align-self-start justify-content-center blue-btn">
+                    <span class="fs-12 lh-14 text-left mb-0 roboto-b">{{'WIZARD.ACRONIS_MODAL.STEP5_PROTECT' | translate}}</span>
+                  </div>
+                </div>
+
+
+              </div>
+
+
+            </div>
+          </div>
+
+          <div class="ds-flex-row w-100">
+            <div class="cac-sidebar">
+              <img class="cac-img-logo" src="{{staticContentUrl+'img/acronis_modal/acronis_cyber_logo.png'}}" >
+              <div class="cac-item-menu">{{'WIZARD.ACRONIS_MODAL.STEP5_ALL_DEVICES' | translate}}</div>
+            </div>
+
+            <div class="cac-content" style="align-items: flex-end;">
+
+              <div class="cac-card second">
+                <span class="ds-caption ds-r-regular ds-c-black-zero ds-mb-12p">{{'WIZARD.ACRONIS_MODAL.STEP5_YOUR_DEVICE' | translate}}</span>
+
+                <div class="d-flex align-self-end blue-light-btn">
+                  <span class="fs-16 lh-19 text-left mb-0 roboto-b">{{'WIZARD.ACRONIS_MODAL.STEP5_CREATE' | translate}}</span>
+                  <i class="fas fa-chevron-down ml-2"></i>
+                </div>
+
+                <div class="d-flex align-self-end justify-content-center mt-2 blue-light-alt">
+                    <span class="fs-16 lh-19 align-self-center mb-0 roboto-b">{{'WIZARD.ACRONIS_MODAL.STEP5_PROTECTION' | translate}}</span>
+                </div>
+
+
+              </div>
+
+
+            </div>
+          </div>
+
+
+        </div>
+
+      </ng-container>
+
+      <ng-container *ngIf="step == 6">
+        <div class="cac-help-text-steps">
+
+          <div class="ds-flex-column  ds-c-black">
+
+            <span class="ds-r-bold ds-mb-12p">{{'WIZARD.BMS_MODAL.STEP' | translate}}{{step}}</span>
+
+            <div class="ds-r-regular ds-body-primary ds-mb-24p">{{'WIZARD.ACRONIS_MODAL.STEP6_TEXT1' | translate}}</div>
+
+            <div class="ds-r-regular ds-body-primary ds-mb-24p">{{'WIZARD.ACRONIS_MODAL.STEP6_TEXT2' | translate}}</div>
+
+            <div class="ds-r-regular ds-body-primary ds-mb-24p">
+              <span class="acronis-important roboto-b">{{'WIZARD.ACRONIS_MODAL.STEP6_TEXT_IMPORTANT' | translate}}</span>
+              {{'WIZARD.ACRONIS_MODAL.STEP6_TEXT3' | translate}}
+            </div>
+
+            <span class="ds-r-bold">{{'WIZARD.ACRONIS_MODAL.STEP6_TEXT4' | translate}}</span>
+
+          </div>
+
+        </div>
+
+        <div class="cac-help-sixth-step">
+          <div class="cac-sidebar">
+            <img class="cac-img-logo" src="{{staticContentUrl+'img/acronis_modal/acronis_cyber_logo.png'}}" >
+            <div class="cac-item-menu">{{'WIZARD.ACRONIS_MODAL.STEP5_ALL_DEVICES' | translate}}</div>
+          </div>
+          <div class="cac-content">
+
+            <div class="cac-card">
+
+              <div class="ds-flex-row ds-jc-between ds-mb-20p">
+                <span class="ds-caption ds-r-regular ds-c-black-zero">{{'WIZARD.ACRONIS_MODAL.STEP5_YOUR_DEVICE' | translate}}</span>
+
+                <div class="col-4 d-flex justify-content-center blue-btn">
+                  <span class="fs-16 lh-19 text-center mb-0 roboto-b">{{'WIZARD.ACRONIS_MODAL.STEP6_CREATE' | translate}}</span>
+                </div>
+              </div>
+
+              <div class="ds-flex-row ds-jc-between ds-al-center ds-mb-10p">
+                <span class="ds-caption ds-r-regular ds-c-black-zero">{{'WIZARD.ACRONIS_MODAL.STEP6_BACKUP' | translate}}</span>
+
+                <img class="toggle" src="{{staticContentUrl+'img/acronis_modal/toggle_active.png'}}" >
+              </div>
+
+              <span class="ds-caption ds-r-regular ds-c-black-zero ds-mb-4p"> {{'WIZARD.ACRONIS_MODAL.STEP6_BACKUP_COPY' | translate}}</span>
+
+              <div class="fake-select ">
+                <i class="fas fa-chevron-up justify-self-end"></i>
+              </div>
+
+              <div class="fake-list d-flex flex-column justify-content-start ds-mb-12p">
+                <span class="fake-elm fs-12 lh-14">
+                    {{'WIZARD.ACRONIS_MODAL.STEP6_BACKUP_OPTION1' | translate}}
+                </span>
+                <span class="fake-elm fs-12 lh-14">
+                    {{'WIZARD.ACRONIS_MODAL.STEP6_BACKUP_OPTION2' | translate}}
+                </span>
+                <span class="fake-elm selected fs-12 lh-14">
+                    {{'WIZARD.ACRONIS_MODAL.STEP6_BACKUP_OPTION3' | translate}}
+                </span>
+                <span class="fake-elm fs-12 lh-14">
+                    {{'WIZARD.ACRONIS_MODAL.STEP6_BACKUP_OPTION4' | translate}}
+                </span>
+              </div>
+
+              <div class="ds-flex-row ds-jc-between ds-al-center ds-mb-10p">
+                <span class="ds-caption ds-r-regular ds-c-black-zero">{{'WIZARD.ACRONIS_MODAL.STEP6_BACKUP_CYPHER' | translate}}</span>
+
+                <img src="{{staticContentUrl+'img/acronis_modal/toggle.png'}}" >
+              </div>
+
+
+
+
+
+
+
+
+
+            </div>
+
+
+          </div>
+        </div>
+
+      </ng-container>
+
+      <ng-container *ngIf="step == 7">
+        <div class="cac-help-text-steps">
+
+          <div class="ds-flex-column  ds-c-black">
+
+            <span class="ds-r-bold ds-mb-12p">{{'WIZARD.BMS_MODAL.STEP' | translate}}{{step}}</span>
+
+            <span class="ds-r-bold ds-body-primary ds-mb-12p">{{'WIZARD.ACRO_TEXT2' | translate}}</span>
+
+            <div class="ds-r-regular ds-body-primary ds-mb-24p">{{'WIZARD.ACRO_TEXT3_ALT1' | translate}}</div>
+
+            <div class="ds-r-regular ds-body-primary ds-mb-24p">{{'WIZARD.ACRO_TEXT3_ALT2' | translate}}</div>
+
+
+          </div>
+
+        </div>
+
+        <div class="cac-help-seventh-step">
+          <div class="cac-content">
+
+
+
+            <div class="cac-card">
+
+              <img class="activation-service-central-img mb-4" src="{{staticContentUrl+'img/secure_icon.png'}}">
+
+              <span class="ds-body-primary ds-r-bold ds-c-black-zero">{{'WIZARD.ACRONIS_MODAL.STEP7_TEXT' | translate}}</span>
+
+
+            </div>
+
+
+          </div>
+        </div>
+
+      </ng-container>
+
+
+    </div>
+
+
+    <div class="d-flex ds-jc-end ds-mt-32p">
+      <button *ngIf="step > 1" (click)="previousStep()" class="ds-btn-secondary ds-mr-32p ds-t-uppercase">
+        <span class="icon-left-big-arrow fs-12"></span> {{'WIZARD.BMS_MODAL.BTN_PREVIOUS' | translate}}
+       </button>
+      <button *ngIf="step < 7" (click)="nextStep()" class="ds-btn-primary ds-t-uppercase">
+        {{'WIZARD.BMS_MODAL.BTN_NEXT' | translate}}
+        <span class="icon-right-big-arrow ml-2 fs-12"></span>
+      </button>
+
+      <button *ngIf="step == 7" (click)="closeModal()" class="ds-btn-primary ds-t-uppercase">
+        {{'WIZARD.BTNS.COMPLETED' | translate}}
+      </button>
+    </div>
+  </div>
+
+
+
+
+
+
+

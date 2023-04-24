@@ -1,0 +1,129 @@
+<section class="ds-card ">
+
+  <div class="cac-progress-container">
+    <div class="col-md-4 cac-line-step active ds-flex-row ds-jc-center">
+      <div class="cac-circle active">
+        <span class="icon-tick-round ds-fs-40"></span>
+      </div>
+    </div>
+    <div class="col-md-4 cac-line-step ds-flex-row ds-jc-center" [ngClass]="{ 'active' : currentStep > 1 }">
+      <div class="cac-circle" [ngClass]="{'active': currentStep > 1 }">
+        <span class=" ds-fs-40 {{ currentStep > 1 ? 'icon-tick-round' : 'icon-circle-password' }}"></span>
+      </div>
+    </div>
+    <div class="col-md-4  ds-flex-row ds-jc-center" [ngClass]="{ 'active' : currentStep > 2 }">
+      <div class="cac-circle " [ngClass]="{ 'disable' : currentStep < 2   ,'active': currentStep > 2 }">
+        <span class=" ds-fs-32 {{ currentStep > 2 ? 'icon-tick-round' : 'icon-download2' }}"></span>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="cac-steps-mobile">
+
+    <div class="cac-progress-container-mobile">
+      <div class="cac-progress" [ngStyle]="{'width': widthPercent }"></div>
+
+      <div class="cac-circle-mobile active">
+        <span class="icon-tick-round ds-fs-20"></span>
+        <span class="ds-caption ds-r-bold ds-c-black cac-text-mobile">{{'CYBERSECURITY.FRACTEL.PASO1R' |
+          translate}}</span>
+      </div>
+
+      <div class="cac-circle-mobile" [ngClass]="{'active': currentStep > 1 }">
+        <span *ngIf="currentStep > 1" class="icon-tick-round ds-fs-20"></span>
+        <span class="ds-body-primary ds-r-regular " *ngIf="currentStep <= 1">2</span>
+        <span class="ds-caption ds-r-bold ds-c-black cac-text-mobile">{{'CYBERSECURITY.FRACTEL.PASO3R' |
+          translate}}</span>
+      </div>
+
+      <div class="cac-circle-mobile" [ngClass]="{ 'disable' : currentStep < 2   ,'active': currentStep > 2 }">
+        <span *ngIf="currentStep > 2" class="icon-tick-round ds-fs-20"></span>
+        <span class="ds-body-primary ds-r-regular " *ngIf="currentStep <= 2">3</span>
+        <span class="ds-caption ds-r-bold cac-text-mobile"
+          [ngClass]="currentStep < 2 ? 'ds-c-secondary-disabled' : 'ds-c-black' ">{{'CYBERSECURITY.FRACTEL.PASO2R' |
+          translate}}</span>
+      </div>
+    </div>
+
+    <div class="ds-flex-row ds-jc-center w-100">
+      <div class="cac-circle">
+        <span class=" ds-fs-40 {{iconMobile}}"></span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="d-flex justify-content-center">
+    <div class="cac-two">
+
+      <div class="ds-flex-column ds-al-center ds-t-center ds-px-24p"
+        [ngClass]="{'cac-mobile-d-none': (currentStep+1) != 1}" style=" width: 600px;">
+        <div class="ds-r-bold ds-body-primary ds-mb-12p">
+          {{'CYBERSECURITY.FRACTEL.PASO1' | translate}}
+        </div>
+        <div class="ds-body-primary ds-r-regular ds-fs-14 ds-mb-12p">
+          {{'CYBERSECURITY.FRACTEL.TEXT_PASOS_1' | translate}}
+
+        </div>
+
+      </div>
+
+
+      <div class="ds-flex-column ds-al-center ds-t-center ds-px-24p"
+        [ngClass]="{'cac-mobile-d-none': (currentStep+1) != 2}" style=" width: 600px;">
+        <div class="ds-r-bold ds-body-primary ds-mb-12p">
+          {{'CYBERSECURITY.FRACTEL.PASO2N' | translate}}
+        </div>
+        <ng-container *ngIf="this.userService.currentUserValue.licenseFractel == null">
+          <div class="ds-body-primary ds-r-regular ds-fs-14 ds-mb-12p">
+            <p [innerHTML]="'CYBERSECURITY.FRACTEL.TEXT_PASOS_2' | translate"></p>
+          </div>
+          <button class="ds-btn-primary  ds-t-uppercase ds-mt-24p ds-mb-24p" (click)="requestFractelService()"
+            [disabled]="loading">
+            <div> {{'CYBERSECURITY.FRACTEL.BTN.REQUEST_LICENSE' | translate}}</div>
+          </button>
+        </ng-container>
+        <ng-container *ngIf="this.userService.currentUserValue.licenseFractel !== null">
+          <div class="ds-body-primary ds-r-regular ds-fs-14 ds-mb-12p">
+            {{'CYBERSECURITY.FRACTEL.LICENCE' | translate}}
+          </div>
+          <div class="ds-flex-row ds-jc-between ds-al-center ds-c-black ds-m-bold  ds-fs-16 ds-mb-12p" id="licence"
+            style="background:#ECF1F8 ; border-radius: 8px; padding: 12px 24px 12px 24px;">
+            <i class="icon-copy ds-cur-pointer ds-fs-20 ds-c-secondary ds-mr-12p" (click)="copyText()"></i>
+            {{userService.currentUserValue.licenseFractel}}
+          </div>
+          <div class="ds-body-primary ds-r-regular ds-fs-14 ds-mb-12p">
+            <div class="ds-body-primary ds-r-regular ds-fs-14 ds-mb-12p">
+              {{'CYBERSECURITY.FRACTEL.COPY_LICENCE' | translate}}
+            </div>
+          </div>
+        </ng-container>
+      </div>
+      <div class="ds-flex-column ds-al-center ds-t-center ds-px-24p"
+        [ngClass]="{'ds-c-secondary-disabled': currentStep < 2, 'cac-mobile-d-none': (currentStep+1)  != 3}"
+        style=" width: 600px;">
+        <div class="ds-r-bold ds-body-primary  ds-mb-12p">
+          {{'WIZARD.ACRO_STEP3_TITLE' | translate}}
+        </div>
+        <div class="ds-body-primary ds-r-regular ds-fs-14  ds-mb-16p">
+          <p [innerHTML]="'CYBERSECURITY.FRACTEL.TEXT_DOWNLOAD' | translate"> </p>
+          <div class="responsive-none ds-pb-24p">
+            <p [innerHTML]="'CYBERSECURITY.FRACTEL.TEXT_DOWNLOAD2' | translate"></p>
+            <div class="ds-m-bold">{{userService.currentUserValue.licenseFractel}}</div>
+          </div>
+          <p [innerHTML]="'CYBERSECURITY.FRACTEL.TEXT_DOWNLOAD3' | translate"> </p>
+        </div>
+        <div class="ds-flex-column ds-mb-24p" *ngIf="userService.currentUserValue.licenseFractel !== null">
+          <a class="ds-btn-primary ds-t-uppercase " href="{{appEndpoint}}" style="text-decoration: none; border:0">
+            {{'CYBERSECURITY.FRACTEL.BTN.DOWNLOAD_APP_BUTTON' | translate}}</a>
+
+          <button class="ds-btn-secondary ds-t-uppercase ds-mt-12p" (click)="openInfoModal()">
+            <nz-spinner *ngIf="loadingCheckProccess"></nz-spinner>
+            <div>{{'CYBERSECURITY.FRACTEL.BTN.CONTINUE' | translate}}</div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

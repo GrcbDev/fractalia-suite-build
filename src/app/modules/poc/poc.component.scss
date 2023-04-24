@@ -1,0 +1,155 @@
+.content-single-service-fix {
+  padding-top: 5rem !important;
+  padding-bottom: 1rem;
+}
+
+
+@media only screen and (max-width: 767px) {
+  .content-single-service-fix {
+    padding-top: 0 !important;
+  }
+}
+
+
+/**/
+
+.ml-fix{
+  margin-left: 11px;
+}
+
+.circle-profile{
+  border: solid 3px #36b3ed;
+  color: #36b3ed;
+  width: 96px;
+  height: 96px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 96px;
+  background-color: #ECF1F8;
+}
+
+.added{
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.pending{
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 4px;
+}
+
+.pending-divider{
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-top: 4px;
+}
+
+@media only screen and (max-width: 767px) {
+  .desktop-only {
+    display: none !important;
+  }
+}
+
+
+
+/**/
+
+.ml-fix{
+  margin-left: 11px;
+}
+
+.add-card{
+  border: 2px dashed #BCC4D4;
+  border-radius: 8px;
+}
+
+.add-card-info{
+  height: 208px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 1rem;
+  cursor: pointer;
+  color: #BCC4D4;
+
+}
+
+
+.add-card:hover{
+  background-color:  #666A73;
+}
+
+
+.add {
+  font-size: 1.5rem;
+}
+
+
+.card-unit{
+border: solid 2px #bcc4d4;
+padding: 0.5rem;
+border-radius: 8px;
+height: 100%;
+}
+
+.head-unit-container{
+display: flex;
+justify-content: space-between;
+padding: 0.5rem;
+}
+
+.head-icons-container{
+display: flex;
+justify-content: space-between;
+align-items: flex-start;
+}
+
+.card-unit-info{
+max-width: 65%;
+padding: 0.5rem;
+}
+
+.user-name{
+font-weight: bold;
+font-size: 1rem;
+}
+
+.unit-card-img{
+width: 65px;
+height: 65px;
+border-radius: 50%;
+}
+
+
+.app-unit-loading {
+height: auto;
+position: relative;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+background-color: white !important;
+color: rgb(74, 62, 243);
+font-family: 'Roboto';
+}
+
+.unit-logo{
+width: 50px;
+height: auto;
+}
+
+@media only screen and (max-width: 767px) {
+  .add-card {
+    height: 100px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .add-card-info {
+    height: 100px;
+    padding-bottom: 10px;
+  }
+}

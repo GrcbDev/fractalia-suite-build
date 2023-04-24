@@ -1,0 +1,82 @@
+.card-email-fix {
+  margin-right: 10px;
+}
+
+.identity-card {
+  margin: 0 0px 0 0px;
+}
+
+.identity-card-container {
+  // padding: 0px 0px 0 0px !important;
+  margin: 0 0px 0 0px;
+  justify-content: space-between;
+  padding: 0px 0px 0 0 !important;
+}
+
+.spaceBetweenCards {
+  margin: 0 0 0 45px !important;
+}
+
+.identity-card-add {
+  display: inline-block;
+  margin: 0px calc(34.2%) 0 0px;
+}
+
+.d-ajust-btn-itp {
+  margin: -30px 0 0 0;
+}
+
+.identity-card.compact {
+  height: 95px !important;
+}
+
+@media only screen and (max-width: 1024px) {
+  .identity-card.compact {
+    height: 109px !important;
+  }
+}
+
+// @media only screen and (max-width: 768px) {
+@media only screen and (max-width: 850px) {
+  // .identity-card {
+  //   margin-right: 0px !important;
+  //   max-width: none !important;
+  // }
+
+  // .identity-card.compact {
+  //     height: 109px !important;
+  // }
+  .spaceBetweenCards {
+    margin: 0 0 0 0 !important;
+  }
+}
+
+@media only screen and (max-width: 757px) {
+  // .identity-card {
+  //   margin-right: 0px !important;
+  //   max-width: none !important;
+  // }
+
+  // .services-steps.twosteps .steps .steps-header::after,
+  // .services-steps.twosteps .steps .steps-header::before {
+  //     top: 0 !important;
+  // }
+}
+
+.small-image {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.card-user-info {
+  display: flex;
+  align-items: center;
+  width: auto;
+  margin-bottom: 10px;
+}
+
+.user-name {
+  font-weight: bold;
+}

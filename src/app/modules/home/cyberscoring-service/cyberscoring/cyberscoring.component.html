@@ -1,0 +1,189 @@
+<section *ngIf="serviceCard" class="ds-card">
+  <div class="ds-card-header align-items-center" *ngIf="showHeaderCard">
+    <div class="d-flex align-items-center">
+      <span class="{{ data.icon }} mr-2"></span>
+      <div class="ds-h4 ds-m-bold ds-c-black" [innerHTML]="data.name"></div>
+    </div>
+    <div>
+      <span
+        *ngIf="!freemiun && (hasHistory && !analyzing)"
+        class="icon-edit ds-header-icon-right cursor"
+        (click)="editMode()"
+        data-toggle="modal"
+        data-target="#analisisForm"
+      ></span>
+      <span
+        class="icon-info ds-header-icon-right cursor"
+        (click)="open(data.name, data.longDesc, data.icon)"
+      ></span>
+    </div>
+  </div>
+
+  <div *ngIf="globalLoading">
+    <app-loading [partnerService]="partnerService"></app-loading>
+  </div>
+
+  <div class="fs-card-body pr-0 pl-0 mt-0" *ngIf="!globalLoading">
+    <div class="h-100 row justify-content-center align-items-center">
+      <div
+        class="icon-cyberscoring mb-2 mt-4 ds-c-primary cyber-main-icon"
+        *ngIf="!hasHistory || analyzing"
+      ></div>
+      <!-- Primera vez -->
+      <section *ngIf="!hasHistory && !analyzing" class="minW-100">
+        <app-cyberscoring-not-started
+          (next)="toggleValidate()"
+          [serviceCard]="serviceCard"
+        ></app-cyberscoring-not-started>
+      </section>
+      <!-- analizando -->
+      <section class="minW-100" *ngIf="analyzing">
+        <app-cyberscoring-in-process
+          [serviceCard]="serviceCard"
+          [dataC]="dataC"
+        ></app-cyberscoring-in-process>
+      </section>
+    </div>
+
+    <div
+      class="container-fluid mt-4"
+      *ngIf="hasHistory && !globalLoading && !analyzing"
+    >
+    <app-cyberscoring-results
+      [serviceCard]="serviceCard"
+      [gaugeType]="gaugeType"
+      [lastScore]="lastScore"
+      [gaugeMax]="gaugeMax"
+      [gaugeMin]="gaugeMin"
+      [thresholdConfig]="thresholdConfig"
+      [markerConfig]="markerConfig"
+      [gaugeMessage]="gaugeMessage"
+      [gaugeLabel]="gaugeLabel"
+      [good]="good"
+      [fair]="fair"
+      [poor]="poor"
+      [freemiun]="freemiun"
+      [isMinDate]="isMinDate"
+      [nextDate]="nextDate"
+      [dataC]="dataC"
+      [sector]="sector"
+      [lastDate]="lastDate"
+      [chartType]="chartType"
+      [chartLabels]="chartLabels"
+      [chartDataset]="chartDataset"
+      [chartOptions]="chartOptions"
+      [staticContentUrl]="staticContentUrl"
+      (next)="getLastReport()"
+      (goCyberScoringEvent)="goCyberscoring()"
+      (toggleFreeModalEvent)="toggleFreeModal()"
+  ></app-cyberscoring-results>
+    </div>
+  </div>
+</section>
+
+<!--Modal-->
+<div
+  class="modal fade"
+  id="analisisForm"
+  tabindex="-1"
+  role="dialog"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+   
+    <app-modal-cyberscoring
+    [sectors]="sectors"
+    [success]="success"
+    [editModal]="editModal"
+    [cantEdit]="cantEdit"
+    [freeModal]="freeModal"
+    [dataC]="dataC"
+    [staticContentUrl]="staticContentUrl"
+    [readonlyFields]="readonlyFields"
+    [showMessage]="showMessage"
+    [message]="message"
+    [errorBusinessName]="errorBusinessName"
+    [errorCnae]="errorCnae"
+    [errorNoDomain]="errorNoDomain"
+    [errorDomain]="errorDomain"
+    [terms]="terms"
+    [loading]="loading"
+    (toggleValidateEvent)="toggleValidate()"
+    (createCompanyEvent)="createCompany()"
+    (onFocusOutBusinessEvent)="onFocusOutBusiness($event)"
+    (onFocusOutCnaeEvent)="onFocusOutCnae($event)"
+    (addDomainEvent)="AddDomain($event)"
+    (onFocusOutDomainEvent)="onFocusOutDomain($event)"
+    (deleteDomainEvent)="DeleteDomain($event)"
+    (checkTermsEvent)="checkTerms($event)"
+    ></app-modal-cyberscoring>
+  
+  </div>
+</div>
+
+<div *ngIf="globalLoading">
+  <app-loading [partnerService]="partnerService"></app-loading>
+</div>
+
+<ng-container *ngIf="!serviceCard">
+  <!-- Sin analisis realizados-->
+  <section
+    class="ds-card pl-1 mt-3 minW-100"
+    *ngIf="!hasHistory && !analyzing"
+    style="padding: 24px"
+  >
+    <app-cyberscoring-not-started
+      (next)="toggleValidate()"
+      [serviceCard]="serviceCard"
+    ></app-cyberscoring-not-started>
+  </section>
+  <!-- Analizando-->
+  <section
+    class="ds-card pl-1 mt-3 minW-100"
+    *ngIf="analyzing"
+    style="padding: 24px"
+  >
+    <app-cyberscoring-in-process
+      [serviceCard]="serviceCard"
+      [dataC]="dataC"
+    ></app-cyberscoring-in-process>
+  </section>
+  <!-- Resultados de análisis-->
+  <section
+    class="pl-1 mt-3"
+    *ngIf="hasHistory && !serviceCard && !globalLoading && !analyzing"
+  >
+    <div class="">
+      <div *ngIf="hasHistory">
+        <!-- Resultados de análisis-->
+
+        <app-cyberscoring-results
+          [serviceCard]="serviceCard"
+          [gaugeType]="gaugeType"
+          [lastScore]="lastScore"
+          [gaugeMax]="gaugeMax"
+          [gaugeMin]="gaugeMin"
+          [thresholdConfig]="thresholdConfig"
+          [markerConfig]="markerConfig"
+          [gaugeMessage]="gaugeMessage"
+          [gaugeLabel]="gaugeLabel"
+          [good]="good"
+          [fair]="fair"
+          [poor]="poor"
+          [freemiun]="freemiun"
+          [isMinDate]="isMinDate"
+          [nextDate]="nextDate"
+          [dataC]="dataC"
+          [sector]="sector"
+          [lastDate]="lastDate"
+          [chartType]="chartType"
+          [chartLabels]="chartLabels"
+          [chartDataset]="chartDataset"
+          [chartOptions]="chartOptions"
+          [staticContentUrl]="staticContentUrl"
+          (next)="getLastReport()"
+        ></app-cyberscoring-results>
+      </div>
+    </div>
+  </section>
+</ng-container>

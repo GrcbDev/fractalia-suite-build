@@ -1,0 +1,48 @@
+<section class="ds-card informative-service-content">
+
+  <div class="ds-card-header align-items-center">
+      <div class="d-flex align-items-center">
+        <span class="{{service.icon }} ds-fs-24 mr-2"></span>
+        <div class="ds-h4 ds-m-bold ds-c-black">
+          {{service.name}}
+        </div>
+      </div>
+      <span class="icon-info ds-header-icon-right cursor" (click)="open(service.name, service.longDesc, service.icon)"></span>
+  </div>
+
+  <div class="ds-card-body">
+    <div class="w-100 d-flex flex-column align-items-center justify-content-center ">
+      <div class="max-w-778p">
+        <div class="d-flex flex-column align-items-center justify-content-center">
+          <div class="{{service.icon}} cyber-main-icon ds-c-primary ds-mb-10p"></div>
+
+          <div class="rgpd-container">
+            <div class="ds-h2 ds-m-bold ds-c-black ds-mb-8p ">
+              {{ 'RGPD.COMPLETE_FORM_TITLE' | translate}}
+            </div>
+
+            <div class="ds-body-primary  ds-r-regular">
+              {{ 'RGPD.COMPLETE_FORM_DESC' | translate}}
+            </div>
+          </div>
+
+          <div class="ds-button-action">
+            <button class="ds-btn-primary ds-text-upper" (click)="startQuiz()" [disabled]="loading">
+              <nz-spinner *ngIf="loading"></nz-spinner>
+              <div *ngIf="!loading" class="text-uppercase">
+                {{ 'RGPD.COMPLETE_FORM' | translate}}
+              </div>
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</section>
+
+
+
+

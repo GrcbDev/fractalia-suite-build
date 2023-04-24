@@ -1,0 +1,50 @@
+<div
+  class="modal-content"
+  style="max-height: 500px; min-height: 480px; max-width: 400px; padding: 1rem"
+>
+  <div class="d-flex w-100 justify-content-end">
+    <div
+      class="icon-close ds-fs-14 ds-cur-pointer"
+      (click)="closeModal()"
+    ></div>
+  </div>
+
+  <section class="row mt-2 mr-4 ml-4 mb-4" *ngIf="selectedCard">
+    <div class="col-sm-12 pl-0 pr-0 d-flex justify-content-center">
+      <div class="new-modal-img mb-4 mt-0 fs-78 icon-trash neutral-black"></div>
+    </div>
+    <div class="col-sm-12 pl-0 pr-0 mb-2 d-flex justify-content-center">
+      <h4 class="wizard-modal-title fs-20 lh-24 neutral-black">
+        {{ "CYBERALARM.CARDS.REMOVE_FORM.SURE1" | translate }}
+      </h4>
+    </div>
+    <div class="col-sm-12 pl-0 pr-0 d-flex justify-content-center">
+      <p class="wizard-modal-text neutral-black fs-16 lh-19">
+        {{ "CYBERALARM.CARDS.REMOVE_FORM.SURE2" | translate }}
+      </p>
+    </div>
+    <div class="col-sm-12 pl-0 pr-0 d-flex justify-content-center">
+      <p class="wizard-modal-text neutral-black fs-16 lh-19">
+        <b>{{ selectedCard.itemName }}</b>
+      </p>
+    </div>
+    <div class="col-sm-12 pl-0 pr-0 wizard-modal-btns d-flex">
+      <button
+        class="btn btn-outline-secondary wizard-modal-btn mr-2"
+        [ngClass]="loading ? 'focus' : ''"
+        (click)="closeModal()"
+      >
+        <nz-spinner *ngIf="loading"></nz-spinner>
+        <div *ngIf="!loading" class="text-uppercase">
+          {{ "CANCEL" | translate }}
+        </div>
+      </button>
+      <button class="btn btn-primary wizard-modal-btn" (click)="deleteCard()">
+        <nz-spinner *ngIf="loading"></nz-spinner>
+        <div *ngIf="!loading" class="text-uppercase">
+          {{ "COMP_GRAVITY.REMOVE_FORM.DELETE_BUTTON" | translate }}
+        </div>
+      </button>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,70 @@
+<div class="ds-card-body">
+  <div class="cac-result">
+    <div class="col-md-4 cac-result-item">
+      <div class="ds-flex-column ds-al-center ds-px-24p">
+
+        <span class="ds-h4 ds-m-bold ds-c-black ds-mb-8p ">{{'CYBERSECURITY.BACKUP.LAST_BACKUP0' | translate}}</span>
+        <span class="ds-body-primary  ds-r-regular ds-c-black ">{{'BACKUP.MADE_ON' | translate}}{{info.dateFormatted}}</span>
+        <span class="ds-body-primary  ds-r-regular ds-c-black ds-mb-24p ">{{info.dayDifference}}</span>
+
+        <div class="progress cac-progress-bar w-100 ds-mb-4p">
+          <div class="progress-bar" [style.width.%]="info.percentFull"></div>
+        </div>
+
+        <span class="ds-m-bold ds-h4 ds-c-black">{{info.spaceUsed}} {{'CYBERSECURITY.BACKUP.FROM' | translate}} {{info.spaceAssigned}} {{'CYBERSECURITY.BACKUP.AVAILABLE' | translate}}</span>
+      </div>
+    </div>
+
+    <div class="col-md-4 cac-result-item">
+      <div class="ds-flex-column ds-al-center ds-jc-center">
+        <span class="ds-h4 ds-m-bold ds-c-black ds-mb-32p ">{{'CYBERSECURITY.BACKUP.YOUR_DEVICES' | translate}}</span>
+
+        <div class="cac-card-devices-container">
+          <div class="cac-card-devices">
+
+            <div class="ds-flex-row ds-mb-12p ds-al-center  ">
+              <span class="icon-computer ds-mr-8p ds-fs-24"></span>
+              <span class="ds-body-primary ds-r-regular ds-c-black fs-14"> {{'CYBERSECURITY.BACKUP.WORKSTATIONS' | translate}}</span>
+            </div>
+
+            <div class="ds-t-center">
+              <span class="ds-h1 ds-m-bold ds-c-black">{{info.wksInstalled}}</span>
+              <span class="ds-h3 ds-m-bold ds-c-black">/{{info.wksAllowed}}</span>
+
+            </div>
+
+          </div>
+
+          <div class="cac-card-devices">
+            <div class="ds-flex-row ds-mb-12p ds-al-center ">
+              <span class="icon-mobile ds-mr-8p ds-fs-24"></span>
+              <span class="ds-body-primary ds-r-regular ds-c-black fs-14"> {{'CYBERSECURITY.BACKUP.MOBILES' | translate}}</span>
+            </div>
+
+            <div class="ds-t-center">
+              <span class="ds-h1 ds-m-bold ds-c-black">{{info.mobInstalled}}</span>
+              <span class="ds-h3 ds-m-bold ds-c-black">/{{info.mobAllowed}}</span>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-md-4 cac-result-item">
+      <div class="ds-flex-column ds-al-center ds-px-24p">
+        <span class="ds-h4 ds-m-bold ds-c-black ds-mb-8p ">{{'CYBERSECURITY.PROTECTION.TITLE_PART_THREE' | translate}}</span>
+        <div class="ds-body-primary  ds-r-regular ds-c-black ds-mb-24p ">
+          {{'CYBERSECURITY.BACKUP.SCHEDULE_ACRONIS' | translate}}
+        </div>
+
+        <div>
+          <button class="ds-btn-primary ds-text-upper" (click)="goToAcronis()"> {{'WIZARD.BTNS.DOWNLOAD_CAC' | translate}}</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

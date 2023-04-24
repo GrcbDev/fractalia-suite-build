@@ -1,0 +1,60 @@
+
+  <ng-container  *ngIf="!isloading">
+    <div class="ds-flex-row ds-mb-24p ds-jc-between">
+      <div class="ds-flex-row ds-al-center">
+        <div class="ds-h1 ds-m-bold ds-c-black  ds-mr-24p">
+          {{service.name}}
+        </div>
+        <span class="icon-info ds-fs-18 cursor" (click)="openServiceInfo()"></span>
+      </div>
+
+      <div class="ds-flex-row ds-al-center ds-cur-pointer" (click)="goToBack()">
+        <span class="icon-left-arrow ds-fs-14 ds-c-secondary ds-mr-12p"></span>
+        <span class="ds-r-bold ds-body-secondary ds-t-uppercase ds-c-secondary">{{'RGPD.BACK' | translate}}</span>
+      </div>
+
+    </div>
+
+    <div class="rgpd-steps-mobile">
+
+      <div class="rgpd-progress-container-mobile">
+        <div class="rgpd-progress" [ngStyle]="{'width': widthPercent }"></div>
+
+        <ng-container *ngFor="let item of menuSteps">
+          <div
+            (click)="goToStep(item.sectionId, stepData.finished, true)"
+            class="rgpd-circle-mobile"
+            [ngClass]="{
+              'ds-cur-pointer ds-is-clickable': stepData.finished,
+              'selected': item.sectionId == currentStep,
+              'done': item.completed,
+              'disable' : !item.completed && !stepData.finished && currentStep < item.sectionId
+
+            }"
+          >
+            <span class="ds-body-primary ds-r-regular ">{{ item.sectionId }}</span>
+            <span class="ds-caption ds-c-black rgpd-text-mobile">{{ item.section }}</span>
+          </div>
+        </ng-container>
+      </div>
+
+    </div>
+
+  </ng-container>
+
+
+
+
+  <ng-template render-component></ng-template>
+
+
+  <ng-container *ngIf="isloading">
+    <div class="default-section fa-3x">
+      <i class="fas fa-spinner fa-spin"></i>
+    </div>
+  </ng-container>
+
+
+
+
+

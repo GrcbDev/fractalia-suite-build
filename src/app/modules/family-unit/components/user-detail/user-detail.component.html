@@ -1,0 +1,793 @@
+<ng-template #basicModal let-modal>
+  <div class="mt-21 modal-head-container">
+    <div class="row">
+      <div class="col close-container">
+        <div class="title-modal-detail"> {{ "FAMILY_UNIT.PROFILE_INFO" | translate }}</div>
+        <button type="button" class="new-close" (click)="close()">
+          <div class="icon-close"></div>
+        </button>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="head-user-info-container">
+          <div class="user-detail-card-header">
+            <div class="img-profile-container">
+              <img
+                *ngIf="!profile.photo"
+                class="unit-card-img"
+                src="{{staticContentUrl+'img/family-unit/fi-cnsuxl-user-circle.png'}}"
+                alt=""
+              />
+              <img
+                *ngIf="profile.photo"
+                class="unit-card-img"
+                [src]="profile.photo"
+                alt=""
+              />
+            </div>
+
+            <div class="user-info">
+              <div class="user-name">
+                {{ profile.name + " " + profile.surname }}
+              </div>
+              <div class="email-container">{{ profile.email }}</div>
+            </div>
+          </div>
+
+          <div class="user-creation-info date">
+             {{ "FAMILY_UNIT.PROFILE_CREATION_DATE" | translate }}
+
+            {{ profile.creationDate | date : "dd/MM/yyyy" }}
+          </div>
+
+          <div class="mobile-grid">
+            <div class="user-creation-info">
+              {{ "FAMILY_UNIT.PROFILE_CREATION_DATE" | translate }}
+              <br>
+             {{ profile.creationDate | date : "dd/MM/yyyy" }}
+           </div>
+          </div>
+        </div>
+
+
+
+        <div class="options-for-view-container">
+          <div class="list-info"  (click)="showList = true; showGrid = false">
+            <div class="icon-menu cursor" style="margin-top: 1px;
+            margin-right: 5px;"></div>
+          </div>
+          <div class="scuare-info" *ngIf="detail.monitoredIdentity.length > 0 || detail.monitoredCard.length > 0" (click)="showList = false; showGrid = true">
+            <div class="">
+              <img
+                class="scuare-icon"
+                src="{{staticContentUrl+'img/family-unit/menu-square.png'}}"
+                alt=""
+              />
+              <img
+                class="scuare-icon"
+                src="{{staticContentUrl+'img/family-unit/menu-square.png'}}"
+                alt=""
+              />
+            </div>
+            <div class="one-row">
+              <img
+                class="scuare-icon"
+                src="{{staticContentUrl+'img/family-unit/menu-square.png'}}"
+                alt=""
+              />
+              <img
+                class="scuare-icon"
+                src="{{staticContentUrl+'img/family-unit/menu-square.png'}}"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <div class="list-view" *ngIf="showList">
+          <div class="titles-container">
+            <div class="title-item service-unit-name-title">   {{ "FAMILY_UNIT.USER_DETAIL_TABLE_TITLE_1" | translate }}</div>
+            <div class="title-item title-fix">   {{ "FAMILY_UNIT.USER_DETAIL_TABLE_TITLE_2" | translate }}</div>
+            <div class="title-item">   {{ "FAMILY_UNIT.USER_DETAIL_TABLE_TITLE_3" | translate }}</div>
+            <div class="title-item">   {{ "FAMILY_UNIT.USER_DETAIL_TABLE_TITLE_4" | translate }}</div>
+          </div>
+
+          <div class="unit-service-list">
+            <div class="service-container" *ngIf="false">
+              <div class="service-unit-name"> {{ "FAMILY_UNIT.GEOLOCATION" | translate }}</div>
+
+              <div class="usage">
+                <div class="ok-mark"></div>
+              </div>
+
+              <div class="devices">
+                <div class="image-device"></div>
+                iphone de Anabel
+              </div>
+
+              <div class="status">
+                <div class="image-status"></div>
+                {{ "FAMILY_UNIT.PROTECTED" | translate }}
+              </div>
+            </div>
+
+            <div class="service-container">
+              <div class="service-unit-name">
+               {{ "FAMILY_UNIT.IDENTITY_THEFT_PROTECTION" | translate }}
+              </div>
+
+              <div class="usage">
+                <div class="ok-mark"  *ngIf="detail.monitoredIdentity.length > 0"></div>
+                <div class="no-ok-mark"  *ngIf="detail.monitoredIdentity.length === 0"></div>
+              </div>
+
+              <div class="devices" *ngIf="detail.monitoredIdentity.length > 0">
+                <div  class="d-flex" *ngFor="let item of detail.monitoredIdentity">
+                  <div class="image-device">   <img
+                    class="credit-card-detail"
+                    src="{{staticContentUrl+'img/family-unit/email.png'}}"
+                    alt=""
+                  /></div>
+                  {{item.email}}
+
+                </div>
+              </div>
+
+              <div class="devices" *ngIf="detail.monitoredIdentity.length === 0">
+                <div class="text-center-fix">
+                  -
+                </div>
+              </div>
+
+              <div class="status"  *ngIf="detail.monitoredIdentity.length > 0">
+
+                <div  class="d-flex" *ngFor="let item of detail.monitoredIdentity">
+                  <div class=" icon-shield-check semantic-success fs-24 fade-infinite" *ngIf="item.status === 0">
+
+                  </div>
+                  <div class="card-status-text"  *ngIf="item.status === 0" style=" color: #14bd44; margin-top: 7px">
+                    {{ "FAMILY_UNIT.PROTECTED" | translate }}
+                  </div>
+
+                  <div class="icon-shield-cross semantic-danger fs-24" *ngIf="item.status> 0"></div>
+                  <div
+                  class="card-status-text danger-text"
+                  *ngIf="item.status > 0"
+                  style="margin-top: 7px"
+                >
+                  <div style="width: 60px;">{{ "FAMILY_UNIT.IN_WARNING" | translate }}</div>
+                </div>
+
+                </div>
+
+
+
+              </div>
+
+              <div class="status" *ngIf="detail.monitoredIdentity.length === 0">
+                <div class="text-center-fix-last">
+                  -
+                </div>
+              </div>
+            </div>
+
+            <div class="service-container">
+              <div class="service-unit-name"> {{ "FAMILY_UNIT.SAFE_NAVIGATION" | translate }}</div>
+
+              <div class="usage">
+                <div class="no-ok-mark"></div>
+              </div>
+
+              <div class="devices">
+                <div class="text-center-fix">
+                  -
+                </div>
+              </div>
+
+              <div class="status">
+                <div class="text-center-fix-last">
+                  -
+                </div>
+              </div>
+            </div>
+
+            <div class="service-container">
+              <div class="service-unit-name">
+                {{ "FAMILY_UNIT.CARDS_PROTECTED" | translate }}
+              </div>
+
+              <div class="usage">
+                <div class="ok-mark"  *ngIf="detail.monitoredCard.length > 0"></div>
+                <div class="no-ok-mark"  *ngIf="detail.monitoredCard.length === 0"></div>
+              </div>
+
+              <div class="devices" *ngIf="detail.monitoredCard.length > 0">
+                <div  class="d-flex" *ngFor="let item of detail.monitoredCard">
+                  <div class="image-device">   <img
+                    class="credit-card-detail"
+                    src="{{staticContentUrl+'img/family-unit/creditcard.png'}}"
+                    alt=""
+                  /></div>
+                  {{item.alias}}
+
+                </div>
+              </div>
+
+              <div class="devices" *ngIf="detail.monitoredCard.length === 0">
+                <div class="text-center-fix">
+                  -
+                </div>
+
+              </div>
+
+
+
+              <div class="status"  *ngIf="detail.monitoredCard.length > 0">
+                <div  class="d-flex" *ngFor="let item of detail.monitoredCard">
+                  <div class=" icon-shield-check semantic-success fs-24 fade-infinite" *ngIf="!item.fraudDetected">
+
+                  </div>
+                  <div class="card-status-text" *ngIf="!item.fraudDetected"  style=" color: #14bd44; margin-top: 7px">
+                    {{ "FAMILY_UNIT.PROTECTED" | translate }}
+                  </div>
+
+                  <div class="icon-shield-cross semantic-danger fs-24" *ngIf="item.fraudDetected"></div>
+                  <div
+                    class="card-status-text danger-text"
+                    *ngIf="item.fraudDetected"
+                    style="margin-top: 7px"
+                  >
+                  <div style="width: 60px;">{{ "FAMILY_UNIT.IN_WARNING" | translate }}</div>
+
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="status" *ngIf="detail.monitoredCard.length === 0">
+                <div class="text-center-fix-last">
+                  -
+                </div>
+              </div>
+            </div>
+
+            <div class="service-container">
+              <div class="service-unit-name"> {{ "FAMILY_UNIT.ANTI_VIRUS" | translate }}</div>
+
+              <div class="usage">
+                <div class="no-ok-mark"></div>
+              </div>
+
+              <div class="devices">
+                <div class="text-center-fix">
+                  -
+                </div>
+              </div>
+
+              <div class="status">
+                <div class="text-center-fix-last">
+                  -
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-view" *ngIf="showGrid">
+          <div class="section-grid-container" *ngIf="false">
+            <div class="section-grid-title"> {{ "FAMILY_UNIT.GEOLOCATION" | translate }}</div>
+            <div class="row section-grid-cards">
+              <div class="col-lg-4 info-card">
+                <div class="card-user-info">
+                  <div class="user-small-image">
+                    <img
+                      *ngIf="!profile.photo"
+                      class="small-image"
+                      src="{{staticContentUrl+'img/family-unit/fi-cnsuxl-user-circle.png'}}"
+                      alt=""
+                    />
+                    <img
+                      *ngIf="profile.photo"
+                      class="small-image"
+                      [src]="profile.photo"
+                      alt=""
+                    />
+                  </div>
+                  <div class="user-name">
+                    {{ profile.name + " " + profile.surname }}
+                  </div>
+                </div>
+
+                <div class="card-user-device">
+                  <div class="card-device-icon">
+                    <img
+                      class="iphone-icon"
+                      src="{{staticContentUrl+'img/family-unit/iphone.png'}}"
+                      alt=""
+                    />
+                  </div>
+
+                  <div class="device-info">Iphone de anabel</div>
+                </div>
+
+                <div class="card-notification">
+                  <div class="card-notification-icon">
+                    <img
+                      class="bell-icon"
+                      src="{{staticContentUrl+'img/family-unit/bell.png'}}"
+                      alt=""
+                    />
+                  </div>
+
+                  <div class="card-notification-title"> {{ "FAMILY_UNIT.ADVICE" | translate }}</div>
+
+                  <div class="card-notification-status"> {{ "FAMILY_UNIT.ACTIVATED" | translate }}</div>
+                </div>
+
+                <div class="card-detail-footer">
+                  <div class="card-device-status">
+                    <div class="card-status-icon">
+                      <div class="greeen-shield">
+                        <img  src="{{staticContentUrl+'img/family-unit/ok.png'}}" alt="" />
+                      </div>
+                    </div>
+                    <div class="card-status-text">{{ "FAMILY_UNIT.PROTECTED" | translate }}</div>
+                  </div>
+
+                  <div class="card-footer-icons">
+                    <div class="card-info-icon">
+                      <img   src="{{staticContentUrl+'img/family-unit/gears.png'}}" alt="" />
+                    </div>
+                    <div
+                      class="delete-card icon-trash fs-20 main-secondary cursor"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="section-grid-container"
+            *ngIf="detail.monitoredCard.length > 0"
+          >
+            <div class="section-grid-title">
+             {{ "FAMILY_UNIT.CARDS_PROTECTED" | translate }}
+            </div>
+            <div class="row section-grid-cards">
+              <div
+                class="col-lg-4 info-card"
+                *ngFor="let item of detail.monitoredCard"
+                [ngClass]="{
+                  'not-secure': item.fraudDetected,
+                  '': !item.fraudDetected
+                }"
+              >
+                <div class="card-user-info">
+                  <div class="user-small-image">
+                    <img
+                      *ngIf="!profile.photo"
+                      class="small-image"
+                      src="{{staticContentUrl+'img/family-unit/fi-cnsuxl-user-circle.png'}}"
+                      alt=""
+                    />
+                    <img
+                      *ngIf="profile.photo"
+                      class="small-image"
+                      [src]="profile.photo"
+                      alt=""
+                    />
+                  </div>
+                  <div class="user-name">
+                    {{ profile.name + " " + profile.surname }}
+                  </div>
+                </div>
+
+                <div class="card-user-device">
+                  <div class="device-info"> {{ "FAMILY_UNIT.NUMBER" | translate }}</div>
+
+                  <div class="card-number">{{ item.numberCard }}</div>
+                </div>
+
+                <div class="card-user-device">
+                  <div class="device-info">{{ "FAMILY_UNIT.ALIAS" | translate }}</div>
+
+                  <div class="card-number">{{ item.alias }}</div>
+                </div>
+
+                <div class="card-user-device">
+                  <div class="device-info"> {{ "FAMILY_UNIT.LAST_ANALYSIS" | translate }}</div>
+
+                  <div class="card-number">{{ item.lastAnalysisDate }}</div>
+                </div>
+
+                <div class="card-detail-footer">
+                  <div class="card-device-status">
+                    <div class="card-status-icon">
+                      <div class="greeen-shield" *ngIf="!item.fraudDetected">
+                        <img src="{{staticContentUrl+'img/family-unit/ok.png'}}" alt="" />
+                      </div>
+
+                      <div class="red-shield" *ngIf="item.fraudDetected">
+                        <img  src="{{staticContentUrl+'img/family-unit/red-x.png'}}" alt="" />
+                      </div>
+                    </div>
+                    <div class="card-status-text" *ngIf="!item.fraudDetected">
+                        {{ "FAMILY_UNIT.PROTECTED" | translate }}
+                    </div>
+                    <div
+                      class="card-status-text danger-text"
+                      *ngIf="item.fraudDetected"
+                    >
+                     {{ "FAMILY_UNIT.IN_WARNING" | translate }}
+                    </div>
+                  </div>
+
+                  <div class="card-footer-icons" *ngIf="!item.fraudDetected">
+                    <div
+                      class="delete-card icon-trash fs-20 main-secondary cursor"
+                    ></div>
+                  </div>
+
+                  <div class="card-footer-icons" *ngIf="item.fraudDetected">
+                    <div class="card-info-icon">
+                      <img  src="{{staticContentUrl+'img/family-unit/danger.png'}}" alt="" />
+                    </div>
+                    <div
+                      class="delete-card icon-trash fs-20 main-secondary cursor"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="section-grid-container"
+            *ngIf="detail.monitoredIdentity.length > 0"
+          >
+            <div class="section-grid-title">
+                {{ "FAMILY_UNIT.IDENTITY_THEFT_PROTECTION" | translate }}
+            </div>
+            <div class="row section-grid-cards">
+              <div
+                class="col-lg-4 info-card"
+                *ngFor="let item of detail.monitoredIdentity"
+              >
+                <div class="card-user-info">
+                  <div class="user-small-image">
+                    <img
+                      *ngIf="!profile.photo"
+                      class="small-image"
+                      src="{{staticContentUrl+'img/family-unit/fi-cnsuxl-user-circle.png'}}"
+                      alt=""
+                    />
+                    <img
+                      *ngIf="profile.photo"
+                      class="small-image"
+                      [src]="profile.photo"
+                      alt=""
+                    />
+                  </div>
+                  <div class="user-name">
+                    {{ profile.name + " " + profile.surname }}
+                  </div>
+                </div>
+
+                <div class="card-user-device">
+                  <div class="device-info"> {{ "FAMILY_UNIT.EMAIL" | translate }}:</div>
+
+                  <div class="card-number">{{ item.email }}</div>
+                </div>
+
+                <div class="card-user-device">
+                  <div class="device-info">{{ "FAMILY_UNIT.LAST_ANALYSIS" | translate }}</div>
+
+                  <div class="card-number">{{ item.lastAnalysisDate | date: 'mm/dd/yyy' }}</div>
+                </div>
+
+                <div class="card-detail-footer">
+                  <div class="card-device-status">
+                    <div class="card-status-icon">
+                      <div class="greeen-shield" *ngIf="item.status === 0">
+                        <img src="{{staticContentUrl+'img/family-unit/ok.png'}}" alt="" />
+                      </div>
+
+                      <div class="red-shield" *ngIf="item.status > 0">
+                        <img   src="{{staticContentUrl+'img/family-unit/red-x.png'}}" alt="" />
+                      </div>
+                    </div>
+                    <div class="card-status-text" *ngIf="item.status === 0">
+                       {{ "FAMILY_UNIT.PROTECTED" | translate }}
+                    </div>
+                    <div
+                      class="card-status-text danger-text"
+                      *ngIf="item.status > 0"
+                    >
+                         {{ "FAMILY_UNIT.IN_WARNING" | translate }}
+                    </div>
+                  </div>
+
+                  <div class="card-footer-icons" *ngIf="item.status === 0">
+                    <div
+                      class="delete-card icon-trash fs-20 main-secondary cursor"
+                    ></div>
+                  </div>
+
+                  <div class="card-footer-icons"  *ngIf="item.status > 0">
+                    <div class="card-info-icon">
+                      <img src="{{staticContentUrl+'img/family-unit/danger.png'}}" alt="" />
+                    </div>
+                    <div
+                      class="delete-card icon-trash fs-20 main-secondary cursor"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mobile-grid">
+          <div class="section-grid-container" *ngIf="false">
+            <div class="section-grid-title"> {{ "FAMILY_UNIT.GEOLOCATION" | translate }}</div>
+            <div class="row section-grid-cards">
+              <div class="col-lg-4 info-card">
+                <div class="card-user-info">
+                  <div class="user-small-image">
+                    <img
+                      *ngIf="!profile.photo"
+                      class="small-image"
+                      src="{{staticContentUrl+'img/family-unit/fi-cnsuxl-user-circle.png'}}"
+                      alt=""
+                    />
+                    <img
+                      *ngIf="profile.photo"
+                      class="small-image"
+                      [src]="profile.photo"
+                      alt=""
+                    />
+                  </div>
+                  <div class="user-name">
+                    {{ profile.name + " " + profile.surname }}
+                  </div>
+                </div>
+
+                <div class="card-user-device">
+                  <div class="card-device-icon">
+                    <img
+                      class="iphone-icon"
+                      src="{{staticContentUrl+'img/family-unit/iphone.png'}}"
+                      alt=""
+                    />
+                  </div>
+
+                  <div class="device-info">Iphone de anabel</div>
+                </div>
+
+                <div class="card-notification">
+                  <div class="card-notification-icon">
+                    <img
+                      class="bell-icon"
+                      src="{{staticContentUrl+'img/family-unit/bell.png'}}"
+                      alt=""
+                    />
+                  </div>
+
+                  <div class="card-notification-title"> {{ "FAMILY_UNIT.ADVICE" | translate }}</div>
+
+                  <div class="card-notification-status"> {{ "FAMILY_UNIT.ACTIVATED" | translate }}</div>
+                </div>
+
+                <div class="card-detail-footer">
+                  <div class="card-device-status">
+                    <div class="card-status-icon">
+                      <div class="greeen-shield">
+                        <img  src="{{staticContentUrl+'img/family-unit/ok.png'}}" alt="" />
+                      </div>
+                    </div>
+                    <div class="card-status-text">{{ "FAMILY_UNIT.PROTECTED" | translate }}</div>
+                  </div>
+
+                  <div class="card-footer-icons">
+                    <div class="card-info-icon">
+                      <img   src="{{staticContentUrl+'img/family-unit/gears.png'}}" alt="" />
+                    </div>
+                    <div
+                      class="delete-card icon-trash fs-20 main-secondary cursor"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="section-grid-container"
+            *ngIf="detail.monitoredCard.length > 0"
+          >
+            <div class="section-grid-title">
+             {{ "FAMILY_UNIT.CARDS_PROTECTED" | translate }}
+            </div>
+            <div class="row section-grid-cards">
+              <div
+                class="col-lg-4 info-card"
+                *ngFor="let item of detail.monitoredCard"
+                [ngClass]="{
+                  'not-secure': item.fraudDetected,
+                  '': !item.fraudDetected
+                }"
+              >
+                <div class="card-user-info">
+                  <div class="user-small-image">
+                    <img
+                      *ngIf="!profile.photo"
+                      class="small-image"
+                      src="{{staticContentUrl+'img/family-unit/fi-cnsuxl-user-circle.png'}}"
+                      alt=""
+                    />
+                    <img
+                      *ngIf="profile.photo"
+                      class="small-image"
+                      [src]="profile.photo"
+                      alt=""
+                    />
+                  </div>
+                  <div class="user-name">
+                    {{ profile.name + " " + profile.surname }}
+                  </div>
+                </div>
+
+                <div class="card-user-device">
+                  <div class="device-info"> {{ "FAMILY_UNIT.NUMBER" | translate }}</div>
+
+                  <div class="card-number">{{ item.numberCard }}</div>
+                </div>
+
+                <div class="card-user-device">
+                  <div class="device-info">{{ "FAMILY_UNIT.ALIAS" | translate }}</div>
+
+                  <div class="card-number">{{ item.alias }}</div>
+                </div>
+
+                <div class="card-user-device">
+                  <div class="device-info"> {{ "FAMILY_UNIT.LAST_ANALYSIS" | translate }}</div>
+
+                  <div class="card-number">{{ item.lastAnalysisDate }}</div>
+                </div>
+
+                <div class="card-detail-footer">
+                  <div class="card-device-status">
+                    <div class="card-status-icon">
+                      <div class="greeen-shield" *ngIf="!item.fraudDetected">
+                        <img src="{{staticContentUrl+'img/family-unit/ok.png'}}" alt="" />
+                      </div>
+
+                      <div class="red-shield" *ngIf="item.fraudDetected">
+                        <img  src="{{staticContentUrl+'img/family-unit/red-x.png'}}" alt="" />
+                      </div>
+                    </div>
+                    <div class="card-status-text" *ngIf="!item.fraudDetected">
+                        {{ "FAMILY_UNIT.PROTECTED" | translate }}
+                    </div>
+                    <div
+                      class="card-status-text danger-text"
+                      *ngIf="item.fraudDetected"
+                    >
+                     {{ "FAMILY_UNIT.IN_WARNING" | translate }}
+                    </div>
+                  </div>
+
+                  <div class="card-footer-icons" *ngIf="!item.fraudDetected">
+                    <div
+                      class="delete-card icon-trash fs-20 main-secondary cursor"
+                    ></div>
+                  </div>
+
+                  <div class="card-footer-icons" *ngIf="item.fraudDetected">
+                    <div class="card-info-icon">
+                      <img  src="{{staticContentUrl+'img/family-unit/danger.png'}}" alt="" />
+                    </div>
+                    <div
+                      class="delete-card icon-trash fs-20 main-secondary cursor"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="section-grid-container"
+            *ngIf="detail.monitoredIdentity.length > 0"
+          >
+            <div class="section-grid-title">
+                {{ "FAMILY_UNIT.IDENTITY_THEFT_PROTECTION" | translate }}
+            </div>
+            <div class="row section-grid-cards">
+              <div
+                class="col-lg-4 info-card"
+                *ngFor="let item of detail.monitoredIdentity"
+              >
+                <div class="card-user-info">
+                  <div class="user-small-image">
+                    <img
+                      *ngIf="!profile.photo"
+                      class="small-image"
+                      src="{{staticContentUrl+'img/family-unit/fi-cnsuxl-user-circle.png'}}"
+                      alt=""
+                    />
+                    <img
+                      *ngIf="profile.photo"
+                      class="small-image"
+                      [src]="profile.photo"
+                      alt=""
+                    />
+                  </div>
+                  <div class="user-name">
+                    {{ profile.name + " " + profile.surname }}
+                  </div>
+                </div>
+
+                <div class="card-user-device">
+                  <div class="device-info"> {{ "FAMILY_UNIT.EMAIL" | translate }}:</div>
+
+                  <div class="card-number">{{ item.email }}</div>
+                </div>
+
+                <div class="card-user-device">
+                  <div class="device-info">{{ "FAMILY_UNIT.LAST_ANALYSIS" | translate }}</div>
+
+                  <div class="card-number">{{ item.lastAnalysisDate | date: mm/dd/yyy }}</div>
+                </div>
+
+                <div class="card-detail-footer">
+                  <div class="card-device-status">
+                    <div class="card-status-icon">
+                      <div class="greeen-shield" *ngIf="item.status === 0">
+                        <img src="{{staticContentUrl+'img/family-unit/ok.png'}}" alt="" />
+                      </div>
+
+                      <div class="red-shield" *ngIf="item.status > 0">
+                        <img   src="{{staticContentUrl+'img/family-unit/red-x.png'}}" alt="" />
+                      </div>
+                    </div>
+                    <div class="card-status-text" *ngIf="item.status === 0">
+                       {{ "FAMILY_UNIT.PROTECTED" | translate }}
+                    </div>
+                    <div
+                      class="card-status-text danger-text"
+                      *ngIf="item.status > 0"
+                    >
+                         {{ "FAMILY_UNIT.IN_WARNING" | translate }}
+                    </div>
+                  </div>
+
+                  <div class="card-footer-icons" *ngIf="item.status === 0">
+                    <div
+                      class="delete-card icon-trash fs-20 main-secondary cursor"
+                    ></div>
+                  </div>
+
+                  <div class="card-footer-icons"  *ngIf="item.status > 0">
+                    <div class="card-info-icon">
+                      <img src="{{staticContentUrl+'img/family-unit/danger.png'}}" alt="" />
+                    </div>
+                    <div
+                      class="delete-card icon-trash fs-20 main-secondary cursor"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

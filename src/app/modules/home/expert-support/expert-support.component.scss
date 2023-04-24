@@ -1,0 +1,91 @@
+
+:root {
+  --bg-img: unset;
+}
+
+
+.exp-support-content {
+  display: flex;
+  justify-content: space-between;
+  & .description {
+    width: 33%;
+    padding: 32px 24px;
+    max-width: 324px;
+
+    & .buttons-mobile {
+      display: none;
+    }
+  }
+
+  & img {
+    width: 230px;
+    // height: 100%;
+  }
+
+  & .buttons {
+    width: 33%;
+    padding: 12px 24px;
+    display: flex;
+
+    & .buttons-content {
+      width: 324px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+    }
+  }
+}
+
+@media only screen and (max-width: 1250px) {
+  .exp-support-content {
+    background-image: var(--bg-img);
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: 300px 100%;
+    & .description {
+      width: 75%;
+
+      & .buttons-mobile {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+    & img {
+      display: none;
+    }
+
+    & .buttons {
+      display: none;
+    }
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .exp-support-content {
+    background-position: 300px;
+    background-size: 300px 100%;
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  .exp-support-content {
+    background-position: 230px;
+    background-size: 300px 100%;
+  }
+}
+
+@media only screen and (max-width: 760px) {
+  .exp-support-content {
+    background-position: right;
+    background-size: 250px 100%;
+  }
+}
+
+
+@media only screen and (max-width: 500px) {
+  .exp-support-content {
+    background-position: 200px;
+    background-size: 65% 100%;
+  }
+}

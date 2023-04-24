@@ -1,0 +1,156 @@
+<div class="ds-card-body" *ngIf="!isloading">
+  <div class="d-flex justify-content-between row mr-0 ml-0">
+    <div class="col-lg-6 col-md-12 col-sm-12 sumary-l ">
+        <div class="identities-sumary d-flex justify-content-between">
+            <span class="fs-16 lh-19 mb-0 neutral-black">
+              {{'CYBERALARM.CARDS.TEXT5' | translate}}
+            </span>
+            <h3 class="fs-24 lh-19 mb-0 neutral-black">
+              {{ cards.length }}/{{ maxCardsByUser }}
+            </h3>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-12 col-sm-12 sumary-r">
+      <div class="identities-sumary d-flex justify-content-between">
+        <div class="clipper">
+          <div class="led mr-2 semantic-danger">
+              <i class="fas fa-circle"></i>
+          </div>
+          <span class="fs-16 lh-19 mb-0 neutral-black">
+            {{'CYBERALARM.CARDS.TEXT6' | translate}}
+          </span>
+        </div>
+        <h3 class="fs-24 lh-19 mb-0 neutral-black">
+          {{ cardsWithFraud }}
+        </h3>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="mt-2 row mr-0 ml-0 d-flex " [ngClass]="(cards.length == 1)? 'justify-content-start' : 'justify-content-between'">
+
+    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-1 pt-1 pb-1 pr-0 pl-0 align-self-stretch identity-card "
+        [ngClass]="{'single-card' : cards.length == 1, 'compact-2' : compactCards == true}"
+        *ngFor="let monitoredCard of cards">
+        <div class="card p-2 h-100 status" [ngClass]="monitoredCard.fraudDetected? 'ko' : 'ok'">
+
+            <div class="card-body p-0">
+
+                <div class="card-user-info" *ngIf="suiteService.isUnitFamily">
+                    <div class="user-small-image">
+                      <img
+                        *ngIf="!monitoredCard.photo"
+                        class="small-image"
+                        src="{{staticContentUrl+'img/family-unit/fi-cnsuxl-user-circle.png'}}"
+                        alt=""
+                      />
+                      <img
+                        *ngIf="monitoredCard.photo"
+                        class="small-image"
+                        [src]="monitoredCard.photo"
+                        alt=""
+                      />
+                    </div>
+                    <div class="ds-body-primary ds-r-regular ds-c-black ">
+                      {{ monitoredCard.name + " " + monitoredCard.surname }}
+                    </div>
+                  </div>
+
+                <p class="neutral-black fs-16 mb-0 identity-email"
+                    [ngClass]="(compactCards) ? 'lh-19' : 'lh-29'">
+                    <b>{{'CYBERALARM.CARDS.ALIAS' | translate}}:</b>
+                    <span class="neutral-black fs-16 "
+                    [ngClass]="(compactCards) ? 'lh-19' : 'lh-29'">
+                        {{monitoredCard.alias}}
+                    </span>
+                </p>
+                <p class="neutral-black fs-16 mb-0 identity-email"
+                    [ngClass]="(compactCards) ? 'lh-19' : 'lh-29'">
+                    <b>{{'CYBERALARM.CARDS.NUM' | translate}}:</b>
+                    <span class="neutral-black fs-16 "
+                    [ngClass]="(compactCards) ? 'lh-19' : 'lh-29'">
+                        {{monitoredCard.numberCard}}
+                    </span>
+                </p>
+                <p class="neutral-black fs-16 mb-0 lh-29"
+                    *ngIf="!compactCards">
+                    <b>{{'CYBERALARM.IDENTITIES.LASTANALISYS' | translate}}</b>
+                    <span class="neutral-black fs-16"
+                    [ngClass]="(compactCards) ? 'lh-19' : 'lh-29'">
+                        {{monitoredCard.lastAnalysisDate}}
+                    </span>
+                </p>
+            </div>
+
+            <div class="card-footer p-0">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div class="creditcard-icon" *ngIf="!compactCards">
+                        <div class="creditcard-status">
+                            <div *ngIf="!monitoredCard.fraudDetected" class="d-flex">
+                                <div class="icon-shield-check semantic-success fs-24 fade-infinite"></div>
+                                <span class="ml-2 semantic-success align-self-center fs-16 lh-19"><b>{{'CYBERALARM.IDENTITIES.PROTECTING' | translate}}</b></span>
+                            </div>
+                            <div *ngIf="monitoredCard.fraudDetected" class="d-flex">
+                                <div class="icon-shield-cross semantic-danger fs-24"></div>
+                                <span class="ml-2 semantic-danger align-self-center fs-16 lh-19"><b>{{'CYBERALARM.IDENTITIES.DANGER' | translate}}</b></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="neutral-black fs-16 mb-0 lh-19"
+                        *ngIf="compactCards">
+                        <b>{{'CYBERALARM.IDENTITIES.LASTANALISYS' | translate}}</b>
+                        <span class="neutral-black fs-16"
+                        [ngClass]="(compactCards) ? 'lh-19' : 'lh-29'">
+                            {{monitoredCard.lastAnalysisDate}}
+                        </span>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <div class="d-flex align-items-center mr-2 cursor-pointer"
+                            *ngIf="monitoredCard.fraudDetected"
+                            (click)="openWarningModal(monitoredCard)"
+                            >
+                            <div class="icon-warning fs-18 semantic-danger"></div>
+                        </div>
+                        <div class="d-flex align-items-center cursor-pointer"   (click)="deleteCreditCard(monitoredCard)">
+                            <div class="icon-trash fs-20 main-secondary">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <ng-container *ngIf="cards.length !== 0 ">
+        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-1 pt-1 pb-1 pr-0 pl-0 align-self-stretch identity-card"
+            [ngClass]="(compactCards) ? 'compact-2' : ''"
+            (click)="addCreditCard()"
+            *ngIf="showAddCard">
+            <div class="card scard h-100">
+                <button class="add-plus h-100">
+                    <div class="mx-auto icon-plus main-disabled fs-20"></div>
+                    <span class="fs-14 lh-16 mx-auto plus-text main-disabled"
+                    [ngClass]="(compactCards) ? '' : 'mt-2'">
+                        {{'CYBERALARM.CARDS.TEXT7' | translate}}
+                    </span>
+                </button>
+            </div>
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-1 pt-1 pb-1 pr-0 pl-0 align-self-stretch identity-card"
+            [ngClass]="(compactCards) ? 'compact' : ''"
+            *ngIf="showAddCard && (cards.length == 4 || cards.length == 7)">
+        </div>
+    </ng-container>
+</div>
+
+
+
+</div>
+
+<ng-container *ngIf="isloading">
+  <div class="default-section fa-3x">
+    <i class="fas fa-spinner fa-spin"></i>
+  </div>
+</ng-container>

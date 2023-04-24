@@ -1,0 +1,17 @@
+// #activation-profile-form-noti-web {
+//   display: flex;
+// }
+
+#activation-profile-form-noti-mobile {
+  display: none !important;
+}
+
+@media only screen and (max-width: 767px) {
+  #activation-profile-form-noti-web {
+    display: none !important;
+  }
+
+  #activation-profile-form-noti-mobile {
+    display: flex !important;
+  }
+}

@@ -1,0 +1,163 @@
+<ng-container *ngIf="!loading; else loadingTemplate">
+  <div class="flex-column" >
+    <div class="ds-caption ds-r-regular ds-c-secondary">
+      <span>{{ "ULTIMO_ACCESO" | translate }}:&nbsp;</span>
+
+      <span>{{
+        slastPreviousAccessDate.toLocaleString() | date : "dd/MM/yyyy"
+      }}</span>
+      |
+      <span>{{
+        slastPreviousAccessDate.toLocaleString() | date : "HH:mm"
+      }}</span>
+    </div>
+    <div *ngIf="!hideGreeting" class="ds-h1 ds-m-bold ds-c-black">
+      {{ 'HOLA' | translate }} {{this.userService.currentUserValue.name}}
+     </div>
+     <div *ngIf="hideGreeting" class="ds-h1 ds-m-bold ds-c-black">
+       {{suiteName}}
+      </div>
+  </div>
+
+
+  <section class="content-single-service-fix" >
+    <div class="ds-mb-24p">
+      <app-servicess-status></app-servicess-status>
+    </div>
+
+
+      <div class="card" style="width: 100%;">
+        <div class="card-body pr-24 pl-24">
+          <div class="container-fluid mt-4">
+            <div class="row">
+              <div
+                class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12 mb-3 justify-content-between d-flex flex-column mobile-mb"
+              >
+                <div>
+                  <div class="ds-m-bold ds-c-black ds-h2 ds-fs-24 ds-mb-12p">
+                    {{ "FAMILY_UNIT.SECTION_TITLE" | translate }}
+                  </div>
+
+                  <div
+                    class="ds-r-regular ds-body-primary ds-fs-16 ds-c-black ds-mb-12p"
+                  >
+                  {{ "FAMILY_UNIT.SECTION_DESCRIPTION" | translate }}
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12 mb-3 desktop-only justify-content-between d-flex flex-column mobile-mb pl-4 pr-4"
+              >
+                <img  src="{{staticContentUrl+'img/family-unit/unit_family.png'}}" alt="" style="object-fit: contain; height: 300px;" />
+              </div>
+
+              <div
+                class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12 d-flex flex-column"
+              >
+                <h2 class="title text-center mb-4 neutral-black fs-16">
+                  {{ "FAMILY_UNIT.LIST_OF_PROFILES" | translate }}
+                </h2>
+
+                <div
+                  class="d-flex flex-column justify-content-center align-items-center ds-pb-24p"
+                >
+                  <div class="circle-profile text-center">
+                    <span class="added">{{userService.userProfileList.length}}</span>
+                    <span class="pending-divider">/</span>
+                    <span class="pending">{{totalProfiles}}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    <section class="ds-flex-row ds-jc-center ds-al-center" style="width: 100%;" >
+      <div class="card " style="width: 100%;">
+        <div class="card-body pr-0 pl-0">
+          <div class="container-fluid mt-2">
+            <div class="row" >
+              <div
+                *ngFor="let profile of items"
+                class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12 mb-3 justify-content-between d-flex flex-column mobile-mb"
+              >
+              <div class="container card-unit" >
+                <div class="row">
+                  <div class="col-lg">
+                    <div class="head-unit-container">
+                      <div *ngIf="!profile.photo" class="icon-user ds-fs-40 text-center" style="background-color: #ecf1f8; border-radius: 50px;" ></div>
+                      <img *ngIf="profile.photo"
+                      class="unit-card-img"
+                      [src]="profile.photo"
+                      alt=""
+                    />
+                      <div class="head-icons-container">
+                        <div
+                          *ngIf="!profile.isOwnerAccount"
+                          class="icon-trash fs-20 main-secondary cursor"
+                          (click)="deleteProfile(profile)"
+                        ></div>
+                        <span
+                          class="icon-edit fs-20 main-secondary cursor"
+                          (click)="editProfile(profile)"
+                        >
+                        </span>
+                      </div>
+                    </div>
+
+                    <div class="ds-flex-column">
+                      <span class="user-name">{{profile.name}} {{profile.surname}}</span>
+                      <span class="ds-mb-16p">{{profile.email}}</span>
+
+                      <div class="ds-flex-row" style="max-width: 160px;">
+                        <button class="ds-btn-primary ds-t-uppercase"  (click)="openDetail(profile)">
+                          {{ "FAMILY_UNIT.BTN_SHOW_INFO" | translate }}
+                        </button>
+                      </div>
+
+
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              </div>
+
+              <div
+                *ngIf="items.length < 5"
+                class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-xs-12 mb-3 justify-content-between d-flex flex-column mobile-mb"
+              >
+                <div class="container add-card" (click)="addProfile()">
+                  <div class="row">
+                    <div class="col-lg">
+                      <div class="add-card-info">
+                        <div class="add">+</div>
+                        <div class="info text-center">
+                          {{'FAMILY_UNIT.ADD_NEW_PROFILE' | translate}}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </section>
+
+</ng-container>
+
+
+<ng-template #loadingTemplate>
+  <div class="app-loading">
+    <div class="logo">
+      <!-- <img src="{{ partnerService.preloaderImage }}" /> -->
+    </div>
+  </div>
+</ng-template>

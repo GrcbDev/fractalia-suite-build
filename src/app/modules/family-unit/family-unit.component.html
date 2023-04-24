@@ -1,0 +1,45 @@
+<ng-container *ngIf="!loading; else loadingTemplate">
+  <div class="flex-column" id="user-sesion-welcome">
+    <div class="ds-caption ds-r-regular ds-c-secondary">
+      <span>{{ "ULTIMO_ACCESO" | translate }}:&nbsp;</span>
+
+      <span>{{
+        slastPreviousAccessDate.toLocaleString() | date : "dd/MM/yyyy"
+      }}</span>
+      |
+      <span>{{
+        slastPreviousAccessDate.toLocaleString() | date : "HH:mm"
+      }}</span>
+    </div>
+    <div class="ds-h1 ds-m-bold ds-c-black">
+      {{ "HOLA" | translate }} {{ this.userService.currentUserValue.name }}
+    </div>
+  </div>
+
+
+  <section class="content-single-service-fix">
+    <div class="ds-mb-24p">
+      <app-servicess-status></app-servicess-status>
+    </div>
+
+    <div class="ds-mb-12p">
+      <div class="ds-mb-24p align-items-center">
+        <app-unit-information></app-unit-information>
+      </div>
+
+      <div class="ds-mb-24p align-items-center" >
+        <app-unit-card-list></app-unit-card-list>
+      </div>
+    </div>
+  </section>
+
+</ng-container>
+
+
+<ng-template #loadingTemplate>
+  <div class="app-loading">
+    <div class="logo">
+      <img src="{{ partnerService.preloaderImage }}" />
+    </div>
+  </div>
+</ng-template>

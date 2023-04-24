@@ -1,0 +1,27 @@
+<div id="cajacookies" *ngIf="!cookiesAccepted && partnerService.partnerCookies">
+  <div class="row align-items-start w-100">
+    <div class="col-lg-9 col-md-8 col-sm-8">
+      <h5>{{configCookie.title}}</h5>
+      <p>{{configCookie.message}}</p>
+      <p>{{'COOKIES.PARAGRAPH2' | translate}}
+        <a *ngIf="this.partnerService.partnerCookies.internalDisplayCookies" [href]="configCookie.policyLinkCookies">
+          {{'COOKIES.COOKIES_POLICY' | translate}}
+        </a>
+        <a *ngIf="this.partnerService.partnerCookies.externalDisplayCookies" [href]="configCookie.policyLinkCookies" target="_blank">
+          {{'COOKIES.COOKIES_POLICY' | translate}}
+        </a>
+        {{'COOKIES.AND' | translate}}
+        <a *ngIf="this.partnerService.partnerCookies.internalDisplayPrivacy" [href]="configCookie.policyLinkPrivacy">
+          {{'COOKIES.PRIVACY_POLICY' | translate}}
+        </a>
+        <a *ngIf="this.partnerService.partnerCookies.externalDisplayPrivacy"[href]="configCookie.policyLinkPrivacy"  target="_blank">
+          {{'COOKIES.PRIVACY_POLICY' | translate}}</a>.
+      </p>
+    </div>
+    <div class="col-lg-3 col-md-4 col-sm-4">
+      <button class="btn btn-primary float-right" id="btnAcceptCookies"
+        (click)="setAcceptCookies()">{{'COOKIES.ACCEPT_COOKIES' |
+        translate}}</button>
+    </div>
+  </div>
+</div>

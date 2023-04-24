@@ -1,0 +1,41 @@
+
+<div class="toolbar fixed">
+  <nav class="frac-navbar">
+    <div class="d-flex justify-content-between align-items-center">
+
+      <div class="d-flex align-items-center">
+          <div class="cursor mr-4" [ngClass]="notificationService.sidebarToogle ? 'icon-close' : 'icon-menu'" id="button-sidebar" (click)="openSidebar()">
+          </div>
+
+        <a routerLink='/home' [attr.disabled]="this.userService.currentUserValue && !this.userService.currentUserValue.checkTermsAcceptDate?'true':null">
+          <img src="{{partnerService.partner.logotipo}}" alt="homepage" class="light-logo" />
+        </a>
+      </div>
+
+      <div class="d-flex">
+        <button id="download" class="btn btn-primary mr-3  btn-download">
+          <div class="icon-download-app"></div>
+        </button>
+        <div class="d-flex">
+          <div class="noti-icon-mobile" id="noti-icon-mobile"  (click)="toogleNotificacion()">
+            <div [ngClass]="notificationService.isOpen ? 'icon-close' : 'icon-bell'" ></div>
+          </div>
+          <!-- <div class="noti-bell-header" *ngIf="notificationService.showBell"  [style.background-color]="partnerService.partner.color ? partnerService.partner.color : ''">
+            <span class="ds-c-white">{{(notificationService.totalNotReadedNotifications && notificationService.totalNotReadedNotifications > 99) ? '+99' : notificationService.totalNotReadedNotifications}}</span>
+          </div> -->
+          <div class="noti-bell-header" *ngIf="notificationService.showBell" [style.background-color]="'#EB1919'">
+            <span class="ds-c-white">{{(notificationService.totalNotReadedNotifications && notificationService.totalNotReadedNotifications > 99) ? '+99' : notificationService.totalNotReadedNotifications}}</span>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </nav>
+
+</div>
+
+
+<app-sidebar [logo]="partnerService.partner.logotipo"></app-sidebar>
+
+

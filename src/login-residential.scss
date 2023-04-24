@@ -1,0 +1,189 @@
+:root {
+  --bg-login: unset;
+}
+
+.ds-login-main-container {
+  background:  var(--bg-login) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+
+  & .ds-card-container {
+    padding: 30px 92px;
+    background: #FFFFFF;
+    border-radius: 8px;
+    width: 616px;
+    border: 1px solid #BCC4D4;
+
+
+    & .ds-login-logo {
+      display: flex;
+      align-items: center;
+      margin-bottom: 30px;
+      & img {
+        width: 179px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      & .ds-login-back-icon{
+        width: auto;
+        position: absolute;
+        cursor: pointer;
+      }
+    }
+
+    & .ds-login-form {
+      display: flex;
+      flex-direction: column;
+
+    }
+
+    & .ds-login-form ~ .ds-login-forget-password {
+      border-top: 2px solid #BCC4D4;
+      border-bottom: 2px solid #BCC4D4;
+      margin-top: 20px;
+    }
+
+    & .ds-login-form ~ .ds-login-contact-us.ds-login-code {
+      border-top: 2px solid #BCC4D4;
+      margin-top: 60px;
+    }
+
+    & .ds-login-forget-password {
+      padding: 24px ;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+    }
+
+
+    & .ds-login-signup {
+      padding: 24px ;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+    }
+
+    & .ds-login-form ~ .ds-login-signup.ds-login-code {
+      border-bottom: 2px solid #BCC4D4;
+    }
+
+    & .ds-login-contact-us {
+      display: flex;
+      flex-direction: column;
+      padding-top: 12px;
+    }
+
+    & .ds-login-icons {
+      display: flex;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+      gap: 12px;
+      & > a {
+        display: flex;
+        font-family: 'RobotoRegular';
+        font-size: 12px;
+        line-height: 14px;
+        color: #666A73;
+        cursor: pointer;
+        &:hover{
+          color: black !important;
+        }
+      }
+
+      .icon-phone:hover {
+        color: #666A73 !important;
+      }
+    }
+
+    & .ds-login-contact-us ~ .ds-login-language {
+      margin-top: 0px;
+    }
+
+  }
+}
+
+.ds-terms-and-conditions {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: row;
+  font-family: 'RobotoRegular';
+  font-size: 12px;
+  line-height: 14px;
+  color: #666A73;
+
+  & span{
+    cursor: pointer;
+    padding: 0px 16px;
+    border-right: 1px solid #BCC4D4;
+
+    &:first-child{
+      padding-left: 0px;
+    }
+
+    &:last-child{
+      border-right: none;
+    }
+    &:hover {
+      font-weight: bold;
+    }
+  }
+
+  @media screen and (max-height: 880px) {
+    /* padding-bottom: 24px; */
+    margin-bottom: 0;
+    padding-top: 24px;
+    margin-top: 0;
+  }
+}
+
+#cookiesbutton {
+  align-self: center;
+}
+
+#cookiesbutton button{
+  float: right;
+}
+
+@media only screen and (max-width: 560px) {
+
+  .ds-login-main-container{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 100vh;
+    & .ds-card-container{
+      padding: 60px 24px;
+      background: #FFFFFF;
+      border-radius: 8px;
+      border: 0px;
+      width: 100%;
+      min-width: unset;
+      margin:0px;
+      height: 100vh;
+
+      & .ds-login-form ~ .ds-login-forget-password {
+        margin-top: 20px;
+      }
+
+      & .ds-login-icons {
+        gap: 18px;
+      }
+
+    }
+  }
+
+  #cookiesbutton button{
+    float: left;
+  }
+}

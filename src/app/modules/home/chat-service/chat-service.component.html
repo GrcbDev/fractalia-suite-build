@@ -1,0 +1,87 @@
+<div class="d-flex ds-mb-24p align-items-center" *ngIf="!isCardInHome">
+  <div class="ds-h1 ds-m-bold ds-c-black  ds-mr-24p">
+    {{data.name}}
+  </div>
+  <span class="icon-info ds-fs-18 cursor" (click)="open(data.name, data.longDesc, data.icon)"></span>
+</div>
+<section class="ds-card">
+
+  <div class="ds-card-header align-items-center " *ngIf="isCardInHome">
+    <div class="d-flex align-items-center">
+      <span class="{{data.icon }} ds-fs-24 mr-2"></span>
+      <div class="ds-h4 ds-m-bold ds-c-black">
+        {{data.name}}
+      </div>
+    </div>
+    <span class="icon-info ds-header-icon-right cursor" (click)="open(data.name, data.longDesc, data.icon)"></span>
+  </div>
+
+  <div class="ds-card-body  ">
+    <ng-container *ngIf="!isloading; else loadingTemplate">
+      <div class="chat-body-content ">
+        <div class="ds-body-primary ds-r-regular ds-c-black" style="max-width: 626px;" [innerHTML]="data.desc">
+          <!-- {{'COMP_CHAT_SERVICE.DOUBTS'| translate}} -->
+        </div>
+        <div class="chat-content-button">
+          <button class="btn btn-primary" (click)="openChat()">{{ 'COMP_CHAT_SERVICE.OPEN_CHAT' | translate }}</button>
+        </div>
+      </div>
+    </ng-container>
+    <ng-template #loadingTemplate>
+      <div class="default-section fa-3x text-center">
+        <i class="fas fa-spinner fa-spin"></i>
+      </div>
+    </ng-template>
+  </div>
+</section>
+
+<div class="chat-alert-popup " *ngIf="showAlertToAllowPopup && !isCardInHome">
+  <div class="chat-alert-popup-title">
+    <div class="ds-h2 ds-m-bold  ds-c-black ds-mb-16p">
+      {{'COMP_CHAT_SERVICE.NO_CHAT_OPEN'| translate}}
+    </div>
+    <i class="icon-close cursor" (click)="onClosePopupAlert()"></i>
+  </div>
+
+
+  <div class="ds-body-primary ds-r-regular ds-c-black ds-mb-24p chat-alert-popup-desc">
+    {{'COMP_CHAT_SERVICE.CHAT_WINDOW_NOT_OPENED'| translate}}
+  </div>
+
+  <div class="row" id="chat-alert-popup-steps">
+    <div class="col-md-4 d-flex flex-column">
+      <span class="ds-r-bold ds-t-uppercase ds-c-black ds-mb-8p">{{'TRANXFER.PASO1'| translate}} </span>
+      <span class="ds-body-primary ds-r-regular ds-c-black ds-mb-24p">
+        {{'COMP_CHAT_SERVICE.ACSESS_ICON'| translate}}
+      </span>
+      <div class="d-flex justify-content-center">
+        <img [src]="staticContentUrl+'img/chat-service/window-block.png'" alt="" style="width:66px">
+      </div>
+    </div>
+    <div class="col-md-4 d-flex flex-column">
+      <span class="ds-r-bold ds-t-uppercase ds-c-black ds-mb-8p">{{'TRANXFER.PASO2'| translate}}</span>
+      <span class="ds-body-primary ds-r-regular ds-c-black ds-mb-32p">
+        {{'COMP_CHAT_SERVICE.ENABLE_PERMISSION'| translate}}
+      </span>
+      <div class="d-flex justify-content-center">
+        <img [src]="staticContentUrl+'img/chat-service/allow-window.png'" alt="" style="height:24px">
+      </div>
+    </div>
+    <div class="col-md-4 d-flex flex-column">
+      <span class="ds-r-bold ds-t-uppercase ds-c-black ds-mb-8p">{{'TRANXFER.PASO3'| translate}}</span>
+      <span class="ds-body-primary ds-r-regular ds-c-black ds-mb-24p">
+        {{'COMP_CHAT_SERVICE.BUTTON_CONFIRMATION'| translate}}
+      </span>
+      <div class="d-flex justify-content-center">
+        <img [src]="staticContentUrl+'img/chat-service/button-ready.png'" alt="" style="width:66px">
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="ds-card ds-space-top" *ngIf="data.content">
+  <div class="ds-card-body">
+    <div class="ds-r-regular ds-fs-16 ds-body-primary ds-c-black ds-t-justify" [innerHTML]="data.content">
+    </div>
+  </div>
+</section>
